@@ -70,6 +70,11 @@ package test_csr_defs;
    parameter HSSI_PORT13_ATTR_ADDR          = HSSI_PORT0_ATTR_ADDR + 32'h34;
    parameter HSSI_PORT14_ATTR_ADDR          = HSSI_PORT0_ATTR_ADDR + 32'h38;
    parameter HSSI_PORT15_ATTR_ADDR          = HSSI_PORT0_ATTR_ADDR + 32'h3C;
+
+   // Access to MAC statistics registers
+   parameter HSSI_CTL_STATUS_ADDR           = HSSI_DFH_LO_ADDR + 32'hA8;
+   parameter HSSI_CTL_ADDRESS_ADDR          = HSSI_DFH_LO_ADDR + 32'hAC;
+
    parameter HSSI_PORT0_STATUS_ADDR         = HSSI_DFH_LO_ADDR + 32'hC0;
    parameter HSSI_PORT1_STATUS_ADDR         = HSSI_PORT0_STATUS_ADDR + 32'h4;
    parameter HSSI_PORT2_STATUS_ADDR         = HSSI_PORT0_STATUS_ADDR + 32'h8;

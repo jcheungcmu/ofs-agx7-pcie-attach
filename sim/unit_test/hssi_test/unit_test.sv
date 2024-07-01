@@ -947,7 +947,9 @@ task read_ack_mailbox;
       rd_attempts  = 'b0;
       ack_done     = 1'h0;
 
-      while (~ack_done && rd_attempts<15) begin
+      // Mailbox reads can be quite slow, especially when going through simulated
+      // NIOS.
+      while (~ack_done && rd_attempts<100) begin
          //READ32(ADDR32, cmd_ctrl_addr, bar,  HEH_VA, HEH_PF, HEH_VF, scratch1, error);
          host_bfm_top.host_bfm.read32_with_completion_status(cmd_ctrl_addr, scratch1, error, cpl_status);
          ack_done = scratch1[2];
@@ -973,6 +975,36 @@ task wait_for_reset_done;
       test_csr_ro_access_32(result, ADDR32, HSSI_WRAP_COLD_RST_ACK_ADDR, 'h0);
       $display("INFO:%t	Subsystem cold reset deassertion acknowledged",$time);
       $display("INFO:%t	Reset Sequence Complete",$time);
+      host_bfm_top.host_bfm.revert_to_last_pfvf_setting();
+   end
+endtask
+
+task read_hssi_mac_stat;
+   input  logic [3:0]  port;
+   input  logic [7:0]  hssi_stat_idx;
+   input  string       stat_name;
+   output logic [63:0] value;
+
+   logic  [31:0]       req_addr;
+   begin
+      pfvf = '{0,0,0}; // Set PFVF to PF0
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
+
+      value = '0;
+      req_addr = '0;
+      req_addr[7:0] = 3;      // Read MAC statistic command
+      req_addr[11:8] = port;
+      req_addr[23:16] = hssi_stat_idx;
+
+      // Low half of stat
+      req_addr[31] = 1'b1;
+      read_mailbox(1, HSSI_CTL_STATUS_ADDR, req_addr, value[31:0]);
+      // High half of stat
+      // Skip high half -- too slow and should be 0 anyway.
+      //req_addr[31] = 1'b0;
+      //read_mailbox(1, HSSI_CTL_STATUS_ADDR, req_addr, value[63:32]);
+
+      $display("INFO: MAC stat port %0d %s: 0x%0x", port, stat_name, value);
       host_bfm_top.host_bfm.revert_to_last_pfvf_setting();
    end
 endtask
@@ -1004,6 +1036,7 @@ task wait_for_hssi_to_ready;
          end
          
          port_status = '0;
+         port_status_prev = '0;
          // Ignore hip_ready for F-Tile (feature major version == 3)
          while ( !port_status.rx_block_lock   || 
                  !port_status.rx_pcs_ready    || 
@@ -1033,6 +1066,7 @@ task wait_for_hssi_to_ready;
                   $display ("INFO:%t	Port %0d - TX enabled", $time, port);
                end
 
+               if (port_status_prev == port_status) #1us;
                port_status_prev = port_status;
          end
       end
@@ -1048,35 +1082,36 @@ task wait_for_hssi_to_ready;
 endtask
 
 // Wait until all packets received back
-task wait_for_all_eop_done;
-   input logic [31:0]  num_pkt;
-   logic [31:0]        pkt_cnt;
-   begin
-      pkt_cnt = 32'h0;
-`ifdef ETH_10_OR_25G
-      while (pkt_cnt < num_pkt) begin
-	      @(posedge top_tb.DUT.afu_top.pg_afu.port_gasket.pr_slot.afu_main.port_afu_instances.afu_gen[1].heh_gen.he_hssi_inst.multi_port_axi_sop_traffic_ctrl_inst.GenBrdg[0].axis_to_avst_bridge_inst.avst_rx_st.rx.eop);
-         @(posedge top_tb.DUT.afu_top.pg_afu.port_gasket.pr_slot.afu_main.port_afu_instances.afu_gen[1].heh_gen.he_hssi_inst.multi_port_axi_sop_traffic_ctrl_inst.GenBrdg[0].axis_to_avst_bridge_inst.avst_rx_st.clk);
-         pkt_cnt=pkt_cnt+1;
-      end
-`endif
-      $display("INFO:%t	- RX EOP count is %d", $time, pkt_cnt);
-   end
-endtask
+logic [63:0] chan_rx_pkt_cnt[NUM_ETH_CHANNELS];
 
-task wait_for_all_eop_done_200G;
-   input logic [63:0]  tx_cnt;
-   logic [63:0] rx_count;
-   begin
-      
+`ifdef ETH_10_OR_25G
+for (genvar c = 0; c < NUM_ETH_CHANNELS; c += 1) begin : cnt
+   // Count RX packets on each channel
+   always_ff @(posedge top_tb.DUT.afu_top.pg_afu.port_gasket.pr_slot.afu_main.port_afu_instances.afu_gen[1].heh_gen.he_hssi_inst.multi_port_axi_sop_traffic_ctrl_inst.GenBrdg[c].axis_to_avst_bridge_inst.avst_rx_st.clk) begin
+      if (top_tb.DUT.afu_top.pg_afu.port_gasket.pr_slot.afu_main.port_afu_instances.afu_gen[1].heh_gen.he_hssi_inst.multi_port_axi_sop_traffic_ctrl_inst.GenBrdg[c].axis_to_avst_bridge_inst.avst_rx_st.rx.eop)
+         chan_rx_pkt_cnt[c] <= chan_rx_pkt_cnt[c] + 1;
+
+      if (~top_tb.DUT.afu_top.pg_afu.port_gasket.pr_slot.afu_main.port_afu_instances.afu_gen[1].heh_gen.he_hssi_inst.multi_port_axi_sop_traffic_ctrl_inst.GenBrdg[c].axis_to_avst_bridge_inst.avst_rx_st.rst_n)
+         chan_rx_pkt_cnt[c] <= '0;
+   end
+end
+`endif
+
 `ifdef ETH_200G
-      rx_count = 32'h0;
-      while (tx_cnt > rx_count) begin
-         @(posedge top_tb.DUT.afu_top.pg_afu.port_gasket.pr_slot.afu_main.port_afu_instances.afu_gen[1].heh_gen.he_hssi_inst.multi_port_axi_mac_seg_traffic_ctrl_inst.GenTrafWrap[0].mac_seg_packet_client_top.packet_client_top.packet_client_csr.u_rx_eop_cnt.clk);
-         rx_count = {top_tb.DUT.afu_top.pg_afu.port_gasket.pr_slot.afu_main.port_afu_instances.afu_gen[1].heh_gen.he_hssi_inst.multi_port_axi_mac_seg_traffic_ctrl_inst.GenTrafWrap[0].mac_seg_packet_client_top.packet_client_top.packet_client_csr.u_rx_eop_cnt.cnt_out[63:0]};
-      end
-      $display("INFO:%t	- RX EOP count is %d", $time, rx_count);
-`endif  
+for (genvar c = 0; c < NUM_ETH_CHANNELS; c += 1) begin : cnt
+   // Record current RX count on each channel
+   always_ff @(posedge top_tb.DUT.afu_top.pg_afu.port_gasket.pr_slot.afu_main.port_afu_instances.afu_gen[1].heh_gen.he_hssi_inst.multi_port_axi_mac_seg_traffic_ctrl_inst.GenTrafWrap[c].mac_seg_packet_client_top.packet_client_top.packet_client_csr.u_rx_eop_cnt.clk) begin
+      chan_rx_pkt_cnt[c] <= top_tb.DUT.afu_top.pg_afu.port_gasket.pr_slot.afu_main.port_afu_instances.afu_gen[1].heh_gen.he_hssi_inst.multi_port_axi_mac_seg_traffic_ctrl_inst.GenTrafWrap[c].mac_seg_packet_client_top.packet_client_top.packet_client_csr.u_rx_eop_cnt.cnt_out[63:0];
+   end
+end
+`endif
+
+task wait_for_all_eop_done;
+   input logic [63:0] num_pkt;
+   input int          chan_num;
+   begin
+      wait (chan_rx_pkt_cnt[chan_num] >= num_pkt);
+      $display("INFO:%t	- RX EOP count is %0d", $time, chan_rx_pkt_cnt[chan_num]);
    end
 endtask
 
@@ -1146,7 +1181,7 @@ task traffic_200G_400G;
       read_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0024, tx_cnt_msb);
       tx_cnt = {tx_cnt_msb, tx_cnt_lsb};
              
-      wait_for_all_eop_done_200G(tx_cnt);
+      wait_for_all_eop_done(tx_cnt, 0);
       write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h40);  // Take snapshot of counters (bit 6 =1) 
 
       $display("T:%8d INFO: read mailbox 2",$time);
@@ -1170,57 +1205,60 @@ endtask
 task traffic_10G_25G;
    input logic  access32;
    logic [31:0] scratch1;
+   int          test_port;
+   int          tx_num_pkts;
    begin
+      test_port = 6;
       pfvf = '{0,1,1}; // Set PFVF to PF0-VF1
       host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       host_bfm_top.host_bfm.set_bar(4'd0);
+
       //---------------------------------------------------------------------------
       // Traffic Controller Configuration
       //---------------------------------------------------------------------------
-      for (int id=NUM_ETH_CHANNELS-1; id >=0;id--) begin
-         host_bfm_top.host_bfm.write32(AFU_PORT_SEL_ADDR, 32'h1*id);
-         // Port-0
-         if (id == 0) begin
-            //Set packet length type
-            write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, TG_PKT_LEN_TYPE_ADDR, TG_PKT_LEN_TYPE_VAL);
-            //Set packet length
-            write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, TG_PKT_LEN_ADDR, TG_PKT_LEN_VAL);
-            //Set data pattern type
-            write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, TG_DATA_PATTERN_ADDR, TG_DATA_PATTERN_VAL);
-            //Set number of packets
-            write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR,TG_NUM_PKT_ADDR, TG_NUM_PKT_VAL);
-            //Set start to send pacts
-            write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, TG_START_XFR_ADDR, 32'h1);
-         end
-         else begin
-            // enable loopback for channel-1 onwards
-            write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, LOOPBACK_EN_ADDR, 32'h1);
-         end
-      end
-      wait_for_all_eop_done(TG_NUM_PKT_VAL);
-      //---------------------------------------------------------------------------
-      // Read Monitor statistics
-      //---------------------------------------------------------------------------
+      // Test each channel. They could all be run in parallel but are not here.
+      for (int id = 0; id < NUM_ETH_CHANNELS; id++) begin
+         // Transmit a different number of packets on each port
+         tx_num_pkts = TG_NUM_PKT_VAL + id;
 
-      // Port-0
-      host_bfm_top.host_bfm.write32(AFU_PORT_SEL_ADDR, 32'h0);
-      read_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, TM_PKT_GOOD_ADDR, scratch1);
-      if (scratch1 != TG_NUM_PKT_VAL) begin
-         incr_err_count();
-         $display("\nError: Received good packets does not match Transmitted packets on Port-%0d !\n",0);
-         $display("Number of Good Packets Received: \tExpected: %0d\n \tRead: %0d",TG_NUM_PKT_VAL,scratch1);
-      end else begin
-         $display("INFO: Number of Good Packets Received on Port-%0d :%0d",0,scratch1);
+         host_bfm_top.host_bfm.write32(AFU_PORT_SEL_ADDR, 32'(id));
+         //Set packet length type
+         write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, TG_PKT_LEN_TYPE_ADDR, TG_PKT_LEN_TYPE_VAL);
+         //Set packet length
+         write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, TG_PKT_LEN_ADDR, TG_PKT_LEN_VAL);
+         //Set data pattern type
+         write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, TG_DATA_PATTERN_ADDR, TG_DATA_PATTERN_VAL);
+         //Set number of packets
+         write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, TG_NUM_PKT_ADDR, tx_num_pkts);
+         //Set start to send pacts
+         write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, TG_START_XFR_ADDR, 32'h1);
+
+         wait_for_all_eop_done(64'(tx_num_pkts), id);
+
+         //---------------------------------------------------------------------------
+         // Read Monitor statistics
+         //---------------------------------------------------------------------------
+
+         host_bfm_top.host_bfm.write32(AFU_PORT_SEL_ADDR, id);
+         read_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, TM_PKT_GOOD_ADDR, scratch1);
+         if (scratch1 != tx_num_pkts) begin
+            incr_err_count();
+            $display("\nError: Received good packets does not match Transmitted packets on Port-%0d !\n",id);
+            $display("Number of Good Packets Received: \tExpected: %0d\n \tRead: %0d",tx_num_pkts,scratch1);
+         end else begin
+            $display("INFO: Number of Good Packets Received on Port-%0d :%0d",id,scratch1);
+         end
+         // Bad packet received at Traffic monitor
+         read_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, TM_PKT_BAD_ADDR, scratch1);
+         if (scratch1 != 32'h0) begin
+            incr_err_count();
+            $display("\nError: Received bad packets on Port-%0d !\n",id);
+            $display("Number of Bad Packets Received: \tExpected: %0d\n \tRead: %0d",32'h0,scratch1);
+         end else begin
+            $display("INFO: Number of Bad Packets Received on Port-%0d :%0d",id,scratch1);
+         end
       end
-      // Bad packet received at Traffic monitor
-      read_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, TM_PKT_BAD_ADDR, scratch1);
-      if (scratch1 != 32'h0) begin
-         incr_err_count();
-         $display("\nError: Received bad packets on Port-%0d !\n",0);
-         $display("Number of Bad Packets Received: \tExpected: %0d\n \tRead: %0d",32'h0,scratch1);
-      end else begin
-         $display("INFO: Number of Bad Packets Received on Port-%0d :%0d",0,scratch1);
-      end
+
       host_bfm_top.host_bfm.revert_to_last_pfvf_setting();
    end
 endtask
@@ -1470,6 +1508,7 @@ endgenerate
 task traffic_test;
    input logic  access32;
    logic [31:0] old_test_err_count;
+   logic [63:0] scratch;
    begin 
       $display("T:%8d INFO: Running Traffic Test",$time);
 
@@ -1496,6 +1535,22 @@ task traffic_test;
       `else      $display("T:%8d INFO: Running eth 10g",$time);
       traffic_10G_25G(access32);
       `endif
+
+      // MAC stats take a while to update. This hack is a delay. It might return 0.
+      read_hssi_mac_stat(0, 5, "rx_payload_bytes", scratch);
+
+      for (int id = 0; id < NUM_ETH_CHANNELS; id++) begin
+         // Ideally we should read a statistic from each channel. Unfortunately, this
+         // is unbearably slow due to the involvement of a NIOS processor. Just read
+         // the first and last channels.
+         if (id == 0 || id == NUM_ETH_CHANNELS-1) begin
+            read_hssi_mac_stat(4'(id), 19, "rx_total_packets", scratch);
+            if (scratch != TG_NUM_PKT_VAL + id) begin
+               incr_err_count();
+               $display("\nError: MAC rx_total_packets port %0d expected %0d!\n", id, TG_NUM_PKT_VAL + id);
+            end
+         end
+      end
 
       post_test_util(old_test_err_count);
    end
