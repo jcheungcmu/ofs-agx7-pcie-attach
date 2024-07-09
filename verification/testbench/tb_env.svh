@@ -270,7 +270,7 @@ class tb_env extends uvm_env;
       end //end plusargs
 
       //Set the model instance scope
-      this.tb_cfg0.pcie_cfg.root_cfg.model_instance_scope = "tb_top.root0";
+      this.tb_cfg0.pcie_cfg.root_cfg.model_instance_scope = "tb_top.pcie_agnt.root0";
 
       //Create status objects for Root and Endpoint devices 
       root_status = `PCIE_DEV_STATUS::type_id::create("root_status");

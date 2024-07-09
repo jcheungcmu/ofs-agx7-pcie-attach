@@ -8,6 +8,22 @@
    `undef      AFU_TOP_REQUIRES_LOCAL_MEMORY_AVALON_MM
    `define EXPERTIO_PCIESVC_INCLUDE_16G
 
+`include "ofs_ip_cfg_db/ofs_ip_cfg_pcie_ss.vh"
+
+   localparam PCIE_GEN = `OFS_FIM_IP_CFG_PCIE_SS_PCIE_GEN;
+   localparam PCIE_LINK_WIDTH = `OFS_FIM_IP_CFG_PCIE_SS_PCIE_LINK_WIDTH;
+
+ `ifdef FTILE_SIM
+   localparam IS_FTILE_SIM = 1;
+ `else
+   localparam IS_FTILE_SIM = 0;
+ `endif
+
+ `ifdef RTILE_SIM
+   localparam IS_RTILE_SIM = 1;
+ `else
+   localparam IS_RTILE_SIM = 0;
+ `endif
 
    localparam SR_IOV_CAP_BASE_ADDR = 10'h230 ;
    localparam BAR0_REG_NUM  = 'h4;

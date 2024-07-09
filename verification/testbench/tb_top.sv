@@ -204,7 +204,8 @@ module tb_top;
    `ifdef ENABLE_AC_COVERAGE
      coverage_intf  cov_intf();
    `endif
-`ifndef RTILE_SIM
+
+   if (PCIE_LINK_WIDTH == 16) begin : pcie_agnt
       `PCIE_DEV_AGNT_X16_8G_HDL root0(
           .reset        (~PCIE_RESET_N),
           .rx_datap_0   ( endpoint0_tx_datap[0]), // inputs
@@ -256,9 +257,9 @@ module tb_top;
           .tx_datap_13  (root0_tx_datap[13]),
           .tx_datap_14  (root0_tx_datap[14]),
           .tx_datap_15  (root0_tx_datap[15])
-     );
- 
-`else
+          );
+   end
+   else if (PCIE_LINK_WIDTH == 8) begin : pcie_agnt
      `PCIE_DEV_AGNT_X8_8G_HDL root0(
           .reset        (~PCIE_RESET_N),
           .rx_datap_0   ( endpoint0_tx_datap[0]), // inputs
@@ -286,35 +287,31 @@ module tb_top;
           .tx_datap_5   (root0_tx_datap[5]),
           .tx_datap_6   (root0_tx_datap[6]),
           .tx_datap_7   (root0_tx_datap[7])
+          );
 
-      //    .rx_datap_0   ( endpoint0_tx_datap[8]), // inputs
-      //    .rx_datap_1   ( endpoint0_tx_datap[9]),
-      //    .rx_datap_2   ( endpoint0_tx_datap[10]),
-      //    .rx_datap_3   ( endpoint0_tx_datap[11]),
-      //    .rx_datap_4   ( endpoint0_tx_datap[12]),
-      //    .rx_datap_5   ( endpoint0_tx_datap[13]),
-      //    .rx_datap_6   ( endpoint0_tx_datap[14]),
-      //    .rx_datap_7   ( endpoint0_tx_datap[15]),
-      //    .rx_datan_0   ( endpoint0_tx_datan[8]), // inputs
-      //    .rx_datan_1   ( endpoint0_tx_datan[9]),
-      //    .rx_datan_2   ( endpoint0_tx_datan[10]),
-      //    .rx_datan_3   ( endpoint0_tx_datan[11]),
-      //    .rx_datan_4   ( endpoint0_tx_datan[12]),
-      //    .rx_datan_5   ( endpoint0_tx_datan[13]),
-      //    .rx_datan_6   ( endpoint0_tx_datan[14]),
-      //    .rx_datan_7   ( endpoint0_tx_datan[15]),
+      assign root0_tx_datap[15:8] = 8'bz;
+   end
+   else begin : pcie_agnt
+     `PCIE_DEV_AGNT_X4_8G_HDL root0(
+          .reset        (~PCIE_RESET_N),
+          .rx_datap_0   ( endpoint0_tx_datap[0]), // inputs
+          .rx_datap_1   ( endpoint0_tx_datap[1]),
+          .rx_datap_2   ( endpoint0_tx_datap[2]),
+          .rx_datap_3   ( endpoint0_tx_datap[3]),
+          .rx_datan_0   ( endpoint0_tx_datan[0]), // inputs
+          .rx_datan_1   ( endpoint0_tx_datan[1]),
+          .rx_datan_2   ( endpoint0_tx_datan[2]),
+          .rx_datan_3   ( endpoint0_tx_datan[3]),
 
-      //    .tx_datap_0   (root0_tx_datap[8]),  // outputs
-      //    .tx_datap_1   (root0_tx_datap[9]),
-      //    .tx_datap_2   (root0_tx_datap[10]),
-      //    .tx_datap_3   (root0_tx_datap[11]),
-      //    .tx_datap_4   (root0_tx_datap[12]),
-      //    .tx_datap_5   (root0_tx_datap[13]),
-      //    .tx_datap_6   (root0_tx_datap[14]),
-      //    .tx_datap_7   (root0_tx_datap[15])
-     );
+          .tx_datap_0   (root0_tx_datap[0]),  // outputs
+          .tx_datap_1   (root0_tx_datap[1]),
+          .tx_datap_2   (root0_tx_datap[2]),
+          .tx_datap_3   (root0_tx_datap[3])
+          );
 
- `endif
+      assign root0_tx_datap[15:4] = 12'bz;
+   end
+
      //PCIE Gen3x16 - P-Tile Bridge and AXI-S Adapter
      //Replace Gen3x16 with Gen4x8 once the PCIe SS available
      top DUT (
@@ -350,17 +347,11 @@ module tb_top;
       `endif
      `endif
 
-      `ifndef RTILE_SIM
         .PCIE_RX_P       (root0_tx_datap),
-        .PCIE_RX_N       ('0),
-      `else
-        .PCIE_RX_P       ({8'bz,root0_tx_datap[7:0]}),
-        .PCIE_RX_N       ({8'bz,~root0_tx_datap[7:0]}),
-      `endif
+        .PCIE_RX_N       (~root0_tx_datap),
+
         .PCIE_TX_P       (endpoint0_tx_datap),
         .PCIE_TX_N       (endpoint0_tx_datan)
-     
-     	
      );
      
      
@@ -683,10 +674,6 @@ module tb_top;
     // `uvm_info("SEED:", $sformatf("random seed = %0d \n", $get_initial_random_seed()), UVM_LOW);
     end  
 
-
-
-  
- `ifdef FTILE_SIM
     
    initial begin
     force tb_top.DUT.ninit_done = 1'b1;
@@ -694,121 +681,78 @@ module tb_top;
     force tb_top.DUT.ninit_done = 1'b0;
    end 
 
-   ofs_top_auto_tiles ofs_top_auto_tiles(); //AUTO_TILE instance
+   if (IS_FTILE_SIM || IS_RTILE_SIM) begin
+      ofs_top_auto_tiles ofs_top_auto_tiles(); //AUTO_TILE instance
+   end
 
-     //def param added to resolve CLK TOLERANCE ERRORs in FTILE
-    defparam tb_top.root0.port0.serdes0.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes0.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes1.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes1.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes2.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes2.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes3.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes3.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes4.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes4.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes5.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes5.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes6.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes6.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes7.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes7.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes8.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes8.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes9.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes9.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes10.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes10.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes11.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes11.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes12.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes12.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes13.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes13.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes14.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes14.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes15.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes15.CLK_TOLERANCE = 1;
+   // VCS didn't resolve cross module references from inside a conditional block,
+   // even if specified from $root. So, we resort to macros to activate defparams.
+`ifdef OFS_FIM_IP_CFG_PCIE_SS_PCIE_LINK_WIDTH_IS_8
+   `define PCIE_LINK_WIDTH_GT_4 1
+`endif
+`ifdef OFS_FIM_IP_CFG_PCIE_SS_PCIE_LINK_WIDTH_IS_16
+   `define PCIE_LINK_WIDTH_GT_4 1
+   `define PCIE_LINK_WIDTH_GT_8 1
+`endif
 
-    defparam tb_top.root0.port0.serdes0.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes1.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes2.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes3.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes4.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes5.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes6.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes7.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes8.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes9.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes10.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes11.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes12.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes13.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes14.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes15.ADJUST_RX_CLK_MODE = 4;
- `endif
+   //def param added to resolve CLK TOLERANCE ERRORs in FTILE and RTILE
+   defparam tb_top.pcie_agnt.root0.port0.serdes0.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes0.CLK_TOLERANCE = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes1.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes1.CLK_TOLERANCE = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes2.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes2.CLK_TOLERANCE = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes3.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes3.CLK_TOLERANCE = 1;
 
-  
- `ifdef RTILE_SIM
-    
-   initial begin
-    force tb_top.DUT.ninit_done = 1'b1;
-    #40us;
-    force tb_top.DUT.ninit_done = 1'b0;
-   end 
+   defparam tb_top.pcie_agnt.root0.port0.serdes0.ADJUST_RX_CLK_MODE = 4;
+   defparam tb_top.pcie_agnt.root0.port0.serdes1.ADJUST_RX_CLK_MODE = 4;
+   defparam tb_top.pcie_agnt.root0.port0.serdes2.ADJUST_RX_CLK_MODE = 4;
+   defparam tb_top.pcie_agnt.root0.port0.serdes3.ADJUST_RX_CLK_MODE = 4;
 
-   ofs_top_auto_tiles ofs_top_auto_tiles(); //AUTO_TILE instance
+`ifdef PCIE_LINK_WIDTH_GT_4
+   defparam tb_top.pcie_agnt.root0.port0.serdes4.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes4.CLK_TOLERANCE = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes5.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes5.CLK_TOLERANCE = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes6.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes6.CLK_TOLERANCE = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes7.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes7.CLK_TOLERANCE = 1;
 
-     //def param added to resolve CLK TOLERANCE ERRORs in FTILE
-    defparam tb_top.root0.port0.serdes0.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes0.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes1.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes1.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes2.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes2.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes3.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes3.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes4.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes4.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes5.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes5.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes6.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes6.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes7.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes7.CLK_TOLERANCE = 1;
-    /*defparam tb_top.root0.port0.serdes8.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes8.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes9.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes9.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes10.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes10.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes11.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes11.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes12.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes12.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes13.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes13.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes14.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes14.CLK_TOLERANCE = 1;
-    defparam tb_top.root0.port0.serdes15.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1; 
-    defparam tb_top.root0.port0.serdes15.CLK_TOLERANCE = 1;*/
+   defparam tb_top.pcie_agnt.root0.port0.serdes4.ADJUST_RX_CLK_MODE = 4;
+   defparam tb_top.pcie_agnt.root0.port0.serdes5.ADJUST_RX_CLK_MODE = 4;
+   defparam tb_top.pcie_agnt.root0.port0.serdes6.ADJUST_RX_CLK_MODE = 4;
+   defparam tb_top.pcie_agnt.root0.port0.serdes7.ADJUST_RX_CLK_MODE = 4;
+`endif
 
-    defparam tb_top.root0.port0.serdes0.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes1.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes2.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes3.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes4.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes5.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes6.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes7.ADJUST_RX_CLK_MODE = 4;
-    /*defparam tb_top.root0.port0.serdes8.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes9.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes10.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes11.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes12.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes13.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes14.ADJUST_RX_CLK_MODE = 4;
-    defparam tb_top.root0.port0.serdes15.ADJUST_RX_CLK_MODE = 4;*/
- `endif
+`ifdef PCIE_LINK_WIDTH_GT_8
+   defparam tb_top.pcie_agnt.root0.port0.serdes8.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes8.CLK_TOLERANCE = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes9.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes9.CLK_TOLERANCE = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes10.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes10.CLK_TOLERANCE = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes11.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes11.CLK_TOLERANCE = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes12.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes12.CLK_TOLERANCE = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes13.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes13.CLK_TOLERANCE = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes14.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes14.CLK_TOLERANCE = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes15.ALLOW_RECOVERED_CLK_WIDTH_ADJUSTMENTS = 1;
+   defparam tb_top.pcie_agnt.root0.port0.serdes15.CLK_TOLERANCE = 1;
+
+   defparam tb_top.pcie_agnt.root0.port0.serdes8.ADJUST_RX_CLK_MODE = 4;
+   defparam tb_top.pcie_agnt.root0.port0.serdes9.ADJUST_RX_CLK_MODE = 4;
+   defparam tb_top.pcie_agnt.root0.port0.serdes10.ADJUST_RX_CLK_MODE = 4;
+   defparam tb_top.pcie_agnt.root0.port0.serdes11.ADJUST_RX_CLK_MODE = 4;
+   defparam tb_top.pcie_agnt.root0.port0.serdes12.ADJUST_RX_CLK_MODE = 4;
+   defparam tb_top.pcie_agnt.root0.port0.serdes13.ADJUST_RX_CLK_MODE = 4;
+   defparam tb_top.pcie_agnt.root0.port0.serdes14.ADJUST_RX_CLK_MODE = 4;
+   defparam tb_top.pcie_agnt.root0.port0.serdes15.ADJUST_RX_CLK_MODE = 4;
+`endif
+
 endmodule : tb_top
 
