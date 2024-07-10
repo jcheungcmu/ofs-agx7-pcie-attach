@@ -64,7 +64,7 @@ endif
 export VIPDIR = $(VERDIR)
 export RALDIR = $(VERDIR)/testbench/ral
 
-VLOG_OPT = -kdb -full64 -error=noMPD -ntb_opts uvm-1.2 +vcs+initreg+random +vcs+lic+wait -ntb_opts dtm -sverilog -timescale=1ps/1ps +libext+.v+.sv -l vlog.log -assert enable_diag -ignore unique_checks
+VLOG_OPT = -kdb -full64 -error=noMPD -ntb_opts uvm-1.2 +vcs+initreg+random +vcs+lic+wait -ntb_opts dtm -sverilog -timescale=1ps/1ps +libext+.v+.sv -assert enable_diag -ignore unique_checks
 VLOG_OPT += -Mdir=./csrc +warn=noBCNACMBP -CFLAGS -y $(VERDIR)/vip/pcie_vip/src/verilog/vcs -y $(VERDIR)/vip/pcie_vip/src/sverilog/vcs -P $(VERIF_SCRIPTS_DIR)/vip/pli.tab $(WORKDIR)/scripts/vip/msglog.o -notice  +incdir+./
 ifneq ($(PARTCMP),1)
   VLOG_OPT += -work work
@@ -165,6 +165,7 @@ SIMV_OPT += +ntb_disable_cnst_null_object_warning=1 -assert nopostproc +vcs+lic+
 #SIMV_OPT += +UVM_PHASE_TRACE
 SIMV_OPT +=  +vcs+lic+wait 
 SIMV_OPT += +vcs+nospecify+notimingchecks +vip_verbosity=svt_pcie_pl:UVM_NONE,svt_pcie_dl:UVM_NONE,svt_pcie_tl:UVM_NONE  
+#SIMV_OPT += -fgp=num_threads:4
 
 ifndef SEED
     SIMV_OPT += +ntb_random_seed_automatic
@@ -325,9 +326,9 @@ $(VERDIR)/sim:
 ##  - VIP/UVM initialization
 ##  - FIM/AFU library definitions
 $(VERDIR)/sim/synopsys_sim.setup: | $(VERDIR)/sim
-	@# Generate the Quartus family-dependent simulation library
-	cd $(VERDIR)/sim; quartus_sh --simlib_comp -family $(FPGA_FAMILY) -tool vcsmx -language verilog
-	find $(VERDIR)/sim/verilog_libs/ -mindepth 1 -maxdepth 1 -type d -printf '%f: ./verilog_libs/%f\n' > $@
+	@# Copy the Quartus libraries that were pre-compiled by gen_sim_files.sh
+	rsync -a $(QIP_DIR)/quartus_libs/vcsmx/ $(VERDIR)/sim/
+	@# Defined libraries that will be built for simulation
 ifeq ($(PARTCMP),1)
 	echo ofs_svt_lib: ./libraries/ofs_svt_lib >> $@
 	echo ofs_ip_lib:  ./libraries/ofs_ip_lib  >> $@
@@ -371,7 +372,7 @@ vlog_adp: setup vlog_ofs_fim_lib vlog_ofs_ip_lib vlog_ofs_svt_lib vlog_ofs_tb_li
 else
 vlog_adp: setup 
 	cd $(VERDIR)/sim && vlogan -full64 -ntb_opts uvm-1.2 -sverilog -timescale=1ns/1ns -l vlog_uvm.log
-	cd $(VERDIR)/sim && vlogan $(VLOG_OPT) -F $(SCRIPTS_DIR)/ip_flist.f  -F $(SCRIPTS_DIR)/generated_rtl_flist.f -F $(VERIF_SCRIPTS_DIR)/svt_list.f -F $(VERIF_SCRIPTS_DIR)/ver_list.f $(AFU_FLIST_IMPORT)
+	cd $(VERDIR)/sim && vlogan $(VLOG_OPT) -l vlog.log -F $(SCRIPTS_DIR)/ip_flist.f -F $(SCRIPTS_DIR)/generated_rtl_flist.f -F $(VERIF_SCRIPTS_DIR)/svt_list.f -F $(VERIF_SCRIPTS_DIR)/ver_list.f $(AFU_FLIST_IMPORT)
 endif 
 
 ifeq ($(PARTCMP),1)
