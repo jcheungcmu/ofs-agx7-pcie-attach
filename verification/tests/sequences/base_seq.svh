@@ -232,7 +232,7 @@ class base_seq extends uvm_sequence;
     endfunction
 
 // Allocate the memory and return the start address
-    function bit [63:0] alloc_mem(int size, bit low32 = 0);
+    function bit [63:0] alloc_mem(int n_bytes, bit low32 = 0);
         bit [63:0] m_addr;
 	std::randomize(m_addr) with {
 	    m_addr[11:0] == 0;
@@ -245,11 +245,11 @@ class base_seq extends uvm_sequence;
 	        m_addr[63:32] == 32'h0;
 	    }
 	    foreach(mem_pool[i]) {
-	        !(m_addr inside {[i:i+'h40*mem_pool[i]]}); 
+	        !(m_addr inside {[i:i+mem_pool[i]]});
 	    }
-	    (m_addr + 'h40*size) < 64'hffff_ffff_ffff_ffff;
+	    (m_addr + n_bytes) < 64'hffff_ffff_ffff_ffff;
 	};
-	mem_pool[m_addr] = size;
+	mem_pool[m_addr] = n_bytes;
         return m_addr;
     endfunction : alloc_mem
 

@@ -39,8 +39,6 @@ class he_lpbk_seq extends base_seq;
     int timeout;
     rand bit [1:0] intr_id;
     bit msix_req_set;
-    rand bit [31:0] rand_data [16];
-    rand bit [31:0] host_dsm_rdata [16];
     rand bit [63:0] dut_mem_start;
     rand bit [63:0] dut_mem_end;
 
@@ -128,14 +126,30 @@ class he_lpbk_seq extends base_seq;
         super.new(name);
     endfunction : new
 
+    function automatic string dw_mem_to_string(input bit [31:0] data[]);
+        string s = "";
+        foreach(data[i]) begin
+            s = $sformatf("%8h%s", data[i], s);
+        end
+        return s;
+    endfunction : dw_mem_to_string
+
     task body();
 	bit [63:0]                  wdata, rdata;
 	bit [63:0]                  dsm_addr_tmp;	
-	bit [511:0]                 src_data[], dst_data[];
+	bit [31:0]                  src_data[], dst_data[];
     uvm_reg_data_t ctl_data;
     uvm_status_e       status;
-        bit [31:0] host_rdata [16];
+        bit [31:0] rand_data [];
+        bit [31:0] host_dsm_rdata [];
         bit [63:0] host_addr;
+        bit [63:0] he_info;
+        int he_lpbk_bus_bytes_log2;
+        int he_lpbk_bus_bytes;
+        int he_lpbk_bus_dw;
+        int compare_dw;
+        int local_mem_bus_bytes_log2;
+        int local_mem_bus_bytes;
 
         super.body();
          `ifdef INCLUDE_DDR4                             
@@ -164,27 +178,47 @@ class he_lpbk_seq extends base_seq;
 	if(he_mem) msix_base = tb_cfg0.PF0_VF0_BAR4;
 	else       msix_base = tb_cfg0.PF2_BAR4;
 
-	src_addr = alloc_mem(num_lines, !src_addr_64bit);
-	dst_addr = alloc_mem(num_lines, !dst_addr_64bit);
-	dsm_addr = alloc_mem(1, !dsm_addr_64bit);
+        // Read HE_INFO0. Bus width is encoded there.
+        mmio_read64 (.addr_(base_addr+'h180), .data_(he_info));
+	`uvm_info(get_name(), $psprintf("HE_INFO0 = %0h", he_info), UVM_LOW)
+	`uvm_info(get_name(), $psprintf("HE API version = %0d", 8'(he_info >> 16)), UVM_LOW)
+        he_lpbk_bus_bytes_log2 = 5 + ((he_info >> 25) & 3);
+        he_lpbk_bus_bytes = 1 << he_lpbk_bus_bytes_log2;
+        he_lpbk_bus_dw = he_lpbk_bus_bytes / 4;
+	`uvm_info(get_name(), $psprintf("HE host bus bytes = %0d, log2 bytes = %0d", he_lpbk_bus_bytes, he_lpbk_bus_bytes_log2), UVM_LOW)
+        local_mem_bus_bytes_log2 = 2 + ((he_info >> 27) & 31);
+        local_mem_bus_bytes = 1 << local_mem_bus_bytes_log2;
+	`uvm_info(get_name(), $psprintf("HE local mem bus bytes = %0d, log2 bytes = %0d", local_mem_bus_bytes, local_mem_bus_bytes_log2), UVM_LOW)
+
+	src_addr = alloc_mem(num_lines * he_lpbk_bus_bytes, !src_addr_64bit);
+	dst_addr = alloc_mem(num_lines * he_lpbk_bus_bytes, !dst_addr_64bit);
+	dsm_addr = alloc_mem(he_lpbk_bus_bytes, !dsm_addr_64bit);
 
 	//this.randomize();
 	`uvm_info(get_name(), $psprintf("he_mem = %0d, en_msix_chk=%0d msix_base=%0h src_addr = %0h, dst_addr = %0h, dsm_addr = %0h. num_lines = %0d, req_len = %0h, mode = %0b, cont_mode = %0d, intlv = %0b", he_mem, en_msix_chk, msix_base, src_addr, dst_addr, dsm_addr, num_lines, req_len, mode, cont_mode, tput_interleave), UVM_LOW)
-	src_data = new[num_lines];
-	dst_data = new[num_lines];
+        rand_data = new[he_lpbk_bus_dw];
+        host_dsm_rdata = new[he_lpbk_bus_dw];
+
+        // How many dwords to compare after loopback? For HE MEM, if the memory bus
+        // is narrower than the host bus the data is truncated to the memory width.
+        if (he_mem && local_mem_bus_bytes < he_lpbk_bus_bytes)
+            compare_dw = local_mem_bus_bytes / 4;
+        else
+            compare_dw = he_lpbk_bus_dw;
+	src_data = new[compare_dw];
+	dst_data = new[compare_dw];
 
 	// Prepare source data in host memory
 	for(int i = 0; i < num_lines; i++) begin
             //std::randomize(rand_data);
-            foreach(rand_data[j]) begin  rand_data[j] = $urandom();
-	    `uvm_info(get_name(), $psprintf("RAND_DATA[%d] :- %h \n",j,rand_data[j]), UVM_LOW)end
+            foreach(rand_data[j]) rand_data[j] = $urandom();
                                   
-           host_mem_write( .addr_(src_addr+'h40*i) , .data_(rand_data) , .len('d16) );
+            host_mem_write( .addr_(src_addr+he_lpbk_bus_bytes*i) , .data_(rand_data) , .len(he_lpbk_bus_dw) );
 	end
 
         // initialize DSM data
         foreach(rand_data[i]) rand_data[i] = 32'h0;
-        host_mem_write( .addr_(dsm_addr) , .data_(rand_data) , .len('d16) );
+        host_mem_write( .addr_(dsm_addr) , .data_(rand_data) , .len(he_lpbk_bus_dw) );
 
         // Program CSR_CTL to reset HE-LPBK
 	wdata = 64'h0;
@@ -199,16 +233,16 @@ class he_lpbk_seq extends base_seq;
 	`uvm_info(get_name(), $psprintf("CSR_CTL = %0h", rdata), UVM_LOW)
 
 	// Program CSR_SRC_ADDR
-        mmio_write64(.addr_(base_addr+'h120), .data_(src_addr>>6));
+        mmio_write64(.addr_(base_addr+'h120), .data_(src_addr >> he_lpbk_bus_bytes_log2));
         mmio_read64 (.addr_(base_addr+'h120), .data_(rdata));	
 	`uvm_info(get_name(), $psprintf("CSR_SRC_ADDR = %0h", rdata), UVM_LOW)
 
 	// Program CSR_DST_ADDR
-        mmio_write64(.addr_(base_addr+'h128), .data_(dst_addr>>6));
+        mmio_write64(.addr_(base_addr+'h128), .data_(dst_addr >> he_lpbk_bus_bytes_log2));
         mmio_read64 (.addr_(base_addr+'h128), .data_(rdata));	
 	`uvm_info(get_name(), $psprintf("CSR_DST_ADDR = %0h", rdata), UVM_LOW)
 
-	dsm_addr_tmp = dsm_addr >> 6;
+	dsm_addr_tmp = dsm_addr >> he_lpbk_bus_bytes_log2;
 	// Program CSR_AFU_DSM_BASEH
         mmio_write32(.addr_(base_addr+'h114), .data_(dsm_addr_tmp[63:32]));
         mmio_read32 (.addr_(base_addr+'h114), .data_(rdata));	
@@ -285,7 +319,7 @@ class he_lpbk_seq extends base_seq;
     end
 
 	if(en_msix_chk) 
-	    check_he_user_intr();
+	    check_he_user_intr(he_lpbk_bus_dw);
 
         rdata = 0;
 	// Polling DSM
@@ -293,7 +327,7 @@ class he_lpbk_seq extends base_seq;
 	    while(!dsm_data[0]) begin
                foreach (host_dsm_rdata[i]) host_dsm_rdata[i] = 32'h0;
 		`uvm_info(get_name(), $psprintf("INSIDE WHILE WILL START HOST_RDATA"), UVM_LOW)
-               host_mem_read( .addr_(dsm_addr) , .data_(host_dsm_rdata) , .len('d16) ); 
+               host_mem_read( .addr_(dsm_addr) , .data_(host_dsm_rdata) , .len(he_lpbk_bus_dw) ); 
 	        foreach(host_dsm_rdata[i])
 	            dsm_data |= changeEndian(host_dsm_rdata[i]) << (i*32);
 		`uvm_info(get_name(), $psprintf("Polling DSM status Addr = %0h Data = %h", dsm_addr, dsm_data), UVM_LOW)
@@ -307,28 +341,20 @@ class he_lpbk_seq extends base_seq;
         if(mode == 3'b000) begin
 	    // Compare data
 	    for(int i = 0; i < num_lines; i++) begin
-               host_addr = src_addr + 'h40*i;
+               host_addr = src_addr + he_lpbk_bus_bytes*i;
+               host_mem_read( .addr_(host_addr) , .data_(src_data) , .len(compare_dw) ); 
+               foreach(src_data[j])
+                   src_data[j] = changeEndian(src_data[j]);
 
-               host_mem_read( .addr_(host_addr) , .data_(host_rdata) , .len('d16) ); 
-	        foreach(host_rdata[j])
-	            src_data[i] |= changeEndian(host_rdata[j]) << (j*32);
-	        `uvm_info(get_name(), $psprintf("addr = %0h src_data = %0h", host_addr, src_data[i]), UVM_LOW)
-	    end
+               host_addr = dst_addr + he_lpbk_bus_bytes*i;
+               host_mem_read( .addr_(host_addr) , .data_(dst_data) , .len(compare_dw) ); 
+               foreach(dst_data[j])
+                   dst_data[j] = changeEndian(dst_data[j]);
 
-	    for(int i = 0; i < num_lines; i++) begin               
-               host_addr = dst_addr + 'h40*i;
-               host_mem_read( .addr_(host_addr) , .data_(host_rdata) , .len('d16) ); 
-
-	        foreach(host_rdata[j])
-	            dst_data[i] |= changeEndian(host_rdata[j]) << (j*32);
-	        `uvm_info(get_name(), $psprintf("addr = %0h dst_data = %0h", host_addr, dst_data[i]), UVM_LOW)
-	    end
-
-	    foreach(src_data[i]) begin
-	        if(src_data[i] !== dst_data[i])
-	            `uvm_error(get_name(), $psprintf("Data mismatch! src_data[%0d] = %0h dst_data[%0d] = %0h", i, src_data[i], i, dst_data[i]))
-	        else
-	            `uvm_info(get_name(), $psprintf("Data match! data[%0d] = %0h", i, src_data[i]), UVM_LOW)
+               if(src_data !== dst_data)
+                  `uvm_error(get_name(), $psprintf("Data mismatch! src_data[%0d] = %s dst_data[%0d] = %s", i, dw_mem_to_string(src_data), i, dw_mem_to_string(dst_data)))
+               else
+                  `uvm_info(get_name(), $psprintf("Data match! data[%0d] = %s", i, dw_mem_to_string(src_data)), UVM_LOW)
 	    end
 	end
 
@@ -545,10 +571,13 @@ class he_lpbk_seq extends base_seq;
     endtask
 
     virtual task check_he_user_intr();
+        input int he_lpbk_bus_dw;
         bit [63:0] wdata, rdata, addr, intr_masked_data;
-        bit [31:0] host_intr_rdata [16];
+        bit [31:0] host_intr_rdata [];
         bit msix_req_set;
 	uvm_status_e status;
+
+        host_intr_rdata = new[he_lpbk_bus_dw];
 
         `uvm_info(get_name(), $psprintf("TEST: Check MSIX_PBA[%0d] is set for masked User interrupt",intr_id), UVM_LOW)
         for(int i=0;i<200;i++) begin
@@ -572,7 +601,7 @@ class he_lpbk_seq extends base_seq;
           #25us;
           `uvm_info(get_name(), $psprintf("TEST: HOST READ Loop Iteration %0d",i), UVM_LOW)
           `uvm_info(get_name(), $psprintf("TEST: Read Host memory"), UVM_LOW)
-          host_mem_read( .addr_(intr_addr) , .data_(host_intr_rdata) , .len('d16) ); 
+          host_mem_read( .addr_(intr_addr) , .data_(host_intr_rdata) , .len(he_lpbk_bus_dw) );
           if(changeEndian(host_intr_rdata[0]) !== intr_wr_data)
               `uvm_error(get_name(), $psprintf("Interrupt write data mismatch exp = %0h act = %0h", intr_wr_data, changeEndian(host_intr_rdata[0])))
           else begin

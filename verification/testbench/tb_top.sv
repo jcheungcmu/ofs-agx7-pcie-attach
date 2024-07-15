@@ -681,9 +681,11 @@ module tb_top;
     force tb_top.DUT.ninit_done = 1'b0;
    end 
 
+`ifdef INCLUDE_HSSI
    if (IS_FTILE_SIM || IS_RTILE_SIM) begin
       ofs_top_auto_tiles ofs_top_auto_tiles(); //AUTO_TILE instance
    end
+`endif
 
    // VCS didn't resolve cross module references from inside a conditional block,
    // even if specified from $root. So, we resort to macros to activate defparams.

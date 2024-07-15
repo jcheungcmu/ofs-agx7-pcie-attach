@@ -337,6 +337,10 @@ ifeq ($(PARTCMP),1)
 endif
 	@# Memory initialization files from the FIM build
 	cd $(VERDIR)/sim && sh "$(OFS_ROOTDIR)"/sim/scripts/ip_flist.sh
+	@# Create a dummy.hex file in case no other .hex files exist for the model.
+	@# Rules below assume the existence of at least one .hex file.
+	touch $(VERDIR)/sim/dummy.hex
+	touch $(VERDIR)/sim/serdes.firmware.rom
 	@echo ''
 	@echo VCS_HOME: $(VCS_HOME)
 	@$(DESIGNWARE_HOME)/bin/dw_vip_setup -path ../vip/axi_vip -add axi_system_env_svt -svlog
