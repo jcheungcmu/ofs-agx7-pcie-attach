@@ -81,6 +81,8 @@ class enumerate_seq extends `PCIE_DRIVER_TRANSACTION_BASE_SEQ_CLASS;
      bit[31:0]  msi_ctl;
      bit[31:0]  dev_ctl;
      bit[31:0]  rdata;
+     bit[11:0]  sriov_offset;
+     bit[11:0]  ext_cap_offset;
      int vf_num_start;
 
      `uvm_info("body", "SDEBUG enum: Entered Enumerating...", UVM_LOW)
@@ -113,7 +115,22 @@ class enumerate_seq extends `PCIE_DRIVER_TRANSACTION_BASE_SEQ_CLASS;
 
       ////////////////////////////////////////////////////////
 
+      // Walk the extended capabilities to find the SR-IOV extended capbility block.
+      // Extended capabilities are a linked list, starting at 'h100.
+      ext_cap_offset = 'h100;
+      while (ext_cap_offset != 0) begin
+        cfg_rd(0, ext_cap_offset, rdata);
+        `uvm_info(get_name(), $psprintf("SDEBUG enum: PCIe extended capability offset %0h, ID %h", ext_cap_offset, rdata[15:0]),UVM_LOW)
 
+        if (rdata[15:0] == 16'h0010) break; // Found SR-IOV!
+        ext_cap_offset = rdata[31:20];      // Next
+      end
+
+      if (ext_cap_offset == 0)
+        `uvm_fatal(get_name(), "Failed to find PCIe SR-IOV extended capability")
+
+      sriov_offset = ext_cap_offset;
+      `uvm_info(get_name(), $psprintf("SDEBUG enum: Found PCIe SR-IOV capability at %0h", sriov_offset),UVM_LOW)
 
       for(int pf_no=0;pf_no<`NUM_PFS;pf_no++)begin
         `uvm_info(get_name(), $psprintf("SDEBUG enum: Configuring PF = %0d",pf_no),UVM_LOW)
@@ -176,11 +193,6 @@ class enumerate_seq extends `PCIE_DRIVER_TRANSACTION_BASE_SEQ_CLASS;
         end     
 
         if(pf_no inside {0,1})begin
-          `ifdef FTILE_SIM   
-            bit[15:0] sriov_offset = 'h22c;
-           `else
-            bit[15:0] sriov_offset = 'h230;
-          `endif
           `uvm_info(get_name(), $psprintf("SDEBUG enum: Configuring VFs for PF = %0d",pf_no),UVM_LOW)
           cfg_rd(pf_no, (sriov_offset+'h4), rdata); //Read SRIOV Cap register
           cfg_rd(pf_no, (sriov_offset+'h8), rdata); // SRIOV Status and Control
