@@ -967,12 +967,26 @@ endtask
 task wait_for_reset_done;
    logic                error;
    logic                result;
+   logic [31:0] scratch;
+   cpl_status_t cpl_status;
    begin
+      result = 1'b1;
       pfvf = '{0,0,0}; // Set PFVF to PF0
       host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       $display("INFO:%t	Waiting for subsystem cold reset deassertion acknowledgment",$time);
-      wait(top_tb.DUT.hssi_wrapper.hssi_ss.subsystem_cold_rst_ack_n);
-      test_csr_ro_access_32(result, ADDR32, HSSI_WRAP_COLD_RST_ACK_ADDR, 'h0);
+      wait(top_tb.DUT.hssi_wrapper.hssi_ss.subsystem_cold_rst_n);
+
+      host_bfm_top.host_bfm.read32_with_completion_status(HSSI_WRAP_COLD_RST_ACK_ADDR, scratch, error, cpl_status);
+      if (error) begin
+         $display("\nERROR: Completion is returned with unsuccessful status.\n");
+         incr_err_count();
+         result = 1'b0;
+      end else if (~scratch[1]) begin
+         $display("\nERROR: Cold reset ACK CSR not set");
+         incr_err_count();
+         result = 1'b0;
+      end
+
       $display("INFO:%t	Subsystem cold reset deassertion acknowledged",$time);
       $display("INFO:%t	Reset Sequence Complete",$time);
       host_bfm_top.host_bfm.revert_to_last_pfvf_setting();
