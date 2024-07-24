@@ -289,7 +289,19 @@ class enumerate_seq extends `PCIE_DRIVER_TRANSACTION_BASE_SEQ_CLASS;
 
       ////////////////////////////////////////////////////////
 
-    `uvm_info("body", "SDEBUG enum: Exiting Enumerating...", UVM_LOW)
+      `ifdef INCLUDE_DDR4
+         `uvm_info(get_name(), "SDEBUG enum: Waiting for DDR4 calibration", UVM_LOW)
+         wait(tb_top.DUT.local_mem_wrapper.mem_ss_top.mem_ss_cal_success[0] == 1'b1);
+         `uvm_info(get_name(), "SDEBUG enum: DDR4 calibration complete", UVM_LOW)
+      `endif
+
+      `ifdef INCLUDE_HSSI
+         `uvm_info(get_name(), "SDEBUG enum: Waiting for HSSI cold reset", UVM_LOW)
+         wait(tb_top.DUT.hssi_wrapper.handshaked_cold_rst == 1'b0);
+         `uvm_info(get_name(), "SDEBUG enum: HSSI cold reset complete", UVM_LOW)
+      `endif
+
+      `uvm_info("body", "SDEBUG enum: Exiting Enumerating...", UVM_LOW)
   endtask: body
 
   task cfg_rd(input int addr, input int reg_num, output bit [31:0] data);

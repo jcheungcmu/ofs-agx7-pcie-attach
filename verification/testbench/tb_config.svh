@@ -4,6 +4,7 @@
 `ifndef TB_CONFIG_SVH
 `define TB_CONFIG_SVH
 
+`include "ofs_ip_cfg_db.vh"
 `include "pcie_shared_cfg.sv"
 
 class tb_config extends uvm_object;

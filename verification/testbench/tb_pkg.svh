@@ -20,7 +20,7 @@
 
 
     `define HE_HSSI_TOP `PG_AFU_TOP.afu_gen[1].heh_gen.he_hssi_inst
-    `define HE_HSSI_RX_ST_Q(CH) `HE_HSSI_TOP.multi_port_axi_sop_traffic_ctrl_inst.GenBrdg[PORT_``CH``].axis_to_avst_bridge_inst.avst_rx_st
+    `define HE_HSSI_RX_ST_Q(CH) `HE_HSSI_TOP.multi_port_axi_sop_traffic_ctrl_inst.GenBrdg[``CH``].axis_to_avst_bridge_inst.avst_rx_st
 
     `define MSIX_TOP tb_top.DUT.pcie_wrapper.msix_top         
     `define FME_CSR_TOP tb_top.DUT.fme_top.fme_io

@@ -13,6 +13,8 @@
  */
 //===============================================================================================================
 
+`include "synopsys_vip_defines.sv"
+
  `timescale 1ps/1ps
 
 `ifdef TEST_LPBK //Use this switch to run rx loopback test to create accurated frequncies of ETH_VIP clks
@@ -683,6 +685,11 @@ module tb_top;
 
 `ifdef INCLUDE_HSSI
    if (IS_FTILE_SIM || IS_RTILE_SIM) begin
+      ofs_top_auto_tiles ofs_top_auto_tiles(); //AUTO_TILE instance
+   end
+`else
+   // F-Tile PCIe uses auto tile for reset
+   if (IS_FTILE_SIM) begin
       ofs_top_auto_tiles ofs_top_auto_tiles(); //AUTO_TILE instance
    end
 `endif

@@ -27,6 +27,7 @@ endif
 # Enable parallel/partial compilation by default. This is so much faster
 # that we should consider removing the non-parallel version.
 PARTCMP=1
+DEBUG=1
 
 SCRIPTS_DIR = $(OFS_ROOTDIR)/sim/scripts
 VERIF_SCRIPTS_DIR = $(VERDIR)/scripts
@@ -55,7 +56,7 @@ else ifeq ($(n6000_100G),1)
   BOARD = n6000
 else ifeq ($(RTILE_SIM),1)
   BOARD = iseries-dk
-  # UVM simulation doesn't support Gen5x16. Use Gen5 2x8.
+  # Default to Gen5 2x8. For Gen5x16 set "OFSS=" (empty).
   OFSS = "$(OFS_ROOTDIR)"/tools/ofss_config/pcie/pcie_host_2link.ofss
 else
   BOARD = n6001
@@ -64,7 +65,7 @@ endif
 export VIPDIR = $(VERDIR)
 export RALDIR = $(VERDIR)/testbench/ral
 
-VLOG_OPT = -kdb -full64 -error=noMPD -ntb_opts uvm-1.2 +vcs+initreg+random +vcs+lic+wait -ntb_opts dtm -sverilog -timescale=1ps/1ps +libext+.v+.sv -assert enable_diag -ignore unique_checks
+VLOG_OPT = -kdb -full64 -error=noMPD -ntb_opts uvm-1.2 +vcs+initreg+random +vcs+lic+wait -ntb_opts dtm -sverilog -timescale=1ns/1ns +libext+.v+.sv -assert enable_diag -ignore unique_checks
 VLOG_OPT += -Mdir=./csrc +warn=noBCNACMBP -CFLAGS -y $(VERDIR)/vip/pcie_vip/src/verilog/vcs -y $(VERDIR)/vip/pcie_vip/src/sverilog/vcs -P $(VERIF_SCRIPTS_DIR)/vip/pli.tab $(WORKDIR)/scripts/vip/msglog.o -notice  +incdir+./
 ifneq ($(PARTCMP),1)
   VLOG_OPT += -work work
@@ -105,67 +106,72 @@ VLOG_OPT += +define+VIP_ETHERNET_100G_SVT +define+SVT_ETHERNET_DEBUG_BUS_ENABLE
 VLOG_OPT += +define+SYNOPSYS_SV
 
 ifdef FTILE_SIM
-VLOG_OPT += +define+FTILE_SIM +define+IP7581SERDES_UX_SIMSPEED
-VLOG_OPT += +define+INCLUDE_FTILE
-ifdef ETH_200G
-VLOG_OPT += +define+ETH_200G +define+ENABLE_8_TO_15_PORTS
-endif
-ifdef ETH_400G
-VLOG_OPT += +define+ETH_400G +define+VIP_ETHERNET_400G_SVT +define+ETH_INTERFACE_WIDTH=40 +define+ENABLE_8_TO_15_PORTS
-endif
-VLOG_OPT += +define+TOP_LEVEL_ENTITY_INSTANCE_PATH=tb_top.DUT
-VLOG_OPT += +define+QUARTUS_ENABLE_DPI_FORCE
-VLOG_OPT += +define+SPEC_FORCE
-VLOG_OPT += +define+IP7581SERDES_UXS2T1R1PGD_PIPE_SPEC_FORCE
-VLOG_OPT += +define+IP7581SERDES_UXS2T1R1PGD_PIPE_SIMULATION
-VLOG_OPT += +define+IP7581SERDES_UXS2T1R1PGD_PIPE_FAST_SIM
-VLOG_OPT += +define+SRC_SPEC_SPEED_UP
-VLOG_OPT += +define+__SRC_TEST__
-VLOG_OPT += +define+gdrb_TIMESCALE_EN +define+RTLSIM +define+gdrb_INTC_FUNCTIONAL +define+SSM_SEQUENCE
+    FTILE_SERDES = 1
+    VLOG_OPT += +define+FTILE_SIM
 endif
 
 ifdef RTILE_SIM
-VLOG_OPT += +define+RTILE_SIM
-VLOG_OPT += +define+INCLUDE_RTILE
-VLOG_OPT += +define+TOP_LEVEL_ENTITY_INSTANCE_PATH=tb_top.DUT
+    FTILE_SERDES = 1
+    VLOG_OPT += +define+RTILE_SIM
+endif
+
+ifdef FTILE_SERDES
+    ifdef ETH_200G
+        VLOG_OPT += +define+ETH_200G +define+ENABLE_8_TO_15_PORTS
+    endif
+    ifdef ETH_400G
+        VLOG_OPT += +define+ETH_400G +define+VIP_ETHERNET_400G_SVT +define+ETH_INTERFACE_WIDTH=40 +define+ENABLE_8_TO_15_PORTS
+    endif
+
+    VLOG_OPT += +define+TOP_LEVEL_ENTITY_INSTANCE_PATH=tb_top.DUT
+    VLOG_OPT += +define+QUARTUS_ENABLE_DPI_FORCE
+    VLOG_OPT += +define+SPEC_FORCE
+
+    # See Fast Simulation Macros for the Agilex 7 F-Tile Hard IP
+    # https://www.intel.com/content/dam/support/us/en/programmable/kdb/2024/ip/Fast-Simulation-Macros-for-the-Agilex%E2%84%A2%207-F-Tile-Hard-IP.pdf
+    VLOG_OPT += +define+IP7581SERDES_UX_SIMSPEED
+    VLOG_OPT += +define+IP7581SERDES_UXS2T1R1PGD_PIPE_SPEC_FORCE
+    VLOG_OPT += +define+IP7581SERDES_UXS2T1R1PGD_PIPE_SIMULATION
+    VLOG_OPT += +define+IP7581SERDES_UXS2T1R1PGD_PIPE_FAST_SIM
+    VLOG_OPT += +define+SRC_SPEC_SPEED_UP
+
+    VLOG_OPT += +define+TIMESCALE_EN
+    VLOG_OPT += +define+INTC_FUNCTIONAL
+    VLOG_OPT += +define+__SRC_TEST__
+    VLOG_OPT += +define+gdrb_TIMESCALE_EN +define+RTLSIM +define+gdrb_INTC_FUNCTIONAL +define+SSM_SEQUENCE
 endif
 
 VLOG_OPT += +define+ETH_FORCE_FS_TIME_PRECISION
 VLOG_OPT += +define+BASE_AFU=dummy_afu+
 # The simulator functional model may be driven by IP configuration in <proj dir>/ofs_ip_cfg_db
-VLOG_OPT += +incdir+$(SCRIPTS_DIR)/qip_gen/quartus_proj_dir
+VLOG_OPT += +incdir+$(QPROJ_DIR) +incdir+$(QPROJ_DIR)/ofs_ip_cfg_db
 VLOG_OPT += +incdir+$(RALDIR)
 
+VCS_OPT = -full64 -ntb_opts uvm-1.2 -licqueue +vcs+lic+wait -l vcs.log
+
 ifeq ($(PARTCMP),1)
-VCS_OPT = -full64 -ntb_opts uvm-1.2 -licqueue  +vcs+lic+wait -j8 -l vcs.log -partcomp ofs_tb_lib.tb_top -partcomp_dir=./libraries/ofs_partition_lib -partcomp
+    VLOG_OPT += +define+SVT_PCIE_OPTIMIZED_COMPILE
+
+    VCS_OPT += -j4 -partcomp ofs_tb_lib.tb_top -partcomp_dir=./libraries/ofs_partition_lib
+    VCS_OPT += -fastpartcomp=j8 +optconfigfile+$(VERIF_SCRIPTS_DIR)/pc.optcfg
 else
-VCS_OPT = -full64 -ntb_opts uvm-1.2 -licqueue  +vcs+lic+wait -l vcs.log -ignore initializer_driver_checks 
+    VCS_OPT += -ignore initializer_driver_checks
 endif
 
-ifdef FTILE_SIM
-VCS_OPT +=-pvalue+tb_top.DUT.local_mem_wrapper.mem_ss_top.mem_ss_inst.mem_ss.emif_cal_top.emif_cal_top.emif_cal.IOSSM_USE_MODEL=0 
-VCS_OPT +=-debug_access+all -debug_region+cell+encrypt -debug_region+cell+lib
-else
-ifdef RTILE_SIM
-VCS_OPT +=-pvalue+tb_top.DUT.local_mem_wrapper.mem_ss_top.mem_ss_inst.mem_ss.emif_cal_top.emif_cal_top.emif_cal.IOSSM_USE_MODEL=0 
-VCS_OPT +=-debug_access+all -debug_region+cell+encrypt -debug_region+cell+lib
-else
-VCS_OPT +=-debug_access+f
-endif
+ifdef FTILE_SERDES
+    VCS_OPT += -pvalue+tb_top.DUT.local_mem_wrapper.mem_ss_top.mem_ss_inst.mem_ss.emif_cal_top.emif_cal_top.emif_cal.IOSSM_USE_MODEL=0
 endif
 
-VLOG_OPT += -debug_access+f
-VLOG_OPT += -debug_access+all
-VLOG_OPT += -debug_region+cell+lib
-VLOG_OPT += -debug_region+cell+encrypt
-VCS_OPT  += $(QUARTUS_INSTALL_DIR)/eda/sim_lib/quartus_dpi.c $(QUARTUS_INSTALL_DIR)/eda/sim_lib/simsf_dpi.cpp
+VCS_OPT += -xlrm uniq_prior_final
+VCS_OPT += -debug_access+wn+pp+dmptf -debug_region+cell+encrypt -debug_region+cell+lib
+VCS_OPT += $(QUARTUS_INSTALL_DIR)/eda/sim_lib/quartus_dpi.c $(QUARTUS_INSTALL_DIR)/eda/sim_lib/simsf_dpi.cpp
+
 SIMV_OPT = +UVM_TESTNAME=$(TESTNAME) +TIMEOUT=$(TIMEOUT)
 #SIMV_OPT += +UVM_NO_RELNOTES
 SIMV_OPT += +ntb_disable_cnst_null_object_warning=1 -assert nopostproc +vcs+lic+wait +vcs+initreg+0 
 #SIMV_OPT += +UVM_PHASE_TRACE
 SIMV_OPT +=  +vcs+lic+wait 
 SIMV_OPT += +vcs+nospecify+notimingchecks +vip_verbosity=svt_pcie_pl:UVM_NONE,svt_pcie_dl:UVM_NONE,svt_pcie_tl:UVM_NONE  
-#SIMV_OPT += -fgp=num_threads:4
 
 ifndef SEED
     SIMV_OPT += +ntb_random_seed_automatic
@@ -206,7 +212,6 @@ ifeq ($(M),0)
     VLOG_OPT += +define+INCLUDE_USER_CLK
 endif
 
-
 ifdef NO_MSIX
     VLOG_OPT += +define+NO_MSIX 
 endif
@@ -216,28 +221,17 @@ ifndef NO_HSSI
 endif
 
 ifdef DUMP
-    #VLOG_OPT += -debug_all 
-    #VCS_OPT += -debug_all 
-    VLOG_OPT += -debug_access+f
-    #VCS_OPT += -debug_access+f
     SIMV_OPT += -ucli -i $(VCDFILE)
 endif
 
-
 ifdef DUMP_FSDB
-    #VLOG_OPT += -debug_all 
-    #VCS_OPT += -debug_all 
-    VLOG_OPT += -debug_access+f
-    VCS_OPT += -debug_access+f
     SIMV_OPT += -ucli -i $(FSDBFILE)
 endif
 
-ifdef DEBUG
-SIMV_OPT += -l runsim.log 
-VLOG_OPT += +define+RUNSIM
+ifneq ($(DEBUG),0)
+    SIMV_OPT += -l runsim.log
+    VLOG_OPT += +define+RUNSIM
 endif
-
-
 
 ifdef GUI
     VCS_OPT += -debug_all +memcbk
@@ -337,10 +331,17 @@ ifeq ($(PARTCMP),1)
 endif
 	@# Memory initialization files from the FIM build
 	cd $(VERDIR)/sim && sh "$(OFS_ROOTDIR)"/sim/scripts/ip_flist.sh
-	@# Create a dummy.hex file in case no other .hex files exist for the model.
-	@# Rules below assume the existence of at least one .hex file.
+	@# Create a dummy files in case no other init files exist for the model.
+	@# Rules below assume the existence of at least one file of each type.
 	touch $(VERDIR)/sim/dummy.hex
 	touch $(VERDIR)/sim/serdes.firmware.rom
+	cp -f $(OFS_ROOTDIR)/ofs-common/src/common/fme_id_rom/fme_id.mif $(VERDIR)/sim/
+	@# Support logic files from quartus_tlg (ofs_top_auto_tiles) for F and R-Tile
+	if [ -d "$(QPROJ_DIR)/support_logic" ]; then cp -f $(QPROJ_DIR)/support_logic/*.mif $(VERDIR)/sim/; fi
+ifdef FTILE_SERDES
+	if [ -d "$(QUARTUS_ROOTDIR)/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1" ]; then cp -f $(QUARTUS_ROOTDIR)/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1/*.hex $(VERDIR)/sim/; fi
+	cp -f $(OFS_ROOTDIR)/ofs-common/src/common/he_hssi/pkt_client_mac_seg/*.hex $(VERDIR)/sim/
+endif
 	@echo ''
 	@echo VCS_HOME: $(VCS_HOME)
 	@$(DESIGNWARE_HOME)/bin/dw_vip_setup -path ../vip/axi_vip -add axi_system_env_svt -svlog
@@ -381,7 +382,7 @@ endif
 
 ifeq ($(PARTCMP),1)
 build: vlog_adp
-	cd $(VERDIR)/sim && vcs $(VCS_OPT) 
+	cd $(VERDIR)/sim && vcs $(VCS_OPT)
 else
 build: vlog_adp
 	cd $(VERDIR)/sim && vcs $(VCS_OPT) tb_top
@@ -396,32 +397,18 @@ build_gka: cmplib build
 .NOTPARALLEL: build_gka
 
 view:
-	dve -full64 -vpd inter.vpd&
-run:    
+	dve -full64 -vpd inter.vpd &
+
+run:
 ifndef TEST_DIR
 	$(error undefined TESTNAME)
 else
-ifdef FTILE_SIM
-ifeq ($(ETH_200G),1)
-	cd $(VERDIR)/sim && mkdir $(TEST_DIR) && cd $(TEST_DIR) && cp -f ../*.hex . && cp -f $(QUARTUS_ROOTDIR)/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1/nios2_smg_regfile.hex . && cp -f $(QUARTUS_ROOTDIR)/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1/rst_ctrl_dram.hex . && cp -f $(QUARTUS_ROOTDIR)/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1/rst_ctrl_iram.hex . && cp -f ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/syn/board/fseries-dk/syn_top/support_logic/ofs_top__z1577b_x393_y0_n0.mif . && cp -f ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/syn/board/fseries-dk/syn_top/support_logic/ofs_top__z1577b_x5_y166_n0.mif . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/eth_f_hw_pkt_gen_rom_init.400G_SEG.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/eth_f_hw_pkt_gen_rom_init.200G_SEG.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_ctrl.200G.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_ctrl.400G.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_data.200G.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_data.400G.hex . && cp -f $(OFS_ROOTDIR)/ofs-common/src/common/fme_id_rom/fme_id.mif . && cp -f $(VERIF_SCRIPTS_DIR)/fme_id.ver . && cp -f $(VERIF_SCRIPTS_DIR)/recalibration.ver . && ../simv $(SIMV_OPT) $(SIMV_OPT_EXTRA)
-else ifeq ($(ETH_400G),1)
-	cd $(VERDIR)/sim && mkdir $(TEST_DIR) && cd $(TEST_DIR) && cp -f ../*.hex . && cp -f $(QUARTUS_ROOTDIR)/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1/nios2_smg_regfile.hex . && cp -f $(QUARTUS_ROOTDIR)/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1/rst_ctrl_dram.hex . && cp -f $(QUARTUS_ROOTDIR)/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1/rst_ctrl_iram.hex . && cp -f ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/syn/board/fseries-dk/syn_top/support_logic/ofs_top__z1577b_x393_y0_n0.mif . && cp -f ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/syn/board/fseries-dk/syn_top/support_logic/ofs_top__z1577b_x5_y166_n0.mif . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/eth_f_hw_pkt_gen_rom_init.400G_SEG.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/eth_f_hw_pkt_gen_rom_init.200G_SEG.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_ctrl.200G.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_ctrl.400G.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_data.200G.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_data.400G.hex . && cp -f $(OFS_ROOTDIR)/ofs-common/src/common/fme_id_rom/fme_id.mif . && cp -f $(VERIF_SCRIPTS_DIR)/fme_id.ver . && cp -f $(VERIF_SCRIPTS_DIR)/recalibration.ver . && ../simv $(SIMV_OPT) $(SIMV_OPT_EXTRA)	
-else
-	cd $(VERDIR)/sim && mkdir $(TEST_DIR) && cd $(TEST_DIR) && cp -f ../*.hex . && cp -f $(VERIF_SCRIPTS_DIR)/FTILE_HEX/*.hex . && cp -f $(VERIF_SCRIPTS_DIR)/FTILE_HEX/*.mif . && cp -f $(OFS_ROOTDIR)/ofs-common/src/common/fme_id_rom/fme_id.mif . && cp -f $(VERIF_SCRIPTS_DIR)/fme_id.ver . && cp -f $(VERIF_SCRIPTS_DIR)/recalibration.ver . && ../simv $(SIMV_OPT) $(SIMV_OPT_EXTRA)
-endif 
-else
-ifdef INCLUDE_CVL
-	cd $(VERDIR)/sim && mkdir $(TEST_DIR) && cd $(TEST_DIR) && cp -f ../*.hex . && cp -f $(OFS_ROOTDIR)/ofs-common/src/common/fme_id_rom/fme_id.mif . && cp -f $(VERIF_SCRIPTS_DIR)/fme_id.ver . && cp -f $(OFS_ROOTDIR)/sim/scripts/qip_gen/ofs-common/src/fpga_family/agilex/user_clock/qph_user_clk_iopll_reconfig/altera_iopll_reconfig_1940/sim/recalibration.mif . && cp -f $(VERIF_SCRIPTS_DIR)/recalibration.ver . && cp -f $(VERDIR)/sim/serdes.firmware.rom . && ../simv $(SIMV_OPT) $(SIMV_OPT_EXTRA)
-else
-ifdef RTILE_SIM
-	cd $(VERDIR)/sim && mkdir $(TEST_DIR) && cd $(TEST_DIR) && cp -f ../*.hex . && cp -f $(OFS_ROOTDIR)/ofs-common/src/common/fme_id_rom/fme_id.mif . && cp -f $(VERIF_SCRIPTS_DIR)/fme_id.ver . && cp -f $(VERIF_SCRIPTS_DIR)/recalibration.ver . && ../simv $(SIMV_OPT) $(SIMV_OPT_EXTRA)
-else
-	cd $(VERDIR)/sim && mkdir $(TEST_DIR) && cd $(TEST_DIR) && cp -f ../*.hex . && cp -f $(OFS_ROOTDIR)/ofs-common/src/common/fme_id_rom/fme_id.mif . && cp -f $(VERIF_SCRIPTS_DIR)/fme_id.ver . && cp -f $(VERIF_SCRIPTS_DIR)/recalibration.ver . && cp -f $(VERDIR)/sim/serdes.firmware.rom . && ../simv $(SIMV_OPT) $(SIMV_OPT_EXTRA)
+	mkdir $(TEST_DIR)
+	cp -f $(VERDIR)/sim/*.hex $(TEST_DIR)
+	cp -f $(VERDIR)/sim/*.mif $(TEST_DIR)
+	cp -f $(VERDIR)/sim/*.rom $(TEST_DIR)
+	cd $(TEST_DIR) && ../simv $(SIMV_OPT) $(SIMV_OPT_EXTRA)
 endif
-endif
-endif
-endif
-
 
 rundb:    
 ifndef TESTNAME
