@@ -488,6 +488,8 @@ qsfp_top #(
 // Configuration reset release IP
 //-----------------------------------------------------------------------------------------------
 `ifdef SIM_MODE
+   // The simulation flow may manage ninit_done in the testbench, holding it
+   // high at the start.
    assign ninit_done = 1'b0;
 `else
    cfg_mon cfg_mon (

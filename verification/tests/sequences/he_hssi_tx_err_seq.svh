@@ -228,25 +228,14 @@ endtask
 
 `ifdef INCLUDE_CVL
 task wait_for_reset_done;
-   bit [63:0]   wdata, rdata, mask, addr;     
-   bit[63:0] expdata;
-
    begin
-     
-      $display("INFO:%t	Waiting for subsystem cold reset deassertion acknowledgment",$time);
-      wait(tb_top.DUT.hssi_wrapper.hssi_ss.subsystem_cold_rst_ack_n);
-      $display("INFO:%t	Subsystem cold reset deassertion acknowledged",$time);
-      `uvm_info(get_name(), "Just read  HSSI_COLD_RST Read write  CSR Registers...", UVM_LOW)
-			          
-         addr = tb_cfg0.PF0_BAR0+'h60810;
-	 expdata =  64'h0000000000000000;
-         mmio_read32 (.addr_(addr), .data_(rdata));
- 
-       	 if(rdata[31:0]== expdata[31:0])
-            `uvm_info(get_name(), $psprintf("HSSI_COLD_RST  Data match!addr = %0h, Exp = %0h, Act = %0h",addr, expdata, rdata),UVM_LOW)
-        else
-            `uvm_error(get_name(), $psprintf(" HSSI_COLD_RST Data mismatch!addr = %0h, EXp = %0h, data = %0h",addr,expdata, rdata))
-      $display("INFO:%t	Reset Sequence Complete",$time);
+      `uvm_info(get_name(), "Waiting for HSSI cold reset deassertion acknowledgment", UVM_LOW)
+
+      wait(tb_top.DUT.hssi_wrapper.handshaked_cold_rst == 1'b0);
+      `uvm_info(get_name(), "HSSI cold reset deassertion acknowledged", UVM_LOW)
+
+      wait(tb_top.DUT.hssi_wrapper.cold_rst_ack_n == 1'b1);
+      `uvm_info(get_name(), "HSSI cold reset ACK deasserted", UVM_LOW)
    end
 endtask
 

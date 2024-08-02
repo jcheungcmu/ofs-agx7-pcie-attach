@@ -970,26 +970,14 @@ task wait_for_reset_done;
    logic [31:0] scratch;
    cpl_status_t cpl_status;
    begin
-      result = 1'b1;
-      pfvf = '{0,0,0}; // Set PFVF to PF0
-      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
-      $display("INFO:%t	Waiting for subsystem cold reset deassertion acknowledgment",$time);
-      wait(top_tb.DUT.hssi_wrapper.hssi_ss.subsystem_cold_rst_n);
+      $display("INFO:%t Waiting for HSSI cold reset deassertion acknowledgment", $time);
 
-      host_bfm_top.host_bfm.read32_with_completion_status(HSSI_WRAP_COLD_RST_ACK_ADDR, scratch, error, cpl_status);
-      if (error) begin
-         $display("\nERROR: Completion is returned with unsuccessful status.\n");
-         incr_err_count();
-         result = 1'b0;
-      end else if (~scratch[1]) begin
-         $display("\nERROR: Cold reset ACK CSR not set");
-         incr_err_count();
-         result = 1'b0;
-      end
+      wait(top_tb.DUT.hssi_wrapper.handshaked_cold_rst == 1'b0);
+      $display("INFO:%t HSSI cold reset deassertion acknowledged", $time);
 
-      $display("INFO:%t	Subsystem cold reset deassertion acknowledged",$time);
-      $display("INFO:%t	Reset Sequence Complete",$time);
-      host_bfm_top.host_bfm.revert_to_last_pfvf_setting();
+      $display("INFO:%t Waiting for HSSI cold reset ACK deassert. This can take a while, e.g. 500us on P-Tile.", $time);
+      wait(top_tb.DUT.hssi_wrapper.cold_rst_ack_n == 1'b1);
+      $display("INFO:%t	HSSI reset sequence complete",$time);
    end
 endtask
 
@@ -1084,11 +1072,7 @@ task wait_for_hssi_to_ready;
                port_status_prev = port_status;
          end
       end
-     `ifdef FTILE_SIM
-       #5us
-     `else  //for Etile,PCS ready is stable at 800us, we added a delay of 500us
-       #500us
-     `endif
+
       // Check rx pcs ready, tx lane stable and pll lock by reading register
       test_csr_ro_access_64(result, ADDR32, HSSI_WRAP_STATUS_ADDR, HSSI_WRAP_STATUS_VAL);
       host_bfm_top.host_bfm.revert_to_last_pfvf_setting();

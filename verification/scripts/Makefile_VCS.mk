@@ -116,6 +116,10 @@ ifdef RTILE_SIM
 endif
 
 ifdef FTILE_SERDES
+    ifndef NO_HSSI
+        VLOG_OPT += +define+FTILE_HSSI_SIM
+    endif
+
     ifdef ETH_200G
         VLOG_OPT += +define+ETH_200G +define+ENABLE_8_TO_15_PORTS
     endif
@@ -134,6 +138,11 @@ ifdef FTILE_SERDES
     VLOG_OPT += +define+IP7581SERDES_UXS2T1R1PGD_PIPE_SIMULATION
     VLOG_OPT += +define+IP7581SERDES_UXS2T1R1PGD_PIPE_FAST_SIM
     VLOG_OPT += +define+SRC_SPEC_SPEED_UP
+    # There appears to be a race during cold reset between the simulated NIOS-based
+    # F-Tile HSSI reset controller and the simulated CSR clock IOPLL setup.
+    # If the CSR clock is too late, HSSI reset ACK wires get stuck high and ports
+    # never become active. Use the non-NIOS simulation controller instead.
+    VLOG_OPT += +define+REMOVE_SRC_NIOS
 
     VLOG_OPT += +define+TIMESCALE_EN
     VLOG_OPT += +define+INTC_FUNCTIONAL
@@ -337,7 +346,7 @@ endif
 	touch $(VERDIR)/sim/serdes.firmware.rom
 	cp -f $(OFS_ROOTDIR)/ofs-common/src/common/fme_id_rom/fme_id.mif $(VERDIR)/sim/
 	@# Support logic files from quartus_tlg (ofs_top_auto_tiles) for F and R-Tile
-	if [ -d "$(QPROJ_DIR)/support_logic" ]; then cp -f $(QPROJ_DIR)/support_logic/*.mif $(VERDIR)/sim/; fi
+	for f in "$(QPROJ_DIR)"/support_logic/*.mif; do if [ -f "$$f" ]; then cp -f "$$f" $(VERDIR)/sim/; fi; done
 ifdef FTILE_SERDES
 	if [ -d "$(QUARTUS_ROOTDIR)/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1" ]; then cp -f $(QUARTUS_ROOTDIR)/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1/*.hex $(VERDIR)/sim/; fi
 	cp -f $(OFS_ROOTDIR)/ofs-common/src/common/he_hssi/pkt_client_mac_seg/*.hex $(VERDIR)/sim/

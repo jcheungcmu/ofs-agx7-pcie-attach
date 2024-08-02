@@ -679,7 +679,7 @@ module tb_top;
     
    initial begin
     force tb_top.DUT.ninit_done = 1'b1;
-    #40us;
+    #1us;
     force tb_top.DUT.ninit_done = 1'b0;
    end 
 

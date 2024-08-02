@@ -74,6 +74,7 @@ class pcie_shared_cfg extends uvm_object;
       root_cfg.pcie_cfg.symbol_log_filename = "symbol.log";
 
       endpoint_cfg.pcie_cfg.enable_transaction_logging = 1'b1;
+      svt_pcie_dl_disp_pattern::default_max_payload_print_dwords = 1024;
      
       // Root Complex Configuration 
       root_cfg.device_is_root         = 1;

@@ -32,7 +32,7 @@ class hssi_ss_seq extends base_seq;
  
     task body();
         super.body();
-      `ifdef FTILE_SIM
+      `ifdef FTILE_HSSI_SIM
       `ifdef ETH_200G
 	 m_regs_m[0] = tb_env0.hssi_regs.get_reg_by_name("HSSI_FEATURE");
          r_a_array["HSSI_FEATURE"] = 32'h00044005;

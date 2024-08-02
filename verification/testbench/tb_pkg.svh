@@ -92,7 +92,12 @@
      import pcie_pkg::*;
      import axi_pkg::*;
 
+`ifdef SVT_PCIE_OPTIMIZED_COMPILE
+    import svt_pcie_common_uvm_pkg::*;
+`else
     import svt_pcie_uvm_pkg::*;
+`endif
+
     import svt_ethernet_uvm_pkg::*;
     `include "svt_ethernet.uvm.pkg"
     `include "svt_ethernet_txrx_if.svi"
