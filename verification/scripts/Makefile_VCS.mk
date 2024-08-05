@@ -157,14 +157,13 @@ VLOG_OPT += +incdir+$(QPROJ_DIR) +incdir+$(QPROJ_DIR)/ofs_ip_cfg_db
 VLOG_OPT += +incdir+$(RALDIR)
 
 VCS_OPT = -full64 -ntb_opts uvm-1.2 -licqueue +vcs+lic+wait -l vcs.log
+VCS_OPT += -ignore initializer_driver_checks
 
 ifeq ($(PARTCMP),1)
     VLOG_OPT += +define+SVT_PCIE_OPTIMIZED_COMPILE
 
     VCS_OPT += -j4 -partcomp ofs_tb_lib.tb_top -partcomp_dir=./libraries/ofs_partition_lib
     VCS_OPT += -fastpartcomp=j8 +optconfigfile+$(VERIF_SCRIPTS_DIR)/pc.optcfg
-else
-    VCS_OPT += -ignore initializer_driver_checks
 endif
 
 ifdef FTILE_SERDES
