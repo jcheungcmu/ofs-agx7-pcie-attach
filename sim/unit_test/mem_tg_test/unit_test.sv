@@ -18,6 +18,10 @@ module unit_test #(
    input logic csr_clk,
    input logic csr_rst_n
 );
+`ifdef INCLUDE_HBM
+// TODO: replace with generated file path.
+`include "../../scripts/qip_gen_mseries-dk/ipss/mem/qip/hbm_ss/hbm_ss/sim/hbm_ss_noc_sim.inc"
+`endif
 
 import pfvf_class_pkg::*;
 import host_memory_class_pkg::*;
@@ -690,6 +694,8 @@ task mem_tg_test;
    logic [31:0] old_test_err_count;
    logic tg_active;
    int 	 ch;
+   longint ch_offset;
+   int  tg_addr_mode;
    cpl_status_t cpl_status;
    enum {
        TG_ACTIVE_BIT,
@@ -723,11 +729,17 @@ begin
          result = 1'b0;
       end
 
+      `ifdef INCLUDE_HBM
+         tg_addr_mode = TG_ADDR_SEQ;
+      `else
+         tg_addr_mode = TG_ADDR_RAND_SEQ;
+      `endif
+
       host_bfm_top.host_bfm.write32((ch+1)*MEM_TG_CFG_OFFSET + TG_LOOP_COUNT,   loops);
       host_bfm_top.host_bfm.write32((ch+1)*MEM_TG_CFG_OFFSET + TG_WRITE_COUNT,  wr);
       host_bfm_top.host_bfm.write32((ch+1)*MEM_TG_CFG_OFFSET + TG_READ_COUNT,   rd);
       host_bfm_top.host_bfm.write32((ch+1)*MEM_TG_CFG_OFFSET + TG_BURST_LENGTH, bls);
-      host_bfm_top.host_bfm.write32((ch+1)*MEM_TG_CFG_OFFSET + TG_ADDR_MODE_WR, 32'h2);
+      host_bfm_top.host_bfm.write32((ch+1)*MEM_TG_CFG_OFFSET + TG_ADDR_MODE_WR, tg_addr_mode);
 
       host_bfm_top.host_bfm.read64_with_completion_status((ch+1)*MEM_TG_CFG_OFFSET + TG_LOOP_COUNT, scratch, error, cpl_status);
       if(scratch[31:0] != loops) begin
@@ -754,12 +766,64 @@ begin
          result = 1'b0;
       end
       host_bfm_top.host_bfm.read64_with_completion_status((ch+1)*MEM_TG_CFG_OFFSET + TG_ADDR_MODE_WR, scratch, error, cpl_status);
-      if(scratch[31:0] != 'h2) begin
-         $display("\nERROR: Unable to configure TG_ADDR_MODE_WR exp=%d act=%d \n",32'h2, scratch[31:0]);
+      if(scratch[31:0] != tg_addr_mode) begin
+         $display("\nERROR: Unable to configure TG_ADDR_MODE_WR exp=%d act=%d \n",tg_addr_mode, scratch[31:0]);
          incr_err_count();
          result = 1'b0;
       end
 
+      `ifdef INCLUDE_HBM
+      ch_offset = HBM_CH_OFFSET*(ch % 16);
+      host_bfm_top.host_bfm.write32((ch+1)*MEM_TG_CFG_OFFSET + TG_SEQ_START_ADDR_WR_H, ch_offset[63:32]);
+      host_bfm_top.host_bfm.write32((ch+1)*MEM_TG_CFG_OFFSET + TG_SEQ_START_ADDR_WR_L, ch_offset[31:0]);
+      host_bfm_top.host_bfm.write32((ch+1)*MEM_TG_CFG_OFFSET + TG_SEQ_START_ADDR_RD_H, ch_offset[63:32]);
+      host_bfm_top.host_bfm.write32((ch+1)*MEM_TG_CFG_OFFSET + TG_SEQ_START_ADDR_RD_L, ch_offset[31:0]);
+      host_bfm_top.host_bfm.write32((ch+1)*MEM_TG_CFG_OFFSET + TG_SEQ_ADDR_INCR, HBM_CH_INCR);
+      host_bfm_top.host_bfm.write32((ch+1)*MEM_TG_CFG_OFFSET + TG_ADDR_MODE_RD, tg_addr_mode);
+
+      host_bfm_top.host_bfm.read64_with_completion_status((ch+1)*MEM_TG_CFG_OFFSET + TG_SEQ_START_ADDR_WR_H, scratch, error, cpl_status);
+      if(scratch[31:0] != ch_offset[63:32]) begin
+         $display("\nERROR: Unable to configure TG_SEQ_START_ADDR_WR_H exp=%d act=%d \n",ch_offset[63:32], scratch[31:0]);
+         incr_err_count();
+         result = 1'b0;
+      end
+      
+      host_bfm_top.host_bfm.read64_with_completion_status((ch+1)*MEM_TG_CFG_OFFSET + TG_SEQ_START_ADDR_WR_L, scratch, error, cpl_status);
+      if(scratch[31:0] != ch_offset[31:0]) begin
+         $display("\nERROR: Unable to configure TG_SEQ_START_ADDR_WR_L exp=%d act=%d \n",ch_offset[31:0], scratch[31:0]);
+         incr_err_count();
+         result = 1'b0;
+      end
+      
+      host_bfm_top.host_bfm.read64_with_completion_status((ch+1)*MEM_TG_CFG_OFFSET + TG_SEQ_START_ADDR_RD_H, scratch, error, cpl_status);
+      if(scratch[31:0] != ch_offset[63:32]) begin
+         $display("\nERROR: Unable to configure TG_SEQ_START_ADDR_RD_H exp=%d act=%d \n",ch_offset[63:32], scratch[31:0]);
+         incr_err_count();
+         result = 1'b0;
+      end
+      
+      host_bfm_top.host_bfm.read64_with_completion_status((ch+1)*MEM_TG_CFG_OFFSET + TG_SEQ_START_ADDR_RD_L, scratch, error, cpl_status);
+      if(scratch[31:0] != ch_offset[31:0]) begin
+         $display("\nERROR: Unable to configure TG_SEQ_START_ADDR_RD_L exp=%d act=%d \n",ch_offset[31:0], scratch[31:0]);
+         incr_err_count();
+         result = 1'b0;
+      end
+      
+      host_bfm_top.host_bfm.read64_with_completion_status((ch+1)*MEM_TG_CFG_OFFSET + TG_SEQ_ADDR_INCR, scratch, error, cpl_status);
+      if(scratch[31:0] != HBM_CH_INCR) begin
+         $display("\nERROR: Unable to configure TG_SEQ_ADDR_INCR exp=%d act=%d \n",HBM_CH_INCR, scratch[31:0]);
+         incr_err_count();
+         result = 1'b0;
+      end
+      
+      host_bfm_top.host_bfm.read64_with_completion_status((ch+1)*MEM_TG_CFG_OFFSET + TG_ADDR_MODE_RD, scratch, error, cpl_status);
+      if(scratch[31:0] != tg_addr_mode) begin
+         $display("\nERROR: Unable to configure TG_ADDR_MODE_RD exp=%d act=%d \n",tg_addr_mode, scratch[31:0]);
+         incr_err_count();
+         result = 1'b0;
+      end
+      `endif
+      
       //host_bfm_top.host_bfm.write64((ch+1)*MEM_TG_CFG_OFFSET + TG_START, 64'h1);
       host_bfm_top.host_bfm.write32((ch+1)*MEM_TG_CFG_OFFSET + TG_START, 32'h1);
    end // for (ch=0; mem_capability[ch] == 1'b1; ch=ch+1)

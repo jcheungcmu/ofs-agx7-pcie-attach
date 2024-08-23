@@ -69,6 +69,12 @@ Work directory names in the commands below are merely examples and may be change
     ```bash
         ./ofs-common/scripts/common/syn/build_top.sh -p --ofss tools/ofss_config/pcie/pcie_host_2link_1pf_1vf.ofss iseries-dk:no_hssi,pr_floorplan=syn/board/iseries-dk/setup/pr_assignments_slim.tcl work_iseries-dk_slim
     ```
+
+* mseries-dk
+   - Compiling the mseries-dk design requires .ofss for changing the .ip configuration. Uses NOC & HBM and works only in flat compile
+    ```bash
+        ./ofs-common/scripts/common/syn/build_top.sh --ofss tools/ofss_config/mseries-dk.ofss mseries-dk:flat work_mseries-dk
+    ```
 ## Directories
 
 ### Evaluation Scripts (***eval\_scripts***)
