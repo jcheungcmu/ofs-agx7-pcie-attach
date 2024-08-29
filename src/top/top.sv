@@ -136,11 +136,11 @@ localparam PCIE_NUM_LINKS = top_cfg_pkg::FIM_NUM_LINKS;
 //-----------------------------------------------------------------------------------------------
 
 // clock signals
-wire clk_sys, clk_sys_div2, clk_sys_div4, clk_ptp_slv;
+wire clk_sys, clk_sys_div2, clk_sys_div4;
 wire clk_100m;
 wire clk_50m;
 wire clk_csr;
-wire clk_noc_fab;
+wire clk_noc_fab, clk_noc_fab_wr;
 
 logic h2f_reset, h2f_reset_q;
 
@@ -159,7 +159,6 @@ logic rst_n_sys_mem;
 logic rst_n_sys_hps;
 logic [PCIE_NUM_LINKS-1:0] rst_n_100m;
 logic [PCIE_NUM_LINKS-1:0] rst_n_50m;
-logic [PCIE_NUM_LINKS-1:0] rst_n_ptp_slv;
 logic [PCIE_NUM_LINKS-1:0] rst_n_csr;
 logic [PCIE_NUM_LINKS-1:0] pwr_good_n;
 logic [PCIE_NUM_LINKS-1:0] pwr_good_csr_clk_n;
@@ -512,7 +511,7 @@ sys_pll sys_pll (
    .outclk_0           (clk_sys                   ), // 350 MHz for x8 and 470 MHz for x16
    .outclk_1           (clk_100m                  ), // 100 MHz
    .outclk_2           (clk_sys_div2              ), // 175 MHz for x8 and 235 MHz for x16
-   .outclk_3           (clk_ptp_slv               ), // 155.56MHz
+   .outclk_3           (clk_noc_fab_wr            ), // 600 MHz for driving wr fabric internal to NOC 
    .outclk_4           (clk_50m                   ), // 50 MHz
    .outclk_5           (clk_sys_div4              ), // 87.5 MHz for x8 and 117.5 MHz for x16
    .outclk_6           (clk_noc_fab               )  // 350 MHz for driving fabric side of NoC
@@ -527,7 +526,6 @@ for (genvar j=0; j<PCIE_NUM_LINKS; j++) begin : PCIE_RST_CTRL
     .clk_sys             (clk_sys                  ),
     .clk_100m            (clk_100m                 ),
     .clk_50m             (clk_50m                  ),
-    .clk_ptp_slv         (clk_ptp_slv              ),
     .pll_locked          (pll_locked               ),
     .pcie_reset_status   (pcie_reset_status[j]     ),
     .pcie_cold_rst_ack_n (pcie_cold_rst_ack_n[j]   ),
@@ -537,7 +535,6 @@ for (genvar j=0; j<PCIE_NUM_LINKS; j++) begin : PCIE_RST_CTRL
     .rst_n_sys           (rst_n_sys[j]             ),  // system reset synchronous to clk_sys
     .rst_n_100m          (rst_n_100m[j]            ),  // system reset synchronous to clk_100m
     .rst_n_50m           (rst_n_50m[j]             ),  // system reset synchronous to clk_50m
-    .rst_n_ptp_slv       (rst_n_ptp_slv[j]         ),  // system reset synchronous to clk_ptp_slv 
     .pwr_good_n          (pwr_good_n[j]            ),  // system reset synchronous to clk_100m
     .pwr_good_csr_clk_n  (pwr_good_csr_clk_n[j]    ),  // power good reset synchronous to clk_sys 
     .pcie_cold_rst_n     (pcie_cold_rst_n[j]       ),
@@ -1225,6 +1222,7 @@ endgenerate
       .uib_refclk      (uib_refclk),
       // Fabric clk (350MHz for full bandwidth)
       .fab_clk         ('{default:clk_noc_fab}),
+      .fab_clk_wr      ('{default:clk_noc_fab_wr}),
       // NoC clk
       .noc_ctrl_refclk (noc_ctrl_refclk),
       // HBM status signals

@@ -25,6 +25,7 @@ Initial Setup:
       iseries-dk Gen5 2x8 400G  - "gen_sim_files.sh --ofss $OFS_ROOTDIR/tools/ofss_config/pcie/pcie_host_2link.ofss,tools/ofss_config/hssi/hssi_1x400_ftile.ofss iseries-dk"
              
       n6000 100G                - "gen_sim_files.sh n6000"
+      mseries-dk                - "gen_sim_files.sh --ofss  $OFS_ROOTDIR/tools/ofss_config/mseries-dk.ofss mseries-dk"
  
 
 6) **Running Test******
