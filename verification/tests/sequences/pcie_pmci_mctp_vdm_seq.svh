@@ -99,49 +99,52 @@ class pcie_pmci_mctp_vdm_seq extends base_seq;
 
       //----------------BMC TXNS---------------------------//
        begin @(negedge m10_intf.clk);
-          uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr" ,'h0);
-          uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_write",'h1);
-          uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_wrdata",{28'h0,2'h0,1'h1,1'h0});
+	 force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr ='h0;
+          force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_write ='h1;
+          force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_wrdata ={28'h0,2'h0,1'h1,1'h0};
+
        end
        @(negedge m10_intf.clk);
        @(negedge m10_intf.clk);
        @(negedge m10_intf.clk);
 
        begin @(negedge m10_intf.clk); 
-          uvm_hdl_force("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr", 'h0);
-          uvm_hdl_force("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_write",'h1);
-          uvm_hdl_force("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_wrdata",{27'h0,1'h1,3'h0,1'h1});
+	  force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr = 'h0;
+          force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_write = 'h1;
+          force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_wrdata ={27'h0,1'h1,3'h0,1'h1};
+
        end
        @(negedge m10_intf.clk);
        @(negedge m10_intf.clk);
-          uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_write", 'h0);
+	force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_write = 'h0;
+
        @(negedge m10_intf.clk);
        @(negedge m10_intf.clk);
        @(negedge m10_intf.clk);
        begin @(negedge m10_intf.clk);
-          uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr", 'h0);
-          uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_read",'h1);
+          force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr = 'h0;
+          force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_read = 'h1;
        end 
        begin @(negedge m10_intf.clk);
-          uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr", 'h1);
-          uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_read",'h1);
+          force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr = 'h1;
+          force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_read = 'h1;
        end 
        begin @(negedge m10_intf.clk);
-          uvm_hdl_force("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr", 'h200);
-          uvm_hdl_force("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_read",'h1);
+          force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr = 'h200;
+          force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_read = 'h1;
        end 
         @(negedge m10_intf.clk); 
         @(negedge m10_intf.clk); 
        begin @(negedge m10_intf.clk); 
-          uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_read",'h0);
+          force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_read = 'h0;
        end
        begin @(negedge m10_intf.clk); 
-          uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr", 'h0);
-          uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_write", 'h1);
-          uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_wrdata",{28'h0,2'h0,1'h0,1'h0});
+          force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr = 'h0;
+          force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_write = 'h1;
+          force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_wrdata ={28'h0,2'h0,1'h0,1'h0};
        end
        begin @(negedge m10_intf.clk); 
-          uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_write",'h0);
+          force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_write = 'h0;
        end
        #0.1ms;
        fork begin
@@ -150,10 +153,10 @@ class pcie_pmci_mctp_vdm_seq extends base_seq;
           uvm_hdl_read("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_waitreq",wait_req); 
           if(!wait_req) begin
             j_temp=j;
-            uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr", 'h200+j_temp);
-            uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_read",'h1);
+            force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr = 'h200+j_temp;
+            force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_read = 'h1;
             @(negedge m10_intf.clk);
-            uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_read",'h0);
+            force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_read = 'h0;
             
           end
           else begin

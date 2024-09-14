@@ -24,12 +24,12 @@ class pmci_pcie_mctp_vdm_seq extends base_seq;
      virtual m10_interface m10_intf;
      bit [63:0] wdata,rdata,addr;
      bit nios_rdata,nios_rdvalid;
-     logic [31:0] vdm_wdata;
+     static logic [31:0] vdm_wdata;
      static logic [7:0] i_temp;
-     rand bit [9:0] rx_length;
+     static rand bit [9:0] rx_length;
      logic m10_clk;
      bit [31:0] fd;
-     rand bit source_id,routing_id;
+     static rand bit source_id,routing_id;
      static rand bit [7:0] csr_id;
 
      constraint rx_pkt_len { rx_length inside {[1:16]};}
@@ -93,8 +93,8 @@ class pmci_pcie_mctp_vdm_seq extends base_seq;
        end
 
        begin @(posedge m10_intf.clk);
-         uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr",'h4);
-         uvm_hdl_force ("tb_top.bmc_m10.avmm_nios_read",'h1);
+         force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr = 'h4;
+         force tb_top.bmc_m10.avmm_nios_read = 'h1;
 
         
          while(uvm_hdl_read("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_rddata[1]",nios_rdata) && uvm_hdl_read("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_rddvld",nios_rdvalid)) begin
@@ -108,28 +108,28 @@ class pmci_pcie_mctp_vdm_seq extends base_seq;
          for (int i=0;i<rx_length;i++)
          begin @(posedge m10_intf.clk);
             i_temp=i;
-            uvm_hdl_force ("tb_top.bmc_m10.avmm_nios_read",'h0);
-            uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr",'h300+i_temp);
-            uvm_hdl_force ("tb_top.bmc_m10.avmm_nios_write",'h1);
+            force tb_top.bmc_m10.avmm_nios_read = 'h0;
+           force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr = 'h300+i_temp;
+           force tb_top.bmc_m10.avmm_nios_write = 'h1;
             assert (std::randomize(vdm_wdata));
-            uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_wrdata",vdm_wdata);
+            force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_wrdata = vdm_wdata;
             $fwrite(fd,"%h \n",vdm_wdata);
          end
          $fclose(fd); 
          begin @(posedge m10_intf.clk);
-            uvm_hdl_force("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr",'h5);
-            uvm_hdl_force("tb_top.bmc_m10.avmm_nios_write",'h1);
-            uvm_hdl_force("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_wrdata",{2'h0,routing_id,source_id,28'h0});
+            force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr = 'h5;
+            force tb_top.bmc_m10.avmm_nios_write = 'h1;
+            force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_wrdata = {2'h0,routing_id,source_id,28'h0};
          end
          begin @(posedge m10_intf.clk); 
-            uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr",'h4);
-            uvm_hdl_force ("tb_top.bmc_m10.avmm_nios_write",'h1);
-            uvm_hdl_force ("tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_wrdata",{rx_length,2'h0,3'h0,1'h1});
+            force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_addr = 'h4;
+            force tb_top.bmc_m10.avmm_nios_write = 'h1;
+            force tb_top.bmc_m10.m10_pcie_vdm.avmm_nios_wrdata = {rx_length,2'h0,3'h0,1'h1};
          end
        end
        @(posedge m10_intf.clk); 
        @(posedge m10_intf.clk); 
-       uvm_hdl_force ("tb_top.bmc_m10.avmm_nios_write",'h0);
+       force tb_top.bmc_m10.avmm_nios_write = 'h0;
        #80us; 
 
      `endif
