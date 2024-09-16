@@ -42,8 +42,10 @@ if { [info exist env(OFS_BUILD_TAG_FLAT) ] || ($include_pr == 0) } {
         set_instance_assignment -name PARTIAL_RECONFIGURATION_PARTITION ON -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
 
 
-        set_instance_assignment -name PLACE_REGION "X90 Y40 X385 Y265" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
-        set_instance_assignment -name ROUTE_REGION "X0 Y0 X385 Y329" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+        #set_instance_assignment -name PLACE_REGION "X90 Y40 X385 Y265" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+        set_instance_assignment -name PLACE_REGION "X88 Y89 X434 Y361" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+        #set_instance_assignment -name ROUTE_REGION "X0 Y0 X385 Y329" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+        set_instance_assignment -name ROUTE_REGION "X0 Y0 X452 Y424" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
     }
 
 }
