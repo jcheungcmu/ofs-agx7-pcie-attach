@@ -83,8 +83,8 @@ pfvf_struct pfvf;
 //  BEGIN: Test Tasks and Utilities
 //---------------------------------------------------------
 parameter MAX_TEST = 100;
-//parameter TIMEOUT = 1.5ms;
-parameter TIMEOUT = 10.0ms;
+parameter TIMEOUT = 1.5ms;
+//parameter TIMEOUT = 10.0ms;
 localparam NUMBER_OF_LINKS = `OFS_FIM_IP_CFG_PCIE_SS_NUM_LINKS;
 localparam string unit_test_name = "MEM Test Pattern Generator (TG) Test";
 
