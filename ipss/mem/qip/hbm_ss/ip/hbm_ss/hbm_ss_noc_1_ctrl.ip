@@ -16,14 +16,14 @@ https://fpgasoftware.intel.com/eula.-->
   <ipxact:vendor>Intel Corporation</ipxact:vendor>
   <ipxact:library>hbm_ss_noc_1_ctrl</ipxact:library>
   <ipxact:name>noc_1_ctrl</ipxact:name>
-  <ipxact:version>2.0.0</ipxact:version>
+  <ipxact:version>2.1.0</ipxact:version>
   <ipxact:busInterfaces>
     <ipxact:busInterface>
       <ipxact:name>refclk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -57,10 +57,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>pll_lock_o</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="conduit" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="conduit" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="conduit" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="conduit" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -94,10 +94,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>target_inst_0</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps></ipxact:portMaps>
         </ipxact:abstractionType>
       </ipxact:abstractionTypes>
@@ -136,6 +136,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:fileSetRef>
           <ipxact:localName>QUARTUS_SYNTH</ipxact:localName>
         </ipxact:fileSetRef>
+        <ipxact:parameters></ipxact:parameters>
       </ipxact:componentInstantiation>
     </ipxact:instantiations>
     <ipxact:ports>
@@ -143,6 +144,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:name>refclk</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>in</ipxact:direction>
+          <ipxact:vectors></ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC</ipxact:typeName>
@@ -155,6 +157,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:name>pll_lock_o</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>out</ipxact:direction>
+          <ipxact:vectors></ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC</ipxact:typeName>
@@ -170,14 +173,14 @@ https://fpgasoftware.intel.com/eula.-->
       <ipxact:vendor>Intel Corporation</ipxact:vendor>
       <ipxact:library>hbm_ss_noc_1_ctrl</ipxact:library>
       <ipxact:name>intel_noc_clock_ctrl</ipxact:name>
-      <ipxact:version>2.0.0</ipxact:version>
+      <ipxact:version>2.1.0</ipxact:version>
     </altera:entity_info>
     <altera:altera_module_parameters>
       <ipxact:parameters>
         <ipxact:parameter parameterId="DEVICE" type="string">
           <ipxact:name>DEVICE</ipxact:name>
           <ipxact:displayName>DEVICE</ipxact:displayName>
-          <ipxact:value>AGMH039R47A2E2V</ipxact:value>
+          <ipxact:value>AGMF039R47A1E2VR0</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="DEVICE_FAMILY" type="string">
           <ipxact:name>DEVICE_FAMILY</ipxact:name>
@@ -206,7 +209,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:parameter parameterId="device" type="string">
           <ipxact:name>device</ipxact:name>
           <ipxact:displayName>Device</ipxact:displayName>
-          <ipxact:value>AGMH039R47A2E2V</ipxact:value>
+          <ipxact:value>AGMF039R47A1E2VR0</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="deviceFamily" type="string">
           <ipxact:name>deviceFamily</ipxact:name>
@@ -228,6 +231,17 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>bonusData</ipxact:displayName>
           <ipxact:value>bonusData 
 {
+   element $system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Agilex 7";
+         type = "String";
+      }
+   }
+   element noc_1_ctrl
+   {
+   }
 }
 </ipxact:value>
         </ipxact:parameter>

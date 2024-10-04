@@ -40,6 +40,15 @@ initial begin
   force top_tb.DUT.pmci_wrapper.pmci_ss.sdm_mailbox_client.s10_mailbox_client_0.s10_mailbox_client_inst.cmd_fifo.out_ready= 1'b0;
  `endif
 end
+
+parameter T_OUTCLK_0 = (40'd1_000_000_000_000 / top_tb.DUT.sys_pll.iopll_0.tennm_ph2_iopll.out_clk_0_freq);
+parameter T_OUTCLK_1 = (40'd1_000_000_000_000 / top_tb.DUT.sys_pll.iopll_0.tennm_ph2_iopll.out_clk_1_freq);
+parameter T_OUTCLK_2 = (40'd1_000_000_000_000 / top_tb.DUT.sys_pll.iopll_0.tennm_ph2_iopll.out_clk_2_freq);
+parameter T_OUTCLK_3 = (40'd1_000_000_000_000 / top_tb.DUT.sys_pll.iopll_0.tennm_ph2_iopll.out_clk_3_freq);
+parameter T_OUTCLK_4 = (40'd1_000_000_000_000 / top_tb.DUT.sys_pll.iopll_0.tennm_ph2_iopll.out_clk_4_freq);
+parameter T_OUTCLK_5 = (40'd1_000_000_000_000 / top_tb.DUT.sys_pll.iopll_0.tennm_ph2_iopll.out_clk_5_freq);
+parameter T_OUTCLK_6 = (40'd1_000_000_000_000 / top_tb.DUT.sys_pll.iopll_0.tennm_ph2_iopll.out_clk_6_freq);
+
 initial begin
         // #20us;
          #1us;
@@ -53,13 +62,13 @@ initial begin
         force top_tb.DUT.sys_pll.outclk_6 = outclk_6;
 
 end 
-     always #1063ps  outclk_0 = ~outclk_0; //470MHz
-     always #4965ps  outclk_1 = ~outclk_1; //100.71MHz
-     always #2127ps  outclk_2 = ~outclk_2; //235MHz
-     always #3191ps  outclk_3 = ~outclk_3; //156.66MHz
-     always #9929ps  outclk_4 = ~outclk_4; //50.358MHz
-     always #4255ps  outclk_5 = ~outclk_5; //117.5MHz
-     always #2837ps  outclk_6 = ~outclk_6; //352.5MHz
+     always #(T_OUTCLK_0/2)  outclk_0 = ~outclk_0; //
+     always #(T_OUTCLK_1/2)  outclk_1 = ~outclk_1; //
+     always #(T_OUTCLK_2/2)  outclk_2 = ~outclk_2; //
+     always #(T_OUTCLK_3/2)  outclk_3 = ~outclk_3; //
+     always #(T_OUTCLK_4/2)  outclk_4 = ~outclk_4; //
+     always #(T_OUTCLK_5/2)  outclk_5 = ~outclk_5; //
+     always #(T_OUTCLK_6/2)  outclk_6 = ~outclk_6; //
 
 initial begin
    SYS_REFCLK   = 0;

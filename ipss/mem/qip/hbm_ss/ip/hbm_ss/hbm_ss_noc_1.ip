@@ -16,14 +16,14 @@ https://fpgasoftware.intel.com/eula.-->
   <ipxact:vendor>Intel Corporation</ipxact:vendor>
   <ipxact:library>hbm_ss_noc_1</ipxact:library>
   <ipxact:name>noc_1</ipxact:name>
-  <ipxact:version>3.0.0</ipxact:version>
+  <ipxact:version>5.0.0</ipxact:version>
   <ipxact:busInterfaces>
     <ipxact:busInterface>
       <ipxact:name>i0_axi4noc</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps></ipxact:portMaps>
         </ipxact:abstractionType>
       </ipxact:abstractionTypes>
@@ -48,10 +48,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>i1_axi4noc</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps></ipxact:portMaps>
         </ipxact:abstractionType>
       </ipxact:abstractionTypes>
@@ -76,10 +76,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>i2_axi4noc</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps></ipxact:portMaps>
         </ipxact:abstractionType>
       </ipxact:abstractionTypes>
@@ -104,10 +104,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>i3_axi4noc</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps></ipxact:portMaps>
         </ipxact:abstractionType>
       </ipxact:abstractionTypes>
@@ -132,10 +132,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>i4_axi4noc</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps></ipxact:portMaps>
         </ipxact:abstractionType>
       </ipxact:abstractionTypes>
@@ -160,10 +160,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>i5_axi4noc</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps></ipxact:portMaps>
         </ipxact:abstractionType>
       </ipxact:abstractionTypes>
@@ -188,10 +188,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>i6_axi4noc</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps></ipxact:portMaps>
         </ipxact:abstractionType>
       </ipxact:abstractionTypes>
@@ -216,10 +216,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>i7_axi4noc</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps></ipxact:portMaps>
         </ipxact:abstractionType>
       </ipxact:abstractionTypes>
@@ -244,10 +244,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>i8_axi4noc</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps></ipxact:portMaps>
         </ipxact:abstractionType>
       </ipxact:abstractionTypes>
@@ -272,10 +272,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>i9_axi4noc</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps></ipxact:portMaps>
         </ipxact:abstractionType>
       </ipxact:abstractionTypes>
@@ -300,10 +300,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>i10_axi4noc</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps></ipxact:portMaps>
         </ipxact:abstractionType>
       </ipxact:abstractionTypes>
@@ -328,10 +328,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>i11_axi4noc</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps></ipxact:portMaps>
         </ipxact:abstractionType>
       </ipxact:abstractionTypes>
@@ -356,10 +356,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>i12_axi4noc</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps></ipxact:portMaps>
         </ipxact:abstractionType>
       </ipxact:abstractionTypes>
@@ -384,10 +384,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>i13_axi4noc</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps></ipxact:portMaps>
         </ipxact:abstractionType>
       </ipxact:abstractionTypes>
@@ -412,10 +412,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>i14_axi4noc</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps></ipxact:portMaps>
         </ipxact:abstractionType>
       </ipxact:abstractionTypes>
@@ -440,10 +440,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>i15_axi4noc</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4noc" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps></ipxact:portMaps>
         </ipxact:abstractionType>
       </ipxact:abstractionTypes>
@@ -468,10 +468,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s0_axi4</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -840,6 +840,26 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>maximumOutstandingTransactions</ipxact:displayName>
           <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
+        <ipxact:parameter parameterId="dataCheck" type="bit">
+          <ipxact:name>dataCheck</ipxact:name>
+          <ipxact:displayName>dataCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="addressCheck" type="bit">
+          <ipxact:name>addressCheck</ipxact:name>
+          <ipxact:displayName>addressCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="securityAttribute" type="bit">
+          <ipxact:name>securityAttribute</ipxact:name>
+          <ipxact:displayName>securityAttribute</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="userData" type="bit">
+          <ipxact:name>userData</ipxact:name>
+          <ipxact:displayName>userData</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
         <ipxact:parameter parameterId="readAcceptanceCapability" type="longint">
           <ipxact:name>readAcceptanceCapability</ipxact:name>
           <ipxact:displayName>Read acceptance capability</ipxact:displayName>
@@ -924,10 +944,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s1_axi4</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -1296,6 +1316,26 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>maximumOutstandingTransactions</ipxact:displayName>
           <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
+        <ipxact:parameter parameterId="dataCheck" type="bit">
+          <ipxact:name>dataCheck</ipxact:name>
+          <ipxact:displayName>dataCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="addressCheck" type="bit">
+          <ipxact:name>addressCheck</ipxact:name>
+          <ipxact:displayName>addressCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="securityAttribute" type="bit">
+          <ipxact:name>securityAttribute</ipxact:name>
+          <ipxact:displayName>securityAttribute</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="userData" type="bit">
+          <ipxact:name>userData</ipxact:name>
+          <ipxact:displayName>userData</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
         <ipxact:parameter parameterId="readAcceptanceCapability" type="longint">
           <ipxact:name>readAcceptanceCapability</ipxact:name>
           <ipxact:displayName>Read acceptance capability</ipxact:displayName>
@@ -1380,10 +1420,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s2_axi4</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -1752,6 +1792,26 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>maximumOutstandingTransactions</ipxact:displayName>
           <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
+        <ipxact:parameter parameterId="dataCheck" type="bit">
+          <ipxact:name>dataCheck</ipxact:name>
+          <ipxact:displayName>dataCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="addressCheck" type="bit">
+          <ipxact:name>addressCheck</ipxact:name>
+          <ipxact:displayName>addressCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="securityAttribute" type="bit">
+          <ipxact:name>securityAttribute</ipxact:name>
+          <ipxact:displayName>securityAttribute</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="userData" type="bit">
+          <ipxact:name>userData</ipxact:name>
+          <ipxact:displayName>userData</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
         <ipxact:parameter parameterId="readAcceptanceCapability" type="longint">
           <ipxact:name>readAcceptanceCapability</ipxact:name>
           <ipxact:displayName>Read acceptance capability</ipxact:displayName>
@@ -1836,10 +1896,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s3_axi4</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -2208,6 +2268,26 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>maximumOutstandingTransactions</ipxact:displayName>
           <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
+        <ipxact:parameter parameterId="dataCheck" type="bit">
+          <ipxact:name>dataCheck</ipxact:name>
+          <ipxact:displayName>dataCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="addressCheck" type="bit">
+          <ipxact:name>addressCheck</ipxact:name>
+          <ipxact:displayName>addressCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="securityAttribute" type="bit">
+          <ipxact:name>securityAttribute</ipxact:name>
+          <ipxact:displayName>securityAttribute</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="userData" type="bit">
+          <ipxact:name>userData</ipxact:name>
+          <ipxact:displayName>userData</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
         <ipxact:parameter parameterId="readAcceptanceCapability" type="longint">
           <ipxact:name>readAcceptanceCapability</ipxact:name>
           <ipxact:displayName>Read acceptance capability</ipxact:displayName>
@@ -2292,10 +2372,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s4_axi4</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -2664,6 +2744,26 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>maximumOutstandingTransactions</ipxact:displayName>
           <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
+        <ipxact:parameter parameterId="dataCheck" type="bit">
+          <ipxact:name>dataCheck</ipxact:name>
+          <ipxact:displayName>dataCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="addressCheck" type="bit">
+          <ipxact:name>addressCheck</ipxact:name>
+          <ipxact:displayName>addressCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="securityAttribute" type="bit">
+          <ipxact:name>securityAttribute</ipxact:name>
+          <ipxact:displayName>securityAttribute</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="userData" type="bit">
+          <ipxact:name>userData</ipxact:name>
+          <ipxact:displayName>userData</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
         <ipxact:parameter parameterId="readAcceptanceCapability" type="longint">
           <ipxact:name>readAcceptanceCapability</ipxact:name>
           <ipxact:displayName>Read acceptance capability</ipxact:displayName>
@@ -2748,10 +2848,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s5_axi4</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -3120,6 +3220,26 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>maximumOutstandingTransactions</ipxact:displayName>
           <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
+        <ipxact:parameter parameterId="dataCheck" type="bit">
+          <ipxact:name>dataCheck</ipxact:name>
+          <ipxact:displayName>dataCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="addressCheck" type="bit">
+          <ipxact:name>addressCheck</ipxact:name>
+          <ipxact:displayName>addressCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="securityAttribute" type="bit">
+          <ipxact:name>securityAttribute</ipxact:name>
+          <ipxact:displayName>securityAttribute</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="userData" type="bit">
+          <ipxact:name>userData</ipxact:name>
+          <ipxact:displayName>userData</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
         <ipxact:parameter parameterId="readAcceptanceCapability" type="longint">
           <ipxact:name>readAcceptanceCapability</ipxact:name>
           <ipxact:displayName>Read acceptance capability</ipxact:displayName>
@@ -3204,10 +3324,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s6_axi4</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -3576,6 +3696,26 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>maximumOutstandingTransactions</ipxact:displayName>
           <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
+        <ipxact:parameter parameterId="dataCheck" type="bit">
+          <ipxact:name>dataCheck</ipxact:name>
+          <ipxact:displayName>dataCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="addressCheck" type="bit">
+          <ipxact:name>addressCheck</ipxact:name>
+          <ipxact:displayName>addressCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="securityAttribute" type="bit">
+          <ipxact:name>securityAttribute</ipxact:name>
+          <ipxact:displayName>securityAttribute</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="userData" type="bit">
+          <ipxact:name>userData</ipxact:name>
+          <ipxact:displayName>userData</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
         <ipxact:parameter parameterId="readAcceptanceCapability" type="longint">
           <ipxact:name>readAcceptanceCapability</ipxact:name>
           <ipxact:displayName>Read acceptance capability</ipxact:displayName>
@@ -3660,10 +3800,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s7_axi4</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -4032,6 +4172,26 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>maximumOutstandingTransactions</ipxact:displayName>
           <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
+        <ipxact:parameter parameterId="dataCheck" type="bit">
+          <ipxact:name>dataCheck</ipxact:name>
+          <ipxact:displayName>dataCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="addressCheck" type="bit">
+          <ipxact:name>addressCheck</ipxact:name>
+          <ipxact:displayName>addressCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="securityAttribute" type="bit">
+          <ipxact:name>securityAttribute</ipxact:name>
+          <ipxact:displayName>securityAttribute</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="userData" type="bit">
+          <ipxact:name>userData</ipxact:name>
+          <ipxact:displayName>userData</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
         <ipxact:parameter parameterId="readAcceptanceCapability" type="longint">
           <ipxact:name>readAcceptanceCapability</ipxact:name>
           <ipxact:displayName>Read acceptance capability</ipxact:displayName>
@@ -4116,10 +4276,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s8_axi4</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -4488,6 +4648,26 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>maximumOutstandingTransactions</ipxact:displayName>
           <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
+        <ipxact:parameter parameterId="dataCheck" type="bit">
+          <ipxact:name>dataCheck</ipxact:name>
+          <ipxact:displayName>dataCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="addressCheck" type="bit">
+          <ipxact:name>addressCheck</ipxact:name>
+          <ipxact:displayName>addressCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="securityAttribute" type="bit">
+          <ipxact:name>securityAttribute</ipxact:name>
+          <ipxact:displayName>securityAttribute</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="userData" type="bit">
+          <ipxact:name>userData</ipxact:name>
+          <ipxact:displayName>userData</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
         <ipxact:parameter parameterId="readAcceptanceCapability" type="longint">
           <ipxact:name>readAcceptanceCapability</ipxact:name>
           <ipxact:displayName>Read acceptance capability</ipxact:displayName>
@@ -4572,10 +4752,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s9_axi4</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -4944,6 +5124,26 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>maximumOutstandingTransactions</ipxact:displayName>
           <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
+        <ipxact:parameter parameterId="dataCheck" type="bit">
+          <ipxact:name>dataCheck</ipxact:name>
+          <ipxact:displayName>dataCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="addressCheck" type="bit">
+          <ipxact:name>addressCheck</ipxact:name>
+          <ipxact:displayName>addressCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="securityAttribute" type="bit">
+          <ipxact:name>securityAttribute</ipxact:name>
+          <ipxact:displayName>securityAttribute</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="userData" type="bit">
+          <ipxact:name>userData</ipxact:name>
+          <ipxact:displayName>userData</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
         <ipxact:parameter parameterId="readAcceptanceCapability" type="longint">
           <ipxact:name>readAcceptanceCapability</ipxact:name>
           <ipxact:displayName>Read acceptance capability</ipxact:displayName>
@@ -5028,10 +5228,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s10_axi4</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -5400,6 +5600,26 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>maximumOutstandingTransactions</ipxact:displayName>
           <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
+        <ipxact:parameter parameterId="dataCheck" type="bit">
+          <ipxact:name>dataCheck</ipxact:name>
+          <ipxact:displayName>dataCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="addressCheck" type="bit">
+          <ipxact:name>addressCheck</ipxact:name>
+          <ipxact:displayName>addressCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="securityAttribute" type="bit">
+          <ipxact:name>securityAttribute</ipxact:name>
+          <ipxact:displayName>securityAttribute</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="userData" type="bit">
+          <ipxact:name>userData</ipxact:name>
+          <ipxact:displayName>userData</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
         <ipxact:parameter parameterId="readAcceptanceCapability" type="longint">
           <ipxact:name>readAcceptanceCapability</ipxact:name>
           <ipxact:displayName>Read acceptance capability</ipxact:displayName>
@@ -5484,10 +5704,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s11_axi4</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -5856,6 +6076,26 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>maximumOutstandingTransactions</ipxact:displayName>
           <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
+        <ipxact:parameter parameterId="dataCheck" type="bit">
+          <ipxact:name>dataCheck</ipxact:name>
+          <ipxact:displayName>dataCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="addressCheck" type="bit">
+          <ipxact:name>addressCheck</ipxact:name>
+          <ipxact:displayName>addressCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="securityAttribute" type="bit">
+          <ipxact:name>securityAttribute</ipxact:name>
+          <ipxact:displayName>securityAttribute</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="userData" type="bit">
+          <ipxact:name>userData</ipxact:name>
+          <ipxact:displayName>userData</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
         <ipxact:parameter parameterId="readAcceptanceCapability" type="longint">
           <ipxact:name>readAcceptanceCapability</ipxact:name>
           <ipxact:displayName>Read acceptance capability</ipxact:displayName>
@@ -5940,10 +6180,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s12_axi4</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -6312,6 +6552,26 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>maximumOutstandingTransactions</ipxact:displayName>
           <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
+        <ipxact:parameter parameterId="dataCheck" type="bit">
+          <ipxact:name>dataCheck</ipxact:name>
+          <ipxact:displayName>dataCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="addressCheck" type="bit">
+          <ipxact:name>addressCheck</ipxact:name>
+          <ipxact:displayName>addressCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="securityAttribute" type="bit">
+          <ipxact:name>securityAttribute</ipxact:name>
+          <ipxact:displayName>securityAttribute</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="userData" type="bit">
+          <ipxact:name>userData</ipxact:name>
+          <ipxact:displayName>userData</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
         <ipxact:parameter parameterId="readAcceptanceCapability" type="longint">
           <ipxact:name>readAcceptanceCapability</ipxact:name>
           <ipxact:displayName>Read acceptance capability</ipxact:displayName>
@@ -6396,10 +6656,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s13_axi4</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -6768,6 +7028,26 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>maximumOutstandingTransactions</ipxact:displayName>
           <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
+        <ipxact:parameter parameterId="dataCheck" type="bit">
+          <ipxact:name>dataCheck</ipxact:name>
+          <ipxact:displayName>dataCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="addressCheck" type="bit">
+          <ipxact:name>addressCheck</ipxact:name>
+          <ipxact:displayName>addressCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="securityAttribute" type="bit">
+          <ipxact:name>securityAttribute</ipxact:name>
+          <ipxact:displayName>securityAttribute</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="userData" type="bit">
+          <ipxact:name>userData</ipxact:name>
+          <ipxact:displayName>userData</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
         <ipxact:parameter parameterId="readAcceptanceCapability" type="longint">
           <ipxact:name>readAcceptanceCapability</ipxact:name>
           <ipxact:displayName>Read acceptance capability</ipxact:displayName>
@@ -6852,10 +7132,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s14_axi4</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -7224,6 +7504,26 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>maximumOutstandingTransactions</ipxact:displayName>
           <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
+        <ipxact:parameter parameterId="dataCheck" type="bit">
+          <ipxact:name>dataCheck</ipxact:name>
+          <ipxact:displayName>dataCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="addressCheck" type="bit">
+          <ipxact:name>addressCheck</ipxact:name>
+          <ipxact:displayName>addressCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="securityAttribute" type="bit">
+          <ipxact:name>securityAttribute</ipxact:name>
+          <ipxact:displayName>securityAttribute</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="userData" type="bit">
+          <ipxact:name>userData</ipxact:name>
+          <ipxact:displayName>userData</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
         <ipxact:parameter parameterId="readAcceptanceCapability" type="longint">
           <ipxact:name>readAcceptanceCapability</ipxact:name>
           <ipxact:displayName>Read acceptance capability</ipxact:displayName>
@@ -7308,10 +7608,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s15_axi4</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -7680,6 +7980,26 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>maximumOutstandingTransactions</ipxact:displayName>
           <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
+        <ipxact:parameter parameterId="dataCheck" type="bit">
+          <ipxact:name>dataCheck</ipxact:name>
+          <ipxact:displayName>dataCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="addressCheck" type="bit">
+          <ipxact:name>addressCheck</ipxact:name>
+          <ipxact:displayName>addressCheck</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="securityAttribute" type="bit">
+          <ipxact:name>securityAttribute</ipxact:name>
+          <ipxact:displayName>securityAttribute</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="userData" type="bit">
+          <ipxact:name>userData</ipxact:name>
+          <ipxact:displayName>userData</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
         <ipxact:parameter parameterId="readAcceptanceCapability" type="longint">
           <ipxact:name>readAcceptanceCapability</ipxact:name>
           <ipxact:displayName>Read acceptance capability</ipxact:displayName>
@@ -7764,10 +8084,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>noc_bridge_fabric_clk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -7801,10 +8121,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s0_axi4_aclk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -7838,10 +8158,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s0_axi4_aresetn</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -7870,10 +8190,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s1_axi4_aclk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -7907,10 +8227,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s1_axi4_aresetn</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -7939,10 +8259,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s2_axi4_aclk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -7976,10 +8296,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s2_axi4_aresetn</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8008,10 +8328,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s3_axi4_aclk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8045,10 +8365,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s3_axi4_aresetn</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8077,10 +8397,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s4_axi4_aclk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8114,10 +8434,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s4_axi4_aresetn</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8146,10 +8466,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s5_axi4_aclk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8183,10 +8503,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s5_axi4_aresetn</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8215,10 +8535,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s6_axi4_aclk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8252,10 +8572,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s6_axi4_aresetn</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8284,10 +8604,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s7_axi4_aclk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8321,10 +8641,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s7_axi4_aresetn</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8353,10 +8673,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s8_axi4_aclk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8390,10 +8710,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s8_axi4_aresetn</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8422,10 +8742,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s9_axi4_aclk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8459,10 +8779,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s9_axi4_aresetn</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8491,10 +8811,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s10_axi4_aclk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8528,10 +8848,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s10_axi4_aresetn</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8560,10 +8880,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s11_axi4_aclk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8597,10 +8917,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s11_axi4_aresetn</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8629,10 +8949,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s12_axi4_aclk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8666,10 +8986,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s12_axi4_aresetn</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8698,10 +9018,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s13_axi4_aclk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8735,10 +9055,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s13_axi4_aresetn</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8767,10 +9087,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s14_axi4_aclk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8804,10 +9124,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s14_axi4_aresetn</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8836,10 +9156,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s15_axi4_aclk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -8873,10 +9193,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s15_axi4_aresetn</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.1"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.3"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.1"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.3"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -19471,7 +19791,7 @@ https://fpgasoftware.intel.com/eula.-->
       <ipxact:vendor>Intel Corporation</ipxact:vendor>
       <ipxact:library>hbm_ss_noc_1</ipxact:library>
       <ipxact:name>intel_noc_initiator</ipxact:name>
-      <ipxact:version>3.0.0</ipxact:version>
+      <ipxact:version>5.0.0</ipxact:version>
     </altera:entity_info>
     <altera:altera_module_parameters>
       <ipxact:parameters>
@@ -19483,12 +19803,12 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:parameter parameterId="SYS_INFO_DEVICE" type="string">
           <ipxact:name>SYS_INFO_DEVICE</ipxact:name>
           <ipxact:displayName>SYS_INFO_DEVICE</ipxact:displayName>
-          <ipxact:value>AGMH039R47A2E2V</ipxact:value>
+          <ipxact:value>AGMF039R47A1E2VR0</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="SYS_INFO_DEVICE_FAMILY_VARIANT" type="string">
           <ipxact:name>SYS_INFO_DEVICE_FAMILY_VARIANT</ipxact:name>
           <ipxact:displayName>SYS_INFO_DEVICE_FAMILY_VARIANT</ipxact:displayName>
-          <ipxact:value>M-Series without HPS and with 32GB HBM</ipxact:value>
+          <ipxact:value>M-Series with both HPS and 32GB HBM</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="SYS_INFO_DEVICE_GROUP" type="string">
           <ipxact:name>SYS_INFO_DEVICE_GROUP</ipxact:name>
@@ -19547,8 +19867,13 @@ https://fpgasoftware.intel.com/eula.-->
         </ipxact:parameter>
         <ipxact:parameter parameterId="INDEPENDENT_WIDE_INTERFACE_CLOCK" type="bit">
           <ipxact:name>INDEPENDENT_WIDE_INTERFACE_CLOCK</ipxact:name>
-          <ipxact:displayName>Clock(s) of wide read and write AXI channels are independent from the NoC initiator hardware clock</ipxact:displayName>
+          <ipxact:displayName>Clock(s) of wide read and write AXI4 channels are independent from the NoC initiator hardware clock</ipxact:displayName>
           <ipxact:value>true</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="DFD_FIFO_BYPASS" type="bit">
+          <ipxact:name>DFD_FIFO_BYPASS</ipxact:name>
+          <ipxact:displayName>Optimize for BL = 1 transactions </ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="AXI4_HANDSHAKE" type="string">
           <ipxact:name>AXI4_HANDSHAKE</ipxact:name>
@@ -19567,243 +19892,358 @@ https://fpgasoftware.intel.com/eula.-->
         </ipxact:parameter>
         <ipxact:parameter parameterId="NOC_QOS_READ_PRIORITY" type="int">
           <ipxact:name>NOC_QOS_READ_PRIORITY</ipxact:name>
-          <ipxact:displayName>NoC priority for Reads</ipxact:displayName>
+          <ipxact:displayName>NoC bridge generated Read Priority</ipxact:displayName>
           <ipxact:value>0</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="NOC_QOS_WRITE_PRIORITY" type="int">
           <ipxact:name>NOC_QOS_WRITE_PRIORITY</ipxact:name>
-          <ipxact:displayName>NoC priority for Writes</ipxact:displayName>
+          <ipxact:displayName>NoC bridge generated Write Priority</ipxact:displayName>
           <ipxact:value>0</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU0_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU0_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU0_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU0_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU0_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU0_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU0_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU0_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU1_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU1_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU0_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU0_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU1_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU1_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU1_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU1_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU2_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU2_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU1_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU1_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU2_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU2_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU1_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU1_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU3_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU3_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU2_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU2_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU3_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU3_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU2_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU2_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU4_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU4_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU2_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU2_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU4_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU4_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU3_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU3_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU5_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU5_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU3_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU3_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU5_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU5_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU3_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU3_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU6_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU6_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU4_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU4_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU6_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU6_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU4_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU4_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU7_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU7_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU4_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU4_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU7_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU7_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU5_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU5_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU8_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU8_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU5_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU5_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU8_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU8_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU5_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU5_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU9_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU9_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU6_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU6_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU9_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU9_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU6_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU6_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU10_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU10_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU6_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU6_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU10_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU10_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU7_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU7_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU11_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU11_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU7_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU7_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU11_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU11_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU7_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU7_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU12_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU12_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU8_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU8_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU12_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU12_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU8_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU8_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU13_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU13_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU8_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU8_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU13_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU13_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU9_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU9_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU14_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU14_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU9_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU9_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU14_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU14_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU9_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU9_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU15_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU15_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU10_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU10_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU15_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU15_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU10_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU10_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU16_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU16_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU10_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU10_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU16_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU16_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU11_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU11_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU17_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU17_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU11_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU11_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU17_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU17_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU11_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU11_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU18_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU18_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU12_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU12_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU18_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU18_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU12_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU12_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU19_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU19_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU12_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU12_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU19_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU19_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU13_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU13_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU20_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU20_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU13_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU13_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU20_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU20_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU13_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU13_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU21_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU21_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU14_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU14_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU21_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU21_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU14_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU14_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU22_THROTTLE_MODE_RD" type="string">
-          <ipxact:name>NOC_INIU22_THROTTLE_MODE_RD</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Read</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_RD_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU14_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU14_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
-        <ipxact:parameter parameterId="NOC_INIU22_THROTTLE_MODE_WR" type="string">
-          <ipxact:name>NOC_INIU22_THROTTLE_MODE_WR</ipxact:name>
-          <ipxact:displayName>Bandwidth Limiter for Write</ipxact:displayName>
-          <ipxact:value>NOC_INIU_THROTTLE_MODE_WR_STATIC_BW_100</ipxact:value>
+        <ipxact:parameter parameterId="NOC_INIU15_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU15_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU15_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU15_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU15_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU15_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU16_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU16_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU16_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU16_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU16_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU16_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU17_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU17_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU17_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU17_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU17_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU17_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU18_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU18_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU18_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU18_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU18_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU18_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU19_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU19_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU19_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU19_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU19_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU19_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU20_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU20_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU20_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU20_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU20_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU20_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU21_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU21_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU21_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU21_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU21_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU21_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU22_THROTTLE_MODE" type="string">
+          <ipxact:name>NOC_INIU22_THROTTLE_MODE</ipxact:name>
+          <ipxact:displayName>Bandwidth Limiter </ipxact:displayName>
+          <ipxact:value>NOC_INIU_THROTTLE_MODE_STATIC_BW_100</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU22_PEND_TRANS_RD_VAL" type="int">
+          <ipxact:name>NOC_INIU22_PEND_TRANS_RD_VAL</ipxact:name>
+          <ipxact:displayName>Read Transaction Limiter</ipxact:displayName>
+          <ipxact:value>128</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="NOC_INIU22_PEND_TRANS_WR_VAL" type="int">
+          <ipxact:name>NOC_INIU22_PEND_TRANS_WR_VAL</ipxact:name>
+          <ipxact:displayName>Write Transaction Limiter</ipxact:displayName>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="AUTO_BOARD" type="string">
           <ipxact:name>AUTO_BOARD</ipxact:name>
@@ -19822,7 +20262,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:parameter parameterId="device" type="string">
           <ipxact:name>device</ipxact:name>
           <ipxact:displayName>Device</ipxact:displayName>
-          <ipxact:value>AGMH039R47A2E2V</ipxact:value>
+          <ipxact:value>AGMF039R47A1E2VR0</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="deviceFamily" type="string">
           <ipxact:name>deviceFamily</ipxact:name>
@@ -20671,6 +21111,22 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;value&gt;1&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
+                        &lt;key&gt;dataCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;addressCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;securityAttribute&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;userData&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
                         &lt;key&gt;readAcceptanceCapability&lt;/key&gt;
                         &lt;value&gt;128&lt;/value&gt;
                     &lt;/entry&gt;
@@ -21132,6 +21588,22 @@ https://fpgasoftware.intel.com/eula.-->
                     &lt;entry&gt;
                         &lt;key&gt;maximumOutstandingTransactions&lt;/key&gt;
                         &lt;value&gt;1&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;dataCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;addressCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;securityAttribute&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;userData&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
                         &lt;key&gt;readAcceptanceCapability&lt;/key&gt;
@@ -21597,6 +22069,22 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;value&gt;1&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
+                        &lt;key&gt;dataCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;addressCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;securityAttribute&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;userData&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
                         &lt;key&gt;readAcceptanceCapability&lt;/key&gt;
                         &lt;value&gt;128&lt;/value&gt;
                     &lt;/entry&gt;
@@ -22058,6 +22546,22 @@ https://fpgasoftware.intel.com/eula.-->
                     &lt;entry&gt;
                         &lt;key&gt;maximumOutstandingTransactions&lt;/key&gt;
                         &lt;value&gt;1&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;dataCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;addressCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;securityAttribute&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;userData&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
                         &lt;key&gt;readAcceptanceCapability&lt;/key&gt;
@@ -22523,6 +23027,22 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;value&gt;1&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
+                        &lt;key&gt;dataCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;addressCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;securityAttribute&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;userData&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
                         &lt;key&gt;readAcceptanceCapability&lt;/key&gt;
                         &lt;value&gt;128&lt;/value&gt;
                     &lt;/entry&gt;
@@ -22984,6 +23504,22 @@ https://fpgasoftware.intel.com/eula.-->
                     &lt;entry&gt;
                         &lt;key&gt;maximumOutstandingTransactions&lt;/key&gt;
                         &lt;value&gt;1&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;dataCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;addressCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;securityAttribute&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;userData&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
                         &lt;key&gt;readAcceptanceCapability&lt;/key&gt;
@@ -23449,6 +23985,22 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;value&gt;1&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
+                        &lt;key&gt;dataCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;addressCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;securityAttribute&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;userData&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
                         &lt;key&gt;readAcceptanceCapability&lt;/key&gt;
                         &lt;value&gt;128&lt;/value&gt;
                     &lt;/entry&gt;
@@ -23910,6 +24462,22 @@ https://fpgasoftware.intel.com/eula.-->
                     &lt;entry&gt;
                         &lt;key&gt;maximumOutstandingTransactions&lt;/key&gt;
                         &lt;value&gt;1&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;dataCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;addressCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;securityAttribute&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;userData&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
                         &lt;key&gt;readAcceptanceCapability&lt;/key&gt;
@@ -24375,6 +24943,22 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;value&gt;1&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
+                        &lt;key&gt;dataCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;addressCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;securityAttribute&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;userData&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
                         &lt;key&gt;readAcceptanceCapability&lt;/key&gt;
                         &lt;value&gt;128&lt;/value&gt;
                     &lt;/entry&gt;
@@ -24836,6 +25420,22 @@ https://fpgasoftware.intel.com/eula.-->
                     &lt;entry&gt;
                         &lt;key&gt;maximumOutstandingTransactions&lt;/key&gt;
                         &lt;value&gt;1&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;dataCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;addressCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;securityAttribute&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;userData&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
                         &lt;key&gt;readAcceptanceCapability&lt;/key&gt;
@@ -25301,6 +25901,22 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;value&gt;1&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
+                        &lt;key&gt;dataCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;addressCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;securityAttribute&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;userData&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
                         &lt;key&gt;readAcceptanceCapability&lt;/key&gt;
                         &lt;value&gt;128&lt;/value&gt;
                     &lt;/entry&gt;
@@ -25762,6 +26378,22 @@ https://fpgasoftware.intel.com/eula.-->
                     &lt;entry&gt;
                         &lt;key&gt;maximumOutstandingTransactions&lt;/key&gt;
                         &lt;value&gt;1&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;dataCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;addressCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;securityAttribute&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;userData&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
                         &lt;key&gt;readAcceptanceCapability&lt;/key&gt;
@@ -26227,6 +26859,22 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;value&gt;1&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
+                        &lt;key&gt;dataCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;addressCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;securityAttribute&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;userData&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
                         &lt;key&gt;readAcceptanceCapability&lt;/key&gt;
                         &lt;value&gt;128&lt;/value&gt;
                     &lt;/entry&gt;
@@ -26688,6 +27336,22 @@ https://fpgasoftware.intel.com/eula.-->
                     &lt;entry&gt;
                         &lt;key&gt;maximumOutstandingTransactions&lt;/key&gt;
                         &lt;value&gt;1&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;dataCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;addressCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;securityAttribute&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;userData&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
                         &lt;key&gt;readAcceptanceCapability&lt;/key&gt;
@@ -27153,6 +27817,22 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;value&gt;1&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
+                        &lt;key&gt;dataCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;addressCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;securityAttribute&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;userData&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
                         &lt;key&gt;readAcceptanceCapability&lt;/key&gt;
                         &lt;value&gt;128&lt;/value&gt;
                     &lt;/entry&gt;
@@ -27614,6 +28294,22 @@ https://fpgasoftware.intel.com/eula.-->
                     &lt;entry&gt;
                         &lt;key&gt;maximumOutstandingTransactions&lt;/key&gt;
                         &lt;value&gt;1&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;dataCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;addressCheck&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;securityAttribute&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;userData&lt;/key&gt;
+                        &lt;value&gt;false&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
                         &lt;key&gt;readAcceptanceCapability&lt;/key&gt;
