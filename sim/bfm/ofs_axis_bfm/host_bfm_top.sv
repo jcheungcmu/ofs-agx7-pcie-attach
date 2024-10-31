@@ -92,7 +92,7 @@ HostAXISReceive #(
    .pf_list(pf_list),
    .vf_list(vf_list),
    .RECEIVE_TUSER_WIDTH(host_bfm_types_pkg::TUSER_WIDTH),
-   .RECEIVE_TDATA_WIDTH(host_bfm_types_pkg::HDR_WIDTH)
+   .RECEIVE_TDATA_WIDTH(host_bfm_types_pkg::TXREQ_DATA_WIDTH)
 ) axis_receive_tx_req;
 
 

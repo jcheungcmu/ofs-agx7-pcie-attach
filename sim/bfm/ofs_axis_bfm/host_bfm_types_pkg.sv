@@ -50,9 +50,11 @@ typedef enum {
    DONE_ACK
 } mbx_message_t;
 
-parameter TUSER_WIDTH = 10;
-parameter HDR_WIDTH = 256;
-parameter TDATA_WIDTH = `OFS_FIM_IP_CFG_PCIE_SS_DWIDTH_BYTE * 8;
+localparam TUSER_WIDTH = 10;
+localparam HDR_WIDTH = 256;
+localparam TDATA_WIDTH = `OFS_FIM_IP_CFG_PCIE_SS_DWIDTH_BYTE * 8;
+// tx_req payload is at most the width of a header
+localparam TXREQ_DATA_WIDTH = (HDR_WIDTH < TDATA_WIDTH) ? HDR_WIDTH : TDATA_WIDTH;
 
 // Debug Functions
 function automatic void dump_pfvf_params(

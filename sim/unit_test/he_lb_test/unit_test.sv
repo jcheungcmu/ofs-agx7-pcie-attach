@@ -84,8 +84,8 @@ parameter TIMEOUT = 10.0ms;
 /* localparam NUMBER_OF_LINKS = 0; */
 localparam NUMBER_OF_LINKS = `OFS_FIM_IP_CFG_PCIE_SS_NUM_LINKS;
 localparam string unit_test_name = "HE Loopback Test";
-localparam BUS_WIDTH = host_bfm_types_pkg::TDATA_WIDTH;
-localparam BUS_BYTE_WIDTH = host_bfm_types_pkg::TDATA_WIDTH / 8;
+localparam BUS_WIDTH = ofs_pcie_ss_cfg_pkg::TDATA_WIDTH;
+localparam BUS_BYTE_WIDTH = BUS_WIDTH / 8;
 
 // From HE CSRs
 test_csr_defs::t_info0 csr_info0;

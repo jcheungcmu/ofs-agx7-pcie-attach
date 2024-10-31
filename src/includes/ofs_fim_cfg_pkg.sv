@@ -33,7 +33,11 @@ localparam real MAIN_CLK_MHZ = `OFS_FIM_IP_CFG_SYS_CLK_SYS_MHZ;
 localparam NUM_PCIE_HOST      = 1;
 localparam PCIE_HOST_WIDTH    = $clog2(NUM_PCIE_HOST);
 
-localparam PCIE_TDATA_WIDTH  = `OFS_FIM_IP_CFG_PCIE_SS_DWIDTH_BYTE * 8;
+// Native width of the AXI-S TLP stream from the PCIe IP
+localparam PCIE_IP_TDATA_WIDTH = `OFS_FIM_IP_CFG_PCIE_SS_DWIDTH_BYTE * 8;
+// Width of the OFS internal TLP stream. May be transformed to a value
+// different from the IP itself.
+localparam PCIE_TDATA_WIDTH  = (PCIE_IP_TDATA_WIDTH >= 512) ? PCIE_IP_TDATA_WIDTH : 512;
 localparam PCIE_TUSER_WIDTH  = 10;
 localparam PCIE_LITE_CSR_WIDTH = 20;
 
