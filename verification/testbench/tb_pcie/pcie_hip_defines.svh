@@ -12,6 +12,7 @@
 
    localparam PCIE_GEN = `OFS_FIM_IP_CFG_PCIE_SS_PCIE_GEN;
    localparam PCIE_LINK_WIDTH = `OFS_FIM_IP_CFG_PCIE_SS_PCIE_LINK_WIDTH;
+   localparam PCIE_NUM_PFS = `OFS_FIM_IP_CFG_PCIE_SS_NUM_PFS;
 
  `ifdef FTILE_SIM
    localparam IS_FTILE_SIM = 1;

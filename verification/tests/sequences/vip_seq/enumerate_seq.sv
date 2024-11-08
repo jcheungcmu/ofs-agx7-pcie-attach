@@ -132,7 +132,7 @@ class enumerate_seq extends `PCIE_DRIVER_TRANSACTION_BASE_SEQ_CLASS;
       sriov_offset = ext_cap_offset;
       `uvm_info(get_name(), $psprintf("SDEBUG enum: Found PCIe SR-IOV capability at %0h", sriov_offset),UVM_LOW)
 
-      for(int pf_no=0;pf_no<`NUM_PFS;pf_no++)begin
+      for(int pf_no=0;pf_no<PCIE_NUM_PFS;pf_no++)begin
         `uvm_info(get_name(), $psprintf("SDEBUG enum: Configuring PF = %0d",pf_no),UVM_LOW)
         cfg_wr(pf_no, 'h078, dev_ctl_data);
         cfg_rd(pf_no, 'h078, rdata);
@@ -276,7 +276,7 @@ class enumerate_seq extends `PCIE_DRIVER_TRANSACTION_BASE_SEQ_CLASS;
           cfg_rd(pf_no, (sriov_offset+'h8), rdata); // SRIOV Status and Control
 
 	  if(pf_no==0) begin
-	    int vf_bdf = `NUM_PFS;
+	    int vf_bdf = PCIE_NUM_PFS;
             `uvm_info(get_name(), $psprintf("SDEBUG enum: Enable Bus Master for PF%0d VF with BDF=%0d",pf_no,vf_bdf),UVM_LOW)
             cfg_wr(vf_bdf, 'h004, pci_ctl);// disable legacy interrupt, enable Mem space and bus master Enable SERR
             `uvm_info(get_name(), $psprintf("SDEBUG enum: Enable PF%0d VF with BDF=%0d MSIX Capability",pf_no,vf_bdf),UVM_LOW)
