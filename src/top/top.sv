@@ -543,17 +543,26 @@ for (genvar j=0; j<PCIE_NUM_LINKS; j++) begin : PCIE_RST_CTRL
 end 
 
 //-----------------------------------------------------------------------------------------------
+// Wrap PCIe pins in an interface
+//-----------------------------------------------------------------------------------------------
+
+ofs_fim_pcie_ss_pins_if #(.PCIE_LANES(ofs_fim_cfg_pkg::PCIE_LANES)) pin_pcie();
+assign pin_pcie.refclk0_p = PCIE_REFCLK0;
+assign pin_pcie.refclk1_p = PCIE_REFCLK1;
+assign pin_pcie.in_perst_n = PCIE_RESET_N;
+assign pin_pcie.rx_p = PCIE_RX_P;
+assign pin_pcie.rx_n = PCIE_RX_N;
+assign PCIE_TX_P = pin_pcie.tx_p;
+assign PCIE_TX_N = pin_pcie.tx_n;
+
+//-----------------------------------------------------------------------------------------------
 // PCIe Subsystem - this IP instantiates the QHIP and builds various features around it such
 // as a standard AXI interface, standardized register interface for the driver, interrupt support
 // data mover mode(hides complexity of TLPs while implementing functionality such as completion 
 // combining etc). The AXI user clock is asynchronous to the reference and the QHIP clock.
 //-----------------------------------------------------------------------------------------------
  pcie_wrapper #(  
-`ifdef INCLUDE_PCIE_SS
      .PCIE_LANES       (ofs_fim_cfg_pkg::PCIE_LANES),
-`else
-     .PCIE_LANES       (16),
-`endif
      .PCIE_NUM_LINKS   (PCIE_NUM_LINKS),
      .MM_ADDR_WIDTH    (MM_ADDR_WIDTH),
      .MM_DATA_WIDTH    (MM_DATA_WIDTH),
@@ -572,13 +581,7 @@ end
    .subsystem_warm_rst_n        (pcie_warm_rst_n          ),
    .subsystem_cold_rst_ack_n    (pcie_cold_rst_ack_n      ),
    .subsystem_warm_rst_ack_n    (pcie_warm_rst_ack_n      ),
-   .pin_pcie_refclk0_p             (PCIE_REFCLK0             ),
-   .pin_pcie_refclk1_p             (PCIE_REFCLK1             ),
-   .pin_pcie_in_perst_n            (PCIE_RESET_N             ),   // connected to HIP
-   .pin_pcie_rx_p                  (PCIE_RX_P                ),
-   .pin_pcie_rx_n                  (PCIE_RX_N                ),
-   .pin_pcie_tx_p                  (PCIE_TX_P                ),                
-   .pin_pcie_tx_n                  (PCIE_TX_N                ),  
+   .pin_pcie                       (pin_pcie                 ),
    .ss_app_st_ctrlshadow_tvalid     (ss_app_st_ctrlshadow_tvalid ),
    .ss_app_st_ctrlshadow_tdata      (ss_app_st_ctrlshadow_tdata  ),
    .axi_st_rxreq_if                (pcie_ss_axis_rxreq_if    ),

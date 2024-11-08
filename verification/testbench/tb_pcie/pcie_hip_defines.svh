@@ -8,7 +8,7 @@
    `undef      AFU_TOP_REQUIRES_LOCAL_MEMORY_AVALON_MM
    `define EXPERTIO_PCIESVC_INCLUDE_16G
 
-`include "ofs_ip_cfg_db/ofs_ip_cfg_pcie_ss.vh"
+`include "ofs_ip_cfg_db.vh"
 
    localparam PCIE_GEN = `OFS_FIM_IP_CFG_PCIE_SS_PCIE_GEN;
    localparam PCIE_LINK_WIDTH = `OFS_FIM_IP_CFG_PCIE_SS_PCIE_LINK_WIDTH;

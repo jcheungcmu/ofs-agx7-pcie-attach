@@ -43,13 +43,7 @@ import ofs_fim_pcie_hdr_def::*;
    output logic [PCIE_NUM_LINKS-1:0] subsystem_warm_rst_ack_n,
    
    // PCIe pins
-   input  logic                      pin_pcie_refclk0_p,
-   input  logic                      pin_pcie_refclk1_p,
-   input  logic                      pin_pcie_in_perst_n,   // connected to HIP
-   input  logic [PCIE_LANES-1:0]     pin_pcie_rx_p,
-   input  logic [PCIE_LANES-1:0]     pin_pcie_rx_n,
-   output logic [PCIE_LANES-1:0]     pin_pcie_tx_p,
-   output logic [PCIE_LANES-1:0]     pin_pcie_tx_n,
+   ofs_fim_pcie_ss_pins_if.pcie_ss   pin_pcie,
 
    //Ctrl Shadow ports
    output logic [PCIE_NUM_LINKS-1:0]        ss_app_st_ctrlshadow_tvalid,
@@ -254,6 +248,11 @@ endgenerate
 // Is the target PCIe interface DM?
 localparam MODE_IS_DM = SOC_ATTACH ? SOC_PCIE_MODE_IS_DM : PCIE_MODE_IS_DM;
 
+ofs_fim_pcie_ss_pins_if #(.PCIE_LANES(ofs_fim_cfg_pkg::PCIE_LANES)) pin_pcie_dummy();
+assign pin_pcie_dummy.refclk0_p = 1'b0;
+assign pin_pcie_dummy.refclk1_p = 1'b0;
+assign pin_pcie_dummy.in_perst_n = 1'b0;
+
 `define PCIE_SS_TOP_PORTS \
     .fim_clk                        ('0), \
     .fim_rst_n                      ('1), \
@@ -264,11 +263,7 @@ localparam MODE_IS_DM = SOC_ATTACH ? SOC_PCIE_MODE_IS_DM : PCIE_MODE_IS_DM;
     .subsystem_warm_rst_n           ('1), \
     .subsystem_cold_rst_ack_n       (), \
     .subsystem_warm_rst_ack_n       (), \
-    .pin_pcie_refclk0_p             ('0), \
-    .pin_pcie_refclk1_p             ('0), \
-    .pin_pcie_in_perst_n            ('0), \
-    .pin_pcie_rx_p                  (), \
-    .pin_pcie_rx_n                  (), \
+    .pin_pcie                       (pin_pcie_dummy), \
     .axi_st_txreq_if                (axi_st_txreq_if_dummy       ), \
     .axi_st_rxreq_if                (axi_st_rxreq_if_dummy       ), \
     .ss_app_st_ctrlshadow_tvalid    (), \ 
@@ -279,8 +274,6 @@ localparam MODE_IS_DM = SOC_ATTACH ? SOC_PCIE_MODE_IS_DM : PCIE_MODE_IS_DM;
     .flr_req_if                     (), \
     .flr_rsp_if                     (axi_st_flr_rsp              ), \
     .reset_status                   (), \
-    .pin_pcie_tx_p                  (), \
-    .pin_pcie_tx_n                  (), \
     .cpl_timeout_if                 (), \
     .pcie_p2c_sideband              () \
 
@@ -351,13 +344,13 @@ generate
          .csr_rst_n             (csr_rst_n[0]               ),
          .ninit_done            (ninit_done                 ),
          .reset_status          (reset_status[0]            ),                 
-         .pin_pcie_refclk0_p    (pin_pcie_refclk0_p         ),
-         .pin_pcie_refclk1_p    (pin_pcie_refclk1_p         ),
-         .pin_pcie_in_perst_n   (pin_pcie_in_perst_n        ),   // connected to HIP
-         .pin_pcie_rx_p         (pin_pcie_rx_p[0]           ),
-         .pin_pcie_rx_n         (pin_pcie_rx_n[0]           ),
-         .pin_pcie_tx_p         (pin_pcie_tx_p[0]           ),                
-         .pin_pcie_tx_n         (pin_pcie_tx_n[0]           ),                
+         .pin_pcie_refclk0_p    (pin_pcie.refclk0_p         ),
+         .pin_pcie_refclk1_p    (pin_pcie.refclk1_p         ),
+         .pin_pcie_in_perst_n   (pin_pcie.in_perst_n        ),
+         .pin_pcie_rx_p         (pin_pcie.rx_p[0]           ),
+         .pin_pcie_rx_n         (pin_pcie.rx_n[0]           ),
+         .pin_pcie_tx_p         (pin_pcie.tx_p[0]           ),                
+         .pin_pcie_tx_n         (pin_pcie.tx_n[0]           ),                
          .axi_st_rx_if          (axi_st_rx_if_native[0]     ),
          .axi_st_tx_if          (axi_st_tx_committed[0]     ),
          .axi_st_txreq_if       (axi_st_txreq_if_native[0]  ),
@@ -397,13 +390,13 @@ generate
          .csr_rst_n             (csr_rst_n[0]               ),
          .ninit_done            (ninit_done                 ),
          .reset_status          (reset_status[0]            ),                 
-         .pin_pcie_refclk0_p    (pin_pcie_refclk0_p         ),
-         .pin_pcie_refclk1_p    (pin_pcie_refclk1_p         ),
-         .pin_pcie_in_perst_n   (pin_pcie_in_perst_n        ),   // connected to HIP
-         .pin_pcie_rx_p         (pin_pcie_rx_p[0]           ),
-         .pin_pcie_rx_n         (pin_pcie_rx_n[0]           ),
-         .pin_pcie_tx_p         (pin_pcie_tx_p[0]           ),                
-         .pin_pcie_tx_n         (pin_pcie_tx_n[0]           ),                
+         .pin_pcie_refclk0_p    (pin_pcie.refclk0_p         ),
+         .pin_pcie_refclk1_p    (pin_pcie.refclk1_p         ),
+         .pin_pcie_in_perst_n   (pin_pcie.in_perst_n        ),
+         .pin_pcie_rx_p         (pin_pcie.rx_p[0]           ),
+         .pin_pcie_rx_n         (pin_pcie.rx_n[0]           ),
+         .pin_pcie_tx_p         (pin_pcie.tx_p[0]           ),                
+         .pin_pcie_tx_n         (pin_pcie.tx_n[0]           ),                
          .axi_st_rx_if          (axi_st_rx_if_native[0]     ),
          .axi_st_tx_if          (axi_st_tx_committed[0]     ),
          .axi_st_txreq_if       (axi_st_txreq_if_native[0]  ),
@@ -441,13 +434,13 @@ generate
             .csr_rst_n             (csr_rst_n[1]               ),
             .ninit_done            (ninit_done                 ),
             .reset_status          (reset_status[1]            ),                 
-            .pin_pcie_refclk0_p    (pin_pcie_refclk0_p         ),
-            .pin_pcie_refclk1_p    (pin_pcie_refclk1_p         ),
-            .pin_pcie_in_perst_n   (pin_pcie_in_perst_n        ),   // connected to HIP
-            .pin_pcie_rx_p         (pin_pcie_rx_p[1]           ),
-            .pin_pcie_rx_n         (pin_pcie_rx_n[1]           ),
-            .pin_pcie_tx_p         (pin_pcie_tx_p[1]           ),   // Leave dummy outputs unconnected for unit simulation
-            .pin_pcie_tx_n         (pin_pcie_tx_n[1]           ),   // Leave dummy outputs unconnected for unit simulation
+            .pin_pcie_refclk0_p    (pin_pcie.refclk0_p         ),
+            .pin_pcie_refclk1_p    (pin_pcie.refclk1_p         ),
+            .pin_pcie_in_perst_n   (pin_pcie.in_perst_n        ),
+            .pin_pcie_rx_p         (pin_pcie.rx_p[1]           ),
+            .pin_pcie_rx_n         (pin_pcie.rx_n[1]           ),
+            .pin_pcie_tx_p         (pin_pcie.tx_p[1]           ),   // Leave dummy outputs unconnected for unit simulation
+            .pin_pcie_tx_n         (pin_pcie.tx_n[1]           ),   // Leave dummy outputs unconnected for unit simulation
             .axi_st_rx_if          (axi_st_rx_if_native[1]     ),
             .axi_st_tx_if          (axi_st_tx_committed[1]     ),
             .axi_st_txreq_if       (axi_st_txreq_if_native[1]  ),
