@@ -875,9 +875,9 @@ begin
    for(ch=0; mem_capability[ch] == 1'b1; ch=ch+1) begin
       host_bfm_top.host_bfm.read64_with_completion_status(MEM_TG_CLOCKS_OFFSET + (32'h8 * ch), tg_status, error, cpl_status);
       $display("\n TG[%d] clocks to completion: %d\n",ch,tg_status);
-      mem_bw = (((real'(loops) * real'(rd) * real'(bls) * 64.0) / real'(tg_status))*0.3); // GB/s @ 300MHz
+      mem_bw = (((real'(loops) * real'(rd) * real'(bls) * 64.0) / real'(tg_status[31:0]))*0.3); // GB/s @ 300MHz
       $display("Rd BW = %0.3f GBps\n",mem_bw);
-      mem_bw = (((real'(loops) * real'(wr) * real'(bls) * 64.0) / real'(tg_status))*0.3); // GB/s @ 300MHz
+      mem_bw = (((real'(loops) * real'(wr) * real'(bls) * 64.0) / real'(tg_status[31:0]))*0.3); // GB/s @ 300MHz
       $display("Wr BW = %0.3f GBps\n",mem_bw);
    end
    post_test_util(old_test_err_count);
