@@ -45,7 +45,9 @@ FPGA_FAMILY = agilex7
 
 # Configure the build target, specifying the board and OFSS IP definitions.
 # These can be overridden on the make command line, e.g. BOARD=<board>.
-ifdef FTILE_SIM
+ifdef ESERIES_SIM
+  BOARD = eseries-mdk
+else ifdef FTILE_SIM
   BOARD = fseries-dk
   ifeq ($(ETH_200G),1)
    OFSS = "$(OFS_ROOTDIR)"/tools/ofss_config/hssi/hssi_2x200_ftile.ofss
@@ -104,6 +106,11 @@ VLOG_OPT += +define+SVT_ETHERNET +define+VIP_ETHERNET_40G100G_OPT_SVT
 VLOG_OPT += +define+ETH_CAUI_25G_INTERFACE_WIDTH=8 +define+SVT_ETHERNET_CLKGEN
 VLOG_OPT += +define+VIP_ETHERNET_100G_SVT +define+SVT_ETHERNET_DEBUG_BUS_ENABLE
 VLOG_OPT += +define+SYNOPSYS_SV
+
+ifdef ESERIES_SIM
+    VLOG_OPT += +define+IP7581SERDES_UX_SIMSPEED
+    VLOG_OPT += +define+CONFIG_AGILEX5 +define+CONFIG_ESERIES +define+CONFIG_ESERIES_MDK
+endif
 
 ifdef FTILE_SIM
     FTILE_SERDES = 1

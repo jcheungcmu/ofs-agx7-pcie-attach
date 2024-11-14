@@ -555,6 +555,18 @@ assign pin_pcie.rx_n = PCIE_RX_N;
 assign PCIE_TX_P = pin_pcie.tx_p;
 assign PCIE_TX_N = pin_pcie.tx_n;
 
+`ifdef CONFIG_AGILEX5
+   // PCIe GTS reset sequencer
+   agilex5_srcss_gts srcss_gts (
+      .o_pma_cu_clk(pin_pcie.in_flux_clk[0])
+     );
+
+   assign pin_pcie.in_flux_clk[1] = 1'b0;
+`else
+   // Unused
+   assign pin_pcie.in_flux_clk = '0;
+`endif
+
 //-----------------------------------------------------------------------------------------------
 // PCIe Subsystem - this IP instantiates the QHIP and builds various features around it such
 // as a standard AXI interface, standardized register interface for the driver, interrupt support

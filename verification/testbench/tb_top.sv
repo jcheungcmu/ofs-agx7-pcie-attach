@@ -502,19 +502,29 @@ module tb_top;
 `endif
 	 
      /////////////////////////////////////////
-     
-     always #500ps tbclk_1Ghz = ~tbclk_1Ghz;
-     `ifndef FTILE_SIM
-       `ifndef RTILE_SIM
+
+`define INIT_Z1565a
+`ifdef CONFIG_AGILEX5
+   `undef INIT_Z1565a
+`endif
+`ifdef FTILE_SIM
+   `undef INIT_Z1565a
+`endif
+`ifdef RTILE_SIM
+   `undef INIT_Z1565a
+`endif
+
+        always #500ps tbclk_1Ghz = ~tbclk_1Ghz;
+`ifdef INIT_Z1565a
         initial begin
-           #1ps;
+              #1ps;
               force `PCIE_QHIP.intel_pcie_ptile_ast_qhip.inst.inst.maib_and_tile.z1565a.ctp_tile_encrypted_inst.z1565a_inst.u_wrtilectrl.wrssm_aibaux_cnoc_clk_occ.uu_wrdft_ckmux21_inst.ck1 = tbclk_1Ghz;
               force `PCIE_QHIP.intel_pcie_ptile_ast_qhip.inst.inst.maib_and_tile.z1565a.ctp_tile_encrypted_inst.z1565a_inst.u_wrtilectrl.wrssm_aibaux_cnoc_clk_occ.uu_wrdft_ckmux21_inst.s0=1;
               force `PCIE_QHIP.intel_pcie_ptile_ast_qhip.inst.inst.maib_and_tile.z1565a.ctp_tile_encrypted_inst.z1565a_inst.u_wrtilectrl.wrssm_config_avmm_clk_div_mux.s0=1;
               force `PCIE_QHIP.intel_pcie_ptile_ast_qhip.inst.inst.maib_and_tile.z1565a.ctp_tile_encrypted_inst.z1565a_inst.u_wrphy_top.pcs.i_pcie_pcs.upcs_clk_ctl.pcs_laneX_mpllb_sel[15:0] ='hFFFF;
               force `PCIE_QHIP.intel_pcie_ptile_ast_qhip.inst.inst.maib_and_tile.z1565a.ctp_tile_encrypted_inst.z1565a_inst.u_wrphy_top.pcs.i_pcie_pcs.upcs_clk_ctl.pcs_laneX_rate[47:0]= 'h6db6db6db6db;
               #1ps;
-     
+
               fork
               begin
                  @(posedge `PCIE_DUT.u_core16.u_ip.u_cfg.u_cfg_dbi_if.cfg_blk_done_o);
@@ -542,9 +552,7 @@ module tb_top;
               //enable the DWIP to run in Fast link mode by forcing. 
               force `PCIE_DUT.u_core16.u_ip.u_dwc.diag_ctrl_bus[2] = 1'b1;
               force `PCIE_DUT.u_core8.u_ip.u_dwc.diag_ctrl_bus[2] = 1'b1;
-      
         end
-     `endif
 
     `ifdef SIM_MODE
       initial begin
@@ -559,8 +567,8 @@ module tb_top;
         force tb_top.DUT.sys_pll.outclk_4 = outclk_4;
 
       end 
-   `endif
-   `endif
+     `endif
+`endif // ifdef INIT_Z1565a
 
   `ifdef INCLUDE_PMCI
     pmci_axi    pmci_axi(axi_if,m10_if);

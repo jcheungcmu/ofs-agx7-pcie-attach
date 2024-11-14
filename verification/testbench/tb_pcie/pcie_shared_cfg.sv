@@ -86,9 +86,11 @@ class pcie_shared_cfg extends uvm_object;
       root_cfg.pcie_cfg.pl_cfg.skip_polling_active = 1;
       root_cfg.pcie_cfg.pl_cfg.set_link_eq_attribute_values(,1,0) ;
      `ifndef FTILE_SIM //equalization is off in FASTSIM_MODE
-      root_cfg.pcie_cfg.pl_cfg.highest_enabled_equalization_phase = 1; //to skip the EQ phase2, 3
+      `ifndef CONFIG_AGILEX5
+          root_cfg.pcie_cfg.pl_cfg.highest_enabled_equalization_phase = 1; //to skip the EQ phase2, 3
+      `endif
      `endif
-      root_cfg.pcie_cfg.pl_cfg.num_tx_ts1_in_polling_active    = 64; // to reduce the TS1 in pol.active state
+          root_cfg.pcie_cfg.pl_cfg.num_tx_ts1_in_polling_active    = 64; // to reduce the TS1 in pol.active state
 
       `ifndef SIM_SERIAL
           root_cfg.pcie_cfg.pl_cfg.max_spipe_phystatus_delay = 100;
