@@ -79,10 +79,19 @@ class pcie_shared_cfg extends uvm_object;
       // Root Complex Configuration 
       root_cfg.device_is_root         = 1;
       `uvm_info("pcie_shared_cfg", $psprintf("SDEBUG: GEN=%d", PCIE_GEN), UVM_LOW)
-      root_cfg.pcie_spec_ver = `PCIE_DEV_CFG_CLASS::PCIE_SPEC_VER_4_0;
-      root_cfg.pipe_spec_ver = `PCIE_DEV_CFG_CLASS::PIPE_SPEC_VER_4_4;
+      root_cfg.pcie_spec_ver = `PCIE_DEV_CFG_CLASS::PCIE_SPEC_VER_5_0;
+      root_cfg.pipe_spec_ver = `PCIE_DEV_CFG_CLASS::PIPE_SPEC_VER_5_2;
+
       root_cfg.pcie_cfg.pl_cfg.set_link_width_values(PCIE_LINK_WIDTH);
-      root_cfg.pcie_cfg.pl_cfg.set_link_speed_values(32'h1E);
+      case(PCIE_GEN)
+         1 : root_cfg.pcie_cfg.pl_cfg.set_link_speed_values(`PCIE_SPEED_2_5G);
+         2 : root_cfg.pcie_cfg.pl_cfg.set_link_speed_values(`PCIE_SPEED_5_0G | `PCIE_SPEED_2_5G);
+         3 : root_cfg.pcie_cfg.pl_cfg.set_link_speed_values(`PCIE_SPEED_8_0G | `PCIE_SPEED_5_0G | `PCIE_SPEED_2_5G);
+         4 : root_cfg.pcie_cfg.pl_cfg.set_link_speed_values(`PCIE_SPEED_16_0G | `PCIE_SPEED_8_0G | `PCIE_SPEED_5_0G | `PCIE_SPEED_2_5G);
+         5 : root_cfg.pcie_cfg.pl_cfg.set_link_speed_values(`PCIE_SPEED_32_0G | `PCIE_SPEED_16_0G | `PCIE_SPEED_8_0G | `PCIE_SPEED_5_0G | `PCIE_SPEED_2_5G);
+         default : root_cfg.pcie_cfg.pl_cfg.set_link_speed_values(`PCIE_SPEED_16_0G | `PCIE_SPEED_8_0G | `PCIE_SPEED_5_0G | `PCIE_SPEED_2_5G);
+      endcase
+
       root_cfg.pcie_cfg.pl_cfg.skip_polling_active = 1;
       root_cfg.pcie_cfg.pl_cfg.set_link_eq_attribute_values(,1,0) ;
      `ifndef FTILE_SIM //equalization is off in FASTSIM_MODE
