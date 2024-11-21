@@ -39,7 +39,7 @@ set_global_assignment -name SYSTEMVERILOG_FILE $::env(BUILD_ROOT_REL)/src/afu_to
 #--------------------
 # Common sources
 #--------------------
-set_global_assignment -name SOURCE_TCL_SCRIPT_FILE $::env(BUILD_ROOT_REL)/ofs-common/src/common/mem_tg/mem_tg_design_files.tcl
+#set_global_assignment -name SOURCE_TCL_SCRIPT_FILE $::env(BUILD_ROOT_REL)/ofs-common/src/common/mem_tg/mem_tg_design_files.tcl
 
 #--------------------
 # PR Gasket modules
@@ -48,14 +48,21 @@ set_global_assignment -name SOURCE_TCL_SCRIPT_FILE $::env(BUILD_ROOT_REL)/ofs-co
 # *** This must follow the user clock IP. ***
 set vlog_macros [get_all_global_assignments -name VERILOG_MACRO]
 set include_user_clk 0
+set config_agilex5 0
 
 foreach_in_collection m $vlog_macros {
     if { [string equal "INCLUDE_USER_CLK" [lindex $m 2]] } {
         set include_user_clk 1
     }
+    if { [string equal "CONFIG_AGILEX5" [lindex $m 2]] } {
+        set config_agilex5 1
+    }
+}
+
+if {$config_agilex5 == 0} {
+    set_global_assignment -name SOURCE_TCL_SCRIPT_FILE $::env(BUILD_ROOT_REL)/ofs-common/src/common/mem_tg/mem_tg_design_files.tcl
 }
 
 if {$include_user_clk == 1} {
     set_global_assignment -name SDC_FILE $::env(BUILD_ROOT_REL)/syn/shared_config/setup_user_clock_for_pr.sdc
 }
-
