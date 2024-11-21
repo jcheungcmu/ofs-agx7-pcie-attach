@@ -895,6 +895,22 @@ begin
 end
 endtask
 
+task wait_for_reset_done;
+   logic                error;
+   logic                result;
+   logic [31:0] scratch;
+   cpl_status_t cpl_status;
+   begin
+      $display("INFO:%t Waiting for HSSI cold reset deassertion acknowledgment", $time);
+
+      wait(top_tb.DUT.hssi_wrapper.handshaked_cold_rst == 1'b0);
+      $display("INFO:%t HSSI cold reset deassertion acknowledged", $time);
+
+      $display("INFO:%t Waiting for HSSI cold reset ACK deassert. This can take a while, e.g. 500us on P-Tile.", $time);
+      wait(top_tb.DUT.hssi_wrapper.cold_rst_ack_n == 1'b1);
+      $display("INFO:%t	HSSI reset sequence complete",$time);
+   end
+endtask
 
 // Test HSSI SS read write
 task test_hssi_ss_mmio;
@@ -1154,6 +1170,73 @@ generate
    end
 endgenerate
 
+// Wait for HSSI TX and RX ready
+task wait_for_hssi_to_ready;
+   logic                error;
+   logic                result;
+   logic [31:0]         scratch;
+   hssi_port_status_t   port_status;
+   hssi_port_status_t   port_status_prev;
+   hssi_feature_t       hssi_cfg;
+   int                  port;
+   logic                is_etile;
+   cpl_status_t cpl_status;
+   begin
+      pfvf = '{0,0,0}; // Set PFVF to PF0
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
+
+      //READ32(ADDR32, HSSI_FEATURE_ADDR, bar, vf_active, pfn, vfn, hssi_cfg, error);
+      //READ32(ADDR32, HSSI_VER_ADDR, bar, vf_active, pfn, vfn, scratch, error);
+      host_bfm_top.host_bfm.read32_with_completion_status(HSSI_FEATURE_ADDR, hssi_cfg, error, cpl_status);
+      host_bfm_top.host_bfm.read32_with_completion_status(HSSI_VER_ADDR, scratch, error, cpl_status);
+      is_etile = scratch[31:16] == 'h1;
+
+      for(port=0; port < $bits(hssi_cfg.port_enable); port++) begin
+         if (!hssi_cfg.port_enable[port]) begin
+            continue;
+         end
+         
+         port_status = '0;
+         port_status_prev = '0;
+         // Ignore hip_ready for F-Tile (feature major version == 3)
+         while ( !port_status.rx_block_lock   || 
+                 !port_status.rx_pcs_ready    || 
+                 !port_status.tx_lanes_stable ||
+                 (is_etile & !port_status.ehip_ready))
+            begin
+
+               //READ32(ADDR32, HSSI_PORT0_STATUS_ADDR + 'h4*port, bar, vf_active, pfn, vfn, port_status, error);
+               host_bfm_top.host_bfm.read32_with_completion_status(HSSI_PORT0_STATUS_ADDR + 'h4*port, port_status, error, cpl_status);
+
+               if(is_etile) begin
+                  if(port_status.ehip_ready & !port_status_prev.ehip_ready)
+                  $display ("INFO:%t	Port %0d - EHIP Ready  is high", $time, port);
+               end
+               
+               if(port_status.rx_block_lock & !port_status_prev.rx_block_lock)
+                  $display ("INFO:%t	Port %0d - EHIP RX Block Lock  is high", $time, port);
+
+               if(port_status.rx_pcs_ready & !port_status_prev.rx_pcs_ready) begin
+                  @(negedge top_tb.DUT.hssi_wrapper.hssi_ss.app_ss_lite_clk);
+                  $display ("INFO:%t	Port %0d - RX deskew locked", $time, port);
+                  $display ("INFO:%t	Port %0d - RX lane aligmnent locked", $time, port);
+               end
+            
+               if(port_status.tx_lanes_stable & !port_status_prev.tx_lanes_stable) begin
+                  // @(posedge top_tb.DUT.hssi_wrapper.hssi_ss.o_p0_clk_pll);
+                  $display ("INFO:%t	Port %0d - TX enabled", $time, port);
+               end
+
+               if (port_status_prev == port_status) #1us;
+               port_status_prev = port_status;
+         end
+      end
+
+      // Check rx pcs ready, tx lane stable and pll lock by reading register
+      test_csr_ro_access_64(result, ADDR32, HSSI_WRAP_STATUS_ADDR, HSSI_WRAP_STATUS_VAL);
+      host_bfm_top.host_bfm.revert_to_last_pfvf_setting();
+   end
+endtask
 
 //---------------------------------------------------------
 //  Unit Test Procedure
@@ -1166,6 +1249,14 @@ task main_test;
       host_bfm_top.host_bfm.set_dm_mode(DM_AUTO_TRANSACTION);
       pfvf = '{2,0,0}; // Set PFVF to PF2
       host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
+
+      // Wait for ready before starting the test
+      $display("T:%8d INFO: Wait for reset done",$time);
+      wait_for_reset_done();
+      wait(&(top_tb.DUT.hssi_wrapper.tx_pll_locked[NUM_ETH_CHANNELS-1:0]));
+
+      $display("T:%8d INFO: Wait for hssi ready",$time);
+      wait_for_hssi_to_ready();
 
       test_hssi_ss_mmio(test_result);
       test_afu_mmio(test_result);

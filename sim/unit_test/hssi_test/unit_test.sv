@@ -1534,21 +1534,27 @@ task traffic_test;
       traffic_10G_25G(access32);
       `endif
 
-      // MAC stats take a while to update. This hack is a delay. It might return 0.
-      read_hssi_mac_stat(0, 5, "rx_payload_bytes", scratch);
+      `ifdef ETH_10_OR_25G
+          // only the 10/25G traffic test is set up to send the traffic pattern required by
+          // the below check.
+          
+          
+          // MAC stats take a while to update. This hack is a delay. It might return 0.
+          read_hssi_mac_stat(0, 5, "rx_payload_bytes", scratch);
 
-      for (int id = 0; id < NUM_ETH_CHANNELS; id++) begin
-         // Ideally we should read a statistic from each channel. Unfortunately, this
-         // is unbearably slow due to the involvement of a NIOS processor. Just read
-         // the first and last channels.
-         if (id == 0 || id == NUM_ETH_CHANNELS-1) begin
-            read_hssi_mac_stat(4'(id), 19, "rx_total_packets", scratch);
-            if (scratch != TG_NUM_PKT_VAL + id) begin
-               incr_err_count();
-               $display("\nError: MAC rx_total_packets port %0d expected %0d!\n", id, TG_NUM_PKT_VAL + id);
-            end
-         end
-      end
+          for (int id = 0; id < NUM_ETH_CHANNELS; id++) begin
+             // Ideally we should read a statistic from each channel. Unfortunately, this
+             // is unbearably slow due to the involvement of a NIOS processor. Just read
+             // the first and last channels.
+             if (id == 0 || id == NUM_ETH_CHANNELS-1) begin
+                 read_hssi_mac_stat(4'(id), 19, "rx_total_packets", scratch);
+                if (scratch != TG_NUM_PKT_VAL + id) begin
+                   incr_err_count();
+                   $display("\nError: MAC rx_total_packets port %0d expected %0d!\n", id, TG_NUM_PKT_VAL + id);
+                end
+             end
+          end
+      `endif
 
       post_test_util(old_test_err_count);
    end
