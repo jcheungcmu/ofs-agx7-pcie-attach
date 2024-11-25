@@ -198,7 +198,7 @@ package test_csr_defs;
    // ******************************************************************************************
    // AFU Register Default Values
    // ******************************************************************************************
-   localparam AFU_DFH_VAL                        = 64'h1000010000001000;
+   localparam AFU_DFH_VAL                        = 64'h1001010000001000;
    localparam AFU_ID_L_VAL                       = 64'hA3DC5B831F5CECBB;
    localparam AFU_ID_H_VAL                       = 64'h4DADEA342C7848CB;
 

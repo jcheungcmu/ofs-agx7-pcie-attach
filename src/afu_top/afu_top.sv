@@ -13,7 +13,9 @@
 module afu_top
 #(
    parameter PCIE_NUM_LINKS = 1,
-   parameter AFU_MEM_CHANNEL = 1
+   parameter AFU_MEM_CHANNEL = 1,
+   parameter PCIE_PL_DEPTH = 1,
+   parameter MEM_PL_DEPTH = 1
 )(
    input wire                            SYS_REFCLK,
    input wire                            clk,
@@ -635,6 +637,8 @@ port_gasket #(
    .PG_NUM_PORTS(PG_AFU_NUM_PORTS),              // Number of PCIe ports to PR region
    .PORT_PF_VF_INFO(PG_PF_VF_INFO),              // PCIe port data
    .NUM_MEM_CH(AFU_MEM_CHANNEL),                 // Number of Memory Porst to PR region
+   .MM_PL_DEPTH(MEM_PL_DEPTH),                   // Memory pipeline depth before PR region crossing
+   .ST_PL_DEPTH(PCIE_PL_DEPTH),                  // PCIe Port pipeline depth before PR region crossing
    .END_OF_LIST    (fabric_width_pkg::apf_pr_slv_eol),                       // port_gasket DFH end of list field
    .NEXT_DFH_OFFSET(fabric_width_pkg::apf_pr_slv_next_dfh_offset),                   // Next offset in OFS management DFH
    .PG_NUM_RTABLE_ENTRIES (PG_NUM_RTABLE_ENTRIES),
