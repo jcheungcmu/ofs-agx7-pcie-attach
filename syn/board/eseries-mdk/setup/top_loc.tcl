@@ -20,6 +20,7 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to SYS_REFCLK
 # PCIe reset
 set_location_assignment PIN_BW28 -to PCIE_RESET_N -comment IOBANK_6A
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to PCIE_RESET_N
+set_instance_assignment -name WEAK_PULL_DOWN ON -to PCIE_RESET_N
 
 # PCIe location
 set_location_assignment PIN_AV3 -to PCIE_RX_N[0] -comment IOBANK_4C

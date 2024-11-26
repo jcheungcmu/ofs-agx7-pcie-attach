@@ -66,6 +66,8 @@ set_global_assignment -name SDC_FILE  $::env(BUILD_ROOT_REL)/syn/shared_config/t
 set_global_assignment -name SDC_FILE  $::env(BUILD_ROOT_REL)/syn/shared_config/eth_top.sdc
 set_global_assignment -name SDC_FILE  $::env(BUILD_ROOT_REL)/syn/shared_config/pmci_top.sdc
 
+set_global_assignment -name SDC_FILE  $::env(BUILD_ROOT_REL)/syn/board/eseries-mdk/setup/top.sdc
+
 # Generate timing reports during quartus_sta
 set_global_assignment -name TIMING_ANALYZER_REPORT_SCRIPT $::env(BUILD_ROOT_REL)/ofs-common/scripts/common/syn/report_timing.tcl
 
