@@ -80,7 +80,7 @@ class pcie_shared_cfg extends uvm_object;
       root_cfg.device_is_root         = 1;
       `uvm_info("pcie_shared_cfg", $psprintf("SDEBUG: GEN=%d", PCIE_GEN), UVM_LOW)
       root_cfg.pcie_spec_ver = `PCIE_DEV_CFG_CLASS::PCIE_SPEC_VER_5_0;
-      root_cfg.pipe_spec_ver = `PCIE_DEV_CFG_CLASS::PIPE_SPEC_VER_5_2;
+      root_cfg.pipe_spec_ver = `PCIE_DEV_CFG_CLASS::PIPE_SPEC_VER_4_4;
 
       root_cfg.pcie_cfg.pl_cfg.set_link_width_values(PCIE_LINK_WIDTH);
       case(PCIE_GEN)

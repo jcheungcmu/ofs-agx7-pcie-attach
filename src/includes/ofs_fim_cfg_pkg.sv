@@ -24,11 +24,7 @@ localparam real MAIN_CLK_MHZ = `OFS_FIM_IP_CFG_SYS_CLK_SYS_MHZ;
 //*****************
 // PCIe host parameters
 //*****************
-`ifdef SIM_USE_PCIE_GEN3X16_BFM
-   localparam PCIE_LANES = 16; 
-`else
-   localparam PCIE_LANES = 16;
-`endif
+localparam PCIE_LANES = `OFS_FIM_IP_CFG_PCIE_SS_TOTAL_NUM_LANES;
 
 localparam NUM_PCIE_HOST      = 1;
 localparam PCIE_HOST_WIDTH    = $clog2(NUM_PCIE_HOST);

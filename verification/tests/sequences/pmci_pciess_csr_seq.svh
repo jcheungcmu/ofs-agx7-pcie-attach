@@ -109,22 +109,22 @@ class pmci_pciess_csr_seq extends base_seq;
   `ifndef RTILE_SIM
      task err_pcie_inj();
      begin
-             force `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_ca_postedreq_s3 = 1'b1; 
-             force `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_ca_postedreq_s2 = 1'b1;    
-             force `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_ca_postedreq_s1 = 1'b1; 
-             force `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_ca_postedreq_s0 = 1'b1; 
-             force `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_ur_postedreq_s3 = 1'b1; 
-             force `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_ur_postedreq_s2 = 1'b1; 
-             force `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_ur_postedreq_s1 = 1'b1; 
-             force `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_ur_postedreq_s0 = 1'b1; 
-             force `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_poisonedcompl_s3 =1'b1;  
-             force `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_poisonedcompl_s2 =1'b1;
-             force `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_poisonedcompl_s1 =1'b1;
-             force `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_poisonedcompl_s0 =1'b1;
-             force `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_poisonedwrreq_s3 =1'b1;
-             force `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_poisonedwrreq_s2 =1'b1;
-             force `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_poisonedwrreq_s1 =1'b1;
-             force `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_poisonedwrreq_s0 =1'b1;
+             force `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_ca_postedreq_s3 = 1'b1; 
+             force `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_ca_postedreq_s2 = 1'b1;    
+             force `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_ca_postedreq_s1 = 1'b1; 
+             force `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_ca_postedreq_s0 = 1'b1; 
+             force `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_ur_postedreq_s3 = 1'b1; 
+             force `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_ur_postedreq_s2 = 1'b1; 
+             force `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_ur_postedreq_s1 = 1'b1; 
+             force `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_ur_postedreq_s0 = 1'b1; 
+             force `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_poisonedcompl_s3 =1'b1;  
+             force `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_poisonedcompl_s2 =1'b1;
+             force `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_poisonedcompl_s1 =1'b1;
+             force `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_poisonedcompl_s0 =1'b1;
+             force `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_poisonedwrreq_s3 =1'b1;
+             force `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_poisonedwrreq_s2 =1'b1;
+             force `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_poisonedwrreq_s1 =1'b1;
+             force `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_poisonedwrreq_s0 =1'b1;
 
              #1us;
 
@@ -133,22 +133,22 @@ class pmci_pciess_csr_seq extends base_seq;
              `uvm_info(get_name(), $psprintf("Reading from PCIE error status register"), UVM_LOW)
              rd_tx_register(address,exp_data);
               
-             release `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_ca_postedreq_s3; 
-             release `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_ca_postedreq_s2;    
-             release `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_ca_postedreq_s1; 
-             release `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_ca_postedreq_s0; 
-             release `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_ur_postedreq_s3; 
-             release `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_ur_postedreq_s2; 
-             release `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_ur_postedreq_s1; 
-             release `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_ur_postedreq_s0; 
-             release `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_poisonedcompl_s3;  
-             release `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_poisonedcompl_s2;
-             release `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_poisonedcompl_s1;
-             release `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_poisonedcompl_s0;
-             release `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_poisonedwrreq_s3;
-             release `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_poisonedwrreq_s2;
-             release `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_poisonedwrreq_s1;
-             release `PCIE_SS_TOP.host_pcie.pcie_ss.pcie_ss.p0_tileif.ss_app_vf_err_poisonedwrreq_s0; 
+             release `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_ca_postedreq_s3; 
+             release `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_ca_postedreq_s2;    
+             release `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_ca_postedreq_s1; 
+             release `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_ca_postedreq_s0; 
+             release `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_ur_postedreq_s3; 
+             release `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_ur_postedreq_s2; 
+             release `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_ur_postedreq_s1; 
+             release `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_ur_postedreq_s0; 
+             release `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_poisonedcompl_s3;  
+             release `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_poisonedcompl_s2;
+             release `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_poisonedcompl_s1;
+             release `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_poisonedcompl_s0;
+             release `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_poisonedwrreq_s3;
+             release `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_poisonedwrreq_s2;
+             release `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_poisonedwrreq_s1;
+             release `PCIE_SS_TOP.p0_tileif.ss_app_vf_err_poisonedwrreq_s0; 
 
      end
      endtask

@@ -107,8 +107,10 @@ VLOG_OPT += +define+ETH_CAUI_25G_INTERFACE_WIDTH=8 +define+SVT_ETHERNET_CLKGEN
 VLOG_OPT += +define+VIP_ETHERNET_100G_SVT +define+SVT_ETHERNET_DEBUG_BUS_ENABLE
 VLOG_OPT += +define+SYNOPSYS_SV
 
+# gen_sim_files.sh generates a file with macros required by Quartus libraries
+VLOG_OPT += -F $(QIP_DIR)/quartus_libs/simlib_defs.f
+
 ifdef ESERIES_SIM
-    VLOG_OPT += +define+IP7581SERDES_UX_SIMSPEED
     VLOG_OPT += +define+CONFIG_AGILEX5 +define+CONFIG_ESERIES +define+CONFIG_ESERIES_MDK
 endif
 
@@ -136,25 +138,14 @@ ifdef FTILE_SERDES
 
     VLOG_OPT += +define+TOP_LEVEL_ENTITY_INSTANCE_PATH=tb_top.DUT
     VLOG_OPT += +define+QUARTUS_ENABLE_DPI_FORCE
-    VLOG_OPT += +define+SPEC_FORCE
 
-    # See Fast Simulation Macros for the Agilex 7 F-Tile Hard IP
-    # https://www.intel.com/content/dam/support/us/en/programmable/kdb/2024/ip/Fast-Simulation-Macros-for-the-Agilex%E2%84%A2%207-F-Tile-Hard-IP.pdf
-    VLOG_OPT += +define+IP7581SERDES_UX_SIMSPEED
-    VLOG_OPT += +define+IP7581SERDES_UXS2T1R1PGD_PIPE_SPEC_FORCE
-    VLOG_OPT += +define+IP7581SERDES_UXS2T1R1PGD_PIPE_SIMULATION
-    VLOG_OPT += +define+IP7581SERDES_UXS2T1R1PGD_PIPE_FAST_SIM
-    VLOG_OPT += +define+SRC_SPEC_SPEED_UP
     # There appears to be a race during cold reset between the simulated NIOS-based
     # F-Tile HSSI reset controller and the simulated CSR clock IOPLL setup.
     # If the CSR clock is too late, HSSI reset ACK wires get stuck high and ports
     # never become active. Use the non-NIOS simulation controller instead.
     VLOG_OPT += +define+REMOVE_SRC_NIOS
 
-    VLOG_OPT += +define+TIMESCALE_EN
-    VLOG_OPT += +define+INTC_FUNCTIONAL
-    VLOG_OPT += +define+__SRC_TEST__
-    VLOG_OPT += +define+gdrb_TIMESCALE_EN +define+RTLSIM +define+gdrb_INTC_FUNCTIONAL +define+SSM_SEQUENCE
+    VLOG_OPT += +define+gdrb_TIMESCALE_EN +define+gdrb_INTC_FUNCTIONAL
 endif
 
 VLOG_OPT += +define+ETH_FORCE_FS_TIME_PRECISION

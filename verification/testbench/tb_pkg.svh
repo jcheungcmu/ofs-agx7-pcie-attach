@@ -26,7 +26,7 @@
     `define FME_CSR_TOP tb_top.DUT.fme_top.fme_io
     `define UART_TOP tb_top.DUT.afu_top.vuart_top
     `define ST2MM_TOP tb_top.DUT.afu_top.fim_afu_instances.st2mm
-    `define PCIE_SS_TOP tb_top.DUT.pcie_wrapper.pcie_ss.top
+    `define PCIE_SS_TOP tb_top.DUT.pcie_wrapper.pcie_ss.top.host_pcie.pcie_ss.pcie_ss
     `define PMCI_WRAPPER tb_top.DUT.pmci_wrapper 
 
     `ifdef ENABLE_AC_COVERAGE
