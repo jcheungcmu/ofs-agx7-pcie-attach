@@ -724,6 +724,9 @@ pmci_wrapper #(
 `ifdef INCLUDE_LOCAL_MEM
          ,.AFU_MEM_CHANNEL     (AFU_MEM_CHANNELS   )
 `endif
+`ifdef INCLUDE_HBM
+         ,.MEM_PL_DEPTH        (3)
+`endif
   )afu_top(
          .SYS_REFCLK          (SYS_REFCLK                   ),
          .clk                 (clk_sys                      ),
