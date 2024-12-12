@@ -313,8 +313,13 @@ endgenerate
 //    - Completion timeouts
 //-----------------------------------------------------------------------------------------------
 
+// Enable the protocol checker as long as the data bus is wider than one TLP
+// header. The protocol checker does not support MMIO header in a beat separate
+// from MMIO data.
+localparam ENABLE_PROTOCOL_CHECKER = PCIE_TDATA_WIDTH > pcie_ss_hdr_pkg::HDR_WIDTH;
+
 afu_intf #(
-   .ENABLE (1'b1),
+   .ENABLE (ENABLE_PROTOCOL_CHECKER),
    // The tag mapper is free to use all available tags in the
    // PCIe SS, independent of the limit imposed on AFUs by
    // ofs_pcie_ss_cfg_pkg::PCIE_EP_MAX_TAGS. The maximum tag

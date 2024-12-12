@@ -52,9 +52,10 @@ typedef enum {
 
 localparam TUSER_WIDTH = 10;
 localparam HDR_WIDTH = 256;
-localparam TDATA_WIDTH = `OFS_FIM_IP_CFG_PCIE_SS_DWIDTH_BYTE * 8;
-// tx_req payload is at most the width of a header
-localparam TXREQ_DATA_WIDTH = (HDR_WIDTH < TDATA_WIDTH) ? HDR_WIDTH : TDATA_WIDTH;
+// The BFM minimum PCIe bus data width is HDR_WIDTH
+localparam TDATA_WIDTH = (`OFS_FIM_IP_CFG_PCIE_SS_DWIDTH_BYTE * 8) > HDR_WIDTH ?
+                            (`OFS_FIM_IP_CFG_PCIE_SS_DWIDTH_BYTE * 8) : HDR_WIDTH;
+localparam TXREQ_DATA_WIDTH = HDR_WIDTH;
 
 // Debug Functions
 function automatic void dump_pfvf_params(
