@@ -11,6 +11,8 @@
 `ifndef __TEST_CSR_DEFS__
 `define __TEST_CSR_DEFS__
 
+`include "ofs_ip_cfg_db.vh"
+
 package test_csr_defs;
    // ******************************************************************************************
    // DFH logic
@@ -28,6 +30,7 @@ package test_csr_defs;
 
    localparam DFH_START_OFFSET = 32'h0; 
    localparam EMIF_DFH_FEAT_ID = 12'h9; 
+   localparam NUMBER_OF_LINKS = `OFS_FIM_IP_CFG_PCIE_SS_NUM_LINKS;
 
    // ******************************************************************************************
    // EMIF feature registers

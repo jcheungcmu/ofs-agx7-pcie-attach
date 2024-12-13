@@ -16,7 +16,7 @@ $BFM_DIR/pfvf_class_pkg.sv \
 $BFM_DIR/pfvf_status_class_pkg.sv \
 $BFM_DIR/packet_class_pkg.sv \
 $BFM_DIR/packet_delay_class_pkg.sv \
-$BFM_DIR/host_memory_class_pkg.sv \
+$BFM_DIR/host_ofs_bfm_memory_class_pkg.sv \
 $BFM_DIR/tag_manager_class_pkg.sv \
 $BFM_DIR/host_transaction_class_pkg.sv \
 $BFM_DIR/host_axis_send_class_pkg.sv \

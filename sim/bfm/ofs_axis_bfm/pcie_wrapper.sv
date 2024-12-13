@@ -142,10 +142,6 @@ generate
 
         end
 
-        // Assign rst_n for the link
-        assign rxreq_in[j].rst_n = fim_rst_n[j];
-        assign axi_st_tx_committed[j].rst_n = fim_rst_n[j];
-
         pcie_ss_if #(
             .MM_ADDR_WIDTH   (MM_ADDR_WIDTH), 
             .MM_DATA_WIDTH   (MM_DATA_WIDTH),

@@ -23,7 +23,7 @@ module unit_test #(
 );
 
 import pfvf_class_pkg::*;
-import host_memory_class_pkg::*;
+import host_ofs_bfm_memory_class_pkg::*;
 import tag_manager_class_pkg::*;
 import pfvf_status_class_pkg::*;
 import packet_class_pkg::*;
@@ -33,15 +33,11 @@ import host_transaction_class_pkg::*;
 import host_bfm_types_pkg::*;
 import host_bfm_class_pkg::*;
 import host_flr_class_pkg::*;
+import test_csr_defs::*;
 
 // Configured PCIe capabilities. These parameters are read from the PCIe SS IP
 // and written as macros to a header file included by ofs_ip_cfg_db.vh as
 // part of the Quartus project.
-localparam PCIE_NUM_PFS = `OFS_FIM_IP_CFG_PCIE_SS_NUM_PFS;
-localparam logic PCIE_ATS_CAP_EN[PCIE_NUM_PFS] = { `OFS_FIM_IP_CFG_PCIE_SS_ATS_CAP_VEC };
-localparam logic PCIE_VF_ATS_CAP_EN[PCIE_NUM_PFS] = { `OFS_FIM_IP_CFG_PCIE_SS_VF_ATS_CAP_VEC };
-localparam logic PCIE_PRS_CAP_EN[PCIE_NUM_PFS] = { `OFS_FIM_IP_CFG_PCIE_SS_PRS_CAP_VEC };
-localparam logic PCIE_PASID_CAP_EN[PCIE_NUM_PFS] = { `OFS_FIM_IP_CFG_PCIE_SS_PASID_CAP_VEC };
 
 //---------------------------------------------------------
 //  BEGIN: Test Tasks and Utilities
@@ -49,7 +45,6 @@ localparam logic PCIE_PASID_CAP_EN[PCIE_NUM_PFS] = { `OFS_FIM_IP_CFG_PCIE_SS_PAS
 parameter MAX_TEST = 100;
 parameter TIMEOUT = 10.0ms;
 parameter RP_MAX_TAGS = 64;
-localparam NUMBER_OF_LINKS = `OFS_FIM_IP_CFG_PCIE_SS_NUM_LINKS;
 localparam string unit_test_name = "PCIe ATS Basic Test";
 
 //---------------------------------------------------------

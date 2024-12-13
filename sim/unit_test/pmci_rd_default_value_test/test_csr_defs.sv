@@ -10,7 +10,7 @@
 //-----------------------------------------------------------------------------
 `ifndef __TEST_CSR_DEFS__
 `define __TEST_CSR_DEFS__
-
+`include "ofs_ip_cfg_db.vh"
 package test_csr_defs;
    localparam PMCI_DFH           = 32'h20000;
    localparam PMCI_FBM_CSR       = PMCI_DFH + 32'h40;
@@ -30,6 +30,7 @@ package test_csr_defs;
    localparam PMCI_VDM_PDR       = PMCI_DFH + 32'h2008;
    localparam PMCI_PXE_OROM_CONT = PMCI_DFH + 32'h10000;
    localparam host_avmm_slv_addr = 5'h1D;
+   localparam NUMBER_OF_LINKS = `OFS_FIM_IP_CFG_PCIE_SS_NUM_LINKS;
 endpackage
 
 `endif

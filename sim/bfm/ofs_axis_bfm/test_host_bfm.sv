@@ -21,7 +21,7 @@ module test_host_bfm#(
 
 //import host_bfm_types_pkg::*;
 import pfvf_class_pkg::*;
-import host_memory_class_pkg::*;
+import host_ofs_bfm_memory_class_pkg::*;
 import tag_manager_class_pkg::*;
 import pfvf_status_class_pkg::*;
 import packet_class_pkg::*;

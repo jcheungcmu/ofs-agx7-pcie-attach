@@ -20,7 +20,7 @@ module unit_test #(
 );
 
 import pfvf_class_pkg::*;
-import host_memory_class_pkg::*;
+import host_ofs_bfm_memory_class_pkg::*;
 import tag_manager_class_pkg::*;
 import pfvf_status_class_pkg::*;
 import packet_class_pkg::*;
@@ -89,7 +89,6 @@ byte_t vdm_buf[];
 parameter MAX_TEST = 100;
 //parameter TIMEOUT = 1.5ms;
 parameter TIMEOUT = 10.0ms;
-localparam NUMBER_OF_LINKS = `OFS_FIM_IP_CFG_PCIE_SS_NUM_LINKS;
 localparam string unit_test_name = "PMCI VDM Length Error Scenario Test";
 
 //---------------------------------------------------------

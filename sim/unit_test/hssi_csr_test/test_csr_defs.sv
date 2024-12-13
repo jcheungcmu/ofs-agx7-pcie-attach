@@ -15,6 +15,11 @@
 package test_csr_defs;
 
    // ******************************************************************************************
+   // General parameters
+   // ******************************************************************************************
+   parameter NUMBER_OF_LINKS = `OFS_FIM_IP_CFG_PCIE_SS_NUM_LINKS;
+   parameter NUM_ETH_CHANNELS = `OFS_FIM_IP_CFG_HSSI_SS_NUM_ETH_PORTS;
+   // ******************************************************************************************
    // AFU Register Address
    // ******************************************************************************************
    parameter AFU_DFH_ADDR                        = 32'h40000;
@@ -107,11 +112,10 @@ package test_csr_defs;
    // ******************************************************************************************
    // HSSI Wrapper Register Values
    // ******************************************************************************************
-   `ifdef ETH_100G
-   parameter HSSI_WRAP_STATUS_VAL           = 64'h0000000300030003;
-   `else
-   parameter HSSI_WRAP_STATUS_VAL           = 64'h000000FF00FF00FF;
-   `endif
+    parameter HSSI_WRAP_STATUS_VAL = (`OFS_FIM_IP_CFG_HSSI_SS_NUM_ETH_PORTS == 4) ? 64'h0000000f000f000f : 
+	                             (`OFS_FIM_IP_CFG_HSSI_SS_NUM_ETH_PORTS == 2) ? 64'h0000000300030003 : 
+	                             (`OFS_FIM_IP_CFG_HSSI_SS_NUM_ETH_PORTS == 1) ? 64'h0000000100010001 :
+	                                                                            64'h000000FF00FF00FF;
    // ******************************************************************************************
    // HSSI SS IP Register Values
    // ******************************************************************************************

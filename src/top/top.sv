@@ -223,22 +223,15 @@ ofs_fim_axi_lite_if #(.AWADDR_WIDTH(fabric_width_pkg::bpf_emif_slv_address_width
 
 
 // AXIS PCIe Subsystem Interface
-pcie_ss_axis_if   pcie_ss_axis_rx_if [PCIE_NUM_LINKS-1:0] (.clk (clk_sys));
-pcie_ss_axis_if   pcie_ss_axis_tx_if [PCIE_NUM_LINKS-1:0] (.clk (clk_sys));
-pcie_ss_axis_if   pcie_ss_axis_rxreq_if [PCIE_NUM_LINKS-1:0] (.clk (clk_sys));
+pcie_ss_axis_if   pcie_ss_axis_rx_if [PCIE_NUM_LINKS-1:0] (.clk (clk_sys),.rst_n(rst_n_sys_pcie));
+pcie_ss_axis_if   pcie_ss_axis_tx_if [PCIE_NUM_LINKS-1:0] (.clk (clk_sys),.rst_n(rst_n_sys_pcie));
+pcie_ss_axis_if   pcie_ss_axis_rxreq_if [PCIE_NUM_LINKS-1:0] (.clk (clk_sys),.rst_n(rst_n_sys_pcie));
 // TXREQ is only headers (read requests)
 pcie_ss_axis_if #(
    .DATA_W(pcie_ss_hdr_pkg::HDR_WIDTH),
    .USER_W(ofs_fim_cfg_pkg::PCIE_TUSER_WIDTH)
-) pcie_ss_axis_txreq_if[PCIE_NUM_LINKS-1:0] (.clk (clk_sys));
+) pcie_ss_axis_txreq_if[PCIE_NUM_LINKS-1:0] (.clk (clk_sys),.rst_n(rst_n_sys_pcie));
 
-// Assign correct rst_n
-for (genvar j=0; j<PCIE_NUM_LINKS; j++) begin : RST_N
-    assign pcie_ss_axis_rx_if[j].rst_n = rst_n_sys_pcie[j];
-    assign pcie_ss_axis_tx_if[j].rst_n = rst_n_sys_pcie[j];
-    assign pcie_ss_axis_rxreq_if[j].rst_n = rst_n_sys_pcie[j];
-    assign pcie_ss_axis_txreq_if[j].rst_n = rst_n_sys_pcie[j];
-end
 
 pcie_ss_axis_pkg::t_axis_pcie_flr pcie_flr_req[PCIE_NUM_LINKS-1:0];
 pcie_ss_axis_pkg::t_axis_pcie_flr pcie_flr_rsp[PCIE_NUM_LINKS-1:0];

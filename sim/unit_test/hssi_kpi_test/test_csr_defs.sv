@@ -28,6 +28,9 @@ import top_cfg_pkg::*;
 
 package test_csr_defs;
 
+
+     localparam NUMBER_OF_LINKS = `OFS_FIM_IP_CFG_PCIE_SS_NUM_LINKS;
+
    // ******************************************************************************************
    // AFU Register Address
    // ******************************************************************************************

@@ -5,7 +5,20 @@
 //---------------------------------------------------------
 
 
-module unit_test #(
+module unit_test 
+import pfvf_class_pkg::*;
+import host_ofs_bfm_memory_class_pkg::*;
+import tag_manager_class_pkg::*;
+import pfvf_status_class_pkg::*;
+import packet_class_pkg::*;
+import host_axis_send_class_pkg::*;
+import host_axis_receive_class_pkg::*;
+import host_transaction_class_pkg::*;
+import host_bfm_types_pkg::*;
+import host_bfm_class_pkg::*;
+import test_csr_defs::*;
+import top_cfg_pkg::*;
+#(
    parameter SOC_ATTACH = 0,
    parameter LINK_NUMBER = 0,
    parameter type pf_type = host_bfm_types_pkg::default_pfs, 
@@ -19,18 +32,6 @@ module unit_test #(
    input logic csr_rst_n
 );
 
-import pfvf_class_pkg::*;
-import host_memory_class_pkg::*;
-import tag_manager_class_pkg::*;
-import pfvf_status_class_pkg::*;
-import packet_class_pkg::*;
-import host_axis_send_class_pkg::*;
-import host_axis_receive_class_pkg::*;
-import host_transaction_class_pkg::*;
-import host_bfm_types_pkg::*;
-import host_bfm_class_pkg::*;
-import test_csr_defs::*;
-import top_cfg_pkg::*;
 
 //---------------------------------------------------------
 // FLR handle and FLR Memory
@@ -81,7 +82,6 @@ pfvf_struct pfvf;
 parameter MAX_TEST = 100;
 parameter TIMEOUT = 10.0ms;
 parameter RP_MAX_TAGS = 64;
-localparam NUMBER_OF_LINKS = `OFS_FIM_IP_CFG_PCIE_SS_NUM_LINKS;
 localparam string unit_test_name = "CSR Test";
 
 //---------------------------------------------------------

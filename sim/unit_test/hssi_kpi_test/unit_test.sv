@@ -4,6 +4,7 @@
 // Test module for the simulation. 
 //---------------------------------------------------------
 
+`include "ofs_ip_cfg_db.vh"
 
 module unit_test #(
    parameter SOC_ATTACH = 0,
@@ -20,7 +21,7 @@ module unit_test #(
 );
 
 import pfvf_class_pkg::*;
-import host_memory_class_pkg::*;
+import host_ofs_bfm_memory_class_pkg::*;
 import tag_manager_class_pkg::*;
 import pfvf_status_class_pkg::*;
 import packet_class_pkg::*;
@@ -83,7 +84,6 @@ pfvf_struct pfvf;
 parameter MAX_TEST = 100;
 parameter TIMEOUT = 10.0ms;
 parameter RP_MAX_TAGS = 64;
-localparam NUMBER_OF_LINKS = `OFS_FIM_IP_CFG_PCIE_SS_NUM_LINKS;
 localparam string unit_test_name = "HSSI KPI Test";
 
 //---------------------------------------------------------
@@ -1484,7 +1484,7 @@ task traffic_test;
    input logic  access32;
    logic [31:0] old_test_err_count;
    begin 
-      $display("T:%8d INFO: running traffic traffic test Running eth 10g",$time);
+      $display("T:%8d INFO: running traffic traffic test ",$time);
 
       print_test_header("traffic_test");
       old_test_err_count = get_err_count();

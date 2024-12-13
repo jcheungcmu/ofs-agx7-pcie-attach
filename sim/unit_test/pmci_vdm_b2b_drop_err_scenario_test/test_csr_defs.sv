@@ -10,7 +10,7 @@
 //-----------------------------------------------------------------------------
 `ifndef __TEST_CSR_DEFS__
 `define __TEST_CSR_DEFS__
-
+`include "ofs_ip_cfg_db.vh"
 package test_csr_defs;
    localparam PMCI_DFH           = 64'h20000;
    localparam PMCI_FBM_CSR       = PMCI_DFH + 64'h40;
@@ -33,6 +33,7 @@ package test_csr_defs;
    localparam ST2MM_SRATCHPAD         = ST2MM_DFH + 64'h8;
    localparam ST2MM_PCIE_VDM_FCR      = ST2MM_DFH + 64'h2000;
    localparam ST2MM_PCIE_VDM_TX_DR    = ST2MM_DFH + 64'h2008;
+   localparam NUMBER_OF_LINKS = `OFS_FIM_IP_CFG_PCIE_SS_NUM_LINKS;
 endpackage
 
 `endif

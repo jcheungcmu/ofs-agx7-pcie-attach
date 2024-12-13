@@ -10,8 +10,11 @@
 //-----------------------------------------------------------------------------
 `ifndef __TEST_CSR_DEFS__
 `define __TEST_CSR_DEFS__
-
+`include "ofs_ip_cfg_db.vh"
 package test_csr_defs;
+
+   localparam NUMBER_OF_LINKS = `OFS_FIM_IP_CFG_PCIE_SS_NUM_LINKS;
+
    localparam QSFP0_DFH             = 32'h12000;
    localparam QSFP1_DFH             = 32'h13000;
    //-----------------------

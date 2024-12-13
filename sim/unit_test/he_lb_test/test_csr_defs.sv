@@ -11,6 +11,8 @@
 `ifndef __TEST_CSR_DEFS__
 `define __TEST_CSR_DEFS__
 
+`include "ofs_ip_cfg_db.vh"
+
 package test_csr_defs;
    localparam DFH                = 64'h0;
    localparam ID_L               = 64'h8;
@@ -33,6 +35,7 @@ package test_csr_defs;
    localparam ERROR              = 64'h170;
    localparam STRIDE             = 64'h178;
    localparam INFO0              = 32'h180;
+   localparam NUMBER_OF_LINKS = `OFS_FIM_IP_CFG_PCIE_SS_NUM_LINKS;
 
    typedef struct packed {
       logic [31:0] rsvd;

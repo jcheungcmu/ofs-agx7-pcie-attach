@@ -5,12 +5,23 @@
 // Top-level module for the AXI-ST BFM
 //---------------------------------------------------------
 
-module host_bfm_top # (
+module host_bfm_top 
+import host_bfm_types_pkg::*;
+import host_ofs_bfm_memory_class_pkg::*;
+import tag_manager_class_pkg::*;
+import packet_delay_class_pkg::*;
+import pfvf_status_class_pkg::*;
+import packet_class_pkg::*;
+import host_axis_send_class_pkg::*;
+import host_axis_receive_class_pkg::*;
+import host_transaction_class_pkg::*;
+import host_bfm_class_pkg::*;
+#(
    type pf_type = host_bfm_types_pkg::default_pfs, 
    type vf_type = host_bfm_types_pkg::default_vfs, 
    pf_type pf_list = '{1'b1}, 
    vf_type vf_list = '{0}
-) (
+)(
     pcie_ss_axis_if.source axis_rx,
     pcie_ss_axis_if.source axis_rx_req,
     pcie_ss_axis_if.sink   axis_tx,
@@ -21,16 +32,6 @@ parameter REQUESTER_ID = 16'h0001;
 parameter COMPLETER_ID = 16'h0001;
 parameter MEMORY_NAME = "HostMemory0";
 
-import host_bfm_types_pkg::*;
-import host_memory_class_pkg::*;
-import tag_manager_class_pkg::*;
-import packet_delay_class_pkg::*;
-import pfvf_status_class_pkg::*;
-import packet_class_pkg::*;
-import host_axis_send_class_pkg::*;
-import host_axis_receive_class_pkg::*;
-import host_transaction_class_pkg::*;
-import host_bfm_class_pkg::*;
 
 
 //---------------------------------------------------------
