@@ -102,7 +102,7 @@ class pcie_csr_seq extends base_seq;
      write_mailbox(tb_cfg0.PF0_BAR0+PCIE_SS_CMD_CSR,18'h00018,wdata);                      // ERR_TLP_HEADER = 18'h00018 RW
      read_mailbox(cur_pf_table, 0, tb_cfg0.PF0_BAR0+PCIE_SS_CMD_CSR,18'h00018,rdata);      
 //Compare data        
-    if(rdata[31:0] !== wdata[63:32])
+    if(rdata[63:32] !== wdata[63:32])
       `uvm_error(get_name(), $psprintf("Data mismatch 64! Register = %0s, Exp = %0h, Act = %0h", "PCIE_SS_DATA_CSR",wdata, rdata))
      else
       `uvm_info(get_name(), $psprintf("Data match 64! Register = %0s, wdata = %0h rdata = %0h","PCIE_SS_DATA_CSR",wdata, rdata), UVM_LOW)
