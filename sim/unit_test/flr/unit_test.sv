@@ -128,12 +128,9 @@ endtask
 
 task print_test_header;
    input [1024*8-1:0] test_name;
-   input logic        vf_active;
-   input logic [2:0]  pfn;
-   input logic [10:0] vfn;
 begin
    $display("\n********************************************************");
-   $display(" Running TEST(%0d) : %0s (vf_active=%0d, pfn=%0d vfn=%0d", test_id, test_name, vf_active, pfn, vfn);
+   $display(" Running TEST(%0d) : %0s", test_id, test_name);
    $display("********************************************************");   
    test_summary[test_id].name = test_name;
 end
@@ -338,26 +335,22 @@ generate
 endgenerate
 
 
-//---------------------------------------------------------
-//  Unit Test Procedure
-//---------------------------------------------------------
-task main_test;
-   output logic test_result;
+task do_flr_test;
+   input parallel;
 
    string test_name;
    PFVFClass#(pf_type, vf_type, pf_list, vf_list) test_flr;
    pfvf_struct test_flr_type;
    HostFLREvent#(pf_type, vf_type, pf_list, vf_list) flr;
    logic [31:0] old_test_err_count;
+begin
+   test_flr = new(0,0,0);
+   test_flr.get_pfvf_first(test_flr_type);
+   print_test_header(parallel ? "flr_parallel_test" : "flr_serial_test");
+   old_test_err_count = get_err_count();
 
-   begin
-      $display("Entering %s." ,unit_test_name);
-      @(posedge clk iff (rst_n === 1'b1));
-      repeat (20) @(posedge clk);
-      test_flr = new(0,0,0);
-      test_flr.get_pfvf_first(test_flr_type);
-      print_test_header("flr_test", '0, '0, '0);
-      old_test_err_count = get_err_count();
+   if (parallel) begin
+      // Emit all FLRs quickly and wait for all to complete
       do
       begin
          automatic pfvf_struct flr_pfvf = test_flr_type;
@@ -370,26 +363,58 @@ task main_test;
       begin
          @(posedge clk);
       end
-      $display(">>> All Sent FLRs <<<");
-      host_flr_top.flr_manager.print_all_sent_flrs();
-      $display("");
-      if(host_flr_top.flr_manager.num_all_outstanding_flrs() > 0) begin
-         $display("ERROR: test has %0d outstanding FLR requests", host_flr_top.flr_manager.num_all_outstanding_flrs());
-         $display(">>> All Outstanding FLRs <<<");
-         host_flr_top.flr_manager.print_all_outstanding_flrs();
-         incr_err_count();
-      end
-      $display("");
-      if(host_flr_top.flr_manager.num_all_unmatched_responses() > 0) begin
-         $display("ERROR: test has %0d unmatched FLR responses", host_flr_top.flr_manager.num_all_unmatched_responses());
-         $display(">>> All Unmatched FLR Responses <<<");
-         host_flr_top.flr_manager.print_all_unmatched_responses();
-         incr_err_count();
-      end
-      $display("");
+   end else begin
+      // Wait for each FLR to complete before starting another
+      do
+      begin
+         automatic pfvf_struct flr_pfvf = test_flr_type;
+         host_flr_top.flr_manager.send_flr(flr_pfvf);
 
-      post_test_util(old_test_err_count, test_result);
+         while (host_flr_top.flr_manager.num_all_outstanding_flrs() > 0 )
+         begin
+            @(posedge clk);
+         end
+      end while (test_flr.get_pfvf_next(test_flr_type));
+   end
+
+   $display(">>> All Sent FLRs <<<");
+   host_flr_top.flr_manager.print_all_sent_flrs();
+   $display("");
+   if(host_flr_top.flr_manager.num_all_outstanding_flrs() > 0) begin
+      $display("ERROR: test has %0d outstanding FLR requests", host_flr_top.flr_manager.num_all_outstanding_flrs());
+      $display(">>> All Outstanding FLRs <<<");
+      host_flr_top.flr_manager.print_all_outstanding_flrs();
+      incr_err_count();
+   end
+   $display("");
+   if(host_flr_top.flr_manager.num_all_unmatched_responses() > 0) begin
+      $display("ERROR: test has %0d unmatched FLR responses", host_flr_top.flr_manager.num_all_unmatched_responses());
+      $display(">>> All Unmatched FLR Responses <<<");
+      host_flr_top.flr_manager.print_all_unmatched_responses();
+      incr_err_count();
+   end
+   $display("");
+
+   post_test_util(old_test_err_count, test_result);
+end
+endtask
+
+//---------------------------------------------------------
+//  Unit Test Procedure
+//---------------------------------------------------------
+task main_test;
+   output logic test_result;
+
+   begin
+      $display("Entering %s." ,unit_test_name);
+      @(posedge clk iff (rst_n === 1'b1));
+      repeat (20) @(posedge clk);
       
+      // Parallel
+      do_flr_test(1);
+      // Serial
+      do_flr_test(0);
+
       repeat (10) @(posedge clk);
    end
 endtask
