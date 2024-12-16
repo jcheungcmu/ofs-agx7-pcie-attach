@@ -4,16 +4,11 @@
 #
 # This file contains PR specific Quartus assignments
 #------------------------------------
-set include_pr 0
 
-foreach_in_collection m $vlog_macros {
-    if { [string equal "INCLUDE_PR" [lindex $m 2]] } {
-        set include_pr 1
-    }
-}
-
-if { [info exist env(OFS_BUILD_TAG_FLAT) ] || ($include_pr == 0) } { 
-    post_message "Compiling Flat design..." 
+if { [::config_env::verilog_macro_defined INCLUDE_PR] == 0 } {
+    post_message "Compiling without PR region..."
+} elseif { [info exist env(OFS_BUILD_TAG_FLAT) ] } {
+    post_message "Compiling flat design..."
 } else {
 
     if { [info exist env(OFS_BUILD_TAG_PR_FLOORPLAN) ] } {

@@ -6,8 +6,10 @@
 #------------------------------------
 set BOTTOM_MEM_REGION "X0 Y0 X222 Y17"
 
-if { [info exist env(OFS_BUILD_TAG_FLAT) ] } { 
-    post_message "Compiling Flat design..." 
+if { [::config_env::verilog_macro_defined INCLUDE_PR] == 0 } {
+    post_message "Compiling without PR region..."
+} elseif { [info exist env(OFS_BUILD_TAG_FLAT) ] } {
+    post_message "Compiling flat design..."
 } else {
 
     post_message "Compiling PR Base revision with a tight(er) floorplan..."

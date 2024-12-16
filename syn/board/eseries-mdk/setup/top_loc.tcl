@@ -15,12 +15,12 @@
 
 # System clock
 set_location_assignment PIN_BK31 -to SYS_REFCLK -comment IOBANK_6A
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to SYS_REFCLK
+set_instance_assignment -name IO_STANDARD "3.3V LVCMOS" -to SYS_REFCLK
 
 # PCIe reset
 set_location_assignment PIN_BW28 -to PCIE_RESET_N -comment IOBANK_6A
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to PCIE_RESET_N
-set_instance_assignment -name WEAK_PULL_DOWN ON -to PCIE_RESET_N
+set_instance_assignment -name IO_STANDARD "3.3V LVCMOS" -to PCIE_RESET_N
+set_instance_assignment -name WEAK_PULL_DOWN_RESISTOR ON -to PCIE_RESET_N
 
 # PCIe location
 set_location_assignment PIN_AV3 -to PCIE_RX_N[0] -comment IOBANK_4C
@@ -41,13 +41,9 @@ set_location_assignment PIN_AR7 -to PCIE_TX_P[1] -comment IOBANK_4C
 set_location_assignment PIN_AN7 -to PCIE_TX_P[2] -comment IOBANK_4C
 set_location_assignment PIN_AL7 -to PCIE_TX_P[3] -comment IOBANK_4C
 
-#set_instance_assignment -name IO_STANDARD "HIGH SPEED DIFFERENTIAL I/O" -to PCIE_RX_P
-#set_instance_assignment -name IO_STANDARD "HIGH SPEED DIFFERENTIAL I/O" -to PCIE_TX_P
+set_instance_assignment -name IO_STANDARD "HIGH SPEED DIFFERENTIAL I/O" -to PCIE_RX_P
+set_instance_assignment -name IO_STANDARD "HIGH SPEED DIFFERENTIAL I/O" -to PCIE_TX_P
 
 set_location_assignment PIN_AT16 -to PCIE_REFCLK0 -comment IOBANK_4C
-#set_location_assignment PIN_AT21 -to "PCIE_REFCLK0(n)"
-#set_location_assignment PIN_AP16 -to PCIE_REFCLK1 -comment IOBANK_4C
-#set_location_assignment PIN_AP21 -to "PCIE_REFCLK1(n)"
-
+set_location_assignment PIN_AT21 -to "PCIE_REFCLK0(n)" -comment IOBANK_4C
 set_instance_assignment -name IO_STANDARD "CURRENT MODE LOGIC (CML)" -to PCIE_REFCLK0
-#set_instance_assignment -name IO_STANDARD "CURRENT MODE LOGIC (CML)" -to PCIE_REFCLK1
