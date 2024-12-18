@@ -32,8 +32,9 @@ localparam PCIE_HOST_WIDTH    = $clog2(NUM_PCIE_HOST);
 // Native width of the AXI-S TLP stream from the PCIe IP
 localparam PCIE_IP_TDATA_WIDTH = `OFS_FIM_IP_CFG_PCIE_SS_DWIDTH_BYTE * 8;
 // Width of the OFS internal TLP stream. May be transformed to a value
-// different from the IP itself.
-localparam PCIE_TDATA_WIDTH  = (PCIE_IP_TDATA_WIDTH >= 512) ? PCIE_IP_TDATA_WIDTH : 512;
+// different from the IP itself. OFS requires a PCIe bus at least wide enough
+// to hold a complete TLP header.
+localparam PCIE_TDATA_WIDTH  = (PCIE_IP_TDATA_WIDTH >= 256) ? PCIE_IP_TDATA_WIDTH : 256;
 localparam PCIE_TUSER_WIDTH  = 10;
 localparam PCIE_LITE_CSR_WIDTH = 20;
 
