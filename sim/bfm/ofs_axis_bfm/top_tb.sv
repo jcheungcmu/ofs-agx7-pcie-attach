@@ -8,10 +8,10 @@
 //   Top level testbench with OFS top level module instantiated as DUT
 //
 //-----------------------------------------------------------------------------
-
 `include "vendor_defines.vh"
 `include "fpga_defines.vh"
 `include "ofs_ip_cfg_db.vh"
+`include "ofs_fim_mem_defines.vh"
 
 import ofs_fim_cfg_pkg::*;
 import ofs_fim_if_pkg::*;
@@ -92,7 +92,15 @@ end
 
 `ifdef INCLUDE_LOCAL_MEM
 `ifdef INCLUDE_DDR4
-   ofs_fim_emif_ddr4_if ddr4_mem [ofs_fim_mem_if_pkg::NUM_MEM_CHANNELS-1:0] ();
+
+`ifdef OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_0
+   ofs_fim_emif_ddr4_if ddr4_mem [ofs_fim_mem_if_pkg::NUM_GROUP_0_DDR4_CHANNELS-1:0] ();
+`endif // OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_0
+`ifdef OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_1
+   ofs_fim_emif_ddr4_group_1_if ddr4_mem_group_1 [ofs_fim_mem_if_pkg::NUM_GROUP_1_DDR4_CHANNELS-1:0] ();
+`endif // OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_1
+
+
 `ifdef INCLUDE_HPS
    ofs_fim_hps_ddr4_if  ddr4_hps (); 
  `endif
@@ -147,7 +155,15 @@ top DUT (
 
 `ifdef INCLUDE_LOCAL_MEM
 `ifdef INCLUDE_DDR4
-   .ddr4_mem     (ddr4_mem),
+
+//Fabric DDR4
+`ifdef OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_0
+      .ddr4_mem  (ddr4_mem),
+`endif
+`ifdef OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_1
+      .ddr4_mem_group_1  (ddr4_mem_group_1),
+`endif
+
 `ifdef INCLUDE_HPS
    .ddr4_hps     (ddr4_hps),
 `endif
@@ -236,31 +252,38 @@ top DUT (
    initial ddr4_hps.ref_clk = '0;
 `endif
    genvar ch;
+
+`ifdef OFS_FIM_IP_CFG_LOCAL_MEM_EN_MEM_0
    generate
-      for(ch=0; ch < ofs_fim_mem_if_pkg::NUM_MEM_CHANNELS; ch = ch+1) begin : mem_model
+      for(ch=0; ch < ofs_fim_mem_if_pkg::NUM_GROUP_0_DDR4_CHANNELS; ch = ch+1) begin : mem_model
          initial ddr4_mem[ch].ref_clk = '0;
          always #833 ddr4_mem[ch].ref_clk = ~ddr4_mem[ch].ref_clk; // 1200 MHz
-         ed_sim_mem ddr_mem_inst (
-            .mem_ck     (ddr4_mem[ch].ck),
-            .mem_ck_n   (ddr4_mem[ch].ck_n),
-            .mem_a      (ddr4_mem[ch].a),
-            .mem_act_n  (ddr4_mem[ch].act_n),
-            .mem_ba     (ddr4_mem[ch].ba),
-            .mem_bg     (ddr4_mem[ch].bg),
-            .mem_cke    (ddr4_mem[ch].cke),
-            .mem_cs_n   (ddr4_mem[ch].cs_n),
-            .mem_odt    (ddr4_mem[ch].odt),
-            .mem_reset_n(ddr4_mem[ch].reset_n),
-            .mem_par    (ddr4_mem[ch].par),
-            .mem_alert_n(ddr4_mem[ch].alert_n),
-            .mem_dqs    (ddr4_mem[ch].dqs),
-            .mem_dqs_n  (ddr4_mem[ch].dqs_n),
-            .mem_dq     (ddr4_mem[ch].dq),
-            .mem_dbi_n  (ddr4_mem[ch].dbi_n)
-         );
+
+          ed_sim_mem ddr_mem (
+         `CONNECT_DDR4_MODEL_TB(mem, mem, ddr4_mem[ch], GROUP_0)
+          );
+
       end
    endgenerate
-`endif
+`endif //OFS_FIM_IP_CFG_LOCAL_MEM_EN_MEM_0
+
+`ifdef OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_1
+   generate
+      for(ch=0; ch < ofs_fim_mem_if_pkg::NUM_GROUP_1_DDR4_CHANNELS; ch = ch+1) begin : mem_model_grp1
+         initial ddr4_mem_group_1[ch].ref_clk = '0;
+         always #833 ddr4_mem_group_1[ch].ref_clk = ~ddr4_mem_group_1[ch].ref_clk; // 1200 MHz
+
+         ed_sim_mem_group1 ddr_mem_group_1 (
+         `CONNECT_DDR4_MODEL_TB(mem, mem, ddr4_mem_group_1[ch], GROUP_1)
+         );
+
+      end
+   endgenerate
+`endif //OFS_FIM_IP_CFG_LOCAL_MEM_EN_MEM_1
+
+
+`endif //DDR
+
 `ifdef INCLUDE_HBM
    initial uib_refclk      = '{default:'0};
    initial noc_ctrl_refclk = '{default:'0};

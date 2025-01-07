@@ -4,6 +4,7 @@
 set vlog_macros [get_all_global_assignments -name VERILOG_MACRO]
 set include_mss 0
 set include_hbm 0
+set ddr4_num_mem_groups 1
 
 foreach_in_collection assignment [get_all_global_assignments -name DEVICE] {
     set opn [lindex $assignment 2]
@@ -25,6 +26,16 @@ foreach_in_collection m $vlog_macros {
             set include_mss 1
         }
     }
+
+    # DDR4_NUM_MEM_GROUPS has a value, so it looks like a list
+    if { [string match "DDR4_NUM_MEM_GROUPS*" [lindex $m 2]] } {
+        # Backward compatibility (UDIMM) variant to skip mutliple groups
+        if { ![info exist env(OFS_BUILD_TAG_EMIF_UDIMM_PIN_ASSN) ] } {
+            set mem_group_str [split [lindex $m 2] "="]
+            set ddr4_num_mem_groups [lindex $mem_group_str 1]
+        }
+    }
+
     if { [string equal "INCLUDE_HBM" [lindex $m 2]] } {
         # Piggy back on the DDR APP channels for now
         set_global_assignment -name VERILOG_MACRO "INCLUDE_LOCAL_MEM"
@@ -38,6 +49,11 @@ if {$include_mss == 1} {
     # Used only in simulation. Loading it here adds ed_sim_mem to the simulation environment.
     # It is not instantiated on HW.
     set_global_assignment -name IP_FILE $::env(BUILD_ROOT_REL)/ipss/mem/qip/ed_sim/ed_sim_mem.ip
+    
+    # Adding ed_sim_model for other non-uniform groups. Not needed if
+    for {set mem_group_idx 1} {$mem_group_idx < $ddr4_num_mem_groups} {incr mem_group_idx} {
+        set_global_assignment -name IP_FILE $::env(BUILD_ROOT_REL)/ipss/mem/qip/ed_sim/ed_sim_mem_group${mem_group_idx}.ip
+    }
 
     # Add the Memory Subsystem to the dictionary of IP files that will be parsed by OFS
     # into the project's ofs_ip_cfg_db directory. Parameters from the configured

@@ -32,24 +32,28 @@ module top
    import ofs_fim_eth_if_pkg::*;
  `endif
 (
-                    input                                       SYS_REFCLK                        ,// System Reference Clock (100MHz)
+                    input                                       SYS_REFCLK,   // System Reference Clock (100MHz)
                                       
 // Local Memory technology interfaces
 `ifdef INCLUDE_LOCAL_MEM
 `ifdef INCLUDE_DDR4
-                    ofs_fim_emif_ddr4_if.emif                      ddr4_mem     [NUM_DDR4_CHANNELS-1:0]      ,// EMIF DDR4 x32 RDIMM (x8)
+`ifdef OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_0
+                     ofs_fim_emif_ddr4_if.emif                 ddr4_mem          [NUM_GROUP_0_DDR4_CHANNELS-1:0],
+`endif // OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_0
+`ifdef OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_1
+                     ofs_fim_emif_ddr4_group_1_if.emif         ddr4_mem_group_1     [NUM_GROUP_1_DDR4_CHANNELS-1:0],
+`endif // OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_1
 `ifdef INCLUDE_HPS
-                    ofs_fim_hps_ddr4_if.emif                       ddr4_hps                          ,
-`endif
-`endif
-
+                     ofs_fim_hps_ddr4_if.emif                  ddr4_hps,
+`endif // INCLUDE_HPS
+`endif // INCLUDE_DDR4
 `ifdef INCLUDE_HBM
-   input       hbm_cattrip     [NUM_HBM_DEVICES-1:0],
-   input [2:0] hbm_temp        [NUM_HBM_DEVICES-1:0],
-   input       uib_refclk      [NUM_HBM_DEVICES-1:0],
-   input       noc_ctrl_refclk [NUM_HBM_DEVICES-1:0],
-`endif
-`endif
+                     input                                     hbm_cattrip       [NUM_HBM_DEVICES-1:0],
+                     input [2:0]                               hbm_temp          [NUM_HBM_DEVICES-1:0],
+                     input                                     uib_refclk        [NUM_HBM_DEVICES-1:0],
+                     input                                     noc_ctrl_refclk   [NUM_HBM_DEVICES-1:0],
+`endif // INCLUDE_HBM
+`endif // INCLUDE_LOCAL_MEM
 
 `ifdef INCLUDE_HSSI                                                                              
                     //QSFP control signals
@@ -1225,7 +1229,12 @@ endgenerate
        // AFU ext mem interfaces
       .afu_mem_if   (afu_ext_mem_if),
 `ifdef INCLUDE_DDR4
+`ifdef OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_0
       .ddr4_mem_if  (ddr4_mem),
+`endif
+`ifdef OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_1
+      .ddr4_mem_if_group_1  (ddr4_mem_group_1),
+`endif
 `endif
 
 `ifdef INCLUDE_HBM
