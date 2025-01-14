@@ -87,13 +87,13 @@ set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../setup/pr_assignments.tcl
 # Pins & Location Assignments
 ############################################################################################
 set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../setup/top_loc.tcl
-if { [info exist env(OFS_BUILD_TAG_EMIF_UDIMM_PIN_ASSN) ] } {
-    post_message "Compiling UDIMM emif assignments emif_loc.tcl"
-    set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../setup/emif_loc.tcl
+if { [info exist env(OFS_BUILD_TAG_EMIF_RDIMM_PIN_ASSN) ] } {
+    post_message "Compiling RDIMM emif assignments emif_rdimm_loc.tcl"
+    set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../setup/emif_rdimm_loc.tcl
      
 } else {
-    post_message "Compiling RDIMM emif assignments emif_rdimm_loc.tcl" 
-    set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../setup/emif_rdimm_loc.tcl
+    post_message "Compiling UDIMM emif assignments emif_loc.tcl" 
+    set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../setup/emif_loc.tcl
 }
 set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../setup/pmci_loc.tcl
 

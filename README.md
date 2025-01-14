@@ -70,9 +70,9 @@ Work directory names in the commands below are merely examples and may be change
         ./ofs-common/scripts/common/syn/build_top.sh -p --ofss tools/ofss_config/pcie/pcie_host_2link_1pf_1vf.ofss iseries-dk:no_hssi,pr_floorplan=syn/board/iseries-dk/setup/pr_assignments_slim.tcl work_iseries-dk_slim
     ```
    
-    - Emif configured to use UDIMM (Instead of RDIMM that ships with the devkit):
+    - Emif configured to use RDIMM (Memory that ships with the devkit):
     ```bash
-        ./ofs-common/scripts/common/syn/build_top.sh -p --ofss tools/ofss_config/memory/memory_rtile.ofss iseries-dk:emif_udimm_pin_assn work_iseries-dk
+        ./ofs-common/scripts/common/syn/build_top.sh -p --ofss tools/ofss_config/memory/memory_rtile_8g_rdimm.ofss iseries-dk:emif_rdimm_pin_assn work_iseries-dk
     ```
 
 * mseries-dk
