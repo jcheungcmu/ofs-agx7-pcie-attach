@@ -25,7 +25,7 @@ class ral_reg_ac_mem_tg_AFU_DFH extends uvm_reg;
       this.Reserved52 = uvm_reg_field::type_id::create("Reserved52",,get_full_name());
       this.Reserved52.configure(this, 8, 52, "RO", 0, 8'h0, 1, 0, 0);
       this.AfuMinVersion = uvm_reg_field::type_id::create("AfuMinVersion",,get_full_name());
-      this.AfuMinVersion.configure(this, 4, 48, "RO", 0, 4'h0, 1, 0, 0);
+      this.AfuMinVersion.configure(this, 4, 48, "RO", 0, 4'h1, 1, 0, 0);
       this.Reserved41 = uvm_reg_field::type_id::create("Reserved41",,get_full_name());
       this.Reserved41.configure(this, 7, 41, "WO", 0, 7'h0, 1, 0, 0);
       this.EOL = uvm_reg_field::type_id::create("EOL",,get_full_name());
