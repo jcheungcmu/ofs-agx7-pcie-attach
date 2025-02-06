@@ -76,7 +76,7 @@ Work directory names in the commands below are merely examples and may be change
     ```
 
 * mseries-dk
-   - Compiling the mseries-dk design requires .ofss for changing the .ip configuration. Uses NOC & HBM and works only in flat compile
+   - Compiling the mseries-dk design requires .ofss for changing the .ip configuration. Uses NOC & HBM and works only in flat compile. This fim only supports PCIe and HBM. PR & hssi not supported. Review release documentation for full description.
     ```bash
         ./ofs-common/scripts/common/syn/build_top.sh --ofss tools/ofss_config/mseries-dk.ofss mseries-dk:flat work_mseries-dk
     ```
