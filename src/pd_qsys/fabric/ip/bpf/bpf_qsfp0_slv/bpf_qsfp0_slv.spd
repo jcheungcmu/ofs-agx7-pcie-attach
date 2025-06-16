@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="axi4lite_shim_10/sim/axi4lite_shim.sv"
+   type="SYSTEM_VERILOG"
+   library="axi4lite_shim_10" />
+ <file
+   path="sim/bpf_qsfp0_slv.v"
+   type="VERILOG"
+   library="bpf_qsfp0_slv"
+   hasInlineConfiguration="true" />
+ <topLevel name="bpf_qsfp0_slv.bpf_qsfp0_slv" />
+ <deviceFamily name="agilex7" />
+ <device name="AGFB014R24A2E2V" />
+</simPackage>

@@ -1,0 +1,354 @@
+build_top.sh launched using command line:
+ ./ofs-common/scripts/common/syn/build_top.sh --ofss tools/ofss_config/n6001.ofss n6001:null_he_lb,null_he_hssi,null_he_mem,null_he_mem_tg,no_hssi work_n6001_minimal_newaddress_switchdfl
+
+Proceeding with requested build script build_fim.sh...
+>>> OFS Board Path = n6001
+>>> OFS Board Core = n6001
+
+Setting up build variables
+source /home/jcheung2/ofs24/ofs-agx7-pcie-attach/syn/scripts/build_var_setup.sh
+BUILD_ROOT_REL is 
+
+**********************************
+********* ENV SETUP **************
+
+FIM Project:
+  OFS_PROJECT = ofs-agx7-pcie-attach
+  OFS_FIM     = 
+  OFS_BOARD   = n6001
+  Q_PROJECT   = ofs_top
+  Q_REVISION  = ofs_top
+  Fitter SEED = 5
+FME id
+  BITSTREAM_ID = 05010202c8e9cc1a
+  BITSTREAM_MD = 0000000002407175
+Flow:
+  ENA_CREATE_WORK_DIR        = 1
+  ENA_OPAE_SDK_SETUP_FOR_FIM = 1
+  ENA_PRE_COMPILE_SCRIPT     = 1
+  ENA_SETUP_IP_LIB_SCRIPT    = 1
+  ENA_FIM_COMPILE            = 1
+  ENA_PR_SETUP               = 1
+  ENA_FLASH                  = 1
+  ENA_PR_BUILD_TEMPLATE_GEN  = 1
+OPAE_SDK:
+  OPAE_SDK_REPO = 
+  OPAE_SDK_REPO_BRANCH = release/2.12.0
+
+File pointers:
+  WORK_SYN_TOP_PATH = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/syn/board/n6001/syn_top
+  CREATE_WORK_DIR_SH_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/scripts/common/syn/create_work_dir.sh
+  FME_ID_MIF_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/common/fme_id_rom/fme_id.mif
+  PMCI_NIOS_HEX_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/pmci_ss_nios_fw.hex
+  WORK_FME_ID_MIF_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/syn/board/n6001/syn_top/fme_id.mif
+  WORK_PMCI_NIOS_HEX_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/syn/board/n6001/syn_top/pmci_ss_nios_fw.hex
+  REPORT_TIMING_TCL_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/scripts/common/syn/report_timing.tcl
+  WORK_BUILD_FLASH_SH_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/syn/board/n6001/syn_top/build_flash/build_flash.sh
+  WORK_PRE_COMPILE_SCRIPT_SH_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/scripts/fpga_family/agilex/syn/setup_no_hssi.sh
+  SETUP_OPAE_SDK_SH_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/scripts/common/syn/setup_opae_sdk.sh
+  REPO_PATH = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/external
+
+PIM configuration:
+  PIM_PLATFORM_NAME = ofs_agilex
+  PIM_INI_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/top/ofs_agilex.ini
+  PIM_ROOT_DIR = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/syn/board/n6001/syn_top/afu_with_pim
+  AFU_WITH_PIM = /home/jcheung2/examples-afu/tutorial/afu_types/01_pim_ifc/hello_world/hw/rtl/axi/sources.txt
+
+
+*** Specified WORK directory: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl
+ Creating /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl
+ Symlinking files...
+This may take a couple of minutes...
+Done setting up work directory (/home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl)
+BUILD_ROOT_REL = ../../../..
+WORK_DIR = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl
+Running pre compile script: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/scripts/fpga_family/agilex/syn/setup_no_hssi.sh
++ sed -i -e /INCLUDE_HSSI/d ofs_pr_afu.qsf ofs_top.qsf
+SETUP_OPAE_SDK_SH_FILE is /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/scripts/common/syn/setup_opae_sdk.sh
+Setting up OPAE SDK
+
+Found OPAE SDK programs on PATH. Not building OPAE SDK.
+
+Setting up project IP copies
+Info: *******************************************************************
+Info: Running Quartus Prime IP Generation Tool
+    Info: Version 23.4.0 Build 79 11/22/2023 Patches 0.02iofs,0.17 SC Pro Edition
+    Info: Copyright (C) 2023  Intel Corporation. All rights reserved.
+    Info: Your use of Intel Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Intel Program License 
+    Info: Subscription Agreement, the Intel Quartus Prime License Agreement,
+    Info: the Intel FPGA IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Intel and sold by Intel or its authorized distributors.  Please
+    Info: refer to the Intel FPGA Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Wed Jul 17 14:23:10 2024
+    Info: System process ID: 3317685
+Info: Command: quartus_ipgenerate -t /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/scripts/common/syn/emit_project_ip.tcl --project=ofs_top --revision=ofs_top --mode=ip_lib
+Info: Quartus(args): --project=ofs_top --revision=ofs_top --mode=ip_lib
+Info: The application is running in 'DNI' mode.
+Info: BUILD_ROOT_REL is ../../../..
+Info: Compiling default SR AFU...
+Info: Loading device exerciser AFU...
+Info: Compiling PR Base revision...
+Info: Found 98 IP file(s) in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/remote_stp/remote_debug_jtag_only.qsys was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/mem_ss/qip/axilite_ic/emif_csr_ic.qsys was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/hssi/qip/axilite_ic/hssi_ss_csr_ic.qsys was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/bpf.qsys was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/pmci_ss.qsys was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/hps/hps_ss.qsys was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/apf.qsys was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/common/fme_id_rom/fme_id_rom.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/common/fme_id_rom/fme_id_rom_2.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/common/fme_id_rom/fme_id_rom_3.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/common/lib/fifo/sc_fifo_tx_sc_fifo.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/avst_pipeline/avst_pipeline_st_pipeline_stage_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/cfg_mon/cfg_mon.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/pr/PR_IP.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/remote_stp/ip/remote_debug_jtag_only/remote_debug_jtag_only_clock_in.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/remote_stp/ip/remote_debug_jtag_only/host_if.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/remote_stp/ip/remote_debug_jtag_only/jop_blaster.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/remote_stp/ip/remote_debug_jtag_only/remote_debug_jtag_only_reset_in.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/remote_stp/ip/remote_debug_jtag_only/sys_clk.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/remote_stp/AFU_debug/config_reset_release.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/remote_stp/AFU_debug/scjio_agilex.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/jtag_pr_stp/ip/jtag_pr_sld_agent.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/jtag_pr_stp/ip/jtag_pr_reset_release.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/jtag_pr_stp/AFU_debug/jtag_pr_sld_host.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/jtag_pr_stp/AFU_debug/jtag_pr_reset_release_endpoint.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/sys_pll/sys_pll.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/user_clock/qph_user_clk_iopll_RF100M.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/user_clock/qph_user_clk_iopll_reconfig.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/mem_ss/qip/axilite_ic/ip/emif_csr_ic/emif_csr_ic_clock_in.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/mem_ss/qip/axilite_ic/ip/emif_csr_ic/emif_csr_ic_reset_in.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/mem_ss/qip/axilite_ic/ip/emif_csr_ic/emif_csr_slv.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/mem_ss/qip/axilite_ic/ip/emif_csr_ic/mem_ss_csr_mst.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/mem_ss/qip/axilite_ic/ip/emif_csr_ic/emif_dfh_mst.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pcie/qip/pcie_ss.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/hssi/qip/hssi_ss/hssi_ss.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/hssi/qip/ptp_iopll/ptp_sample_clk_pll.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/hssi/qip/axilite_ic/ip/hssi_ss_csr_ic/hssi_ss_csr_ic_clock_in.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/hssi/qip/axilite_ic/ip/hssi_ss_csr_ic/hssi_ss_csr_ic_reset_in.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/hssi/qip/axilite_ic/ip/hssi_ss_csr_ic/hssi_ss_csr_mst.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/hssi/qip/axilite_ic/ip/hssi_ss_csr_ic/hssi_ss_ip_slv.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/hssi/qip/axilite_ic/ip/hssi_ss_csr_ic/hssi_ss_wrapper_slv.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/qsfp/ip/qsfp_ctrl.qsys was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/qsfp/ip/qsfp_ctrl_reset_in.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/qsfp/ip/qsfp_ctrl_i2c_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/qsfp/ip/qsfp_ctrl_onchip_memory2_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/qsfp/ip/qsfp_ctrl_clock_in.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/bpf/bpf_default_slv.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/bpf/bpf_apf_mst.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/bpf/bpf_apf_slv.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/bpf/bpf_clock_bridge.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/bpf/bpf_emif_slv.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/bpf/bpf_fme_mst.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/bpf/bpf_fme_slv.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/bpf/bpf_hssi_slv.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/bpf/bpf_pcie_slv.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/bpf/bpf_pmci_lpbk_mst.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/bpf/bpf_pmci_lpbk_slv.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/bpf/bpf_pmci_mst.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/bpf/bpf_pmci_slv.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/bpf/bpf_qsfp0_slv.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/bpf/bpf_qsfp1_slv.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/bpf/bpf_reset_bridge.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/mem/qip/mem_ss/mem_ss.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/mem/qip/ed_sim/ed_sim_mem.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/ip/pmci_ss/pmci_ss_s10_mailbox_client_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/ip/pmci_ss/pmci_ss_axi_bridge_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/ip/pmci_ss/pmci_ss_axi_bridge_1.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/ip/pmci_ss/pmci_ss_clock_in.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/ip/pmci_ss/pmci_ss_mctp_pcievdm_ctrlr_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/ip/pmci_ss/pmci_ss_nios2_gen2_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/ip/pmci_ss/pmci_ss_pmci_csr_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/ip/pmci_ss/pmci_ss_pxeboot_optrom_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/ip/pmci_ss/pmci_ss_avmms_2_spim_bridge_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/ip/pmci_ss/pmci_ss_reset_in.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/ip/pmci_ss/pmci_ss_spi_slave_to_avalon_mm_master_bridge_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/ip/pmci_ss/pmci_ss_intel_generic_serial_flash_interface_top_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/ip/pmci_ss/pmci_ss_onchip_memory2_1.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/ip/pmci_ss/pmci_ss_onchip_memory2_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/ip/pmci_ss/pmci_ss_flash_burst_master_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/ip/pmci_ss/pmci_ss_ncsi_ctrlr_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/ip/pmci_ss/pmci_ss_timer_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ipss/pmci/ip/pmci_ss/pmci_ss_stratix10_asd_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/hps/ip/hps_ss/hps_ss_clock_in_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/hps/ip/hps_ss/hps_ss_intel_agilex_hps_1.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/hps/ip/hps_ss/hps_ss_reset_in_0.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/ofs-common/src/fpga_family/agilex/uart/ip/uart.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/apf/apf_st2mm_mst.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/apf/apf_uart_slv.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/apf/apf_default_slv.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/apf/apf_mctp_mst.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/apf/apf_reset_bridge.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/apf/apf_uart_mst.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/apf/apf_achk_slv.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/apf/apf_bpf_slv.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/apf/apf_pr_slv.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/apf/apf_bpf_mst.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/apf/apf_clock_bridge.ip was found in the project.
+    Info: IP file /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_newaddress_switchdfl/src/pd_qsys/fabric/ip/apf/apf_st2mm_slv.ip was found in the project.
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/remote_stp/remote_debug_jtag_only.qsys
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/mem_ss/qip/axilite_ic/emif_csr_ic.qsys
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/hssi/qip/axilite_ic/hssi_ss_csr_ic.qsys
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/bpf.qsys
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/pmci_ss.qsys
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/hps/hps_ss.qsys
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/apf.qsys
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/common/fme_id_rom/fme_id_rom.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/common/fme_id_rom/fme_id_rom_2.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/common/fme_id_rom/fme_id_rom_3.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/common/lib/fifo/sc_fifo_tx_sc_fifo.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/avst_pipeline/avst_pipeline_st_pipeline_stage_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/cfg_mon/cfg_mon.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/pr/PR_IP.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/remote_stp/ip/remote_debug_jtag_only/remote_debug_jtag_only_clock_in.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/remote_stp/ip/remote_debug_jtag_only/host_if.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/remote_stp/ip/remote_debug_jtag_only/jop_blaster.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/remote_stp/ip/remote_debug_jtag_only/remote_debug_jtag_only_reset_in.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/remote_stp/ip/remote_debug_jtag_only/sys_clk.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/remote_stp/AFU_debug/config_reset_release.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/remote_stp/AFU_debug/scjio_agilex.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/jtag_pr_stp/ip/jtag_pr_sld_agent.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/jtag_pr_stp/ip/jtag_pr_reset_release.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/jtag_pr_stp/AFU_debug/jtag_pr_sld_host.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/jtag_pr_stp/AFU_debug/jtag_pr_reset_release_endpoint.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/sys_pll/sys_pll.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/user_clock/qph_user_clk_iopll_RF100M.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/user_clock/qph_user_clk_iopll_reconfig.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/mem_ss/qip/axilite_ic/ip/emif_csr_ic/emif_csr_ic_clock_in.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/mem_ss/qip/axilite_ic/ip/emif_csr_ic/emif_csr_ic_reset_in.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/mem_ss/qip/axilite_ic/ip/emif_csr_ic/emif_csr_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/mem_ss/qip/axilite_ic/ip/emif_csr_ic/mem_ss_csr_mst.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/mem_ss/qip/axilite_ic/ip/emif_csr_ic/emif_dfh_mst.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pcie/qip/pcie_ss.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/hssi/qip/hssi_ss/hssi_ss.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/hssi/qip/ptp_iopll/ptp_sample_clk_pll.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/hssi/qip/axilite_ic/ip/hssi_ss_csr_ic/hssi_ss_csr_ic_clock_in.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/hssi/qip/axilite_ic/ip/hssi_ss_csr_ic/hssi_ss_csr_ic_reset_in.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/hssi/qip/axilite_ic/ip/hssi_ss_csr_ic/hssi_ss_csr_mst.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/hssi/qip/axilite_ic/ip/hssi_ss_csr_ic/hssi_ss_ip_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/hssi/qip/axilite_ic/ip/hssi_ss_csr_ic/hssi_ss_wrapper_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/qsfp/ip/qsfp_ctrl.qsys
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/qsfp/ip/qsfp_ctrl_reset_in.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/qsfp/ip/qsfp_ctrl_i2c_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/qsfp/ip/qsfp_ctrl_onchip_memory2_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/qsfp/ip/qsfp_ctrl_clock_in.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/bpf/bpf_default_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/bpf/bpf_apf_mst.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/bpf/bpf_apf_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/bpf/bpf_clock_bridge.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/bpf/bpf_emif_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/bpf/bpf_fme_mst.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/bpf/bpf_fme_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/bpf/bpf_hssi_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/bpf/bpf_pcie_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/bpf/bpf_pmci_lpbk_mst.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/bpf/bpf_pmci_lpbk_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/bpf/bpf_pmci_mst.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/bpf/bpf_pmci_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/bpf/bpf_qsfp0_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/bpf/bpf_qsfp1_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/bpf/bpf_reset_bridge.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/mem/qip/mem_ss/mem_ss.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/mem/qip/ed_sim/ed_sim_mem.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/ip/pmci_ss/pmci_ss_s10_mailbox_client_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/ip/pmci_ss/pmci_ss_axi_bridge_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/ip/pmci_ss/pmci_ss_axi_bridge_1.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/ip/pmci_ss/pmci_ss_clock_in.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/ip/pmci_ss/pmci_ss_mctp_pcievdm_ctrlr_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/ip/pmci_ss/pmci_ss_nios2_gen2_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/ip/pmci_ss/pmci_ss_pmci_csr_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/ip/pmci_ss/pmci_ss_pxeboot_optrom_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/ip/pmci_ss/pmci_ss_avmms_2_spim_bridge_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/ip/pmci_ss/pmci_ss_reset_in.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/ip/pmci_ss/pmci_ss_spi_slave_to_avalon_mm_master_bridge_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/ip/pmci_ss/pmci_ss_intel_generic_serial_flash_interface_top_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/ip/pmci_ss/pmci_ss_onchip_memory2_1.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/ip/pmci_ss/pmci_ss_onchip_memory2_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/ip/pmci_ss/pmci_ss_flash_burst_master_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/ip/pmci_ss/pmci_ss_ncsi_ctrlr_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/ip/pmci_ss/pmci_ss_timer_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/ip/pmci_ss/pmci_ss_stratix10_asd_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/hps/ip/hps_ss/hps_ss_clock_in_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/hps/ip/hps_ss/hps_ss_intel_agilex_hps_1.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/hps/ip/hps_ss/hps_ss_reset_in_0.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/fpga_family/agilex/uart/ip/uart.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/apf/apf_st2mm_mst.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/apf/apf_uart_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/apf/apf_default_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/apf/apf_mctp_mst.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/apf/apf_reset_bridge.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/apf/apf_uart_mst.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/apf/apf_achk_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/apf/apf_bpf_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/apf/apf_pr_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/apf/apf_bpf_mst.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/apf/apf_clock_bridge.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/src/pd_qsys/fabric/ip/apf/apf_st2mm_slv.ip
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_ctrl.200G.hex
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_ctrl.400G.hex
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_data.200G.hex
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_data.400G.hex
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/common/he_hssi/pkt_client_mac_seg/eth_f_hw_pkt_gen_rom_init.200G_SEG.hex
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/common/he_hssi/pkt_client_mac_seg/eth_f_hw_pkt_gen_rom_init.400G_SEG.hex
+Copy from: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/pmci_ss_nios_fw.hex
+Info (23030): Evaluation of Tcl script /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/scripts/common/syn/emit_project_ip.tcl was successful
+Info: Quartus Prime IP Generation Tool was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 977 megabytes
+    Info: Processing ended: Wed Jul 17 14:23:11 2024
+    Info: Elapsed time: 00:00:01
+    Info: System process ID: 3317685
+Command: ${OFS_ROOTDIR}/ofs-common/tools/ofss_config/gen_ofs_settings.py --ofss "/home/jcheung2/ofs24/ofs-agx7-pcie-attach/tools/ofss_config/n6001.ofss" --target ../../../..
+pcie_ss source file: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/tools/ofss_config/ip_params/pcie_ss_parameters.py
+ofs
+	settings:
+		platform : n6001
+		family : agilex
+		fim : base_x16
+		part : AGFB014R24A2E2V
+		device_id : 6001
+pcie
+	settings:
+		output_name : pcie_ss
+	pf0:
+		bar0_address_width : 20
+	pf1:
+		bar0_address_width : 20
+	pf2:
+		bar0_address_width : 20
+iopll
+memory
+hssi
+=============================================
+Beginning OFS IP Configuration Tool
+=============================================
+
+=========================
+PCIe (pcie_ss) Summary
+=========================
+Total PF Count = 3
+Total VF Count = 0
+PF VF Mapping = {'pf0': 0, 'pf1': 0, 'pf2': 0}
+
+Going to clean the following: ['../../../../ipss/pcie/qip/pcie_ss.ip', '../../../../ipss/pcie/qip/pcie_ss']
+Deploy Command:
+ip-deploy --family=agilex --part="AGFB014R24A2E2V" --search-path="$OFS_ROOTDIR/ipss/**/*,$" --output-name="pcie_ss" --component-name="pcie_ss" --output-directory=../../../../ipss/pcie/qip --component-parameter=g3_pld_clkfreq_user_hwtcl="250MHz" --component-parameter=g4_pld_clkfreq_user_hwtcl="500MHz" --component-parameter=axi_st_clk_freq_user_hwtcl="400MHz" --component-parameter=axi_lite_clk_freq_user_hwtcl="100" --component-parameter=core16_dwdn_msg_fwd_en_hwtcl="1" --component-parameter=core16_flr_req_drop_en_hwtcl="0" --component-parameter=core16_enable_multi_func_hwtcl="1" --component-parameter=core16_enable_sriov_hwtcl="0" --component-parameter=core16_enable_10bit_tag_support_intf_hwtcl="1" --component-parameter=core16_cpl_reordering_en_hwtcl="1" --component-parameter=core16_ctrl_shadow_en_hwtcl="1" --component-parameter=core16_comp_timeout_en_hwtcl="1" --component-parameter=pcie_link_en_hwtcl="1" --component-parameter=total_pcie_intf_hwtcl="1" --component-parameter=pcie_ss_func_mode_hwtcl="AXI-ST Data Mover" --component-parameter=top_topology_hwtcl="Gen4 1x16" --component-parameter=core16_pf0_gen3_eq_pset_req_vec_hwtcl="0x00000004" --component-parameter=core16_pf0_pcie_cap_port_num_hwtcl="1" --component-parameter=core16_msix_en_table_hwtcl="1" --component-parameter=core16_msix_table_size_hwtcl="7" --component-parameter=core16_msix_bir_hwtcl="4" --component-parameter=core16_msix_bar_offset_hwtcl="12288" --component-parameter=core16_msix_vector_alloc_hwtcl="Static" --component-parameter=core16_pf0_expansion_base_address_register_hwtcl="Disabled" --component-parameter=core16_pf0_sriov_vf_bar0_type_hwtcl="Disabled" --component-parameter=core16_pf0_sriov_vf_bar0_type_user_hwtcl="Disabled" --component-parameter=core16_pf0_bar0_type_user_hwtcl="64-bit prefetchable memory" --component-parameter=core16_pf0_bar0_address_width_user_hwtcl="20" --component-parameter=core16_virtual_pf0_msix_enable_user_hwtcl="1" --component-parameter=core16_virtual_pf0_exvf_msix_cap_enable_hwtcl="0" --component-parameter=core16_virtual_pf0_acs_cap_enable_hwtcl="1" --component-parameter=core16_exvf_msix_tablesize_pf0="0" --component-parameter=core16_exvf_msixtable_offset_pf0="0" --component-parameter=core16_exvf_msixtable_bir_pf0="0" --component-parameter=core16_exvf_msixpba_offset_pf0="0" --component-parameter=core16_exvf_msixpba_bir_pf0="0" --component-parameter=core16_pf0_bar4_type_user_hwtcl="64-bit prefetchable memory" --component-parameter=core16_pf0_bar4_address_width_user_hwtcl="14" --component-parameter=core16_pf0_sriov_vf_bar0_address_width_hwtcl="0" --component-parameter=core16_pf0_sriov_vf_bar4_type_hwtcl="Disabled" --component-parameter=core16_pf0_sriov_vf_bar4_type_user_hwtcl="Disabled" --component-parameter=core16_pf0_sriov_vf_bar4_address_width_hwtcl="0" --component-parameter=core16_pf0_pci_msix_table_size_hwtcl="6" --component-parameter=core16_pf0_pci_msix_table_offset_hwtcl="1536" --component-parameter=core16_pf0_pci_msix_bir_hwtcl="4" --component-parameter=core16_pf0_pci_msix_pba_offset_hwtcl="1550" --component-parameter=core16_pf0_pci_msix_pba_hwtcl="4" --component-parameter=core16_pf0_pci_msix_table_size_vfcomm_cs2_hwtcl="4" --component-parameter=core16_virtual_pf0_ats_cap_enable_hwtcl="0" --component-parameter=core16_pf0_vf_ats_cap_enable_hwtcl="0" --component-parameter=core16_virtual_pf0_prs_ext_cap_enable_hwtcl="0" --component-parameter=core16_virtual_pf0_pasid_cap_enable_hwtcl="0" --component-parameter=core16_pf0_pasid_cap_max_pasid_width="0" --component-parameter=core16_pf0_pci_type0_vendor_id_hwtcl="0x00008086" --component-parameter=core16_pf0_pci_type0_vendor_id_user_hwtcl="0x00008086" --component-parameter=core16_pf0_pci_type0_device_id_hwtcl="0x0000bcce" --component-parameter=core16_pf0_revision_id_hwtcl="0x00000001" --component-parameter=core16_pf0_revision_id_user_hwtcl="0x00000001" --component-parameter=core16_pf0_class_code_hwtcl="0x00120000" --component-parameter=core16_pf0_subsys_vendor_id_hwtcl="0x00008086" --component-parameter=core16_pf0_subsys_dev_id_hwtcl="0x00001771" --component-parameter=core16_pf0_vf_count_hwtcl="0" --component-parameter=core16_pf1_expansion_base_address_register_hwtcl="Disabled" --component-parameter=core16_pf1_sriov_vf_bar0_type_hwtcl="Disabled" --component-parameter=core16_pf1_sriov_vf_bar0_type_user_hwtcl="Disabled" --component-parameter=core16_pf1_bar0_type_user_hwtcl="64-bit prefetchable memory" --component-parameter=core16_pf1_bar0_address_width_user_hwtcl="20" --component-parameter=core16_virtual_pf1_msix_enable_user_hwtcl="1" --component-parameter=core16_virtual_pf1_exvf_msix_cap_enable_hwtcl="0" --component-parameter=core16_virtual_pf1_acs_cap_enable_hwtcl="1" --component-parameter=core16_exvf_msix_tablesize_pf1="0" --component-parameter=core16_exvf_msixtable_offset_pf1="0" --component-parameter=core16_exvf_msixtable_bir_pf1="0" --component-parameter=core16_exvf_msixpba_offset_pf1="0" --component-parameter=core16_exvf_msixpba_bir_pf1="0" --component-parameter=core16_pf1_bar4_type_user_hwtcl="64-bit prefetchable memory" --component-parameter=core16_pf1_bar4_address_width_user_hwtcl="14" --component-parameter=core16_pf1_sriov_vf_bar0_address_width_hwtcl="0" --component-parameter=core16_pf1_sriov_vf_bar4_type_hwtcl="Disabled" --component-parameter=core16_pf1_sriov_vf_bar4_type_user_hwtcl="Disabled" --component-parameter=core16_pf1_sriov_vf_bar4_address_width_hwtcl="0" --component-parameter=core16_pf1_pci_msix_table_size_hwtcl="6" --component-parameter=core16_pf1_pci_msix_table_offset_hwtcl="1536" --component-parameter=core16_pf1_pci_msix_bir_hwtcl="4" --component-parameter=core16_pf1_pci_msix_pba_offset_hwtcl="1550" --component-parameter=core16_pf1_pci_msix_pba_hwtcl="4" --component-parameter=core16_pf1_pci_msix_table_size_vfcomm_cs2_hwtcl="4" --component-parameter=core16_virtual_pf1_ats_cap_enable_hwtcl="0" --component-parameter=core16_pf1_vf_ats_cap_enable_hwtcl="0" --component-parameter=core16_virtual_pf1_prs_ext_cap_enable_hwtcl="0" --component-parameter=core16_virtual_pf1_pasid_cap_enable_hwtcl="0" --component-parameter=core16_pf1_pasid_cap_max_pasid_width="0" --component-parameter=core16_pf1_pci_type0_vendor_id_hwtcl="0x00008086" --component-parameter=core16_pf1_pci_type0_vendor_id_user_hwtcl="0x00008086" --component-parameter=core16_pf1_pci_type0_device_id_hwtcl="0x0000bcce" --component-parameter=core16_pf1_revision_id_hwtcl="0x00000001" --component-parameter=core16_pf1_revision_id_user_hwtcl="0x00000001" --component-parameter=core16_pf1_class_code_hwtcl="0x00120000" --component-parameter=core16_pf1_subsys_vendor_id_hwtcl="0x00008086" --component-parameter=core16_pf1_subsys_dev_id_hwtcl="0x00001771" --component-parameter=core16_pf1_vf_count_hwtcl="0" --component-parameter=core16_pf2_expansion_base_address_register_hwtcl="Disabled" --component-parameter=core16_pf2_sriov_vf_bar0_type_hwtcl="Disabled" --component-parameter=core16_pf2_sriov_vf_bar0_type_user_hwtcl="Disabled" --component-parameter=core16_pf2_bar0_type_user_hwtcl="64-bit prefetchable memory" --component-parameter=core16_pf2_bar0_address_width_user_hwtcl="20" --component-parameter=core16_virtual_pf2_msix_enable_user_hwtcl="1" --component-parameter=core16_virtual_pf2_exvf_msix_cap_enable_hwtcl="0" --component-parameter=core16_virtual_pf2_acs_cap_enable_hwtcl="1" --component-parameter=core16_exvf_msix_tablesize_pf2="0" --component-parameter=core16_exvf_msixtable_offset_pf2="0" --component-parameter=core16_exvf_msixtable_bir_pf2="0" --component-parameter=core16_exvf_msixpba_offset_pf2="0" --component-parameter=core16_exvf_msixpba_bir_pf2="0" --component-parameter=core16_pf2_bar4_type_user_hwtcl="64-bit prefetchable memory" --component-parameter=core16_pf2_bar4_address_width_user_hwtcl="14" --component-parameter=core16_pf2_sriov_vf_bar0_address_width_hwtcl="0" --component-parameter=core16_pf2_sriov_vf_bar4_type_hwtcl="Disabled" --component-parameter=core16_pf2_sriov_vf_bar4_type_user_hwtcl="Disabled" --component-parameter=core16_pf2_sriov_vf_bar4_address_width_hwtcl="0" --component-parameter=core16_pf2_pci_msix_table_size_hwtcl="6" --component-parameter=core16_pf2_pci_msix_table_offset_hwtcl="1536" --component-parameter=core16_pf2_pci_msix_bir_hwtcl="4" --component-parameter=core16_pf2_pci_msix_pba_offset_hwtcl="1550" --component-parameter=core16_pf2_pci_msix_pba_hwtcl="4" --component-parameter=core16_pf2_pci_msix_table_size_vfcomm_cs2_hwtcl="4" --component-parameter=core16_virtual_pf2_ats_cap_enable_hwtcl="0" --component-parameter=core16_pf2_vf_ats_cap_enable_hwtcl="0" --component-parameter=core16_virtual_pf2_prs_ext_cap_enable_hwtcl="0" --component-parameter=core16_virtual_pf2_pasid_cap_enable_hwtcl="0" --component-parameter=core16_pf2_pasid_cap_max_pasid_width="0" --component-parameter=core16_pf2_pci_type0_vendor_id_hwtcl="0x00008086" --component-parameter=core16_pf2_pci_type0_vendor_id_user_hwtcl="0x00008086" --component-parameter=core16_pf2_pci_type0_device_id_hwtcl="0x0000bcce" --component-parameter=core16_pf2_revision_id_hwtcl="0x00000001" --component-parameter=core16_pf2_revision_id_user_hwtcl="0x00000001" --component-parameter=core16_pf2_class_code_hwtcl="0x00120000" --component-parameter=core16_pf2_subsys_vendor_id_hwtcl="0x00008086" --component-parameter=core16_pf2_subsys_dev_id_hwtcl="0x00001771" --component-parameter=core16_pf2_vf_count_hwtcl="0" --component-parameter=core16_total_pf_count_hwtcl="3"
+***************************************************************
+Quartus is a registered trademark of Intel Corporation in the
+US and other countries.  Portions of the Quartus Prime software
+code, and other portions of the code included in this download
+or on this DVD, are licensed to Intel Corporation and are the
+copyrighted property of third parties. For license details,
+refer to the End User License Agreement at
+http://fpgasoftware.intel.com/eula.
+***************************************************************
+
+!!FAIL!! IP Deploy Failed!!

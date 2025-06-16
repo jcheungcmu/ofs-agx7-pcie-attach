@@ -1,0 +1,63 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 2023  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the Intel FPGA Software License Subscription Agreements 
+# on the Quartus Prime software download page.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus Prime
+# Version 23.4.0 Build 79 11/22/2023 Patches 0.02iofs,0.17 SC Pro Edition
+# Date created = 01:45:39  August 28, 2024
+#
+# -------------------------------------------------------------------------- #
+set_global_assignment -name TOP_LEVEL_ENTITY ofs_top
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION "23.4.0 SP0.02IOFS,0.17"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "01:45:39  AUGUST 28, 2024"
+set_global_assignment -name LAST_QUARTUS_VERSION "23.4.0 SP0.02iofs,0.17 Pro Edition"
+set_global_assignment -name FAMILY "Agilex 7"
+set_global_assignment -name DEVICE AGFB014R24A2E2V
+set_global_assignment -name IP_FILE ip/apf/apf_clock_bridge.ip
+set_global_assignment -name IP_FILE ip/apf/apf_reset_bridge.ip
+set_global_assignment -name IP_FILE ip/apf/apf_default_slv.ip
+set_global_assignment -name IP_FILE ip/apf/apf_bpf_slv.ip
+set_global_assignment -name IP_FILE ip/apf/apf_st2mm_slv.ip
+set_global_assignment -name IP_FILE ip/apf/apf_uart_slv.ip
+set_global_assignment -name IP_FILE ip/apf/apf_pr_slv.ip
+set_global_assignment -name IP_FILE ip/apf/apf_achk_slv.ip
+set_global_assignment -name IP_FILE ip/apf/apf_pr_2_slv.ip
+set_global_assignment -name IP_FILE ip/apf/apf_bpf_mst.ip
+set_global_assignment -name IP_FILE ip/apf/apf_st2mm_mst.ip
+set_global_assignment -name IP_FILE ip/apf/apf_mctp_mst.ip
+set_global_assignment -name IP_FILE ip/apf/apf_uart_mst.ip
+set_global_assignment -name QSYS_FILE apf.qsys
+set_global_assignment -name PWRMGT_VOLTAGE_OUTPUT_FORMAT "LINEAR FORMAT"
+set_global_assignment -name PWRMGT_LINEAR_FORMAT_N "-12"
+set_global_assignment -name IP_FILE ip/bpf/bpf_clock_bridge.ip
+set_global_assignment -name IP_FILE ip/bpf/bpf_reset_bridge.ip
+set_global_assignment -name IP_FILE ip/bpf/bpf_default_slv.ip
+set_global_assignment -name IP_FILE ip/bpf/bpf_fme_slv.ip
+set_global_assignment -name IP_FILE ip/bpf/bpf_apf_slv.ip
+set_global_assignment -name IP_FILE ip/bpf/bpf_pcie_slv.ip
+set_global_assignment -name IP_FILE ip/bpf/bpf_qsfp0_slv.ip
+set_global_assignment -name IP_FILE ip/bpf/bpf_qsfp1_slv.ip
+set_global_assignment -name IP_FILE ip/bpf/bpf_hssi_slv.ip
+set_global_assignment -name IP_FILE ip/bpf/bpf_emif_slv.ip
+set_global_assignment -name IP_FILE ip/bpf/bpf_pmci_slv.ip
+set_global_assignment -name IP_FILE ip/bpf/bpf_pmci_lpbk_slv.ip
+set_global_assignment -name IP_FILE ip/bpf/bpf_apf_mst.ip
+set_global_assignment -name IP_FILE ip/bpf/bpf_fme_mst.ip
+set_global_assignment -name IP_FILE ip/bpf/bpf_pmci_mst.ip
+set_global_assignment -name IP_FILE ip/bpf/bpf_pmci_lpbk_mst.ip
+set_global_assignment -name QSYS_FILE bpf.qsys

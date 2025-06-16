@@ -41,7 +41,7 @@ set_global_assignment -name REMOVE_DUPLICATE_REGISTERS OFF -to rst_n_sys_afu
 set_global_assignment -name REMOVE_DUPLICATE_REGISTERS OFF -to rst_n_sys_mem
 set_global_assignment -name REMOVE_DUPLICATE_REGISTERS OFF -to rst_n_sys_pcie
 
-set_global_assignment -name LAST_QUARTUS_VERSION "23.3.0 Pro Edition"
+set_global_assignment -name LAST_QUARTUS_VERSION "23.4.0 SP0.02iofs,0.17 Pro Edition"
 
 set_global_assignment -name FLOW_DISABLE_ASSEMBLER OFF
 set_global_assignment -name FLOW_ENABLE_INTERACTIVE_TIMING_ANALYZER OFF
@@ -129,3 +129,17 @@ set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ofs_top_sources.tcl
 # VAB Assignments 
 ############################################################################################
 set_global_assignment -name ENABLE_MULTI_AUTHORITY ON
+set_global_assignment -name BOARD default
+set_global_assignment -name IP_FILE ../../../../src/pd_qsys/fabric/ip/apf/apf_st2mm_mst.ip
+set_global_assignment -name IP_FILE ../../../../src/pd_qsys/fabric/ip/apf/apf_uart_slv.ip
+set_global_assignment -name IP_FILE ../../../../src/pd_qsys/fabric/ip/apf/apf_default_slv.ip
+set_global_assignment -name IP_FILE ../../../../src/pd_qsys/fabric/ip/apf/apf_mctp_mst.ip
+set_global_assignment -name IP_FILE ../../../../src/pd_qsys/fabric/ip/apf/apf_reset_bridge.ip
+set_global_assignment -name IP_FILE ../../../../src/pd_qsys/fabric/ip/apf/apf_uart_mst.ip
+set_global_assignment -name IP_FILE ../../../../src/pd_qsys/fabric/ip/apf/apf_achk_slv.ip
+set_global_assignment -name IP_FILE ../../../../src/pd_qsys/fabric/ip/apf/apf_bpf_slv.ip
+set_global_assignment -name IP_FILE ../../../../src/pd_qsys/fabric/ip/apf/apf_pr_slv.ip
+set_global_assignment -name IP_FILE ../../../../src/pd_qsys/fabric/ip/apf/apf_bpf_mst.ip
+set_global_assignment -name IP_FILE ../../../../src/pd_qsys/fabric/ip/apf/apf_clock_bridge.ip
+set_global_assignment -name IP_FILE ../../../../src/pd_qsys/fabric/ip/apf/apf_st2mm_slv.ip
+set_global_assignment -name QSYS_FILE ../../../../src/pd_qsys/fabric/apf.qsys

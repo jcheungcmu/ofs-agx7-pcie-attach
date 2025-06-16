@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="axi4lite_rsp_10/sim/axi4lite_rsp.sv"
+   type="SYSTEM_VERILOG"
+   library="axi4lite_rsp_10" />
+ <file
+   path="sim/apf_default_slv.v"
+   type="VERILOG"
+   library="apf_default_slv"
+   hasInlineConfiguration="true" />
+ <topLevel name="apf_default_slv.apf_default_slv" />
+ <deviceFamily name="agilex7" />
+ <device name="AGFB014R24A2E2V" />
+</simPackage>

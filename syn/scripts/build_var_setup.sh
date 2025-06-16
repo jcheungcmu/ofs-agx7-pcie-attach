@@ -168,6 +168,7 @@ if [ -z ${Q_PR_REVISION} ]; then
 fi
 if [ -z ${Q_PR_PARTITION_NAME} ]; then
     export Q_PR_PARTITION_NAME="green_region"
+    export Q_PR_PARTITION_NAME_2="green_region_2"
 fi
 
 
@@ -232,6 +233,9 @@ export FME_ID_MIF_FILE=${OFS_ROOTDIR}/ofs-common/src/common/fme_id_rom/fme_id.mi
 export PMCI_NIOS_HEX_FILE=${OFS_ROOTDIR}/ipss/pmci/pmci_ss_nios_fw.hex
 # TODO: rel1 points to fme_id_mif in the syn_top path (check to see if this can be removed)
 export WORK_FME_ID_MIF_FILE=${WORK_SYN_TOP_PATH}/fme_id.mif
+export WORK_FME_ID_MIF_FILE_2=${WORK_SYN_TOP_PATH}/fme_id_2.mif
+export WORK_FME_ID_MIF_FILE_3=${WORK_SYN_TOP_PATH}/fme_id_3.mif
+
 export WORK_PMCI_NIOS_HEX_FILE=${WORK_SYN_TOP_PATH}/pmci_ss_nios_fw.hex
 export REPORT_TIMING_TCL_FILE=${SYN_COMMON_SCRIPTS_PATH}/report_timing.tcl
 export WORK_BUILD_FLASH_SH_FILE=${WORK_SYN_TOP_PATH}/build_flash/build_flash.sh
@@ -252,7 +256,7 @@ export WORK_PR_PACSIGN_GBS_FILE="${WORK_SYN_TOP_PATH}/output_files/${Q_PR_REVISI
 #### Platform Interface Manager configuration 
 export PIM_PLATFORM_NAME=ofs_agilex
 export PIM_INI_FILE=${WORK_DIR}/src/top/${PIM_PLATFORM_NAME}.ini
-
+export AFU_WITH_PIM=/home/jcheung2/01_pim_ifc/hello_world/hw/rtl/axi/sources.txt
 
 #TODO: add capabilities to specify project only work directory so create_work_dir.sh
 #      will only sync over the pertnant files to <WORK_DIR>.

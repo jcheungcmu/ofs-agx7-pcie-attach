@@ -1,0 +1,27 @@
+# **************************************************
+# Quartus Prime Version 23.4.0
+# Process ID 5463
+# Start logging UI actions
+# Wed Aug 28 16:44:32 2024
+# **************************************************
+[Wed Aug 28 16:44:32 2024] Window title: '' | QCheckBox 'Record data discontinuities' was checked
+[Wed Aug 28 16:44:32 2024] Window title: '' | 'Trigger in': QRadioButton 'Node:' was checked
+[Wed Aug 28 16:44:32 2024] Window title: '' | 'Data': QRadioButton 'Auto' was checked
+[Wed Aug 28 16:44:32 2024] Window title: '' | 'Trigger': QRadioButton 'Auto' was checked
+[Wed Aug 28 16:44:32 2024] Window title: '' | 'Storage qualifier:': QRadioButton 'Auto' was checked
+[Wed Aug 28 16:44:32 2024] Window title: '' | QCheckBox 'Record data discontinuities' was checked
+[Wed Aug 28 16:44:32 2024] Window title: '' | 'Trigger in': QRadioButton 'Node:' was checked
+[Wed Aug 28 16:44:32 2024] Window title: '' | 'Data': QRadioButton 'Auto' was checked
+[Wed Aug 28 16:44:32 2024] Window title: '' | 'Trigger': QRadioButton 'Auto' was checked
+[Wed Aug 28 16:44:32 2024] Window title: '' | 'Storage qualifier:': QRadioButton 'Auto' was checked
+[Wed Aug 28 16:44:37 2024] Window title: 'Quartus Prime Signal Tap Logic Analyzer Pro Edition - [stp1.stp][*]' | combo box changed to: 'Basic OR'
+[Wed Aug 28 16:44:37 2024] Window title: '' | QCheckBox 'Record data discontinuities' was checked
+[Wed Aug 28 16:44:37 2024] Window title: '' | 'Trigger in': QRadioButton 'Node:' was checked
+[Wed Aug 28 16:44:37 2024] Window title: '' | 'Data': QRadioButton 'Auto' was checked
+[Wed Aug 28 16:44:37 2024] Window title: '' | 'Trigger': QRadioButton 'Auto' was checked
+[Wed Aug 28 16:44:37 2024] Window title: '' | 'Storage qualifier:': QRadioButton 'Auto' was checked
+[Wed Aug 28 16:44:39 2024] [Action triggered] Window title: 'Quartus Prime Signal Tap Logic Analyzer Pro Edition - [stp1.stp][*]' | &File > '&Save' was pressed
+# **************************************************
+# Wed Aug 28 16:44:43 2024
+# End of logging UI actions
+# **************************************************

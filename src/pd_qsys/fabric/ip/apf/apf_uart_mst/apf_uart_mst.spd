@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="axi4lite_shim_10/sim/axi4lite_shim.sv"
+   type="SYSTEM_VERILOG"
+   library="axi4lite_shim_10" />
+ <file
+   path="sim/apf_uart_mst.v"
+   type="VERILOG"
+   library="apf_uart_mst"
+   hasInlineConfiguration="true" />
+ <topLevel name="apf_uart_mst.apf_uart_mst" />
+ <deviceFamily name="agilex7" />
+ <device name="AGFB014R24A2E2V" />
+</simPackage>

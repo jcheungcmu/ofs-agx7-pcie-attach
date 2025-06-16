@@ -89,7 +89,7 @@ else
     echo "Error: STAGE bpf.qsys RTL generation! Check gen_fabrics.log" | tee -a gen_fabrics.log
 fi
 
-sh "${OFS_ROOTDIR}/ofs-common/tools/fabric_generation/gen_fabric_width_pkg.sh"
+bash "${OFS_ROOTDIR}/ofs-common/tools/fabric_generation/gen_fabric_width_pkg.sh"
 
 # Clean up generated folder
 cleanup >/dev/null 2>&1

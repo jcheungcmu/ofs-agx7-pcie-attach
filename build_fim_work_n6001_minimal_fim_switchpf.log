@@ -1,0 +1,271 @@
+build_top.sh launched using command line:
+ ./ofs-common/scripts/common/syn/build_top.sh --stage=finish --ofss tools/ofss_config/n6001.ofss n6001:null_he_lb,null_he_hssi,null_he_mem,null_he_mem_tg,no_hssi work_n6001_minimal_fim_switchpf
+
+Proceeding with requested build script build_fim_finish.sh...
+>>> OFS Board Path = n6001
+>>> OFS Board Core = n6001
+
+Setting up build variables
+source /home/jcheung2/ofs24/ofs-agx7-pcie-attach/syn/scripts/build_var_setup.sh
+BUILD_ROOT_REL is ../../../..
+
+**********************************
+********* ENV SETUP **************
+
+FIM Project:
+  OFS_PROJECT = ofs-agx7-pcie-attach
+  OFS_FIM     = 
+  OFS_BOARD   = n6001
+  Q_PROJECT   = ofs_top
+  Q_REVISION  = ofs_top
+  Fitter SEED = 5
+FME id
+  BITSTREAM_ID = 05010202c8e9cc1a
+  BITSTREAM_MD = 0000000002407145
+Flow:
+  ENA_CREATE_WORK_DIR        = 1
+  ENA_OPAE_SDK_SETUP_FOR_FIM = 1
+  ENA_PRE_COMPILE_SCRIPT     = 1
+  ENA_SETUP_IP_LIB_SCRIPT    = 1
+  ENA_FIM_COMPILE            = 1
+  ENA_PR_SETUP               = 1
+  ENA_FLASH                  = 1
+  ENA_PR_BUILD_TEMPLATE_GEN  = 1
+OPAE_SDK:
+  OPAE_SDK_REPO = 
+  OPAE_SDK_REPO_BRANCH = release/2.12.0
+
+File pointers:
+  WORK_SYN_TOP_PATH = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_switchpf/syn/board/n6001/syn_top
+  CREATE_WORK_DIR_SH_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/scripts/common/syn/create_work_dir.sh
+  FME_ID_MIF_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/common/fme_id_rom/fme_id.mif
+  PMCI_NIOS_HEX_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/pmci_ss_nios_fw.hex
+  WORK_FME_ID_MIF_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_switchpf/syn/board/n6001/syn_top/fme_id.mif
+  WORK_PMCI_NIOS_HEX_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_switchpf/syn/board/n6001/syn_top/pmci_ss_nios_fw.hex
+  REPORT_TIMING_TCL_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/scripts/common/syn/report_timing.tcl
+  WORK_BUILD_FLASH_SH_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_switchpf/syn/board/n6001/syn_top/build_flash/build_flash.sh
+  WORK_PRE_COMPILE_SCRIPT_SH_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_switchpf/ofs-common/scripts/fpga_family/agilex/syn/setup_no_hssi.sh
+  SETUP_OPAE_SDK_SH_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/scripts/common/syn/setup_opae_sdk.sh
+  BUILD_ROOT_REL = ../../../..
+realpath: = 
+/
+  REPO_PATH = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/external
+
+PIM configuration:
+  PIM_PLATFORM_NAME = ofs_agilex
+  PIM_INI_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_switchpf/src/top/ofs_agilex.ini
+  PIM_ROOT_DIR = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_switchpf/syn/board/n6001/syn_top/afu_with_pim
+  AFU_WITH_PIM = /home/jcheung2/examples-afu/tutorial/afu_types/01_pim_ifc/hello_world/hw/rtl/axi/sources.txt
+
+SETUP_OPAE_SDK_SH_FILE is /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/scripts/common/syn/setup_opae_sdk.sh
+Setting up OPAE SDK
+
+Found OPAE SDK programs on PATH. Not building OPAE SDK.
+
+
+Finishing compilation in /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_switchpf/syn/board/n6001/syn_top
+
+FLASH image generation enabled
+No ofs_top_hps.sof factory image found, but ofs_top.sof exists.
+Copying over ofs_top.sof as the factory image.
+
+>>> Generating POF for Flash BIN Creation (SOF Image Auto Size) <<<
+Using PFG file ofs_top_pof_flash.pfg.
+Info: *******************************************************************
+Info: Running Quartus Prime Programming File Generator
+    Info: Version 23.4.0 Build 79 11/22/2023 Patches 0.02iofs,0.17 SC Pro Edition
+    Info: Copyright (C) 2023  Intel Corporation. All rights reserved.
+    Info: Your use of Intel Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Intel Program License 
+    Info: Subscription Agreement, the Intel Quartus Prime License Agreement,
+    Info: the Intel FPGA IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Intel and sold by Intel or its authorized distributors.  Please
+    Info: refer to the Intel FPGA Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Sun Jul 14 23:47:15 2024
+    Info: System process ID: 3145494
+Info: Command: quartus_pfg -c ofs_top_pof_flash.pfg
+Info: The application is running in 'DNI' mode.
+Info (19848): Regular SEU info => 30 sector(s), 5 thread(s), 479000 interval time in microsecond(s)
+Info (19848): IO hash is C965E33F06EE3AC9CCE6BF4E4A663D4C8BB631583BBD5B660B5A87D06AB79297
+Info (19848): Keyed hash is B20A3CA2184543E37C72622B53D173EB62BFBCDDEBF174089BB715BC1B6F4F6C
+Info (19848): Design hash is 3FCEC8BE2337DF7FB305BC21209765ABA477AFDBE4A0ABCC51C4FD503E539D54
+Info (19848): IO hash is C965E33F06EE3AC9CCE6BF4E4A663D4C8BB631583BBD5B660B5A87D06AB79297
+Info (19848): Keyed hash is 001812B53A51F9E903F39B3A90FF2970FBA8F75BF97FA006580BED5E21494237
+Info (19848): Regular SEU info => 30 sector(s), 5 thread(s), 479000 interval time in microsecond(s)
+Info (19848): IO hash is C965E33F06EE3AC9CCE6BF4E4A663D4C8BB631583BBD5B660B5A87D06AB79297
+Info (19848): Keyed hash is B20A3CA2184543E37C72622B53D173EB62BFBCDDEBF174089BB715BC1B6F4F6C
+Info (19848): Design hash is 3FCEC8BE2337DF7FB305BC21209765ABA477AFDBE4A0ABCC51C4FD503E539D54
+Info (19848): IO hash is C965E33F06EE3AC9CCE6BF4E4A663D4C8BB631583BBD5B660B5A87D06AB79297
+Info (19848): Keyed hash is 001812B53A51F9E903F39B3A90FF2970FBA8F75BF97FA006580BED5E21494237
+Info (19848): Regular SEU info => 30 sector(s), 5 thread(s), 479000 interval time in microsecond(s)
+Info (19848): IO hash is C965E33F06EE3AC9CCE6BF4E4A663D4C8BB631583BBD5B660B5A87D06AB79297
+Info (19848): Keyed hash is B20A3CA2184543E37C72622B53D173EB62BFBCDDEBF174089BB715BC1B6F4F6C
+Info (19848): Design hash is 3FCEC8BE2337DF7FB305BC21209765ABA477AFDBE4A0ABCC51C4FD503E539D54
+Info (19848): IO hash is C965E33F06EE3AC9CCE6BF4E4A663D4C8BB631583BBD5B660B5A87D06AB79297
+Info (19848): Keyed hash is 001812B53A51F9E903F39B3A90FF2970FBA8F75BF97FA006580BED5E21494237
+Info: Quartus Prime Programming File Generator was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 3130 megabytes
+    Info: Processing ended: Sun Jul 14 23:47:50 2024
+    Info: Elapsed time: 00:00:35
+    Info: System process ID: 3145494
+Info: *******************************************************************
+Info: Running Quartus Prime Convert_programming_file
+    Info: Version 23.4.0 Build 79 11/22/2023 Patches 0.02iofs,0.17 SC Pro Edition
+    Info: Copyright (C) 2023  Intel Corporation. All rights reserved.
+    Info: Your use of Intel Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Intel Program License 
+    Info: Subscription Agreement, the Intel Quartus Prime License Agreement,
+    Info: the Intel FPGA IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Intel and sold by Intel or its authorized distributors.  Please
+    Info: refer to the Intel FPGA Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Sun Jul 14 23:47:50 2024
+    Info: System process ID: 3151102
+Info: Command: quartus_cpf -c /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_switchpf/syn/board/n6001/syn_top/build_flash/../output_files/ofs_top.pof /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_switchpf/syn/board/n6001/syn_top/build_flash/../output_files/ofs_top.hexout
+Info: The application is running in 'DNI' mode.
+Info: Quartus Prime Convert_programming_file was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 1427 megabytes
+    Info: Processing ended: Sun Jul 14 23:48:00 2024
+    Info: Elapsed time: 00:00:10
+    Info: System process ID: 3151102
+INFO:__main__:---Reverse Bits---
+INFO:__main__:Reading input file: <_io.BufferedReader name='/home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_switchpf/syn/board/n6001/syn_top/build_flash/../output_files/ofs_top.bin'>
+INFO:__main__:Writing output file: <_io.BufferedWriter name='/home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_switchpf/syn/board/n6001/syn_top/build_flash/../output_files/mfg_ofs_fim_reversed.bin'>
+INFO:__main__:Finished
+2024-07-14 23:48:06,908 - PACSign.log - WARNING - CDLL(libcrypto.so.1.1) failed
+2024-07-14 23:48:06,908 - PACSign.log - WARNING - CDLL(libcrypto.so.1.1) failed
+2024-07-14 23:48:06,908 - PACSign.log - INFO - OpenSSL version "OpenSSL 3.0.2 15 Mar 2022" matches ""
+2024-07-14 23:48:06,912 - PACSign.log - INFO - Bitstream not previously signed
+2024-07-14 23:48:06,912 - PACSign.log - INFO - platform value is '536871937' 
+2024-07-14 23:48:08,617 - PACSign.log - INFO - Starting Block 0 creation
+2024-07-14 23:48:08,617 - PACSign.log - INFO - Calculating SHA256
+2024-07-14 23:48:08,620 - PACSign.log - INFO - Calculating SHA384
+2024-07-14 23:48:08,626 - PACSign.log - INFO - Done with Block 0
+2024-07-14 23:48:08,627 - PACSign.log - INFO - Starting Root Entry creation
+2024-07-14 23:48:08,627 - PACSign.log - INFO - Calculating Root Entry SHA
+2024-07-14 23:48:08,627 - PACSign.log - INFO - Starting Code Signing Key Entry creation
+2024-07-14 23:48:08,627 - PACSign.log - INFO - Calculating Code Signing Key Entry SHA
+2024-07-14 23:48:08,627 - PACSign.log - INFO - Code Signing Key Entry done
+2024-07-14 23:48:08,627 - PACSign.log - INFO - Starting Block 0 Entry creation
+2024-07-14 23:48:08,627 - PACSign.log - INFO - Calculating Block 0 Entry SHA
+2024-07-14 23:48:08,627 - PACSign.log - INFO - Block 0 Entry done
+2024-07-14 23:48:08,627 - PACSign.log - INFO - Starting Block 1 creation
+2024-07-14 23:48:08,627 - PACSign.log - INFO - Block 1 done
+2024-07-14 23:48:08,627 - PACSign.log - INFO - Writing blocks to file
+2024-07-14 23:48:08,629 - PACSign.log - INFO - Processing of file '/home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_switchpf/syn/board/n6001/syn_top/build_flash/../output_files/ofs_top_page0_unsigned_factory.bin' complete
+2024-07-14 23:48:09,038 - PACSign.log - WARNING - CDLL(libcrypto.so.1.1) failed
+2024-07-14 23:48:09,038 - PACSign.log - WARNING - CDLL(libcrypto.so.1.1) failed
+2024-07-14 23:48:09,038 - PACSign.log - INFO - OpenSSL version "OpenSSL 3.0.2 15 Mar 2022" matches ""
+2024-07-14 23:48:09,043 - PACSign.log - INFO - Bitstream not previously signed
+2024-07-14 23:48:09,043 - PACSign.log - INFO - platform value is '536871937' 
+2024-07-14 23:48:10,756 - PACSign.log - INFO - Starting Block 0 creation
+2024-07-14 23:48:10,756 - PACSign.log - INFO - Calculating SHA256
+2024-07-14 23:48:10,759 - PACSign.log - INFO - Calculating SHA384
+2024-07-14 23:48:10,765 - PACSign.log - INFO - Done with Block 0
+2024-07-14 23:48:10,765 - PACSign.log - INFO - Starting Root Entry creation
+2024-07-14 23:48:10,765 - PACSign.log - INFO - Calculating Root Entry SHA
+2024-07-14 23:48:10,765 - PACSign.log - INFO - Starting Code Signing Key Entry creation
+2024-07-14 23:48:10,765 - PACSign.log - INFO - Calculating Code Signing Key Entry SHA
+2024-07-14 23:48:10,765 - PACSign.log - INFO - Code Signing Key Entry done
+2024-07-14 23:48:10,765 - PACSign.log - INFO - Starting Block 0 Entry creation
+2024-07-14 23:48:10,765 - PACSign.log - INFO - Calculating Block 0 Entry SHA
+2024-07-14 23:48:10,765 - PACSign.log - INFO - Block 0 Entry done
+2024-07-14 23:48:10,765 - PACSign.log - INFO - Starting Block 1 creation
+2024-07-14 23:48:10,765 - PACSign.log - INFO - Block 1 done
+2024-07-14 23:48:10,765 - PACSign.log - INFO - Writing blocks to file
+2024-07-14 23:48:10,768 - PACSign.log - INFO - Processing of file '/home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_switchpf/syn/board/n6001/syn_top/build_flash/../output_files/ofs_top_page1_unsigned_user1.bin' complete
+2024-07-14 23:48:11,178 - PACSign.log - WARNING - CDLL(libcrypto.so.1.1) failed
+2024-07-14 23:48:11,178 - PACSign.log - WARNING - CDLL(libcrypto.so.1.1) failed
+2024-07-14 23:48:11,178 - PACSign.log - INFO - OpenSSL version "OpenSSL 3.0.2 15 Mar 2022" matches ""
+2024-07-14 23:48:11,182 - PACSign.log - INFO - Bitstream not previously signed
+2024-07-14 23:48:11,182 - PACSign.log - INFO - platform value is '536871937' 
+2024-07-14 23:48:12,891 - PACSign.log - INFO - Starting Block 0 creation
+2024-07-14 23:48:12,891 - PACSign.log - INFO - Calculating SHA256
+2024-07-14 23:48:12,894 - PACSign.log - INFO - Calculating SHA384
+2024-07-14 23:48:12,900 - PACSign.log - INFO - Done with Block 0
+2024-07-14 23:48:12,900 - PACSign.log - INFO - Starting Root Entry creation
+2024-07-14 23:48:12,900 - PACSign.log - INFO - Calculating Root Entry SHA
+2024-07-14 23:48:12,901 - PACSign.log - INFO - Starting Code Signing Key Entry creation
+2024-07-14 23:48:12,901 - PACSign.log - INFO - Calculating Code Signing Key Entry SHA
+2024-07-14 23:48:12,901 - PACSign.log - INFO - Code Signing Key Entry done
+2024-07-14 23:48:12,901 - PACSign.log - INFO - Starting Block 0 Entry creation
+2024-07-14 23:48:12,901 - PACSign.log - INFO - Calculating Block 0 Entry SHA
+2024-07-14 23:48:12,901 - PACSign.log - INFO - Block 0 Entry done
+2024-07-14 23:48:12,901 - PACSign.log - INFO - Starting Block 1 creation
+2024-07-14 23:48:12,901 - PACSign.log - INFO - Block 1 done
+2024-07-14 23:48:12,901 - PACSign.log - INFO - Writing blocks to file
+2024-07-14 23:48:12,903 - PACSign.log - INFO - Processing of file '/home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_switchpf/syn/board/n6001/syn_top/build_flash/../output_files/ofs_top_page2_unsigned_user2.bin' complete
+>>> Generating POF for General Purpose Use (SOF Image Maximum Size) <<<
+Using PFG file ofs_top_pof.pfg.
+Info: *******************************************************************
+Info: Running Quartus Prime Programming File Generator
+    Info: Version 23.4.0 Build 79 11/22/2023 Patches 0.02iofs,0.17 SC Pro Edition
+    Info: Copyright (C) 2023  Intel Corporation. All rights reserved.
+    Info: Your use of Intel Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Intel Program License 
+    Info: Subscription Agreement, the Intel Quartus Prime License Agreement,
+    Info: the Intel FPGA IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Intel and sold by Intel or its authorized distributors.  Please
+    Info: refer to the Intel FPGA Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Sun Jul 14 23:48:13 2024
+    Info: System process ID: 3151135
+Info: Command: quartus_pfg -c ofs_top_pof.pfg
+Info: The application is running in 'DNI' mode.
+Info (19848): Regular SEU info => 30 sector(s), 5 thread(s), 479000 interval time in microsecond(s)
+Info (19848): IO hash is C965E33F06EE3AC9CCE6BF4E4A663D4C8BB631583BBD5B660B5A87D06AB79297
+Info (19848): Keyed hash is B20A3CA2184543E37C72622B53D173EB62BFBCDDEBF174089BB715BC1B6F4F6C
+Info (19848): Design hash is 3FCEC8BE2337DF7FB305BC21209765ABA477AFDBE4A0ABCC51C4FD503E539D54
+Info (19848): IO hash is C965E33F06EE3AC9CCE6BF4E4A663D4C8BB631583BBD5B660B5A87D06AB79297
+Info (19848): Keyed hash is 001812B53A51F9E903F39B3A90FF2970FBA8F75BF97FA006580BED5E21494237
+Info (19848): Regular SEU info => 30 sector(s), 5 thread(s), 479000 interval time in microsecond(s)
+Info (19848): IO hash is C965E33F06EE3AC9CCE6BF4E4A663D4C8BB631583BBD5B660B5A87D06AB79297
+Info (19848): Keyed hash is B20A3CA2184543E37C72622B53D173EB62BFBCDDEBF174089BB715BC1B6F4F6C
+Info (19848): Design hash is 3FCEC8BE2337DF7FB305BC21209765ABA477AFDBE4A0ABCC51C4FD503E539D54
+Info (19848): IO hash is C965E33F06EE3AC9CCE6BF4E4A663D4C8BB631583BBD5B660B5A87D06AB79297
+Info (19848): Keyed hash is 001812B53A51F9E903F39B3A90FF2970FBA8F75BF97FA006580BED5E21494237
+Info (19848): Regular SEU info => 30 sector(s), 5 thread(s), 479000 interval time in microsecond(s)
+Info (19848): IO hash is C965E33F06EE3AC9CCE6BF4E4A663D4C8BB631583BBD5B660B5A87D06AB79297
+Info (19848): Keyed hash is B20A3CA2184543E37C72622B53D173EB62BFBCDDEBF174089BB715BC1B6F4F6C
+Info (19848): Design hash is 3FCEC8BE2337DF7FB305BC21209765ABA477AFDBE4A0ABCC51C4FD503E539D54
+Info (19848): IO hash is C965E33F06EE3AC9CCE6BF4E4A663D4C8BB631583BBD5B660B5A87D06AB79297
+Info (19848): Keyed hash is 001812B53A51F9E903F39B3A90FF2970FBA8F75BF97FA006580BED5E21494237
+Info: Quartus Prime Programming File Generator was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 3318 megabytes
+    Info: Processing ended: Sun Jul 14 23:48:47 2024
+    Info: Elapsed time: 00:00:34
+    Info: System process ID: 3151135
+
+Compile work directory:     /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_switchpf/syn/board/n6001/syn_top
+Compile artifact directory: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_switchpf/syn/board/n6001/syn_top/output_files
+
+***********************************
+***
+***        OFS_PROJECT: ofs-agx7-pcie-attach
+***        OFS_BOARD: n6001
+***        Q_PROJECT:  ofs_top
+***        Q_REVISION: ofs_top
+***        SEED: 5
+***        Build Complete
+***        Timing Passed!
+***
+***********************************

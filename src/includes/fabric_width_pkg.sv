@@ -41,6 +41,9 @@ localparam apf_pr_slv_address_width = 16;
 localparam apf_achk_slv_baseaddress = 'h80000;
 localparam apf_achk_slv_address_width = 16;
 
+localparam apf_pr_2_slv_baseaddress = 'h90000;
+localparam apf_pr_2_slv_address_width = 16;
+
 localparam bpf_apf_mst_address_width = 18;
 
 localparam bpf_fme_mst_address_width = 20;
@@ -113,8 +116,11 @@ localparam apf_uart_slv_eol = 'b0;
 localparam apf_pr_slv_next_dfh_offset = 'h10000;
 localparam apf_pr_slv_eol = 'b0;
 
-localparam apf_achk_slv_next_dfh_offset = 'h80000;
-localparam apf_achk_slv_eol = 'b1;
+localparam apf_achk_slv_next_dfh_offset = 'h10000;
+localparam apf_achk_slv_eol = 'b0;
+
+localparam apf_pr_2_slv_next_dfh_offset = 'h70000;
+localparam apf_pr_2_slv_eol = 'b1;
 
 // Hardcoded from ofs-common/src/common/fme/fme_csr.sv
 // To modify, do so in ofs-common/tools/fabric_generation/gen_fabric_width_pkg.sh

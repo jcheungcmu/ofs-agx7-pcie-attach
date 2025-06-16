@@ -58,7 +58,7 @@ localparam MAX_RD_REQ_SIZE    = 128; // DW
 //*****************
 // MMIO parameters
 //*****************
-localparam PORTS              = 1;
+localparam PORTS              = 2;
 localparam MMIO_TID_WIDTH     = PCIE_HOST_WIDTH + PCIE_RP_TAG_WIDTH; // Matches PCIe TLP tag width 
 localparam MMIO_DATA_WIDTH    = 64;
 // PF0 bar 0 addr width 1MB, VF under this PF has same address width
@@ -81,7 +81,7 @@ localparam MMIO_ADDR_WIDTH    = `OFS_FIM_IP_CFG_PCIE_SS_PF0_BAR0_ADDR_WIDTH;
 `ifdef NUM_AFUS
 localparam   NUM_AFUS    = 2;
 `else
-localparam   NUM_AFUS    = 1;
+localparam   NUM_AFUS    = 2;
 `endif
 localparam LNUM_AFUS = NUM_AFUS>1?$clog2(NUM_AFUS):1'h1;
 localparam NUM_AFU_INTERRUPTS = 7;

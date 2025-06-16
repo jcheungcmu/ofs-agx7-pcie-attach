@@ -1,0 +1,861 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="altera_merlin_axi_master_ni_1962/sim/altera_merlin_address_alignment.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_master_ni_1962" />
+ <file
+   path="altera_merlin_axi_master_ni_1962/sim/bpf_altera_merlin_axi_master_ni_1962_2kryw2a.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_master_ni_1962" />
+ <file
+   path="altera_avalon_sc_fifo_1931/sim/bpf_altera_avalon_sc_fifo_1931_fzgstwy.v"
+   type="VERILOG"
+   library="altera_avalon_sc_fifo_1931" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_sc_fifo_1971_6f46wua.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_avalon_st_pipeline_stage_1930/sim/bpf_altera_avalon_st_pipeline_stage_1930_bv2ucky.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_avalon_st_pipeline_stage_1930" />
+ <file
+   path="altera_avalon_st_pipeline_stage_1930/sim/altera_avalon_st_pipeline_base.v"
+   type="SYSTEM_VERILOG"
+   library="altera_avalon_st_pipeline_stage_1930" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_a42nnri.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_h6wexfa.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_7asbqai.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_burst_uncompressor.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_address_alignment.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/compare_eq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_response_mem_hfsbxta.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_comp_sel_hfsbxta.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_pri_mux_hfsbxta.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_sipo_plus_hfsbxta.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_response_mem_hfsbxta.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_comp_sel_hfsbxta.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_pri_mux_hfsbxta.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_sipo_plus_hfsbxta.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_1971_hfsbxta.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_sc_fifo_1971_zewvfuy.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_a42nnri.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_h6wexfa.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_7asbqai.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_burst_uncompressor.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_address_alignment.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/compare_eq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_response_mem_artnyka.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_comp_sel_artnyka.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_pri_mux_artnyka.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_sipo_plus_artnyka.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_response_mem_artnyka.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_comp_sel_artnyka.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_pri_mux_artnyka.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_sipo_plus_artnyka.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_1971_artnyka.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_sc_fifo_1971_zewvfuy.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_a42nnri.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_h6wexfa.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_7asbqai.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_burst_uncompressor.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_address_alignment.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/compare_eq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_response_mem_onpxjry.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_comp_sel_onpxjry.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_pri_mux_onpxjry.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_sipo_plus_onpxjry.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_response_mem_onpxjry.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_comp_sel_onpxjry.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_pri_mux_onpxjry.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_sipo_plus_onpxjry.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_1971_onpxjry.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_sc_fifo_1971_zewvfuy.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_a42nnri.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_h6wexfa.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_7asbqai.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_burst_uncompressor.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_address_alignment.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/compare_eq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_response_mem_jidvjzi.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_comp_sel_jidvjzi.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_pri_mux_jidvjzi.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_sipo_plus_jidvjzi.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_response_mem_jidvjzi.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_comp_sel_jidvjzi.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_pri_mux_jidvjzi.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_sipo_plus_jidvjzi.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_1971_jidvjzi.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_sc_fifo_1971_zewvfuy.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_a42nnri.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_h6wexfa.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_7asbqai.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_burst_uncompressor.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_address_alignment.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/compare_eq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_response_mem_47k3fca.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_comp_sel_47k3fca.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_pri_mux_47k3fca.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_sipo_plus_47k3fca.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_response_mem_47k3fca.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_comp_sel_47k3fca.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_pri_mux_47k3fca.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_sipo_plus_47k3fca.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_1971_47k3fca.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_sc_fifo_1971_zewvfuy.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_a42nnri.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_h6wexfa.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_7asbqai.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_burst_uncompressor.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_address_alignment.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/compare_eq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_response_mem_y32nn3y.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_comp_sel_y32nn3y.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_pri_mux_y32nn3y.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_sipo_plus_y32nn3y.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_response_mem_y32nn3y.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_comp_sel_y32nn3y.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_pri_mux_y32nn3y.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_sipo_plus_y32nn3y.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_1971_y32nn3y.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_sc_fifo_1971_zewvfuy.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_a42nnri.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_h6wexfa.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_7asbqai.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_burst_uncompressor.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_address_alignment.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/compare_eq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_response_mem_rgdvaay.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_comp_sel_rgdvaay.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_pri_mux_rgdvaay.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_sipo_plus_rgdvaay.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_response_mem_rgdvaay.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_comp_sel_rgdvaay.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_pri_mux_rgdvaay.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_sipo_plus_rgdvaay.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_1971_rgdvaay.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_sc_fifo_1971_zewvfuy.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_a42nnri.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_h6wexfa.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_7asbqai.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_burst_uncompressor.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_address_alignment.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/compare_eq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_response_mem_vcfvj5i.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_comp_sel_vcfvj5i.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_pri_mux_vcfvj5i.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_sipo_plus_vcfvj5i.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_response_mem_vcfvj5i.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_comp_sel_vcfvj5i.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_pri_mux_vcfvj5i.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_sipo_plus_vcfvj5i.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_1971_vcfvj5i.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_sc_fifo_1971_zewvfuy.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_a42nnri.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_h6wexfa.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_7asbqai.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_burst_uncompressor.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_address_alignment.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/compare_eq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_response_mem_5c3miba.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_comp_sel_5c3miba.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_pri_mux_5c3miba.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_sipo_plus_5c3miba.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_response_mem_5c3miba.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_comp_sel_5c3miba.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_pri_mux_5c3miba.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_sipo_plus_5c3miba.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_1971_5c3miba.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_sc_fifo_1971_zewvfuy.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_a42nnri.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_h6wexfa.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_altera_avalon_st_pipeline_stage_1971_7asbqai.v"
+   type="VERILOG"
+   library="altera_merlin_axi_slave_ni_1971"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_burst_uncompressor.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/altera_merlin_address_alignment.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/compare_eq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_response_mem_tyzqqri.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_comp_sel_tyzqqri.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_pri_mux_tyzqqri.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/rd_sipo_plus_tyzqqri.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_response_mem_tyzqqri.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_comp_sel_tyzqqri.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_pri_mux_tyzqqri.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/wr_sipo_plus_tyzqqri.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_axi_slave_ni_1971/sim/bpf_altera_merlin_axi_slave_ni_1971_tyzqqri.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_axi_slave_ni_1971" />
+ <file
+   path="altera_merlin_router_1921/sim/bpf_altera_merlin_router_1921_dxb44hi.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_router_1921" />
+ <file
+   path="altera_merlin_router_1921/sim/bpf_altera_merlin_router_1921_a7quflq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_router_1921" />
+ <file
+   path="altera_merlin_router_1921/sim/bpf_altera_merlin_router_1921_c2ajpdi.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_router_1921" />
+ <file
+   path="altera_merlin_router_1921/sim/bpf_altera_merlin_router_1921_ozxyppq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_router_1921" />
+ <file
+   path="altera_merlin_router_1921/sim/bpf_altera_merlin_router_1921_72c3a4q.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_router_1921" />
+ <file
+   path="altera_merlin_router_1921/sim/bpf_altera_merlin_router_1921_f4yhgki.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_router_1921" />
+ <file
+   path="altera_merlin_router_1921/sim/bpf_altera_merlin_router_1921_stsce6y.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_router_1921" />
+ <file
+   path="altera_merlin_router_1921/sim/bpf_altera_merlin_router_1921_a6i454a.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_router_1921" />
+ <file
+   path="altera_merlin_router_1921/sim/bpf_altera_merlin_router_1921_fuvvuqq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_router_1921" />
+ <file
+   path="altera_merlin_router_1921/sim/bpf_altera_merlin_router_1921_2d52dly.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_router_1921" />
+ <file
+   path="altera_merlin_router_1921/sim/bpf_altera_merlin_router_1921_wksrbji.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_router_1921" />
+ <file
+   path="altera_merlin_router_1921/sim/bpf_altera_merlin_router_1921_zhhqfji.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_router_1921" />
+ <file
+   path="altera_merlin_router_1921/sim/bpf_altera_merlin_router_1921_spslutq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_router_1921" />
+ <file
+   path="altera_merlin_router_1921/sim/bpf_altera_merlin_router_1921_nywgomq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_router_1921" />
+ <file
+   path="altera_merlin_traffic_limiter_1921/sim/bpf_altera_merlin_traffic_limiter_altera_avalon_sc_fifo_1921_ho5tama.v"
+   type="VERILOG"
+   library="altera_merlin_traffic_limiter_1921"
+   hasInlineConfiguration="true" />
+ <file
+   path="altera_merlin_traffic_limiter_1921/sim/altera_merlin_reorder_memory.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_traffic_limiter_1921" />
+ <file
+   path="altera_merlin_traffic_limiter_1921/sim/altera_avalon_st_pipeline_base.v"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_traffic_limiter_1921" />
+ <file
+   path="altera_merlin_traffic_limiter_1921/sim/bpf_altera_merlin_traffic_limiter_1921_p5flxai.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_traffic_limiter_1921" />
+ <file
+   path="altera_merlin_demultiplexer_1921/sim/bpf_altera_merlin_demultiplexer_1921_ti6d3uy.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_demultiplexer_1921" />
+ <file
+   path="altera_merlin_demultiplexer_1921/sim/bpf_altera_merlin_demultiplexer_1921_wkkjz7i.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_demultiplexer_1921" />
+ <file
+   path="altera_merlin_demultiplexer_1921/sim/bpf_altera_merlin_demultiplexer_1921_vtoouzq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_demultiplexer_1921" />
+ <file
+   path="altera_merlin_multiplexer_1922/sim/bpf_altera_merlin_multiplexer_1922_3dfdvma.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_multiplexer_1922" />
+ <file
+   path="altera_merlin_multiplexer_1922/sim/altera_merlin_arbitrator.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_multiplexer_1922" />
+ <file
+   path="altera_merlin_multiplexer_1922/sim/bpf_altera_merlin_multiplexer_1922_cdpjm4a.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_multiplexer_1922" />
+ <file
+   path="altera_merlin_multiplexer_1922/sim/altera_merlin_arbitrator.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_multiplexer_1922" />
+ <file
+   path="altera_merlin_multiplexer_1922/sim/bpf_altera_merlin_multiplexer_1922_mityqiq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_multiplexer_1922" />
+ <file
+   path="altera_merlin_multiplexer_1922/sim/altera_merlin_arbitrator.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_multiplexer_1922" />
+ <file
+   path="altera_merlin_demultiplexer_1921/sim/bpf_altera_merlin_demultiplexer_1921_twn2xqi.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_demultiplexer_1921" />
+ <file
+   path="altera_merlin_demultiplexer_1921/sim/bpf_altera_merlin_demultiplexer_1921_fum5tcq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_demultiplexer_1921" />
+ <file
+   path="altera_merlin_demultiplexer_1921/sim/bpf_altera_merlin_demultiplexer_1921_iraid2i.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_demultiplexer_1921" />
+ <file
+   path="altera_merlin_multiplexer_1922/sim/bpf_altera_merlin_multiplexer_1922_d6pfiny.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_multiplexer_1922" />
+ <file
+   path="altera_merlin_multiplexer_1922/sim/altera_merlin_arbitrator.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_multiplexer_1922" />
+ <file
+   path="altera_merlin_multiplexer_1922/sim/bpf_altera_merlin_multiplexer_1922_foeu7bq.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_multiplexer_1922" />
+ <file
+   path="altera_merlin_multiplexer_1922/sim/altera_merlin_arbitrator.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_multiplexer_1922" />
+ <file
+   path="altera_merlin_multiplexer_1922/sim/bpf_altera_merlin_multiplexer_1922_2hno62q.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_multiplexer_1922" />
+ <file
+   path="altera_merlin_multiplexer_1922/sim/altera_merlin_arbitrator.sv"
+   type="SYSTEM_VERILOG"
+   library="altera_merlin_multiplexer_1922" />
+ <file
+   path="altera_mm_interconnect_1920/sim/bpf_altera_mm_interconnect_1920_thhyi2i.v"
+   type="VERILOG"
+   library="altera_mm_interconnect_1920"
+   hasInlineConfiguration="true" />
+ <file
+   path="sim/bpf.v"
+   type="VERILOG"
+   library="bpf"
+   hasInlineConfiguration="true" />
+ <topLevel name="bpf.bpf" />
+ <deviceFamily name="agilex7" />
+ <device name="AGFB014R24A2E2V" />
+</simPackage>

@@ -107,9 +107,13 @@ set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../../../shared_config/suppre
 ############################################################################################
 # PR assignments
 ############################################################################################
-set_instance_assignment -name PARTITION green_region -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+set_instance_assignment -name PARTITION green_region_2 -to afu_top|pg_afu_2.port_gasket_2|pr_slot|afu_main -entity top
+set_instance_assignment -name ENTITY_REBINDING afu_main -to afu_top|pg_afu_2.port_gasket_2|pr_slot|afu_main
+
 set_instance_assignment -name QDB_FILE_PARTITION ofs_top.qdb -to | -entity top
+set_instance_assignment -name PARTITION green_region -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
 set_instance_assignment -name ENTITY_REBINDING afu_main -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+
 set_global_assignment -name REVISION_TYPE PR_IMPL
 
 # Load macros defined in the Quartus project during the FIM build.

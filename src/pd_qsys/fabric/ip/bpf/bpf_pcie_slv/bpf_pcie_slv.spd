@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="axi4lite_shim_10/sim/axi4lite_shim.sv"
+   type="SYSTEM_VERILOG"
+   library="axi4lite_shim_10" />
+ <file
+   path="sim/bpf_pcie_slv.v"
+   type="VERILOG"
+   library="bpf_pcie_slv"
+   hasInlineConfiguration="true" />
+ <topLevel name="bpf_pcie_slv.bpf_pcie_slv" />
+ <deviceFamily name="agilex7" />
+ <device name="AGFB014R24A2E2V" />
+</simPackage>

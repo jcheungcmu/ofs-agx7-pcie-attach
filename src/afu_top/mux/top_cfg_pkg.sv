@@ -79,13 +79,16 @@ package top_cfg_pkg;
    // PF0VF: When VFs are enabled on PF0 or PF1 when VFs are disabled on PF0 : Port Gasket
    // Port Gasket is always instantiated either with PF0VFs or PF1.
    // PF1+ : When VFs are enabled on PF0 or PF2+ when VFs are disabled on PF0 : static-region afu
-   localparam NUM_TOP_PORTS = int'(PF_ENABLED_VEC[0]) + 1 + (ENABLE_PG_SHARED_VF ? (MAX_PF_NUM > 0) : (MAX_PF_NUM > 1));
+
+   // localparam NUM_TOP_PORTS = int'(PF_ENABLED_VEC[0]) + 1 + (ENABLE_PG_SHARED_VF ? (MAX_PF_NUM > 0) : (MAX_PF_NUM > 1));
+   localparam NUM_TOP_PORTS = 3;
 
    // Number of ports in the static-region AFU block:
    //  - A port for each non-PF0 function when VFs are enabled on PF0 or
    //  - A port for each non-PF0 and non-PF1 function when VFs are not enabled
    //  on PF0
-   localparam NUM_SR_PORTS = FIM_NUM_PF + FIM_NUM_VF - int'(PF_ENABLED_VEC[0]) - ((PF_NUM_VFS_VEC[0] > 0 ) ? (PF_NUM_VFS_VEC[0]) : (PF_ENABLED_VEC[1])) ;
+   // localparam NUM_SR_PORTS = FIM_NUM_PF + FIM_NUM_VF - int'(PF_ENABLED_VEC[0]) - ((PF_NUM_VFS_VEC[0] > 0 ) ? (PF_NUM_VFS_VEC[0]) : (PF_ENABLED_VEC[1])) ;
+   localparam NUM_SR_PORTS = 0;
 
    // PG mux parameters
    // routing PF0 VFs when VFs are enabled on PF0 or
@@ -113,6 +116,19 @@ package top_cfg_pkg;
       t_prr_pf_vf_entry_info map;
       for (int p = 0; p < PG_AFU_NUM_PORTS; p = p + 1) begin
          map[p].pf        = (PG_VFS > 0 ) ? 0 : 1; // pf0-vfs or pf1
+   	 map[p].vf        = p;
+         map[p].vf_active = (PG_VFS > 0 ) ? 1 : 0; // pf0-vfs or pf1
+         map[p].pfvf_port = p;
+      end
+      return map;
+   endfunction 
+
+   localparam t_prr_pf_vf_entry_info PG_PF_VF_RTABLE_2 = get_prr_pf_vf_entry_info_2();
+
+   function automatic t_prr_pf_vf_entry_info get_prr_pf_vf_entry_info_2();
+      t_prr_pf_vf_entry_info map;
+      for (int p = 0; p < PG_AFU_NUM_PORTS; p = p + 1) begin
+         map[p].pf        = (PG_VFS > 0 ) ? 0 : 2; // pf0-vfs or pf1
    	 map[p].vf        = p;
          map[p].vf_active = (PG_VFS > 0 ) ? 1 : 0; // pf0-vfs or pf1
          map[p].pfvf_port = p;

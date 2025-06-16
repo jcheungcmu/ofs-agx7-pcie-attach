@@ -1,0 +1,67 @@
+build_top.sh launched using command line:
+ ./ofs-common/scripts/common/syn/build_top.sh --ofss tools/ofss_config/n6001.ofss n6001:null_he_lb,null_he_hssi,null_he_mem,null_he_mem_tg,no_hssi work_n6001_minimal_fim_default
+
+Proceeding with requested build script build_fim.sh...
+>>> OFS Board Path = n6001
+>>> OFS Board Core = n6001
+
+Setting up build variables
+source /home/jcheung2/ofs24/ofs-agx7-pcie-attach/syn/scripts/build_var_setup.sh
+BUILD_ROOT_REL is ../../../..
+
+**********************************
+********* ENV SETUP **************
+
+FIM Project:
+  OFS_PROJECT = ofs-agx7-pcie-attach
+  OFS_FIM     = 
+  OFS_BOARD   = n6001
+  Q_PROJECT   = ofs_top
+  Q_REVISION  = ofs_top
+  Fitter SEED = 5
+FME id
+  BITSTREAM_ID = 05010202c8e9cc1a
+  BITSTREAM_MD = 0000000002407145
+Flow:
+  ENA_CREATE_WORK_DIR        = 1
+  ENA_OPAE_SDK_SETUP_FOR_FIM = 1
+  ENA_PRE_COMPILE_SCRIPT     = 1
+  ENA_SETUP_IP_LIB_SCRIPT    = 1
+  ENA_FIM_COMPILE            = 1
+  ENA_PR_SETUP               = 1
+  ENA_FLASH                  = 1
+  ENA_PR_BUILD_TEMPLATE_GEN  = 1
+OPAE_SDK:
+  OPAE_SDK_REPO = 
+  OPAE_SDK_REPO_BRANCH = release/2.12.0
+
+File pointers:
+  WORK_SYN_TOP_PATH = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_default/syn/board/n6001/syn_top
+  CREATE_WORK_DIR_SH_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/scripts/common/syn/create_work_dir.sh
+  FME_ID_MIF_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/src/common/fme_id_rom/fme_id.mif
+  PMCI_NIOS_HEX_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ipss/pmci/pmci_ss_nios_fw.hex
+  WORK_FME_ID_MIF_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_default/syn/board/n6001/syn_top/fme_id.mif
+  WORK_PMCI_NIOS_HEX_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_default/syn/board/n6001/syn_top/pmci_ss_nios_fw.hex
+  REPORT_TIMING_TCL_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/scripts/common/syn/report_timing.tcl
+  WORK_BUILD_FLASH_SH_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_default/syn/board/n6001/syn_top/build_flash/build_flash.sh
+  WORK_PRE_COMPILE_SCRIPT_SH_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_default/ofs-common/scripts/fpga_family/agilex/syn/setup_no_hssi.sh
+  SETUP_OPAE_SDK_SH_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/ofs-common/scripts/common/syn/setup_opae_sdk.sh
+  BUILD_ROOT_REL = ../../../..
+realpath: = 
+/
+  REPO_PATH = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/external
+
+PIM configuration:
+  PIM_PLATFORM_NAME = ofs_agilex
+  PIM_INI_FILE = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_default/src/top/ofs_agilex.ini
+  PIM_ROOT_DIR = /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_default/syn/board/n6001/syn_top/afu_with_pim
+  AFU_WITH_PIM = /home/jcheung2/examples-afu/tutorial/afu_types/01_pim_ifc/hello_world/hw/rtl/axi/sources.txt
+
+
+*** Specified WORK directory: /home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_default
+/home/jcheung2/ofs24/ofs-agx7-pcie-attach/work_n6001_minimal_fim_default exists
+
+Please enter response before script terminates in 20 seconds
+Are you sure you want to compile in the existing dir?
+y: yes,  n: no,  f: force (delete and recreate work dir)
+Invalid reply or timeout reached, aborting script

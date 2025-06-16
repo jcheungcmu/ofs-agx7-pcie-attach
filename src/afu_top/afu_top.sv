@@ -13,12 +13,140 @@
 
 import pcie_ss_axis_pkg::*;
 
+interface asp_avst_if #(
+   //  parameter DATA_WIDTH        = ofs_fim_eth_if_pkg::ETH_PACKET_WIDTH
+    parameter DATA_WIDTH        = 64
+);
+    logic                           valid;
+    logic                           ready;
+    logic [DATA_WIDTH-1:0]          data;
+    
+    modport source (
+        input  ready,
+        output valid, data
+    );
+    modport sink (
+        input  valid, data,
+        output ready
+    );
+endinterface : asp_avst_if
+
+`ifdef INCLUDE_HSSI
+
+module reorder_eth_channel (
+   ofs_fim_hssi_ss_tx_axis_if.client             hssi_ss_st_tx [MAX_NUM_ETH_CHANNELS-1:0],
+   ofs_fim_hssi_ss_rx_axis_if.client             hssi_ss_st_rx [MAX_NUM_ETH_CHANNELS-1:0],
+   ofs_fim_hssi_fc_if.client                     hssi_fc [MAX_NUM_ETH_CHANNELS-1:0],
+   input logic [MAX_NUM_ETH_CHANNELS-1:0]     i_hssi_clk_pll,
+
+   ofs_fim_hssi_ss_tx_axis_if.mac             pg1_hssi_ss_st_tx [MAX_NUM_ETH_CHANNELS/2-1:0],
+   ofs_fim_hssi_ss_rx_axis_if.mac             pg1_hssi_ss_st_rx [MAX_NUM_ETH_CHANNELS/2-1:0],
+   ofs_fim_hssi_fc_if.mac                     pg1_hssi_fc [MAX_NUM_ETH_CHANNELS/2-1:0],
+   output logic [MAX_NUM_ETH_CHANNELS/2-1:0]     pg1_i_hssi_clk_pll,
+
+   ofs_fim_hssi_ss_tx_axis_if.mac             pg2_hssi_ss_st_tx [MAX_NUM_ETH_CHANNELS/2-1:0],
+   ofs_fim_hssi_ss_rx_axis_if.mac             pg2_hssi_ss_st_rx [MAX_NUM_ETH_CHANNELS/2-1:0],
+   ofs_fim_hssi_fc_if.mac                     pg2_hssi_fc [MAX_NUM_ETH_CHANNELS/2-1:0],
+   output logic [MAX_NUM_ETH_CHANNELS/2-1:0]     pg2_i_hssi_clk_pll
+
+);
+
+   genvar i;
+   generate 
+      for (i = 0; i < NUM_ETH_CHANNELS/2; i++) begin 
+
+         always_comb begin 
+               
+            // pg2
+            pg2_i_hssi_clk_pll[i] = i_hssi_clk_pll[i];
+
+            pg2_hssi_ss_st_tx[i].tready = hssi_ss_st_tx[i].tready;
+            pg2_hssi_ss_st_tx[i].clk    = hssi_ss_st_tx[i].clk;
+            pg2_hssi_ss_st_tx[i].rst_n  = hssi_ss_st_tx[i].rst_n;
+            hssi_ss_st_tx[i].tx         = pg2_hssi_ss_st_tx[i].tx;
+
+            pg2_hssi_ss_st_rx[i].clk    = hssi_ss_st_rx[i].clk;
+            pg2_hssi_ss_st_rx[i].rst_n  = hssi_ss_st_rx[i].rst_n;
+            pg2_hssi_ss_st_rx[i].rx     = hssi_ss_st_rx[i].rx;
+
+            pg2_hssi_fc[i].rx_pause     = hssi_fc[i].rx_pause; 
+            pg2_hssi_fc[i].rx_pfc       = hssi_fc[i].rx_pfc;
+            hssi_fc[i].tx_pause         = pg2_hssi_fc[i].tx_pause;
+            hssi_fc[i].tx_pfc           = pg2_hssi_fc[i].tx_pfc;
+
+            // pg1
+            pg1_i_hssi_clk_pll[i] = i_hssi_clk_pll[i + NUM_ETH_CHANNELS/2];
+
+            pg1_hssi_ss_st_tx[i].tready = hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].tready;
+            pg1_hssi_ss_st_tx[i].clk    = hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].clk;
+            pg1_hssi_ss_st_tx[i].rst_n  = hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].rst_n;
+            hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].tx         = pg1_hssi_ss_st_tx[i].tx;
+
+            pg1_hssi_ss_st_rx[i].clk    = hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].clk;
+            pg1_hssi_ss_st_rx[i].rst_n  = hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].rst_n;
+            pg1_hssi_ss_st_rx[i].rx     = hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].rx;
+
+            pg1_hssi_fc[i].rx_pause     = hssi_fc[i + NUM_ETH_CHANNELS/2].rx_pause; 
+            pg1_hssi_fc[i].rx_pfc       = hssi_fc[i + NUM_ETH_CHANNELS/2].rx_pfc;
+            hssi_fc[i + NUM_ETH_CHANNELS/2].tx_pause         = pg1_hssi_fc[i].tx_pause;
+            hssi_fc[i + NUM_ETH_CHANNELS/2].tx_pfc           = pg1_hssi_fc[i].tx_pfc;
+
+         end 
+      end 
+   endgenerate
+
+   generate
+      for (i = 0; i < (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2; i++) begin 
+         always_comb begin 
+            // pg2
+            pg2_i_hssi_clk_pll[i + NUM_ETH_CHANNELS/2] = i_hssi_clk_pll[i + NUM_ETH_CHANNELS];
+
+            pg2_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].tready = hssi_ss_st_tx[i + NUM_ETH_CHANNELS].tready;
+            pg2_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].clk    = hssi_ss_st_tx[i + NUM_ETH_CHANNELS].clk;
+            pg2_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].rst_n  = hssi_ss_st_tx[i + NUM_ETH_CHANNELS].rst_n;
+            hssi_ss_st_tx[i + NUM_ETH_CHANNELS].tx         = pg2_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].tx;
+
+            pg2_hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].clk    = hssi_ss_st_rx[i + NUM_ETH_CHANNELS].clk;
+            pg2_hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].rst_n  = hssi_ss_st_rx[i + NUM_ETH_CHANNELS].rst_n;
+            pg2_hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].rx     = hssi_ss_st_rx[i + NUM_ETH_CHANNELS].rx;
+
+            pg2_hssi_fc[i + NUM_ETH_CHANNELS/2].rx_pause     = hssi_fc[i + NUM_ETH_CHANNELS].rx_pause; 
+            pg2_hssi_fc[i + NUM_ETH_CHANNELS/2].rx_pfc       = hssi_fc[i + NUM_ETH_CHANNELS].rx_pfc;
+            hssi_fc[i + NUM_ETH_CHANNELS].tx_pause         = pg2_hssi_fc[i + NUM_ETH_CHANNELS/2].tx_pause;
+            hssi_fc[i + NUM_ETH_CHANNELS].tx_pfc           = pg2_hssi_fc[i + NUM_ETH_CHANNELS/2].tx_pfc;
+
+            // pg1
+            pg1_i_hssi_clk_pll[i + NUM_ETH_CHANNELS/2] = i_hssi_clk_pll[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2];
+
+            pg1_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].tready = hssi_ss_st_tx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].tready;
+            pg1_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].clk    = hssi_ss_st_tx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].clk;
+            pg1_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].rst_n  = hssi_ss_st_tx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].rst_n;
+            hssi_ss_st_tx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].tx         = pg1_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].tx;
+
+            pg1_hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].clk    = hssi_ss_st_rx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].clk;
+            pg1_hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].rst_n  = hssi_ss_st_rx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].rst_n;
+            pg1_hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].rx     = hssi_ss_st_rx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].rx;
+
+            pg1_hssi_fc[i + NUM_ETH_CHANNELS/2].rx_pause     = hssi_fc[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].rx_pause; 
+            pg1_hssi_fc[i + NUM_ETH_CHANNELS/2].rx_pfc       = hssi_fc[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].rx_pfc;
+            hssi_fc[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].tx_pause         = pg1_hssi_fc[i + NUM_ETH_CHANNELS/2].tx_pause;
+            hssi_fc[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].tx_pfc           = pg1_hssi_fc[i + NUM_ETH_CHANNELS/2].tx_pfc;
+         end 
+      end 
+   endgenerate
+
+endmodule
+`endif 
+
 module afu_top #(
 `ifdef INCLUDE_DDR4
-   parameter AFU_MEM_CHANNEL = 1
+   parameter AFU_MEM_CHANNEL = 2,
 `else
-   parameter AFU_MEM_CHANNEL = 0
+   parameter AFU_MEM_CHANNEL = 0,
 `endif
+
+   parameter JASON_NUM_IOPIPES = 1,
+   parameter JASON_IOPIPES_WIDTH = 64
 )(
    input wire                            SYS_REFCLK,
    input wire                            clk,
@@ -136,6 +264,16 @@ logic [1:0] pf_vf_fifo_perr;
 logic       sel_mmio_rsp;
 logic       read_flush_done;
 logic       afu_softreset;
+
+logic pr_parity_error_1;
+logic pr_parity_error_2;
+
+assign pr_parity_error = pr_parity_error_1 | pr_parity_error_2;
+
+logic afu_softreset_1;
+logic afu_softreset_2;
+
+assign afu_softreset = afu_softreset_1 | afu_softreset_2;
 
 //-----------------------------------------------------------------------------------------------
 // Preserve clocks
@@ -416,35 +554,39 @@ assign pg_flr_rst_n = (top_cfg_pkg::PG_VFS > 0) ? pf0_flr_rst_n : 1'b1;
 // logic.
 //-----------------------------------------------------------------------------------------------
 generate if(top_cfg_pkg::NUM_SR_PORTS > 0) begin : sr_afu
-   fim_afu_instances #(
-      .NUM_PF             (top_cfg_pkg::FIM_NUM_PF),
-      .NUM_VF             (top_cfg_pkg::FIM_NUM_VF),
-      .MAX_NUM_VF         (top_cfg_pkg::FIM_MAX_NUM_VF),
-      .NUM_MUX_PORTS      (top_cfg_pkg::NUM_SR_RTABLE_ENTRIES),
-      .PFVF_ROUTING_TABLE (top_cfg_pkg::SR_PF_VF_RTABLE)
-   ) fim_afu_instances (
-      .clk               (clk),
-      .rst_n             (rst_n),
+  fim_afu_instances #(
+     .NUM_PF             (top_cfg_pkg::FIM_NUM_PF),
+     .NUM_VF             (top_cfg_pkg::FIM_NUM_VF),
+     .MAX_NUM_VF         (top_cfg_pkg::FIM_MAX_NUM_VF),
+     .NUM_MUX_PORTS      (top_cfg_pkg::NUM_SR_RTABLE_ENTRIES),
+     .PFVF_ROUTING_TABLE (top_cfg_pkg::SR_PF_VF_RTABLE)
+  ) fim_afu_instances (
+     .clk               (clk),
+     .rst_n             (rst_n),
 
-      .flr_req           (afu_flr_req[SR_SHARED_PFVF_PID]),
-      .flr_rsp           (afu_flr_rsp[SR_SHARED_PFVF_PID]),
+     .flr_req           (afu_flr_req[SR_SHARED_PFVF_PID]),
+     .flr_rsp           (afu_flr_rsp[SR_SHARED_PFVF_PID]),
 
-      .clk_csr           (clk_csr),
-      .rst_n_csr         (rst_n_csr),
+     .clk_csr           (clk_csr),
+     .rst_n_csr         (rst_n_csr),
 
 `ifdef INCLUDE_HPS
-      .hps_axi4_mm_if    (hps_axi4_mm_if),
-      .hps_ace_lite_if   (hps_ace_lite_if),
-      .h2f_reset         (h2f_reset),
+     .hps_axi4_mm_if    (hps_axi4_mm_if),
+     .hps_ace_lite_if   (hps_ace_lite_if),
+     .h2f_reset         (h2f_reset),
 `endif
-      .afu_axi_rx_a_if     (mx2fn_rx_a_port[SR_SHARED_PFVF_PID]),
-      .afu_axi_tx_a_if     (fn2mx_tx_a_port[SR_SHARED_PFVF_PID]),
-      .afu_axi_rx_b_if     (mx2fn_rx_b_port[SR_SHARED_PFVF_PID]),
-      .afu_axi_tx_b_if     (fn2mx_tx_b_port[SR_SHARED_PFVF_PID])
-   );
+     .afu_axi_rx_a_if     (mx2fn_rx_a_port[SR_SHARED_PFVF_PID]),
+     .afu_axi_tx_a_if     (fn2mx_tx_a_port[SR_SHARED_PFVF_PID]),
+     .afu_axi_rx_b_if     (mx2fn_rx_b_port[SR_SHARED_PFVF_PID]),
+     .afu_axi_tx_b_if     (fn2mx_tx_b_port[SR_SHARED_PFVF_PID])
+  );
 end : sr_afu
 endgenerate
    
+	
+	
+// logic uclk, uclk_div2;
+logic port2_reset, port2_freeze;
 //-----------------------------------------------------------------------------------------------
 // Port Gasket (PG) AFU
 //-----------------------------------------------------------------------------------------------
@@ -472,16 +614,153 @@ endfunction // gen_pf_vf_map
 localparam pcie_ss_hdr_pkg::ReqHdr_pf_vf_info_t[PG_AFU_NUM_PORTS-1:0] PG_PF_VF_INFO =
    gen_prr_pf_vf_map();
 
+
+ofs_fim_axi_lite_if #(.AWADDR_WIDTH(16), .ARADDR_WIDTH(16))                       apf_pgsk_slv_if_2  (.clk(clk), .rst_n(rst_n));
+//localparam PG_NUM_RTABLE_ENTRIES = top_cfg_pkg::PG_NUM_RTABLE_ENTRIES;
+localparam t_prr_pf_vf_entry_info PG_PFVF_ROUTING_TABLE_2 = top_cfg_pkg::PG_PF_VF_RTABLE_2;
+
+//typedef pcie_ss_hdr_pkg::ReqHdr_pf_vf_info_t[PG_AFU_NUM_PORTS-1:0] t_afu_prr_pf_vf_map;
+function automatic t_afu_prr_pf_vf_map gen_prr_pf_vf_map_2();
+   t_afu_prr_pf_vf_map map;
+   for (int p = 0; p < PG_AFU_NUM_PORTS; p = p + 1) begin
+      map[p].pf_num = PG_PFVF_ROUTING_TABLE_2[p].pf;
+      map[p].vf_num = PG_PFVF_ROUTING_TABLE_2[p].vf;
+      map[p].vf_active = PG_PFVF_ROUTING_TABLE_2[p].vf_active;
+      map[p].link_num = 0;
+   end
+   return map;
+endfunction // gen_pf_vf_map
+
+localparam pcie_ss_hdr_pkg::ReqHdr_pf_vf_info_t[PG_AFU_NUM_PORTS-1:0] PG_PF_VF_INFO_2 =
+   gen_prr_pf_vf_map_2();
+
+
+// generate if (PG_AFU_NUM_PORTS > 0) begin : pg_afu
+// port_gasket #( 
+//    .PG_NUM_PORTS(PG_AFU_NUM_PORTS),              // Number of PCIe ports to PR region
+//    .PORT_PF_VF_INFO(PG_PF_VF_INFO),              // PCIe port data
+//    .NUM_MEM_CH(AFU_MEM_CHANNEL),                 // Number of Memory Porst to PR region
+//    .END_OF_LIST    (fabric_width_pkg::apf_pr_slv_eol),                       // port_gasket DFH end of list field
+//    .NEXT_DFH_OFFSET(fabric_width_pkg::apf_pr_slv_next_dfh_offset),                   // Next offset in OFS management DFH
+//    .PG_NUM_RTABLE_ENTRIES (PG_NUM_RTABLE_ENTRIES),
+//    .PG_PFVF_ROUTING_TABLE (PG_PFVF_ROUTING_TABLE)
+// ) port_gasket (
+// //	.uclk,
+// //	.uclk_div2,
+
+//    .refclk             (SYS_REFCLK),            // 100 MHz refclk for user clk pll
+//    .clk,                                        // PCIe Clk
+//    .clk_div2,                                   // Half frequency of PCIe clk
+//    .clk_div4,                                   // Quarter frequency of PCIe clk
+//    .clk_100            (clk_csr),               // 100 MHz for user clk logic
+//    .clk_csr            (clk_csr),               // 100 MHz CSR interface clock
+
+//    .rst_n,                                      // Reset from hip
+//    .rst_n_100          (rst_n_csr),             // Reset from hip on csr clk
+//    .rst_n_csr          (rst_n_csr),             // Reset from hip on csr clk
+
+//    // FLR interface
+//    .pg_pf_flr_rst_n    (pg_flr_rst_n),
+//    .flr_req            (afu_flr_req[PG_SHARED_VF_PID]),
+//    .flr_rsp            (afu_flr_rsp[PG_SHARED_VF_PID]),
+
+// `ifdef INCLUDE_DDR4
+//    .afu_mem_if         (ext_mem_if),             // Memory interface
+// `endif
+
+//    `ifdef INCLUDE_HSSI                           // Instantiates HE-HSSI in PR region   
+//       .hssi_ss_st_tx  (hssi_ss_st_tx),           // HSSI Tx
+//       .hssi_ss_st_rx  (hssi_ss_st_rx),           // HSSI Rx
+//       .hssi_fc        (hssi_fc),                 // Flow control interface
+//       .i_hssi_clk_pll (i_hssi_clk_pll),          // HSSI clocks
+//    `endif
+
+//    .i_sel_mmio_rsp     (sel_mmio_rsp),
+//    .i_read_flush_done  (read_flush_done),
+//    .o_afu_softreset    (afu_softreset_1),
+//    .o_pr_parity_error  (pr_parity_error_1),       // Partial Reconfiguration FIFO Parity Error Indication from PR Controller.
+
+//    .axi_rx_a_if        (mx2fn_rx_a_port[PG_SHARED_VF_PID]),
+//    .axi_tx_a_if        (fn2mx_tx_a_port[PG_SHARED_VF_PID]),
+//    .axi_rx_b_if        (mx2fn_rx_b_port[PG_SHARED_VF_PID]),
+//    .axi_tx_b_if        (fn2mx_tx_b_port[PG_SHARED_VF_PID]),
+
+//    .axi_s_if           (apf_pgsk_slv_if)        // CSR interface from APF
+// );
+// end : pg_afu
+// else begin
+//    dummy_csr #(
+//       .NEXT_DFH_OFFSET  (fabric_width_pkg::apf_pr_slv_next_dfh_offset),
+//       .END_OF_LIST      (fabric_width_pkg::apf_pr_slv_eol)
+//    ) emif_dummy_csr (
+//       .clk         (clk_csr),
+//       .rst_n       (rst_n_csr),
+//       .csr_lite_if (apf_pgsk_slv_if)
+//    );
+// end // else: !if(PG_AFU_NUM_PORTS > 0)
+// endgenerate
+
+
+`ifdef INCLUDE_HSSI
+   ofs_fim_hssi_ss_tx_axis_if      pg1_hssi_ss_st_tx [MAX_NUM_ETH_CHANNELS/2-1:0]();
+   ofs_fim_hssi_ss_rx_axis_if      pg1_hssi_ss_st_rx [MAX_NUM_ETH_CHANNELS/2-1:0]();
+   ofs_fim_hssi_fc_if              pg1_hssi_fc [MAX_NUM_ETH_CHANNELS/2-1:0]();
+   logic [MAX_NUM_ETH_CHANNELS/2-1:0] pg1_i_hssi_clk_pll;
+
+   ofs_fim_hssi_ss_tx_axis_if      pg2_hssi_ss_st_tx [MAX_NUM_ETH_CHANNELS/2-1:0]();
+   ofs_fim_hssi_ss_rx_axis_if      pg2_hssi_ss_st_rx [MAX_NUM_ETH_CHANNELS/2-1:0]();
+   ofs_fim_hssi_fc_if              pg2_hssi_fc [MAX_NUM_ETH_CHANNELS/2-1:0]();
+   logic [MAX_NUM_ETH_CHANNELS/2-1:0] pg2_i_hssi_clk_pll;
+
+   reorder_eth_channel jason_reorder ( 
+      .hssi_ss_st_tx(hssi_ss_st_tx),
+      .hssi_ss_st_rx(hssi_ss_st_rx),
+      .hssi_fc(hssi_fc),
+      .i_hssi_clk_pll(i_hssi_clk_pll),
+
+      .pg1_hssi_ss_st_tx(pg1_hssi_ss_st_tx),
+      .pg1_hssi_ss_st_rx(pg1_hssi_ss_st_rx),
+      .pg1_hssi_fc(pg1_hssi_fc),
+      .pg1_i_hssi_clk_pll(pg1_i_hssi_clk_pll),
+
+      .pg2_hssi_ss_st_tx(pg2_hssi_ss_st_tx),
+      .pg2_hssi_ss_st_rx(pg2_hssi_ss_st_rx),
+      .pg2_hssi_fc(pg2_hssi_fc),
+      .pg2_i_hssi_clk_pll(pg2_i_hssi_clk_pll)
+   );
+
+`endif
+
+   // asp_avst_if udp_avst_from_pg1_to_pg2[NUM_ETH_CHANNELS/2-1:0]();
+   // asp_avst_if udp_avst_from_pg2_to_pg1[NUM_ETH_CHANNELS/2-1:0]();
+
+   asp_avst_if #(.DATA_WIDTH(JASON_IOPIPES_WIDTH)) udp_avst_from_pg1_to_pg2[JASON_NUM_IOPIPES-1:0]();
+   asp_avst_if #(.DATA_WIDTH(JASON_IOPIPES_WIDTH)) udp_avst_from_pg2_to_pg1[JASON_NUM_IOPIPES-1:0]();
+
+
 generate if (PG_AFU_NUM_PORTS > 0) begin : pg_afu
 port_gasket #( 
    .PG_NUM_PORTS(PG_AFU_NUM_PORTS),              // Number of PCIe ports to PR region
    .PORT_PF_VF_INFO(PG_PF_VF_INFO),              // PCIe port data
-   .NUM_MEM_CH(AFU_MEM_CHANNEL),                 // Number of Memory Porst to PR region
+   .NUM_MEM_CH(2),                 // Number of Memory Porst to PR region
+   .JASON_NUM_IOPIPES(JASON_NUM_IOPIPES),
+   .JASON_IOPIPES_WIDTH(JASON_IOPIPES_WIDTH),
+   `ifdef INCLUDE_HSSI
+   .JASON_MAX_NUM_ETH_CH(MAX_NUM_ETH_CHANNELS/2), // Number of HSSI channels
+   `endif
    .END_OF_LIST    (fabric_width_pkg::apf_pr_slv_eol),                       // port_gasket DFH end of list field
    .NEXT_DFH_OFFSET(fabric_width_pkg::apf_pr_slv_next_dfh_offset),                   // Next offset in OFS management DFH
    .PG_NUM_RTABLE_ENTRIES (PG_NUM_RTABLE_ENTRIES),
    .PG_PFVF_ROUTING_TABLE (PG_PFVF_ROUTING_TABLE)
+
+
+
 ) port_gasket (
+	// .uclk,
+	// .uclk_div2,
+   .port2_reset,
+   .port2_freeze,
+
    .refclk             (SYS_REFCLK),            // 100 MHz refclk for user clk pll
    .clk,                                        // PCIe Clk
    .clk_div2,                                   // Half frequency of PCIe clk
@@ -495,29 +774,32 @@ port_gasket #(
 
    // FLR interface
    .pg_pf_flr_rst_n    (pg_flr_rst_n),
-   .flr_req            (afu_flr_req[PG_SHARED_VF_PID]),
-   .flr_rsp            (afu_flr_rsp[PG_SHARED_VF_PID]),
+   .flr_req            (afu_flr_req[1]),
 
 `ifdef INCLUDE_DDR4
-   .afu_mem_if         (ext_mem_if),             // Memory interface
+   .afu_mem_if         (ext_mem_if[3:2]),             // Memory interface
 `endif
 
-   `ifdef INCLUDE_HSSI                           // Instantiates HE-HSSI in PR region   
-      .hssi_ss_st_tx  (hssi_ss_st_tx),           // HSSI Tx
-      .hssi_ss_st_rx  (hssi_ss_st_rx),           // HSSI Rx
-      .hssi_fc        (hssi_fc),                 // Flow control interface
-      .i_hssi_clk_pll (i_hssi_clk_pll),          // HSSI clocks
+   .udp_avst_from_kernel (udp_avst_from_pg1_to_pg2),
+   .udp_avst_to_kernel   (udp_avst_from_pg2_to_pg1),
+
+   `ifdef INCLUDE_HSSI                           // Instantiates HE-HSSI in PR region                                                                             
+      .hssi_ss_st_tx  (pg1_hssi_ss_st_tx ),           // HSSI Tx
+      .hssi_ss_st_rx  (pg1_hssi_ss_st_rx ),           // HSSI Rx
+      .hssi_fc        (pg1_hssi_fc       ),                 // Flow control interface
+      .i_hssi_clk_pll (pg1_i_hssi_clk_pll),          // HSSI clocks
+                                                // 15 : 12                                                                                    // 7 : 4
    `endif
 
    .i_sel_mmio_rsp     (sel_mmio_rsp),
    .i_read_flush_done  (read_flush_done),
-   .o_afu_softreset    (afu_softreset),
-   .o_pr_parity_error  (pr_parity_error),       // Partial Reconfiguration FIFO Parity Error Indication from PR Controller.
+   .o_afu_softreset    (afu_softreset_1),
+   .o_pr_parity_error  (pr_parity_error_1),       // Partial Reconfiguration FIFO Parity Error Indication from PR Controller.
 
-   .axi_rx_a_if        (mx2fn_rx_a_port[PG_SHARED_VF_PID]),
-   .axi_tx_a_if        (fn2mx_tx_a_port[PG_SHARED_VF_PID]),
-   .axi_rx_b_if        (mx2fn_rx_b_port[PG_SHARED_VF_PID]),
-   .axi_tx_b_if        (fn2mx_tx_b_port[PG_SHARED_VF_PID]),
+   .axi_rx_a_if        (mx2fn_rx_a_port[1]),
+   .axi_tx_a_if        (fn2mx_tx_a_port[1]),
+   .axi_rx_b_if        (mx2fn_rx_b_port[1]),
+   .axi_tx_b_if        (fn2mx_tx_b_port[1]),
 
    .axi_s_if           (apf_pgsk_slv_if)        // CSR interface from APF
 );
@@ -533,6 +815,96 @@ else begin
    );
 end // else: !if(PG_AFU_NUM_PORTS > 0)
 endgenerate
+
+//-----------------------------------------------------------------------------------------------
+// Port Gasket (PG) AFU_2
+//-----------------------------------------------------------------------------------------------
+// The port gasket implements the Partial Reconfiguration (PR) region AFU and supporting 
+// infrastucture including freeze bridges, the PR controller feature, user clock feature, and remote 
+// signal tap feature. The reference implementation connects a single physical interface routed to 
+// 3VFs on PF0. In the PR region the VFs are then routed to HE-MEM (PF0-VF0), HE-HSSI(PF0-VF1), 
+// and MEM-TG (PF0-VF2). The reference routing table is provided in $OFS_ROOTDIR/afu_top/mux/top_cfg_pkg.sv
+//-----------------------------------------------------------------------------------------------
+
+// mem 0 and 1 is on the bottom
+generate if (PG_AFU_NUM_PORTS > 0) begin : pg_afu_2
+port_gasket_2 #( 
+   .PG_NUM_PORTS(PG_AFU_NUM_PORTS),              // Number of PCIe ports to PR region
+   .PORT_PF_VF_INFO(PG_PF_VF_INFO_2),              // PCIe port data
+   .NUM_MEM_CH(2),                 // Number of Memory Porst to PR region
+   .JASON_NUM_IOPIPES(JASON_NUM_IOPIPES),
+   .JASON_IOPIPES_WIDTH(JASON_IOPIPES_WIDTH),
+   `ifdef INCLUDE_HSSI
+   .JASON_MAX_NUM_ETH_CH(MAX_NUM_ETH_CHANNELS/2), // Number of HSSI channels
+   `endif
+   .END_OF_LIST    (fabric_width_pkg::apf_pr_2_slv_eol),                       // port_gasket DFH end of list field
+   .NEXT_DFH_OFFSET(fabric_width_pkg::apf_pr_2_slv_next_dfh_offset),                   // Next offset in OFS management DFH
+   .PG_NUM_RTABLE_ENTRIES (PG_NUM_RTABLE_ENTRIES),
+   .PG_PFVF_ROUTING_TABLE (PG_PFVF_ROUTING_TABLE_2)
+) port_gasket_2 (
+	// .uclk,
+	// .uclk_div2,
+   .port2_reset,
+   .port2_freeze,
+	
+   .refclk             (SYS_REFCLK),            // 100 MHz refclk for user clk pll
+   .clk,                                        // PCIe Clk
+   .clk_div2,                                   // Half frequency of PCIe clk
+   .clk_div4,                                   // Quarter frequency of PCIe clk
+   .clk_100            (clk_csr),               // 100 MHz for user clk logic
+   .clk_csr            (clk_csr),               // 100 MHz CSR interface clock      
+
+   .rst_n,                                      // Reset from hip
+   .rst_n_100          (rst_n_csr),             // Reset from hip on csr clk
+   .rst_n_csr          (rst_n_csr),             // Reset from hip on csr clk
+
+   // FLR interface
+   .pg_pf_flr_rst_n    (pg_flr_rst_n),
+   .flr_req            (afu_flr_req[2]),
+   .flr_rsp            (afu_flr_rsp[2]),
+
+`ifdef INCLUDE_DDR4
+  .afu_mem_if         (ext_mem_if[1:0]),             // Memory interface
+`endif
+
+   .udp_avst_from_kernel(udp_avst_from_pg2_to_pg1),
+   .udp_avst_to_kernel  (udp_avst_from_pg1_to_pg2),
+
+
+
+  `ifdef INCLUDE_HSSI                           // Instantiates HE-HSSI in PR region   
+     .hssi_ss_st_tx  (pg2_hssi_ss_st_tx ),           // HSSI Tx
+     .hssi_ss_st_rx  (pg2_hssi_ss_st_rx ),           // HSSI Rx
+     .hssi_fc        (pg2_hssi_fc       ),                 // Flow control interface
+     .i_hssi_clk_pll (pg2_i_hssi_clk_pll),          // HSSI clocks
+                                                         // 11 : 8                                                                      // 3 : 0
+  `endif
+
+   .i_sel_mmio_rsp     (sel_mmio_rsp),
+   .i_read_flush_done  (read_flush_done),
+   .o_afu_softreset    (afu_softreset_2),
+   .o_pr_parity_error  (pr_parity_error_2),       // Partial Reconfiguration FIFO Parity Error Indication from PR Controller.
+
+   .axi_rx_a_if        (mx2fn_rx_a_port[2]),
+   .axi_tx_a_if        (fn2mx_tx_a_port[2]),
+   .axi_rx_b_if        (mx2fn_rx_b_port[2]),
+   .axi_tx_b_if        (fn2mx_tx_b_port[2]),
+
+   .axi_s_if           (apf_pgsk_slv_if_2)        // CSR interface from APF
+);
+end : pg_afu_2
+else begin
+   dummy_csr #(
+      .NEXT_DFH_OFFSET  (fabric_width_pkg::apf_pr_2_slv_next_dfh_offset),
+      .END_OF_LIST      (fabric_width_pkg::apf_pr_2_slv_eol)
+   ) emif_dummy_csr (
+      .clk         (clk_csr),
+      .rst_n       (rst_n_csr),
+      .csr_lite_if (apf_pgsk_slv_if_2)
+   );
+end // else: !if(PG_AFU_NUM_PORTS > 0)
+endgenerate
+
 
 //----------------------------------------------------------------
 // MCTP management interface 
@@ -694,6 +1066,26 @@ apf apf(
    .apf_pr_slv_rresp      (apf_pgsk_slv_if.rresp     ),
    .apf_pr_slv_rvalid     (apf_pgsk_slv_if.rvalid    ),
    .apf_pr_slv_rready     (apf_pgsk_slv_if.rready    ),
+
+	.apf_pr_2_slv_awaddr     (apf_pgsk_slv_if_2.awaddr    ),
+   .apf_pr_2_slv_awprot     (apf_pgsk_slv_if_2.awprot    ),
+   .apf_pr_2_slv_awvalid    (apf_pgsk_slv_if_2.awvalid   ),
+   .apf_pr_2_slv_awready    (apf_pgsk_slv_if_2.awready   ),
+   .apf_pr_2_slv_wdata      (apf_pgsk_slv_if_2.wdata     ),
+   .apf_pr_2_slv_wstrb      (apf_pgsk_slv_if_2.wstrb     ),
+   .apf_pr_2_slv_wvalid     (apf_pgsk_slv_if_2.wvalid    ),
+   .apf_pr_2_slv_wready     (apf_pgsk_slv_if_2.wready    ),
+   .apf_pr_2_slv_bresp      (apf_pgsk_slv_if_2.bresp     ),
+   .apf_pr_2_slv_bvalid     (apf_pgsk_slv_if_2.bvalid    ),
+   .apf_pr_2_slv_bready     (apf_pgsk_slv_if_2.bready    ),
+   .apf_pr_2_slv_araddr     (apf_pgsk_slv_if_2.araddr    ),
+   .apf_pr_2_slv_arprot     (apf_pgsk_slv_if_2.arprot    ),
+   .apf_pr_2_slv_arvalid    (apf_pgsk_slv_if_2.arvalid   ),
+   .apf_pr_2_slv_arready    (apf_pgsk_slv_if_2.arready   ),
+   .apf_pr_2_slv_rdata      (apf_pgsk_slv_if_2.rdata     ),
+   .apf_pr_2_slv_rresp      (apf_pgsk_slv_if_2.rresp     ),
+   .apf_pr_2_slv_rvalid     (apf_pgsk_slv_if_2.rvalid    ),
+   .apf_pr_2_slv_rready     (apf_pgsk_slv_if_2.rready    ),
 
    .apf_uart_mst_awaddr   (apf_uart_mst_if.awaddr  ),
    .apf_uart_mst_awprot   (apf_uart_mst_if.awprot  ),

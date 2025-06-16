@@ -1,6 +1,3 @@
-# Copyright (C) 2020-2023 Intel Corporation
-# SPDX-License-Identifier: MIT
-
 package require -exact qsys 18.0
   
     # create the system
@@ -529,6 +526,85 @@ package require -exact qsys 18.0
         add_instantiation_interface_port altera_axi4lite_master m_rready rready 1 STD_LOGIC Output
         save_instantiation
         
+        add_component apf_pr_2_slv ip/apf/apf_pr_2_slv.ip axi4lite_shim apf_pr_2_slv 1.0
+        load_component apf_pr_2_slv
+        set_component_parameter_value AW {16}
+        set_component_parameter_value DW {64}
+        set_component_project_property HIDE_FROM_IP_CATALOG {false}
+        save_component
+        load_instantiation apf_pr_2_slv
+        remove_instantiation_interfaces_and_ports
+        add_instantiation_interface clock clock INPUT
+        set_instantiation_interface_parameter_value clock clockRate {0}
+        set_instantiation_interface_parameter_value clock externallyDriven {false}
+        set_instantiation_interface_parameter_value clock ptfSchematicName {}
+        add_instantiation_interface_port clock clk clk 1 STD_LOGIC Input
+        add_instantiation_interface reset reset INPUT
+        set_instantiation_interface_parameter_value reset associatedClock {clock}
+        set_instantiation_interface_parameter_value reset synchronousEdges {DEASSERT}
+        add_instantiation_interface_port reset rst_n reset_n 1 STD_LOGIC Input
+        add_instantiation_interface altera_axi4lite_slave axi4lite INPUT
+        set_instantiation_interface_parameter_value altera_axi4lite_slave associatedClock {clock}
+        set_instantiation_interface_parameter_value altera_axi4lite_slave associatedReset {reset}
+        set_instantiation_interface_parameter_value altera_axi4lite_slave bridgesToMaster {}
+        set_instantiation_interface_parameter_value altera_axi4lite_slave combinedAcceptanceCapability {16}
+        set_instantiation_interface_parameter_value altera_axi4lite_slave maximumOutstandingReads {16}
+        set_instantiation_interface_parameter_value altera_axi4lite_slave maximumOutstandingTransactions {16}
+        set_instantiation_interface_parameter_value altera_axi4lite_slave maximumOutstandingWrites {16/4}
+        set_instantiation_interface_parameter_value altera_axi4lite_slave readAcceptanceCapability {16}
+        set_instantiation_interface_parameter_value altera_axi4lite_slave readDataReorderingDepth {1}
+        set_instantiation_interface_parameter_value altera_axi4lite_slave trustzoneAware {true}
+        set_instantiation_interface_parameter_value altera_axi4lite_slave writeAcceptanceCapability {16/4}
+        add_instantiation_interface_port altera_axi4lite_slave s_awaddr awaddr 16 STD_LOGIC_VECTOR Input
+        add_instantiation_interface_port altera_axi4lite_slave s_awprot awprot 3 STD_LOGIC_VECTOR Input
+        add_instantiation_interface_port altera_axi4lite_slave s_awvalid awvalid 1 STD_LOGIC Input
+        add_instantiation_interface_port altera_axi4lite_slave s_awready awready 1 STD_LOGIC Output
+        add_instantiation_interface_port altera_axi4lite_slave s_wdata wdata 64 STD_LOGIC_VECTOR Input
+        add_instantiation_interface_port altera_axi4lite_slave s_wstrb wstrb 8 STD_LOGIC_VECTOR Input
+        add_instantiation_interface_port altera_axi4lite_slave s_wvalid wvalid 1 STD_LOGIC Input
+        add_instantiation_interface_port altera_axi4lite_slave s_wready wready 1 STD_LOGIC Output
+        add_instantiation_interface_port altera_axi4lite_slave s_bresp bresp 2 STD_LOGIC_VECTOR Output
+        add_instantiation_interface_port altera_axi4lite_slave s_bvalid bvalid 1 STD_LOGIC Output
+        add_instantiation_interface_port altera_axi4lite_slave s_bready bready 1 STD_LOGIC Input
+        add_instantiation_interface_port altera_axi4lite_slave s_araddr araddr 16 STD_LOGIC_VECTOR Input
+        add_instantiation_interface_port altera_axi4lite_slave s_arprot arprot 3 STD_LOGIC_VECTOR Input
+        add_instantiation_interface_port altera_axi4lite_slave s_arvalid arvalid 1 STD_LOGIC Input
+        add_instantiation_interface_port altera_axi4lite_slave s_arready arready 1 STD_LOGIC Output
+        add_instantiation_interface_port altera_axi4lite_slave s_rdata rdata 64 STD_LOGIC_VECTOR Output
+        add_instantiation_interface_port altera_axi4lite_slave s_rresp rresp 2 STD_LOGIC_VECTOR Output
+        add_instantiation_interface_port altera_axi4lite_slave s_rvalid rvalid 1 STD_LOGIC Output
+        add_instantiation_interface_port altera_axi4lite_slave s_rready rready 1 STD_LOGIC Input
+        add_instantiation_interface altera_axi4lite_master axi4lite OUTPUT
+        set_instantiation_interface_parameter_value altera_axi4lite_master associatedClock {clock}
+        set_instantiation_interface_parameter_value altera_axi4lite_master associatedReset {reset}
+        set_instantiation_interface_parameter_value altera_axi4lite_master combinedIssuingCapability {16}
+        set_instantiation_interface_parameter_value altera_axi4lite_master maximumOutstandingReads {16}
+        set_instantiation_interface_parameter_value altera_axi4lite_master maximumOutstandingTransactions {16}
+        set_instantiation_interface_parameter_value altera_axi4lite_master maximumOutstandingWrites {16/4}
+        set_instantiation_interface_parameter_value altera_axi4lite_master readIssuingCapability {16}
+        set_instantiation_interface_parameter_value altera_axi4lite_master trustzoneAware {true}
+        set_instantiation_interface_parameter_value altera_axi4lite_master writeIssuingCapability {16/4}
+        add_instantiation_interface_port altera_axi4lite_master m_awaddr awaddr 16 STD_LOGIC_VECTOR Output
+        add_instantiation_interface_port altera_axi4lite_master m_awprot awprot 3 STD_LOGIC_VECTOR Output
+        add_instantiation_interface_port altera_axi4lite_master m_awvalid awvalid 1 STD_LOGIC Output
+        add_instantiation_interface_port altera_axi4lite_master m_awready awready 1 STD_LOGIC Input
+        add_instantiation_interface_port altera_axi4lite_master m_wdata wdata 64 STD_LOGIC_VECTOR Output
+        add_instantiation_interface_port altera_axi4lite_master m_wstrb wstrb 8 STD_LOGIC_VECTOR Output
+        add_instantiation_interface_port altera_axi4lite_master m_wvalid wvalid 1 STD_LOGIC Output
+        add_instantiation_interface_port altera_axi4lite_master m_wready wready 1 STD_LOGIC Input
+        add_instantiation_interface_port altera_axi4lite_master m_bresp bresp 2 STD_LOGIC_VECTOR Input
+        add_instantiation_interface_port altera_axi4lite_master m_bvalid bvalid 1 STD_LOGIC Input
+        add_instantiation_interface_port altera_axi4lite_master m_bready bready 1 STD_LOGIC Output
+        add_instantiation_interface_port altera_axi4lite_master m_araddr araddr 16 STD_LOGIC_VECTOR Output
+        add_instantiation_interface_port altera_axi4lite_master m_arprot arprot 3 STD_LOGIC_VECTOR Output
+        add_instantiation_interface_port altera_axi4lite_master m_arvalid arvalid 1 STD_LOGIC Output
+        add_instantiation_interface_port altera_axi4lite_master m_arready arready 1 STD_LOGIC Input
+        add_instantiation_interface_port altera_axi4lite_master m_rdata rdata 64 STD_LOGIC_VECTOR Input
+        add_instantiation_interface_port altera_axi4lite_master m_rresp rresp 2 STD_LOGIC_VECTOR Input
+        add_instantiation_interface_port altera_axi4lite_master m_rvalid rvalid 1 STD_LOGIC Input
+        add_instantiation_interface_port altera_axi4lite_master m_rready rready 1 STD_LOGIC Output
+        save_instantiation
+        
         add_component apf_bpf_mst ip/apf/apf_bpf_mst.ip axi4lite_shim apf_bpf_mst 1.0
         load_component apf_bpf_mst
         set_component_parameter_value AW {20}
@@ -890,6 +966,15 @@ package require -exact qsys 18.0
         set_connection_parameter_value apf_reset_bridge.out_reset/apf_achk_slv.reset clockDomainSysInfo {-1}
         set_connection_parameter_value apf_reset_bridge.out_reset/apf_achk_slv.reset clockResetSysInfo {}
         set_connection_parameter_value apf_reset_bridge.out_reset/apf_achk_slv.reset resetDomainSysInfo {-1}
+        add_connection apf_clock_bridge.out_clk/apf_pr_2_slv.clock
+        set_connection_parameter_value apf_clock_bridge.out_clk/apf_pr_2_slv.clock clockDomainSysInfo {-1}
+        set_connection_parameter_value apf_clock_bridge.out_clk/apf_pr_2_slv.clock clockRateSysInfo {}
+        set_connection_parameter_value apf_clock_bridge.out_clk/apf_pr_2_slv.clock clockResetSysInfo {}
+        set_connection_parameter_value apf_clock_bridge.out_clk/apf_pr_2_slv.clock resetDomainSysInfo {-1}
+        add_connection apf_reset_bridge.out_reset/apf_pr_2_slv.reset
+        set_connection_parameter_value apf_reset_bridge.out_reset/apf_pr_2_slv.reset clockDomainSysInfo {-1}
+        set_connection_parameter_value apf_reset_bridge.out_reset/apf_pr_2_slv.reset clockResetSysInfo {}
+        set_connection_parameter_value apf_reset_bridge.out_reset/apf_pr_2_slv.reset resetDomainSysInfo {-1}
         add_connection apf_clock_bridge.out_clk/apf_bpf_mst.clock
         set_connection_parameter_value apf_clock_bridge.out_clk/apf_bpf_mst.clock clockDomainSysInfo {-1}
         set_connection_parameter_value apf_clock_bridge.out_clk/apf_bpf_mst.clock clockRateSysInfo {}
@@ -1028,6 +1113,25 @@ package require -exact qsys 18.0
         set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_slv.altera_axi4lite_slave qsys_mm.widthAdapterImplementation {GENERIC_CONVERTER}
         set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_slv.altera_axi4lite_slave slaveDataWidthSysInfo {-1}
         
+        add_connection apf_st2mm_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave
+        set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave addressMapSysInfo {}
+        set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave addressWidthSysInfo {}
+        set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave arbitrationPriority {1}
+        set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave baseAddress {0x90000}
+        set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave defaultConnection {0}
+        set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave domainAlias {}
+        set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.burstAdapterImplementation {GENERIC_CONVERTER}
+        set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.clockCrossingAdapter {HANDSHAKE}
+        set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.enableEccProtection {FALSE}
+        set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.enableInstrumentation {FALSE}
+        set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.insertDefaultSlave {FALSE}
+        set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.interconnectResetSource {DEFAULT}
+        set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.interconnectType {STANDARD}
+        set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.maxAdditionalLatency {1}
+        set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.syncResets {FALSE}
+        set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.widthAdapterImplementation {GENERIC_CONVERTER}
+        set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave slaveDataWidthSysInfo {-1}
+        
         add_connection apf_st2mm_mst.altera_axi4lite_master/apf_st2mm_slv.altera_axi4lite_slave
         set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_st2mm_slv.altera_axi4lite_slave addressMapSysInfo {}
         set_connection_parameter_value apf_st2mm_mst.altera_axi4lite_master/apf_st2mm_slv.altera_axi4lite_slave addressWidthSysInfo {}
@@ -1153,6 +1257,25 @@ package require -exact qsys 18.0
         set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_slv.altera_axi4lite_slave qsys_mm.syncResets {FALSE}
         set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_slv.altera_axi4lite_slave qsys_mm.widthAdapterImplementation {GENERIC_CONVERTER}
         set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_slv.altera_axi4lite_slave slaveDataWidthSysInfo {-1}
+        
+        add_connection apf_mctp_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave
+        set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave addressMapSysInfo {}
+        set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave addressWidthSysInfo {}
+        set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave arbitrationPriority {1}
+        set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave baseAddress {0x90000}
+        set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave defaultConnection {0}
+        set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave domainAlias {}
+        set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.burstAdapterImplementation {GENERIC_CONVERTER}
+        set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.clockCrossingAdapter {HANDSHAKE}
+        set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.enableEccProtection {FALSE}
+        set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.enableInstrumentation {FALSE}
+        set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.insertDefaultSlave {FALSE}
+        set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.interconnectResetSource {DEFAULT}
+        set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.interconnectType {STANDARD}
+        set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.maxAdditionalLatency {1}
+        set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.syncResets {FALSE}
+        set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.widthAdapterImplementation {GENERIC_CONVERTER}
+        set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave slaveDataWidthSysInfo {-1}
         
         add_connection apf_mctp_mst.altera_axi4lite_master/apf_st2mm_slv.altera_axi4lite_slave
         set_connection_parameter_value apf_mctp_mst.altera_axi4lite_master/apf_st2mm_slv.altera_axi4lite_slave addressMapSysInfo {}
@@ -1280,6 +1403,25 @@ package require -exact qsys 18.0
         set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_slv.altera_axi4lite_slave qsys_mm.widthAdapterImplementation {GENERIC_CONVERTER}
         set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_slv.altera_axi4lite_slave slaveDataWidthSysInfo {-1}
         
+        add_connection apf_uart_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave
+        set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave addressMapSysInfo {}
+        set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave addressWidthSysInfo {}
+        set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave arbitrationPriority {1}
+        set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave baseAddress {0x90000}
+        set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave defaultConnection {0}
+        set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave domainAlias {}
+        set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.burstAdapterImplementation {GENERIC_CONVERTER}
+        set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.clockCrossingAdapter {HANDSHAKE}
+        set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.enableEccProtection {FALSE}
+        set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.enableInstrumentation {FALSE}
+        set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.insertDefaultSlave {FALSE}
+        set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.interconnectResetSource {DEFAULT}
+        set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.interconnectType {STANDARD}
+        set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.maxAdditionalLatency {1}
+        set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.syncResets {FALSE}
+        set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave qsys_mm.widthAdapterImplementation {GENERIC_CONVERTER}
+        set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_pr_2_slv.altera_axi4lite_slave slaveDataWidthSysInfo {-1}
+        
         add_connection apf_uart_mst.altera_axi4lite_master/apf_st2mm_slv.altera_axi4lite_slave
         set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_st2mm_slv.altera_axi4lite_slave addressMapSysInfo {}
         set_connection_parameter_value apf_uart_mst.altera_axi4lite_master/apf_st2mm_slv.altera_axi4lite_slave addressWidthSysInfo {}
@@ -1327,6 +1469,7 @@ package require -exact qsys 18.0
 	set_interface_property apf_uart_slv EXPORT_OF apf_uart_slv.altera_axi4lite_master
 	set_interface_property apf_pr_slv EXPORT_OF apf_pr_slv.altera_axi4lite_master
 	set_interface_property apf_achk_slv EXPORT_OF apf_achk_slv.altera_axi4lite_master
+	set_interface_property apf_pr_2_slv EXPORT_OF apf_pr_2_slv.altera_axi4lite_master
 
     # set the the module properties
 	set_module_property FILE {apf.qsys}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="sim/apf_reset_bridge.v"
+   type="VERILOG"
+   library="apf_reset_bridge"
+   hasInlineConfiguration="true" />
+ <topLevel name="apf_reset_bridge.apf_reset_bridge" />
+ <deviceFamily name="agilex7" />
+ <device name="AGFB014R24A2E2V" />
+</simPackage>
