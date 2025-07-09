@@ -585,7 +585,7 @@ endgenerate
    
 	
 	
-// logic uclk, uclk_div2;
+logic uclk, uclk_div2;
 logic port2_reset, port2_freeze;
 //-----------------------------------------------------------------------------------------------
 // Port Gasket (PG) AFU
@@ -756,8 +756,8 @@ port_gasket #(
 
 
 ) port_gasket (
-	// .uclk,
-	// .uclk_div2,
+	.uclk,
+	.uclk_div2,
    .port2_reset,
    .port2_freeze,
 
@@ -842,8 +842,8 @@ port_gasket_2 #(
    .PG_NUM_RTABLE_ENTRIES (PG_NUM_RTABLE_ENTRIES),
    .PG_PFVF_ROUTING_TABLE (PG_PFVF_ROUTING_TABLE_2)
 ) port_gasket_2 (
-	// .uclk,
-	// .uclk_div2,
+	.uclk,
+	.uclk_div2,
    .port2_reset,
    .port2_freeze,
 	
