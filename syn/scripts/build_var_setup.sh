@@ -169,6 +169,8 @@ fi
 if [ -z ${Q_PR_PARTITION_NAME} ]; then
     export Q_PR_PARTITION_NAME="green_region"
     export Q_PR_PARTITION_NAME_2="green_region_2"
+    export Q_PR_PARTITION_NAME_3="green_region_3"
+    export Q_PR_PARTITION_NAME_4="green_region_4"
 fi
 
 

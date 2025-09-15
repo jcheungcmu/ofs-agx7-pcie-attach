@@ -140,7 +140,7 @@ endmodule
 
 module afu_top #(
 `ifdef INCLUDE_DDR4
-   parameter AFU_MEM_CHANNEL = 2,
+   parameter AFU_MEM_CHANNEL = 4,
 `else
    parameter AFU_MEM_CHANNEL = 0,
 `endif
@@ -615,26 +615,6 @@ localparam pcie_ss_hdr_pkg::ReqHdr_pf_vf_info_t[PG_AFU_NUM_PORTS-1:0] PG_PF_VF_I
    gen_prr_pf_vf_map();
 
 
-ofs_fim_axi_lite_if #(.AWADDR_WIDTH(16), .ARADDR_WIDTH(16))                       apf_pgsk_slv_if_2  (.clk(clk), .rst_n(rst_n));
-//localparam PG_NUM_RTABLE_ENTRIES = top_cfg_pkg::PG_NUM_RTABLE_ENTRIES;
-localparam t_prr_pf_vf_entry_info PG_PFVF_ROUTING_TABLE_2 = top_cfg_pkg::PG_PF_VF_RTABLE_2;
-
-//typedef pcie_ss_hdr_pkg::ReqHdr_pf_vf_info_t[PG_AFU_NUM_PORTS-1:0] t_afu_prr_pf_vf_map;
-function automatic t_afu_prr_pf_vf_map gen_prr_pf_vf_map_2();
-   t_afu_prr_pf_vf_map map;
-   for (int p = 0; p < PG_AFU_NUM_PORTS; p = p + 1) begin
-      map[p].pf_num = PG_PFVF_ROUTING_TABLE_2[p].pf;
-      map[p].vf_num = PG_PFVF_ROUTING_TABLE_2[p].vf;
-      map[p].vf_active = PG_PFVF_ROUTING_TABLE_2[p].vf_active;
-      map[p].link_num = 0;
-   end
-   return map;
-endfunction // gen_pf_vf_map
-
-localparam pcie_ss_hdr_pkg::ReqHdr_pf_vf_info_t[PG_AFU_NUM_PORTS-1:0] PG_PF_VF_INFO_2 =
-   gen_prr_pf_vf_map_2();
-
-
 // generate if (PG_AFU_NUM_PORTS > 0) begin : pg_afu
 // port_gasket #( 
 //    .PG_NUM_PORTS(PG_AFU_NUM_PORTS),              // Number of PCIe ports to PR region
@@ -737,12 +717,15 @@ localparam pcie_ss_hdr_pkg::ReqHdr_pf_vf_info_t[PG_AFU_NUM_PORTS-1:0] PG_PF_VF_I
    asp_avst_if #(.DATA_WIDTH(JASON_IOPIPES_WIDTH)) udp_avst_from_pg1_to_pg2[JASON_NUM_IOPIPES-1:0]();
    asp_avst_if #(.DATA_WIDTH(JASON_IOPIPES_WIDTH)) udp_avst_from_pg2_to_pg1[JASON_NUM_IOPIPES-1:0]();
 
+   asp_avst_if #(.DATA_WIDTH(JASON_IOPIPES_WIDTH)) udp_avst_from_pg3_to_pg4[JASON_NUM_IOPIPES-1:0]();
+   asp_avst_if #(.DATA_WIDTH(JASON_IOPIPES_WIDTH)) udp_avst_from_pg4_to_pg3[JASON_NUM_IOPIPES-1:0]();
+
 
 generate if (PG_AFU_NUM_PORTS > 0) begin : pg_afu
 port_gasket #( 
    .PG_NUM_PORTS(PG_AFU_NUM_PORTS),              // Number of PCIe ports to PR region
    .PORT_PF_VF_INFO(PG_PF_VF_INFO),              // PCIe port data
-   .NUM_MEM_CH(2),                 // Number of Memory Porst to PR region
+   .NUM_MEM_CH(1),                 // Number of Memory Porst to PR region
    .JASON_NUM_IOPIPES(JASON_NUM_IOPIPES),
    .JASON_IOPIPES_WIDTH(JASON_IOPIPES_WIDTH),
    `ifdef INCLUDE_HSSI
@@ -777,7 +760,7 @@ port_gasket #(
    .flr_req            (afu_flr_req[1]),
 
 `ifdef INCLUDE_DDR4
-   .afu_mem_if         (ext_mem_if[3:2]),             // Memory interface
+   .afu_mem_if         (ext_mem_if[3:3]),             // Memory interface
 `endif
 
    .udp_avst_from_kernel (udp_avst_from_pg1_to_pg2),
@@ -826,12 +809,32 @@ endgenerate
 // and MEM-TG (PF0-VF2). The reference routing table is provided in $OFS_ROOTDIR/afu_top/mux/top_cfg_pkg.sv
 //-----------------------------------------------------------------------------------------------
 
+ofs_fim_axi_lite_if #(.AWADDR_WIDTH(16), .ARADDR_WIDTH(16))                       apf_pgsk_slv_if_2  (.clk(clk), .rst_n(rst_n));
+//localparam PG_NUM_RTABLE_ENTRIES = top_cfg_pkg::PG_NUM_RTABLE_ENTRIES;
+localparam t_prr_pf_vf_entry_info PG_PFVF_ROUTING_TABLE_2 = top_cfg_pkg::PG_PF_VF_RTABLE_2;
+
+//typedef pcie_ss_hdr_pkg::ReqHdr_pf_vf_info_t[PG_AFU_NUM_PORTS-1:0] t_afu_prr_pf_vf_map;
+function automatic t_afu_prr_pf_vf_map gen_prr_pf_vf_map_2();
+   t_afu_prr_pf_vf_map map;
+   for (int p = 0; p < PG_AFU_NUM_PORTS; p = p + 1) begin
+      map[p].pf_num = PG_PFVF_ROUTING_TABLE_2[p].pf;
+      map[p].vf_num = PG_PFVF_ROUTING_TABLE_2[p].vf;
+      map[p].vf_active = PG_PFVF_ROUTING_TABLE_2[p].vf_active;
+      map[p].link_num = 0;
+   end
+   return map;
+endfunction // gen_pf_vf_map
+
+localparam pcie_ss_hdr_pkg::ReqHdr_pf_vf_info_t[PG_AFU_NUM_PORTS-1:0] PG_PF_VF_INFO_2 =
+   gen_prr_pf_vf_map_2();
+
+
 // mem 0 and 1 is on the bottom
 generate if (PG_AFU_NUM_PORTS > 0) begin : pg_afu_2
-port_gasket_2 #( 
+port_gasket_slv #( 
    .PG_NUM_PORTS(PG_AFU_NUM_PORTS),              // Number of PCIe ports to PR region
    .PORT_PF_VF_INFO(PG_PF_VF_INFO_2),              // PCIe port data
-   .NUM_MEM_CH(2),                 // Number of Memory Porst to PR region
+   .NUM_MEM_CH(1),                 // Number of Memory Porst to PR region
    .JASON_NUM_IOPIPES(JASON_NUM_IOPIPES),
    .JASON_IOPIPES_WIDTH(JASON_IOPIPES_WIDTH),
    `ifdef INCLUDE_HSSI
@@ -864,7 +867,7 @@ port_gasket_2 #(
    .flr_rsp            (afu_flr_rsp[2]),
 
 `ifdef INCLUDE_DDR4
-  .afu_mem_if         (ext_mem_if[1:0]),             // Memory interface
+  .afu_mem_if         (ext_mem_if[2:2]),             // Memory interface
 `endif
 
    .udp_avst_from_kernel(udp_avst_from_pg2_to_pg1),
@@ -904,6 +907,238 @@ else begin
    );
 end // else: !if(PG_AFU_NUM_PORTS > 0)
 endgenerate
+
+
+//-----------------------------------------------------------------------------------------------
+// Port Gasket (PG) AFU_3
+//-----------------------------------------------------------------------------------------------
+// The port gasket implements the Partial Reconfiguration (PR) region AFU and supporting 
+// infrastucture including freeze bridges, the PR controller feature, user clock feature, and remote 
+// signal tap feature. The reference implementation connects a single physical interface routed to 
+// 3VFs on PF0. In the PR region the VFs are then routed to HE-MEM (PF0-VF0), HE-HSSI(PF0-VF1), 
+// and MEM-TG (PF0-VF2). The reference routing table is provided in $OFS_ROOTDIR/afu_top/mux/top_cfg_pkg.sv
+//-----------------------------------------------------------------------------------------------
+
+ofs_fim_axi_lite_if #(.AWADDR_WIDTH(16), .ARADDR_WIDTH(16))                       apf_pgsk_slv_if_3  (.clk(clk), .rst_n(rst_n));
+//localparam PG_NUM_RTABLE_ENTRIES = top_cfg_pkg::PG_NUM_RTABLE_ENTRIES;
+localparam t_prr_pf_vf_entry_info PG_PFVF_ROUTING_TABLE_3 = top_cfg_pkg::PG_PF_VF_RTABLE_3;
+
+//typedef pcie_ss_hdr_pkg::ReqHdr_pf_vf_info_t[PG_AFU_NUM_PORTS-1:0] t_afu_prr_pf_vf_map;
+function automatic t_afu_prr_pf_vf_map gen_prr_pf_vf_map_3();
+   t_afu_prr_pf_vf_map map;
+   for (int p = 0; p < PG_AFU_NUM_PORTS; p = p + 1) begin
+      map[p].pf_num = PG_PFVF_ROUTING_TABLE_3[p].pf;
+      map[p].vf_num = PG_PFVF_ROUTING_TABLE_3[p].vf;
+      map[p].vf_active = PG_PFVF_ROUTING_TABLE_3[p].vf_active;
+      map[p].link_num = 0;
+   end
+   return map;
+endfunction // gen_pf_vf_map
+
+localparam pcie_ss_hdr_pkg::ReqHdr_pf_vf_info_t[PG_AFU_NUM_PORTS-1:0] PG_PF_VF_INFO_3 =
+   gen_prr_pf_vf_map_3();
+
+// mem 0 and 1 is on the bottom
+generate if (PG_AFU_NUM_PORTS > 0) begin : pg_afu_3
+port_gasket_slv #( 
+   .PG_NUM_PORTS(PG_AFU_NUM_PORTS),              // Number of PCIe ports to PR region
+   .PORT_PF_VF_INFO(PG_PF_VF_INFO_3),              // PCIe port data
+   .NUM_MEM_CH(1),                 // Number of Memory Porst to PR region
+   .JASON_NUM_IOPIPES(JASON_NUM_IOPIPES),
+   .JASON_IOPIPES_WIDTH(JASON_IOPIPES_WIDTH),
+   `ifdef INCLUDE_HSSI
+   .JASON_MAX_NUM_ETH_CH(MAX_NUM_ETH_CHANNELS/2), // Number of HSSI channels
+   `endif
+   .END_OF_LIST    (fabric_width_pkg::apf_pr_3_slv_eol),                       // port_gasket DFH end of list field
+   .NEXT_DFH_OFFSET(fabric_width_pkg::apf_pr_3_slv_next_dfh_offset),                   // Next offset in OFS management DFH
+   .PG_NUM_RTABLE_ENTRIES (PG_NUM_RTABLE_ENTRIES),
+   .PG_PFVF_ROUTING_TABLE (PG_PFVF_ROUTING_TABLE_3)
+) port_gasket_3 (
+	.uclk,
+	.uclk_div2,
+   .port2_reset,
+   .port2_freeze,
+	
+   .refclk             (SYS_REFCLK),            // 100 MHz refclk for user clk pll
+   .clk,                                        // PCIe Clk
+   .clk_div2,                                   // Half frequency of PCIe clk
+   .clk_div4,                                   // Quarter frequency of PCIe clk
+   .clk_100            (clk_csr),               // 100 MHz for user clk logic
+   .clk_csr            (clk_csr),               // 100 MHz CSR interface clock      
+
+   .rst_n,                                      // Reset from hip
+   .rst_n_100          (rst_n_csr),             // Reset from hip on csr clk
+   .rst_n_csr          (rst_n_csr),             // Reset from hip on csr clk
+
+   // FLR interface
+   .pg_pf_flr_rst_n    (pg_flr_rst_n),
+   .flr_req            (afu_flr_req[3]),
+   .flr_rsp            (afu_flr_rsp[3]),
+
+`ifdef INCLUDE_DDR4
+  .afu_mem_if         (ext_mem_if[1:1]),             // Memory interface
+`endif
+
+   .udp_avst_from_kernel(udp_avst_from_pg3_to_pg4),
+   .udp_avst_to_kernel  (udp_avst_from_pg4_to_pg3),
+
+
+
+//   `ifdef INCLUDE_HSSI                           // Instantiates HE-HSSI in PR region   
+//      .hssi_ss_st_tx  (pg2_hssi_ss_st_tx ),           // HSSI Tx
+//      .hssi_ss_st_rx  (pg2_hssi_ss_st_rx ),           // HSSI Rx
+//      .hssi_fc        (pg2_hssi_fc       ),                 // Flow control interface
+//      .i_hssi_clk_pll (pg2_i_hssi_clk_pll),          // HSSI clocks
+//                                                          // 11 : 8                                                                      // 3 : 0
+//   `endif
+
+   .i_sel_mmio_rsp     (sel_mmio_rsp),
+   .i_read_flush_done  (read_flush_done),
+   .o_afu_softreset    (afu_softreset_3),
+   .o_pr_parity_error  (pr_parity_error_3),       // Partial Reconfiguration FIFO Parity Error Indication from PR Controller.
+
+   .axi_rx_a_if        (mx2fn_rx_a_port[3]),
+   .axi_tx_a_if        (fn2mx_tx_a_port[3]),
+   .axi_rx_b_if        (mx2fn_rx_b_port[3]),
+   .axi_tx_b_if        (fn2mx_tx_b_port[3]),
+
+   .axi_s_if           (apf_pgsk_slv_if_3)        // CSR interface from APF
+);
+end : pg_afu_3
+else begin
+   dummy_csr #(
+      .NEXT_DFH_OFFSET  (fabric_width_pkg::apf_pr_3_slv_next_dfh_offset),
+      .END_OF_LIST      (fabric_width_pkg::apf_pr_3_slv_eol)
+   ) emif_dummy_csr (
+      .clk         (clk_csr),
+      .rst_n       (rst_n_csr),
+      .csr_lite_if (apf_pgsk_slv_if_3)
+   );
+end // else: !if(PG_AFU_NUM_PORTS > 0)
+endgenerate
+
+
+//-----------------------------------------------------------------------------------------------
+// Port Gasket (PG) AFU_4
+//-----------------------------------------------------------------------------------------------
+// The port gasket implements the Partial Reconfiguration (PR) region AFU and supporting 
+// infrastucture including freeze bridges, the PR controller feature, user clock feature, and remote 
+// signal tap feature. The reference implementation connects a single physical interface routed to 
+// 3VFs on PF0. In the PR region the VFs are then routed to HE-MEM (PF0-VF0), HE-HSSI(PF0-VF1), 
+// and MEM-TG (PF0-VF2). The reference routing table is provided in $OFS_ROOTDIR/afu_top/mux/top_cfg_pkg.sv
+//-----------------------------------------------------------------------------------------------
+
+ofs_fim_axi_lite_if #(.AWADDR_WIDTH(16), .ARADDR_WIDTH(16))                       apf_pgsk_slv_if_4  (.clk(clk), .rst_n(rst_n));
+//localparam PG_NUM_RTABLE_ENTRIES = top_cfg_pkg::PG_NUM_RTABLE_ENTRIES;
+localparam t_prr_pf_vf_entry_info PG_PFVF_ROUTING_TABLE_4 = top_cfg_pkg::PG_PF_VF_RTABLE_4;
+
+//typedef pcie_ss_hdr_pkg::ReqHdr_pf_vf_info_t[PG_AFU_NUM_PORTS-1:0] t_afu_prr_pf_vf_map;
+function automatic t_afu_prr_pf_vf_map gen_prr_pf_vf_map_4();
+   t_afu_prr_pf_vf_map map;
+   for (int p = 0; p < PG_AFU_NUM_PORTS; p = p + 1) begin
+      map[p].pf_num = PG_PFVF_ROUTING_TABLE_4[p].pf;
+      map[p].vf_num = PG_PFVF_ROUTING_TABLE_4[p].vf;
+      map[p].vf_active = PG_PFVF_ROUTING_TABLE_4[p].vf_active;
+      map[p].link_num = 0;
+   end
+   return map;
+endfunction // gen_pf_vf_map
+
+localparam pcie_ss_hdr_pkg::ReqHdr_pf_vf_info_t[PG_AFU_NUM_PORTS-1:0] PG_PF_VF_INFO_4 =
+   gen_prr_pf_vf_map_4();
+
+// mem 0 and 1 is on the bottom
+generate if (PG_AFU_NUM_PORTS > 0) begin : pg_afu_4
+port_gasket_slv #( 
+   .PG_NUM_PORTS(PG_AFU_NUM_PORTS),              // Number of PCIe ports to PR region
+   .PORT_PF_VF_INFO(PG_PF_VF_INFO_4),              // PCIe port data
+   .NUM_MEM_CH(1),                 // Number of Memory Porst to PR region
+   .JASON_NUM_IOPIPES(JASON_NUM_IOPIPES),
+   .JASON_IOPIPES_WIDTH(JASON_IOPIPES_WIDTH),
+   `ifdef INCLUDE_HSSI
+   .JASON_MAX_NUM_ETH_CH(MAX_NUM_ETH_CHANNELS/2), // Number of HSSI channels
+   `endif
+   .END_OF_LIST    (fabric_width_pkg::apf_pr_4_slv_eol),                       // port_gasket DFH end of list field
+   .NEXT_DFH_OFFSET(fabric_width_pkg::apf_pr_4_slv_next_dfh_offset),                   // Next offset in OFS management DFH
+   .PG_NUM_RTABLE_ENTRIES (PG_NUM_RTABLE_ENTRIES),
+   .PG_PFVF_ROUTING_TABLE (PG_PFVF_ROUTING_TABLE_4)
+) port_gasket_4 (
+	.uclk,
+	.uclk_div2,
+   .port2_reset,
+   .port2_freeze,
+	
+   .refclk             (SYS_REFCLK),            // 100 MHz refclk for user clk pll
+   .clk,                                        // PCIe Clk
+   .clk_div2,                                   // Half frequency of PCIe clk
+   .clk_div4,                                   // Quarter frequency of PCIe clk
+   .clk_100            (clk_csr),               // 100 MHz for user clk logic
+   .clk_csr            (clk_csr),               // 100 MHz CSR interface clock      
+
+   .rst_n,                                      // Reset from hip
+   .rst_n_100          (rst_n_csr),             // Reset from hip on csr clk
+   .rst_n_csr          (rst_n_csr),             // Reset from hip on csr clk
+
+   // FLR interface
+   .pg_pf_flr_rst_n    (pg_flr_rst_n),
+   .flr_req            (afu_flr_req[4]),
+   .flr_rsp            (afu_flr_rsp[4]),
+
+`ifdef INCLUDE_DDR4
+  .afu_mem_if         (ext_mem_if[0:0]),             // Memory interface
+`endif
+
+   .udp_avst_from_kernel(udp_avst_from_pg4_to_pg3),
+   .udp_avst_to_kernel  (udp_avst_from_pg3_to_pg4),
+
+
+
+//   `ifdef INCLUDE_HSSI                           // Instantiates HE-HSSI in PR region   
+//      .hssi_ss_st_tx  (pg2_hssi_ss_st_tx ),           // HSSI Tx
+//      .hssi_ss_st_rx  (pg2_hssi_ss_st_rx ),           // HSSI Rx
+//      .hssi_fc        (pg2_hssi_fc       ),                 // Flow control interface
+//      .i_hssi_clk_pll (pg2_i_hssi_clk_pll),          // HSSI clocks
+//                                                          // 11 : 8                                                                      // 3 : 0
+//   `endif
+
+   .i_sel_mmio_rsp     (sel_mmio_rsp),
+   .i_read_flush_done  (read_flush_done),
+   .o_afu_softreset    (afu_softreset_4),
+   .o_pr_parity_error  (pr_parity_error_4),       // Partial Reconfiguration FIFO Parity Error Indication from PR Controller.
+
+   .axi_rx_a_if        (mx2fn_rx_a_port[4]),
+   .axi_tx_a_if        (fn2mx_tx_a_port[4]),
+   .axi_rx_b_if        (mx2fn_rx_b_port[4]),
+   .axi_tx_b_if        (fn2mx_tx_b_port[4]),
+
+   .axi_s_if           (apf_pgsk_slv_if_4)        // CSR interface from APF
+);
+end : pg_afu_4
+else begin
+   dummy_csr #(
+      .NEXT_DFH_OFFSET  (fabric_width_pkg::apf_pr_4_slv_next_dfh_offset),
+      .END_OF_LIST      (fabric_width_pkg::apf_pr_4_slv_eol)
+   ) emif_dummy_csr (
+      .clk         (clk_csr),
+      .rst_n       (rst_n_csr),
+      .csr_lite_if (apf_pgsk_slv_if_4)
+   );
+end // else: !if(PG_AFU_NUM_PORTS > 0)
+endgenerate
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //----------------------------------------------------------------
@@ -1067,6 +1302,8 @@ apf apf(
    .apf_pr_slv_rvalid     (apf_pgsk_slv_if.rvalid    ),
    .apf_pr_slv_rready     (apf_pgsk_slv_if.rready    ),
 
+   // additional apf port gasket interfaces 
+
 	.apf_pr_2_slv_awaddr     (apf_pgsk_slv_if_2.awaddr    ),
    .apf_pr_2_slv_awprot     (apf_pgsk_slv_if_2.awprot    ),
    .apf_pr_2_slv_awvalid    (apf_pgsk_slv_if_2.awvalid   ),
@@ -1086,6 +1323,49 @@ apf apf(
    .apf_pr_2_slv_rresp      (apf_pgsk_slv_if_2.rresp     ),
    .apf_pr_2_slv_rvalid     (apf_pgsk_slv_if_2.rvalid    ),
    .apf_pr_2_slv_rready     (apf_pgsk_slv_if_2.rready    ),
+
+   .apf_pr_3_slv_awaddr     (apf_pgsk_slv_if_3.awaddr    ),
+   .apf_pr_3_slv_awprot     (apf_pgsk_slv_if_3.awprot    ),
+   .apf_pr_3_slv_awvalid    (apf_pgsk_slv_if_3.awvalid   ),
+   .apf_pr_3_slv_awready    (apf_pgsk_slv_if_3.awready   ),
+   .apf_pr_3_slv_wdata      (apf_pgsk_slv_if_3.wdata     ),
+   .apf_pr_3_slv_wstrb      (apf_pgsk_slv_if_3.wstrb     ),
+   .apf_pr_3_slv_wvalid     (apf_pgsk_slv_if_3.wvalid    ),
+   .apf_pr_3_slv_wready     (apf_pgsk_slv_if_3.wready    ),
+   .apf_pr_3_slv_bresp      (apf_pgsk_slv_if_3.bresp     ),
+   .apf_pr_3_slv_bvalid     (apf_pgsk_slv_if_3.bvalid    ),
+   .apf_pr_3_slv_bready     (apf_pgsk_slv_if_3.bready    ),
+   .apf_pr_3_slv_araddr     (apf_pgsk_slv_if_3.araddr    ),
+   .apf_pr_3_slv_arprot     (apf_pgsk_slv_if_3.arprot    ),
+   .apf_pr_3_slv_arvalid    (apf_pgsk_slv_if_3.arvalid   ),
+   .apf_pr_3_slv_arready    (apf_pgsk_slv_if_3.arready   ),
+   .apf_pr_3_slv_rdata      (apf_pgsk_slv_if_3.rdata     ),
+   .apf_pr_3_slv_rresp      (apf_pgsk_slv_if_3.rresp     ),
+   .apf_pr_3_slv_rvalid     (apf_pgsk_slv_if_3.rvalid    ),
+   .apf_pr_3_slv_rready     (apf_pgsk_slv_if_3.rready    ),
+
+   .apf_pr_4_slv_awaddr     (apf_pgsk_slv_if_4.awaddr    ),
+   .apf_pr_4_slv_awprot     (apf_pgsk_slv_if_4.awprot    ),
+   .apf_pr_4_slv_awvalid    (apf_pgsk_slv_if_4.awvalid   ),
+   .apf_pr_4_slv_awready    (apf_pgsk_slv_if_4.awready   ),
+   .apf_pr_4_slv_wdata      (apf_pgsk_slv_if_4.wdata     ),
+   .apf_pr_4_slv_wstrb      (apf_pgsk_slv_if_4.wstrb     ),
+   .apf_pr_4_slv_wvalid     (apf_pgsk_slv_if_4.wvalid    ),
+   .apf_pr_4_slv_wready     (apf_pgsk_slv_if_4.wready    ),
+   .apf_pr_4_slv_bresp      (apf_pgsk_slv_if_4.bresp     ),
+   .apf_pr_4_slv_bvalid     (apf_pgsk_slv_if_4.bvalid    ),
+   .apf_pr_4_slv_bready     (apf_pgsk_slv_if_4.bready    ),
+   .apf_pr_4_slv_araddr     (apf_pgsk_slv_if_4.araddr    ),
+   .apf_pr_4_slv_arprot     (apf_pgsk_slv_if_4.arprot    ),
+   .apf_pr_4_slv_arvalid    (apf_pgsk_slv_if_4.arvalid   ),
+   .apf_pr_4_slv_arready    (apf_pgsk_slv_if_4.arready   ),
+   .apf_pr_4_slv_rdata      (apf_pgsk_slv_if_4.rdata     ),
+   .apf_pr_4_slv_rresp      (apf_pgsk_slv_if_4.rresp     ),
+   .apf_pr_4_slv_rvalid     (apf_pgsk_slv_if_4.rvalid    ),
+   .apf_pr_4_slv_rready     (apf_pgsk_slv_if_4.rready    ),
+
+   ///////////////////////////additional port gasket interfaces///////////////////////////////
+
 
    .apf_uart_mst_awaddr   (apf_uart_mst_if.awaddr  ),
    .apf_uart_mst_awprot   (apf_uart_mst_if.awprot  ),
