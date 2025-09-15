@@ -258,7 +258,8 @@ export WORK_PR_PACSIGN_GBS_FILE="${WORK_SYN_TOP_PATH}/output_files/${Q_PR_REVISI
 #### Platform Interface Manager configuration 
 export PIM_PLATFORM_NAME=ofs_agilex
 export PIM_INI_FILE=${WORK_DIR}/src/top/${PIM_PLATFORM_NAME}.ini
-export AFU_WITH_PIM=/home/jcheung2/01_pim_ifc/hello_world/hw/rtl/axi/sources.txt
+# export AFU_WITH_PIM=/home/jcheung2/01_pim_ifc/hello_world/hw/rtl/axi/sources.txt
+export AFU_WITH_PIM=${OFS_ROOTDIR}/ofs-common/src/fpga_family/agilex/port_gasket/dma/hw/rtl/sources.txt
 
 #TODO: add capabilities to specify project only work directory so create_work_dir.sh
 #      will only sync over the pertnant files to <WORK_DIR>.

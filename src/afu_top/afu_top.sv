@@ -12,24 +12,25 @@
 `endif 
 
 import pcie_ss_axis_pkg::*;
+// import jason_pkg::*;
 
-interface asp_avst_if #(
-   //  parameter DATA_WIDTH        = ofs_fim_eth_if_pkg::ETH_PACKET_WIDTH
-    parameter DATA_WIDTH        = 64
-);
-    logic                           valid;
-    logic                           ready;
-    logic [DATA_WIDTH-1:0]          data;
+// interface asp_avst_if #(
+//    //  parameter DATA_WIDTH        = ofs_fim_eth_if_pkg::ETH_PACKET_WIDTH
+//     parameter DATA_WIDTH        = 64
+// );
+//     logic                           valid;
+//     logic                           ready;
+//     logic [DATA_WIDTH-1:0]          data;
     
-    modport source (
-        input  ready,
-        output valid, data
-    );
-    modport sink (
-        input  valid, data,
-        output ready
-    );
-endinterface : asp_avst_if
+//     modport source (
+//         input  ready,
+//         output valid, data
+//     );
+//     modport sink (
+//         input  valid, data,
+//         output ready
+//     );
+// endinterface : asp_avst_if
 
 `ifdef INCLUDE_HSSI
 
@@ -139,14 +140,17 @@ endmodule
 `endif 
 
 module afu_top #(
+
+   // afu_mem_channel set in top
 `ifdef INCLUDE_DDR4
    parameter AFU_MEM_CHANNEL = 4,
 `else
    parameter AFU_MEM_CHANNEL = 0,
 `endif
 
-   parameter JASON_NUM_IOPIPES = 1,
-   parameter JASON_IOPIPES_WIDTH = 64
+   // set these here
+   parameter JASON_NUM_IOPIPES = 2,
+   parameter JASON_IOPIPES_WIDTH = 80
 )(
    input wire                            SYS_REFCLK,
    input wire                            clk,
