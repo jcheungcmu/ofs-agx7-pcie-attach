@@ -6,7 +6,7 @@
 ############################################################################################
 
 set_global_assignment -name FAMILY "Agilex 7"
-set_global_assignment -name DEVICE AGIB027R29A1E2VR3
+set_global_assignment -name DEVICE AGIB027R29A1E1VB
 
 
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
@@ -105,6 +105,14 @@ set_instance_assignment -name PARTITION green_region -to afu_top|pg_afu.port_gas
 set_instance_assignment -name QDB_FILE_PARTITION ofs_top.qdb -to | -entity top
 set_instance_assignment -name ENTITY_REBINDING afu_main -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
 set_global_assignment -name REVISION_TYPE PR_IMPL
+
+set_instance_assignment -name PARTITION green_region_2 -to afu_top|pg_afu_2.port_gasket_2|pr_slot|afu_main
+set_instance_assignment -name PARTITION green_region_3 -to afu_top|pg_afu_3.port_gasket_3|pr_slot|afu_main
+set_instance_assignment -name PARTITION green_region_4 -to afu_top|pg_afu_4.port_gasket_4|pr_slot|afu_main
+
+set_instance_assignment -name ENTITY_REBINDING afu_main -to afu_top|pg_afu_2.port_gasket_2|pr_slot|afu_main
+set_instance_assignment -name ENTITY_REBINDING afu_main -to afu_top|pg_afu_3.port_gasket_3|pr_slot|afu_main
+set_instance_assignment -name ENTITY_REBINDING afu_main -to afu_top|pg_afu_4.port_gasket_4|pr_slot|afu_main
 
 # Load macros defined in the Quartus project during the FIM build.
 set_global_assignment -name SOURCE_TCL_SCRIPT_FILE fim_project_macros.tcl

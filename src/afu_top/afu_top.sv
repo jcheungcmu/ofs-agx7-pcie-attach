@@ -32,112 +32,453 @@ import pcie_ss_axis_pkg::*;
 //     );
 // endinterface : asp_avst_if
 
-`ifdef INCLUDE_HSSI
+// module noc 
+// #( 
+//    parameter JASON_NUM_IOPIPES = 1
+// )
+// (
+//    asp_avst_if.source    udp_avst_to_pg1[JASON_NUM_IOPIPES-1:0],
+//    asp_avst_if.sink      udp_avst_from_pg1[JASON_NUM_IOPIPES-1:0],
 
-module reorder_eth_channel (
-   ofs_fim_hssi_ss_tx_axis_if.client             hssi_ss_st_tx [MAX_NUM_ETH_CHANNELS-1:0],
-   ofs_fim_hssi_ss_rx_axis_if.client             hssi_ss_st_rx [MAX_NUM_ETH_CHANNELS-1:0],
-   ofs_fim_hssi_fc_if.client                     hssi_fc [MAX_NUM_ETH_CHANNELS-1:0],
-   input logic [MAX_NUM_ETH_CHANNELS-1:0]     i_hssi_clk_pll,
+//    asp_avst_if.source    udp_avst_to_pg2[JASON_NUM_IOPIPES-1:0],
+//    asp_avst_if.sink      udp_avst_from_pg2[JASON_NUM_IOPIPES-1:0],
 
-   ofs_fim_hssi_ss_tx_axis_if.mac             pg1_hssi_ss_st_tx [MAX_NUM_ETH_CHANNELS/2-1:0],
-   ofs_fim_hssi_ss_rx_axis_if.mac             pg1_hssi_ss_st_rx [MAX_NUM_ETH_CHANNELS/2-1:0],
-   ofs_fim_hssi_fc_if.mac                     pg1_hssi_fc [MAX_NUM_ETH_CHANNELS/2-1:0],
-   output logic [MAX_NUM_ETH_CHANNELS/2-1:0]     pg1_i_hssi_clk_pll,
+//    asp_avst_if.source    udp_avst_to_pg3[JASON_NUM_IOPIPES-1:0],
+//    asp_avst_if.sink      udp_avst_from_pg3[JASON_NUM_IOPIPES-1:0],
 
-   ofs_fim_hssi_ss_tx_axis_if.mac             pg2_hssi_ss_st_tx [MAX_NUM_ETH_CHANNELS/2-1:0],
-   ofs_fim_hssi_ss_rx_axis_if.mac             pg2_hssi_ss_st_rx [MAX_NUM_ETH_CHANNELS/2-1:0],
-   ofs_fim_hssi_fc_if.mac                     pg2_hssi_fc [MAX_NUM_ETH_CHANNELS/2-1:0],
-   output logic [MAX_NUM_ETH_CHANNELS/2-1:0]     pg2_i_hssi_clk_pll
+//    asp_avst_if.source    udp_avst_to_pg4[JASON_NUM_IOPIPES-1:0],
+//    asp_avst_if.sink      udp_avst_from_pg4[JASON_NUM_IOPIPES-1:0]
+// );
 
-);
+//    // 1 2 
+//    // 4 3
 
-   genvar i;
-   generate 
-      for (i = 0; i < NUM_ETH_CHANNELS/2; i++) begin 
+//    // 0 write (out) 
+//    // 1 read (in)
 
-         always_comb begin 
+//    // pg1
+//    // 2
+//    // 4 
+//    // 3 
+
+//    // pg2 
+//    // 3 
+//    // 1
+//    // 4 
+
+//    // pg3 
+//    // 4 
+//    // 2 
+//    // 1 
+
+//    // pg4 
+//    // 1 
+//    // 3 
+//    // 2
+
+//    // always_comb begin 
+//    //    // pg 1
+//    //    udp_avst_to_pg1  [0].valid  = udp_avst_from_pg2[2].valid; 
+//    //    udp_avst_to_pg1  [0].data   = udp_avst_from_pg2[2].data; 
+//    //    udp_avst_from_pg1[0].ready  = udp_avst_to_pg2  [2].ready;
+//    //    udp_avst_to_pg1  [1].valid  = udp_avst_from_pg2[3].valid; 
+//    //    udp_avst_to_pg1  [1].data   = udp_avst_from_pg2[3].data; 
+//    //    udp_avst_from_pg1[1].ready  = udp_avst_to_pg2  [3].ready;
+      
+//    //    udp_avst_to_pg1  [2].valid  = udp_avst_from_pg4[0].valid; 
+//    //    udp_avst_to_pg1  [2].data   = udp_avst_from_pg4[0].data; 
+//    //    udp_avst_from_pg1[2].ready  = udp_avst_to_pg4  [0].ready;
+//    //    udp_avst_to_pg1  [3].valid  = udp_avst_from_pg4[1].valid; 
+//    //    udp_avst_to_pg1  [3].data   = udp_avst_from_pg4[1].data; 
+//    //    udp_avst_from_pg1[3].ready  = udp_avst_to_pg4  [1].ready;
+
+//    //    udp_avst_to_pg1  [4].valid  = udp_avst_from_pg3[4].valid; 
+//    //    udp_avst_to_pg1  [4].data   = udp_avst_from_pg3[4].data; 
+//    //    udp_avst_from_pg1[4].ready  = udp_avst_to_pg3  [4].ready;
+//    //    udp_avst_to_pg1  [5].valid  = udp_avst_from_pg3[5].valid; 
+//    //    udp_avst_to_pg1  [5].data   = udp_avst_from_pg3[5].data; 
+//    //    udp_avst_from_pg1[5].ready  = udp_avst_to_pg3  [5].ready;
+
+//    //    // pg 2
+//    //    udp_avst_to_pg2  [0].valid  = udp_avst_from_pg3[2].valid; 
+//    //    udp_avst_to_pg2  [0].data   = udp_avst_from_pg3[2].data; 
+//    //    udp_avst_from_pg2[0].ready  = udp_avst_to_pg3  [2].ready;
+//    //    udp_avst_to_pg2  [1].valid  = udp_avst_from_pg3[3].valid; 
+//    //    udp_avst_to_pg2  [1].data   = udp_avst_from_pg3[3].data; 
+//    //    udp_avst_from_pg2[1].ready  = udp_avst_to_pg3  [3].ready;
+
+//    //    udp_avst_to_pg2  [2].valid  = udp_avst_from_pg1[0].valid; 
+//    //    udp_avst_to_pg2  [2].data   = udp_avst_from_pg1[0].data; 
+//    //    udp_avst_from_pg2[2].ready  = udp_avst_to_pg1  [0].ready;
+//    //    udp_avst_to_pg2  [3].valid  = udp_avst_from_pg1[1].valid; 
+//    //    udp_avst_to_pg2  [3].data   = udp_avst_from_pg1[1].data; 
+//    //    udp_avst_from_pg2[3].ready  = udp_avst_to_pg1  [1].ready;
+      
+//    //    udp_avst_to_pg2  [4].valid  = udp_avst_from_pg4[4].valid; 
+//    //    udp_avst_to_pg2  [4].data   = udp_avst_from_pg4[4].data; 
+//    //    udp_avst_from_pg2[4].ready  = udp_avst_to_pg4  [4].ready;
+//    //    udp_avst_to_pg2  [5].valid  = udp_avst_from_pg4[5].valid; 
+//    //    udp_avst_to_pg2  [5].data   = udp_avst_from_pg4[5].data; 
+//    //    udp_avst_from_pg2[5].ready  = udp_avst_to_pg4  [5].ready;
+
+//    //    // pg 3
+//    //    udp_avst_to_pg3  [0].valid  = udp_avst_from_pg4[2].valid; 
+//    //    udp_avst_to_pg3  [0].data   = udp_avst_from_pg4[2].data; 
+//    //    udp_avst_from_pg3[0].ready  = udp_avst_to_pg4  [2].ready;
+//    //    udp_avst_to_pg3  [1].valid  = udp_avst_from_pg4[3].valid; 
+//    //    udp_avst_to_pg3  [1].data   = udp_avst_from_pg4[3].data; 
+//    //    udp_avst_from_pg3[1].ready  = udp_avst_to_pg4  [3].ready;
+
+//    //    udp_avst_to_pg3  [2].valid  = udp_avst_from_pg2[0].valid; 
+//    //    udp_avst_to_pg3  [2].data   = udp_avst_from_pg2[0].data; 
+//    //    udp_avst_from_pg3[2].ready  = udp_avst_to_pg2  [0].ready;
+//    //    udp_avst_to_pg3  [3].valid  = udp_avst_from_pg2[1].valid; 
+//    //    udp_avst_to_pg3  [3].data   = udp_avst_from_pg2[1].data; 
+//    //    udp_avst_from_pg3[3].ready  = udp_avst_to_pg2  [1].ready;
+      
+//    //    udp_avst_to_pg3  [4].valid  = udp_avst_from_pg1[4].valid; 
+//    //    udp_avst_to_pg3  [4].data   = udp_avst_from_pg1[4].data; 
+//    //    udp_avst_from_pg3[4].ready  = udp_avst_to_pg1  [4].ready;
+//    //    udp_avst_to_pg3  [5].valid  = udp_avst_from_pg1[5].valid; 
+//    //    udp_avst_to_pg3  [5].data   = udp_avst_from_pg1[5].data; 
+//    //    udp_avst_from_pg3[5].ready  = udp_avst_to_pg1  [5].ready;
+
+//    //    // pg 4
+//    //    udp_avst_to_pg4  [0].valid  = udp_avst_from_pg1[2].valid; 
+//    //    udp_avst_to_pg4  [0].data   = udp_avst_from_pg1[2].data; 
+//    //    udp_avst_from_pg4[0].ready  = udp_avst_to_pg1  [2].ready;
+//    //    udp_avst_to_pg4  [1].valid  = udp_avst_from_pg1[3].valid; 
+//    //    udp_avst_to_pg4  [1].data   = udp_avst_from_pg1[3].data; 
+//    //    udp_avst_from_pg4[1].ready  = udp_avst_to_pg1  [3].ready;
+
+//    //    udp_avst_to_pg4  [2].valid  = udp_avst_from_pg3[0].valid; 
+//    //    udp_avst_to_pg4  [2].data   = udp_avst_from_pg3[0].data; 
+//    //    udp_avst_from_pg4[2].ready  = udp_avst_to_pg3  [0].ready;
+//    //    udp_avst_to_pg4  [3].valid  = udp_avst_from_pg3[1].valid; 
+//    //    udp_avst_to_pg4  [3].data   = udp_avst_from_pg3[1].data; 
+//    //    udp_avst_from_pg4[3].ready  = udp_avst_to_pg3  [1].ready;
+      
+//    //    udp_avst_to_pg4  [4].valid  = udp_avst_from_pg2[4].valid; 
+//    //    udp_avst_to_pg4  [4].data   = udp_avst_from_pg2[4].data; 
+//    //    udp_avst_from_pg4[4].ready  = udp_avst_to_pg2  [4].ready;
+//    //    udp_avst_to_pg4  [5].valid  = udp_avst_from_pg2[5].valid; 
+//    //    udp_avst_to_pg4  [5].data   = udp_avst_from_pg2[5].data; 
+//    //    udp_avst_from_pg4[5].ready  = udp_avst_to_pg2  [5].ready;
+//    // end 
+
+//    // compensate for rotation?
+//    // pg1
+//    // 4
+//    // 3 
+//    // 2 
+
+//    // pg2 
+//    // 1 
+//    // 4
+//    // 3 
+
+//    // pg3 
+//    // 2 
+//    // 1 
+//    // 4 
+
+//    // pg4 
+//    // 3 
+//    // 2 
+//    // 1
+   
+//    // attempt 1 
+
+//    // always_comb begin 
+//    //    // pg 1
+//    //    udp_avst_to_pg1  [0].valid  = udp_avst_from_pg4[2].valid; 
+//    //    udp_avst_to_pg1  [0].data   = udp_avst_from_pg4[2].data; 
+//    //    udp_avst_from_pg1[0].ready  = udp_avst_to_pg4  [2].ready;
+//    //    udp_avst_to_pg1  [1].valid  = udp_avst_from_pg4[3].valid; 
+//    //    udp_avst_to_pg1  [1].data   = udp_avst_from_pg4[3].data; 
+//    //    udp_avst_from_pg1[1].ready  = udp_avst_to_pg4  [3].ready;
+      
+//    //    udp_avst_to_pg1  [2].valid  = udp_avst_from_pg3[0].valid; 
+//    //    udp_avst_to_pg1  [2].data   = udp_avst_from_pg3[0].data; 
+//    //    udp_avst_from_pg1[2].ready  = udp_avst_to_pg3  [0].ready;
+//    //    udp_avst_to_pg1  [3].valid  = udp_avst_from_pg3[1].valid; 
+//    //    udp_avst_to_pg1  [3].data   = udp_avst_from_pg3[1].data; 
+//    //    udp_avst_from_pg1[3].ready  = udp_avst_to_pg3  [1].ready;
+
+//    //    udp_avst_to_pg1  [4].valid  = udp_avst_from_pg2[4].valid; 
+//    //    udp_avst_to_pg1  [4].data   = udp_avst_from_pg2[4].data; 
+//    //    udp_avst_from_pg1[4].ready  = udp_avst_to_pg2  [4].ready;
+//    //    udp_avst_to_pg1  [5].valid  = udp_avst_from_pg2[5].valid; 
+//    //    udp_avst_to_pg1  [5].data   = udp_avst_from_pg2[5].data; 
+//    //    udp_avst_from_pg1[5].ready  = udp_avst_to_pg2  [5].ready;
+
+//    //    // pg 2
+//    //    udp_avst_to_pg2  [0].valid  = udp_avst_from_pg1[2].valid; 
+//    //    udp_avst_to_pg2  [0].data   = udp_avst_from_pg1[2].data; 
+//    //    udp_avst_from_pg2[0].ready  = udp_avst_to_pg1  [2].ready;
+//    //    udp_avst_to_pg2  [1].valid  = udp_avst_from_pg1[3].valid; 
+//    //    udp_avst_to_pg2  [1].data   = udp_avst_from_pg1[3].data; 
+//    //    udp_avst_from_pg2[1].ready  = udp_avst_to_pg1  [3].ready;
+
+//    //    udp_avst_to_pg2  [2].valid  = udp_avst_from_pg4[0].valid; 
+//    //    udp_avst_to_pg2  [2].data   = udp_avst_from_pg4[0].data; 
+//    //    udp_avst_from_pg2[2].ready  = udp_avst_to_pg4  [0].ready;
+//    //    udp_avst_to_pg2  [3].valid  = udp_avst_from_pg4[1].valid; 
+//    //    udp_avst_to_pg2  [3].data   = udp_avst_from_pg4[1].data; 
+//    //    udp_avst_from_pg2[3].ready  = udp_avst_to_pg4  [1].ready;
+      
+//    //    udp_avst_to_pg2  [4].valid  = udp_avst_from_pg3[4].valid; 
+//    //    udp_avst_to_pg2  [4].data   = udp_avst_from_pg3[4].data; 
+//    //    udp_avst_from_pg2[4].ready  = udp_avst_to_pg3  [4].ready;
+//    //    udp_avst_to_pg2  [5].valid  = udp_avst_from_pg3[5].valid; 
+//    //    udp_avst_to_pg2  [5].data   = udp_avst_from_pg3[5].data; 
+//    //    udp_avst_from_pg2[5].ready  = udp_avst_to_pg3  [5].ready;
+
+//    //    // pg 3
+//    //    udp_avst_to_pg3  [0].valid  = udp_avst_from_pg2[2].valid; 
+//    //    udp_avst_to_pg3  [0].data   = udp_avst_from_pg2[2].data; 
+//    //    udp_avst_from_pg3[0].ready  = udp_avst_to_pg2  [2].ready;
+//    //    udp_avst_to_pg3  [1].valid  = udp_avst_from_pg2[3].valid; 
+//    //    udp_avst_to_pg3  [1].data   = udp_avst_from_pg2[3].data; 
+//    //    udp_avst_from_pg3[1].ready  = udp_avst_to_pg2  [3].ready;
+
+//    //    udp_avst_to_pg3  [2].valid  = udp_avst_from_pg1[0].valid; 
+//    //    udp_avst_to_pg3  [2].data   = udp_avst_from_pg1[0].data; 
+//    //    udp_avst_from_pg3[2].ready  = udp_avst_to_pg1  [0].ready;
+//    //    udp_avst_to_pg3  [3].valid  = udp_avst_from_pg1[1].valid; 
+//    //    udp_avst_to_pg3  [3].data   = udp_avst_from_pg1[1].data; 
+//    //    udp_avst_from_pg3[3].ready  = udp_avst_to_pg1  [1].ready;
+      
+//    //    udp_avst_to_pg3  [4].valid  = udp_avst_from_pg4[4].valid; 
+//    //    udp_avst_to_pg3  [4].data   = udp_avst_from_pg4[4].data; 
+//    //    udp_avst_from_pg3[4].ready  = udp_avst_to_pg4  [4].ready;
+//    //    udp_avst_to_pg3  [5].valid  = udp_avst_from_pg4[5].valid; 
+//    //    udp_avst_to_pg3  [5].data   = udp_avst_from_pg4[5].data; 
+//    //    udp_avst_from_pg3[5].ready  = udp_avst_to_pg4  [5].ready;
+
+//    //    // pg 4
+//    //    udp_avst_to_pg4  [0].valid  = udp_avst_from_pg3[2].valid; 
+//    //    udp_avst_to_pg4  [0].data   = udp_avst_from_pg3[2].data; 
+//    //    udp_avst_from_pg4[0].ready  = udp_avst_to_pg3  [2].ready;
+//    //    udp_avst_to_pg4  [1].valid  = udp_avst_from_pg3[3].valid; 
+//    //    udp_avst_to_pg4  [1].data   = udp_avst_from_pg3[3].data; 
+//    //    udp_avst_from_pg4[1].ready  = udp_avst_to_pg3  [3].ready;
+
+//    //    udp_avst_to_pg4  [2].valid  = udp_avst_from_pg2[0].valid; 
+//    //    udp_avst_to_pg4  [2].data   = udp_avst_from_pg2[0].data; 
+//    //    udp_avst_from_pg4[2].ready  = udp_avst_to_pg2  [0].ready;
+//    //    udp_avst_to_pg4  [3].valid  = udp_avst_from_pg2[1].valid; 
+//    //    udp_avst_to_pg4  [3].data   = udp_avst_from_pg2[1].data; 
+//    //    udp_avst_from_pg4[3].ready  = udp_avst_to_pg2  [1].ready;
+      
+//    //    udp_avst_to_pg4  [4].valid  = udp_avst_from_pg1[4].valid; 
+//    //    udp_avst_to_pg4  [4].data   = udp_avst_from_pg1[4].data; 
+//    //    udp_avst_from_pg4[4].ready  = udp_avst_to_pg1  [4].ready;
+//    //    udp_avst_to_pg4  [5].valid  = udp_avst_from_pg1[5].valid; 
+//    //    udp_avst_to_pg4  [5].data   = udp_avst_from_pg1[5].data; 
+//    //    udp_avst_from_pg4[5].ready  = udp_avst_to_pg1  [5].ready;
+//    // end 
+
+//    // attempt 2 
+
+//    always_comb begin 
+//       // pg 1
+//       udp_avst_to_pg1  [2].valid  = udp_avst_from_pg2[4].valid; 
+//       udp_avst_to_pg1  [2].data   = udp_avst_from_pg2[4].data; 
+//       udp_avst_from_pg1[2].ready  = udp_avst_to_pg2  [4].ready;
+//       udp_avst_to_pg1  [3].valid  = udp_avst_from_pg2[5].valid; 
+//       udp_avst_to_pg1  [3].data   = udp_avst_from_pg2[5].data; 
+//       udp_avst_from_pg1[3].ready  = udp_avst_to_pg2  [5].ready;
+      
+//       udp_avst_to_pg1  [4].valid  = udp_avst_from_pg4[2].valid; 
+//       udp_avst_to_pg1  [4].data   = udp_avst_from_pg4[2].data; 
+//       udp_avst_from_pg1[4].ready  = udp_avst_to_pg4  [2].ready;
+//       udp_avst_to_pg1  [5].valid  = udp_avst_from_pg4[3].valid; 
+//       udp_avst_to_pg1  [5].data   = udp_avst_from_pg4[3].data; 
+//       udp_avst_from_pg1[5].ready  = udp_avst_to_pg4  [3].ready;
+
+//       udp_avst_to_pg1  [0].valid  = udp_avst_from_pg3[0].valid; 
+//       udp_avst_to_pg1  [0].data   = udp_avst_from_pg3[0].data; 
+//       udp_avst_from_pg1[0].ready  = udp_avst_to_pg3  [0].ready;
+//       udp_avst_to_pg1  [1].valid  = udp_avst_from_pg3[1].valid; 
+//       udp_avst_to_pg1  [1].data   = udp_avst_from_pg3[1].data; 
+//       udp_avst_from_pg1[1].ready  = udp_avst_to_pg3  [1].ready;
+
+//       // pg 2
+//       udp_avst_to_pg2  [2].valid  = udp_avst_from_pg3[4].valid; 
+//       udp_avst_to_pg2  [2].data   = udp_avst_from_pg3[4].data; 
+//       udp_avst_from_pg2[2].ready  = udp_avst_to_pg3  [4].ready;
+//       udp_avst_to_pg2  [3].valid  = udp_avst_from_pg3[5].valid; 
+//       udp_avst_to_pg2  [3].data   = udp_avst_from_pg3[5].data; 
+//       udp_avst_from_pg2[3].ready  = udp_avst_to_pg3  [5].ready;
+
+//       udp_avst_to_pg2  [4].valid  = udp_avst_from_pg1[2].valid; 
+//       udp_avst_to_pg2  [4].data   = udp_avst_from_pg1[2].data; 
+//       udp_avst_from_pg2[4].ready  = udp_avst_to_pg1  [2].ready;
+//       udp_avst_to_pg2  [5].valid  = udp_avst_from_pg1[3].valid; 
+//       udp_avst_to_pg2  [5].data   = udp_avst_from_pg1[3].data; 
+//       udp_avst_from_pg2[5].ready  = udp_avst_to_pg1  [3].ready;
+      
+//       udp_avst_to_pg2  [0].valid  = udp_avst_from_pg4[0].valid; 
+//       udp_avst_to_pg2  [0].data   = udp_avst_from_pg4[0].data; 
+//       udp_avst_from_pg2[0].ready  = udp_avst_to_pg4  [0].ready;
+//       udp_avst_to_pg2  [1].valid  = udp_avst_from_pg4[1].valid; 
+//       udp_avst_to_pg2  [1].data   = udp_avst_from_pg4[1].data; 
+//       udp_avst_from_pg2[1].ready  = udp_avst_to_pg4  [1].ready;
+
+//       // pg 3
+//       udp_avst_to_pg3  [2].valid  = udp_avst_from_pg4[4].valid; 
+//       udp_avst_to_pg3  [2].data   = udp_avst_from_pg4[4].data; 
+//       udp_avst_from_pg3[2].ready  = udp_avst_to_pg4  [4].ready;
+//       udp_avst_to_pg3  [3].valid  = udp_avst_from_pg4[5].valid; 
+//       udp_avst_to_pg3  [3].data   = udp_avst_from_pg4[5].data; 
+//       udp_avst_from_pg3[3].ready  = udp_avst_to_pg4  [5].ready;
+
+//       udp_avst_to_pg3  [4].valid  = udp_avst_from_pg2[2].valid; 
+//       udp_avst_to_pg3  [4].data   = udp_avst_from_pg2[2].data; 
+//       udp_avst_from_pg3[4].ready  = udp_avst_to_pg2  [2].ready;
+//       udp_avst_to_pg3  [5].valid  = udp_avst_from_pg2[3].valid; 
+//       udp_avst_to_pg3  [5].data   = udp_avst_from_pg2[3].data; 
+//       udp_avst_from_pg3[5].ready  = udp_avst_to_pg2  [3].ready;
+      
+//       udp_avst_to_pg3  [0].valid  = udp_avst_from_pg1[0].valid; 
+//       udp_avst_to_pg3  [0].data   = udp_avst_from_pg1[0].data; 
+//       udp_avst_from_pg3[0].ready  = udp_avst_to_pg1  [0].ready;
+//       udp_avst_to_pg3  [1].valid  = udp_avst_from_pg1[1].valid; 
+//       udp_avst_to_pg3  [1].data   = udp_avst_from_pg1[1].data; 
+//       udp_avst_from_pg3[1].ready  = udp_avst_to_pg1  [1].ready;
+
+//       // pg 4
+//       udp_avst_to_pg4  [2].valid  = udp_avst_from_pg1[4].valid; 
+//       udp_avst_to_pg4  [2].data   = udp_avst_from_pg1[4].data; 
+//       udp_avst_from_pg4[2].ready  = udp_avst_to_pg1  [4].ready;
+//       udp_avst_to_pg4  [3].valid  = udp_avst_from_pg1[5].valid; 
+//       udp_avst_to_pg4  [3].data   = udp_avst_from_pg1[5].data; 
+//       udp_avst_from_pg4[3].ready  = udp_avst_to_pg1  [5].ready;
+
+//       udp_avst_to_pg4  [4].valid  = udp_avst_from_pg3[2].valid; 
+//       udp_avst_to_pg4  [4].data   = udp_avst_from_pg3[2].data; 
+//       udp_avst_from_pg4[4].ready  = udp_avst_to_pg3  [2].ready;
+//       udp_avst_to_pg4  [5].valid  = udp_avst_from_pg3[3].valid; 
+//       udp_avst_to_pg4  [5].data   = udp_avst_from_pg3[3].data; 
+//       udp_avst_from_pg4[5].ready  = udp_avst_to_pg3  [3].ready;
+      
+//       udp_avst_to_pg4  [0].valid  = udp_avst_from_pg2[0].valid; 
+//       udp_avst_to_pg4  [0].data   = udp_avst_from_pg2[0].data; 
+//       udp_avst_from_pg4[0].ready  = udp_avst_to_pg2  [0].ready;
+//       udp_avst_to_pg4  [1].valid  = udp_avst_from_pg2[1].valid; 
+//       udp_avst_to_pg4  [1].data   = udp_avst_from_pg2[1].data; 
+//       udp_avst_from_pg4[1].ready  = udp_avst_to_pg2  [1].ready;
+//    end 
+
+// endmodule
+
+// `ifdef INCLUDE_HSSI
+
+// module reorder_eth_channel (
+//    ofs_fim_hssi_ss_tx_axis_if.client             hssi_ss_st_tx [MAX_NUM_ETH_CHANNELS-1:0],
+//    ofs_fim_hssi_ss_rx_axis_if.client             hssi_ss_st_rx [MAX_NUM_ETH_CHANNELS-1:0],
+//    ofs_fim_hssi_fc_if.client                     hssi_fc [MAX_NUM_ETH_CHANNELS-1:0],
+//    input logic [MAX_NUM_ETH_CHANNELS-1:0]     i_hssi_clk_pll,
+
+//    ofs_fim_hssi_ss_tx_axis_if.mac             pg1_hssi_ss_st_tx [MAX_NUM_ETH_CHANNELS/2-1:0],
+//    ofs_fim_hssi_ss_rx_axis_if.mac             pg1_hssi_ss_st_rx [MAX_NUM_ETH_CHANNELS/2-1:0],
+//    ofs_fim_hssi_fc_if.mac                     pg1_hssi_fc [MAX_NUM_ETH_CHANNELS/2-1:0],
+//    output logic [MAX_NUM_ETH_CHANNELS/2-1:0]     pg1_i_hssi_clk_pll,
+
+//    ofs_fim_hssi_ss_tx_axis_if.mac             pg2_hssi_ss_st_tx [MAX_NUM_ETH_CHANNELS/2-1:0],
+//    ofs_fim_hssi_ss_rx_axis_if.mac             pg2_hssi_ss_st_rx [MAX_NUM_ETH_CHANNELS/2-1:0],
+//    ofs_fim_hssi_fc_if.mac                     pg2_hssi_fc [MAX_NUM_ETH_CHANNELS/2-1:0],
+//    output logic [MAX_NUM_ETH_CHANNELS/2-1:0]     pg2_i_hssi_clk_pll
+
+// );
+
+//    genvar i;
+//    generate 
+//       for (i = 0; i < NUM_ETH_CHANNELS/2; i++) begin 
+
+//          always_comb begin 
                
-            // pg2
-            pg2_i_hssi_clk_pll[i] = i_hssi_clk_pll[i];
+//             // pg2
+//             pg2_i_hssi_clk_pll[i] = i_hssi_clk_pll[i];
 
-            pg2_hssi_ss_st_tx[i].tready = hssi_ss_st_tx[i].tready;
-            pg2_hssi_ss_st_tx[i].clk    = hssi_ss_st_tx[i].clk;
-            pg2_hssi_ss_st_tx[i].rst_n  = hssi_ss_st_tx[i].rst_n;
-            hssi_ss_st_tx[i].tx         = pg2_hssi_ss_st_tx[i].tx;
+//             pg2_hssi_ss_st_tx[i].tready = hssi_ss_st_tx[i].tready;
+//             pg2_hssi_ss_st_tx[i].clk    = hssi_ss_st_tx[i].clk;
+//             pg2_hssi_ss_st_tx[i].rst_n  = hssi_ss_st_tx[i].rst_n;
+//             hssi_ss_st_tx[i].tx         = pg2_hssi_ss_st_tx[i].tx;
 
-            pg2_hssi_ss_st_rx[i].clk    = hssi_ss_st_rx[i].clk;
-            pg2_hssi_ss_st_rx[i].rst_n  = hssi_ss_st_rx[i].rst_n;
-            pg2_hssi_ss_st_rx[i].rx     = hssi_ss_st_rx[i].rx;
+//             pg2_hssi_ss_st_rx[i].clk    = hssi_ss_st_rx[i].clk;
+//             pg2_hssi_ss_st_rx[i].rst_n  = hssi_ss_st_rx[i].rst_n;
+//             pg2_hssi_ss_st_rx[i].rx     = hssi_ss_st_rx[i].rx;
 
-            pg2_hssi_fc[i].rx_pause     = hssi_fc[i].rx_pause; 
-            pg2_hssi_fc[i].rx_pfc       = hssi_fc[i].rx_pfc;
-            hssi_fc[i].tx_pause         = pg2_hssi_fc[i].tx_pause;
-            hssi_fc[i].tx_pfc           = pg2_hssi_fc[i].tx_pfc;
+//             pg2_hssi_fc[i].rx_pause     = hssi_fc[i].rx_pause; 
+//             pg2_hssi_fc[i].rx_pfc       = hssi_fc[i].rx_pfc;
+//             hssi_fc[i].tx_pause         = pg2_hssi_fc[i].tx_pause;
+//             hssi_fc[i].tx_pfc           = pg2_hssi_fc[i].tx_pfc;
 
-            // pg1
-            pg1_i_hssi_clk_pll[i] = i_hssi_clk_pll[i + NUM_ETH_CHANNELS/2];
+//             // pg1
+//             pg1_i_hssi_clk_pll[i] = i_hssi_clk_pll[i + NUM_ETH_CHANNELS/2];
 
-            pg1_hssi_ss_st_tx[i].tready = hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].tready;
-            pg1_hssi_ss_st_tx[i].clk    = hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].clk;
-            pg1_hssi_ss_st_tx[i].rst_n  = hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].rst_n;
-            hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].tx         = pg1_hssi_ss_st_tx[i].tx;
+//             pg1_hssi_ss_st_tx[i].tready = hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].tready;
+//             pg1_hssi_ss_st_tx[i].clk    = hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].clk;
+//             pg1_hssi_ss_st_tx[i].rst_n  = hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].rst_n;
+//             hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].tx         = pg1_hssi_ss_st_tx[i].tx;
 
-            pg1_hssi_ss_st_rx[i].clk    = hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].clk;
-            pg1_hssi_ss_st_rx[i].rst_n  = hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].rst_n;
-            pg1_hssi_ss_st_rx[i].rx     = hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].rx;
+//             pg1_hssi_ss_st_rx[i].clk    = hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].clk;
+//             pg1_hssi_ss_st_rx[i].rst_n  = hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].rst_n;
+//             pg1_hssi_ss_st_rx[i].rx     = hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].rx;
 
-            pg1_hssi_fc[i].rx_pause     = hssi_fc[i + NUM_ETH_CHANNELS/2].rx_pause; 
-            pg1_hssi_fc[i].rx_pfc       = hssi_fc[i + NUM_ETH_CHANNELS/2].rx_pfc;
-            hssi_fc[i + NUM_ETH_CHANNELS/2].tx_pause         = pg1_hssi_fc[i].tx_pause;
-            hssi_fc[i + NUM_ETH_CHANNELS/2].tx_pfc           = pg1_hssi_fc[i].tx_pfc;
+//             pg1_hssi_fc[i].rx_pause     = hssi_fc[i + NUM_ETH_CHANNELS/2].rx_pause; 
+//             pg1_hssi_fc[i].rx_pfc       = hssi_fc[i + NUM_ETH_CHANNELS/2].rx_pfc;
+//             hssi_fc[i + NUM_ETH_CHANNELS/2].tx_pause         = pg1_hssi_fc[i].tx_pause;
+//             hssi_fc[i + NUM_ETH_CHANNELS/2].tx_pfc           = pg1_hssi_fc[i].tx_pfc;
 
-         end 
-      end 
-   endgenerate
+//          end 
+//       end 
+//    endgenerate
 
-   generate
-      for (i = 0; i < (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2; i++) begin 
-         always_comb begin 
-            // pg2
-            pg2_i_hssi_clk_pll[i + NUM_ETH_CHANNELS/2] = i_hssi_clk_pll[i + NUM_ETH_CHANNELS];
+//    generate
+//       for (i = 0; i < (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2; i++) begin 
+//          always_comb begin 
+//             // pg2
+//             pg2_i_hssi_clk_pll[i + NUM_ETH_CHANNELS/2] = i_hssi_clk_pll[i + NUM_ETH_CHANNELS];
 
-            pg2_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].tready = hssi_ss_st_tx[i + NUM_ETH_CHANNELS].tready;
-            pg2_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].clk    = hssi_ss_st_tx[i + NUM_ETH_CHANNELS].clk;
-            pg2_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].rst_n  = hssi_ss_st_tx[i + NUM_ETH_CHANNELS].rst_n;
-            hssi_ss_st_tx[i + NUM_ETH_CHANNELS].tx         = pg2_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].tx;
+//             pg2_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].tready = hssi_ss_st_tx[i + NUM_ETH_CHANNELS].tready;
+//             pg2_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].clk    = hssi_ss_st_tx[i + NUM_ETH_CHANNELS].clk;
+//             pg2_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].rst_n  = hssi_ss_st_tx[i + NUM_ETH_CHANNELS].rst_n;
+//             hssi_ss_st_tx[i + NUM_ETH_CHANNELS].tx         = pg2_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].tx;
 
-            pg2_hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].clk    = hssi_ss_st_rx[i + NUM_ETH_CHANNELS].clk;
-            pg2_hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].rst_n  = hssi_ss_st_rx[i + NUM_ETH_CHANNELS].rst_n;
-            pg2_hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].rx     = hssi_ss_st_rx[i + NUM_ETH_CHANNELS].rx;
+//             pg2_hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].clk    = hssi_ss_st_rx[i + NUM_ETH_CHANNELS].clk;
+//             pg2_hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].rst_n  = hssi_ss_st_rx[i + NUM_ETH_CHANNELS].rst_n;
+//             pg2_hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].rx     = hssi_ss_st_rx[i + NUM_ETH_CHANNELS].rx;
 
-            pg2_hssi_fc[i + NUM_ETH_CHANNELS/2].rx_pause     = hssi_fc[i + NUM_ETH_CHANNELS].rx_pause; 
-            pg2_hssi_fc[i + NUM_ETH_CHANNELS/2].rx_pfc       = hssi_fc[i + NUM_ETH_CHANNELS].rx_pfc;
-            hssi_fc[i + NUM_ETH_CHANNELS].tx_pause         = pg2_hssi_fc[i + NUM_ETH_CHANNELS/2].tx_pause;
-            hssi_fc[i + NUM_ETH_CHANNELS].tx_pfc           = pg2_hssi_fc[i + NUM_ETH_CHANNELS/2].tx_pfc;
+//             pg2_hssi_fc[i + NUM_ETH_CHANNELS/2].rx_pause     = hssi_fc[i + NUM_ETH_CHANNELS].rx_pause; 
+//             pg2_hssi_fc[i + NUM_ETH_CHANNELS/2].rx_pfc       = hssi_fc[i + NUM_ETH_CHANNELS].rx_pfc;
+//             hssi_fc[i + NUM_ETH_CHANNELS].tx_pause         = pg2_hssi_fc[i + NUM_ETH_CHANNELS/2].tx_pause;
+//             hssi_fc[i + NUM_ETH_CHANNELS].tx_pfc           = pg2_hssi_fc[i + NUM_ETH_CHANNELS/2].tx_pfc;
 
-            // pg1
-            pg1_i_hssi_clk_pll[i + NUM_ETH_CHANNELS/2] = i_hssi_clk_pll[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2];
+//             // pg1
+//             pg1_i_hssi_clk_pll[i + NUM_ETH_CHANNELS/2] = i_hssi_clk_pll[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2];
 
-            pg1_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].tready = hssi_ss_st_tx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].tready;
-            pg1_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].clk    = hssi_ss_st_tx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].clk;
-            pg1_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].rst_n  = hssi_ss_st_tx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].rst_n;
-            hssi_ss_st_tx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].tx         = pg1_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].tx;
+//             pg1_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].tready = hssi_ss_st_tx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].tready;
+//             pg1_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].clk    = hssi_ss_st_tx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].clk;
+//             pg1_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].rst_n  = hssi_ss_st_tx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].rst_n;
+//             hssi_ss_st_tx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].tx         = pg1_hssi_ss_st_tx[i + NUM_ETH_CHANNELS/2].tx;
 
-            pg1_hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].clk    = hssi_ss_st_rx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].clk;
-            pg1_hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].rst_n  = hssi_ss_st_rx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].rst_n;
-            pg1_hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].rx     = hssi_ss_st_rx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].rx;
+//             pg1_hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].clk    = hssi_ss_st_rx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].clk;
+//             pg1_hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].rst_n  = hssi_ss_st_rx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].rst_n;
+//             pg1_hssi_ss_st_rx[i + NUM_ETH_CHANNELS/2].rx     = hssi_ss_st_rx[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].rx;
 
-            pg1_hssi_fc[i + NUM_ETH_CHANNELS/2].rx_pause     = hssi_fc[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].rx_pause; 
-            pg1_hssi_fc[i + NUM_ETH_CHANNELS/2].rx_pfc       = hssi_fc[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].rx_pfc;
-            hssi_fc[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].tx_pause         = pg1_hssi_fc[i + NUM_ETH_CHANNELS/2].tx_pause;
-            hssi_fc[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].tx_pfc           = pg1_hssi_fc[i + NUM_ETH_CHANNELS/2].tx_pfc;
-         end 
-      end 
-   endgenerate
+//             pg1_hssi_fc[i + NUM_ETH_CHANNELS/2].rx_pause     = hssi_fc[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].rx_pause; 
+//             pg1_hssi_fc[i + NUM_ETH_CHANNELS/2].rx_pfc       = hssi_fc[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].rx_pfc;
+//             hssi_fc[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].tx_pause         = pg1_hssi_fc[i + NUM_ETH_CHANNELS/2].tx_pause;
+//             hssi_fc[i + NUM_ETH_CHANNELS + (MAX_NUM_ETH_CHANNELS - NUM_ETH_CHANNELS) / 2].tx_pfc           = pg1_hssi_fc[i + NUM_ETH_CHANNELS/2].tx_pfc;
+//          end 
+//       end 
+//    endgenerate
 
-endmodule
-`endif 
+// endmodule
+// `endif 
 
 module afu_top #(
 
@@ -149,8 +490,10 @@ module afu_top #(
 `endif
 
    // set these here
-   parameter JASON_NUM_IOPIPES = 2,
-   parameter JASON_IOPIPES_WIDTH = 80
+   parameter JASON_NUM_IOPIPES_DATA = 1,
+   parameter JASON_IOPIPES_WIDTH_DATA = 96,
+   parameter JASON_NUM_IOPIPES_CTRL = 1,
+   parameter JASON_IOPIPES_WIDTH_CTRL = 32
 )(
    input wire                            SYS_REFCLK,
    input wire                            clk,
@@ -271,13 +614,17 @@ logic       afu_softreset;
 
 logic pr_parity_error_1;
 logic pr_parity_error_2;
+logic pr_parity_error_3;
+logic pr_parity_error_4;
 
-assign pr_parity_error = pr_parity_error_1 | pr_parity_error_2;
+assign pr_parity_error = pr_parity_error_1 | pr_parity_error_2 | pr_parity_error_3 | pr_parity_error_4;
 
 logic afu_softreset_1;
 logic afu_softreset_2;
+logic afu_softreset_3;
+logic afu_softreset_4;
 
-assign afu_softreset = afu_softreset_1 | afu_softreset_2;
+assign afu_softreset = afu_softreset_1 | afu_softreset_2 | afu_softreset_3 | afu_softreset_4;
 
 //-----------------------------------------------------------------------------------------------
 // Preserve clocks
@@ -591,6 +938,9 @@ endgenerate
 	
 logic uclk, uclk_div2;
 logic port2_reset, port2_freeze;
+logic port3_reset, port3_freeze;
+logic port4_reset, port4_freeze;
+
 //-----------------------------------------------------------------------------------------------
 // Port Gasket (PG) AFU
 //-----------------------------------------------------------------------------------------------
@@ -715,23 +1065,95 @@ localparam pcie_ss_hdr_pkg::ReqHdr_pf_vf_info_t[PG_AFU_NUM_PORTS-1:0] PG_PF_VF_I
 
 `endif
 
-   // asp_avst_if udp_avst_from_pg1_to_pg2[NUM_ETH_CHANNELS/2-1:0]();
-   // asp_avst_if udp_avst_from_pg2_to_pg1[NUM_ETH_CHANNELS/2-1:0]();
+// asp_avst_if udp_avst_from_pg1_to_pg2[NUM_ETH_CHANNELS/2-1:0]();
+// asp_avst_if udp_avst_from_pg2_to_pg1[NUM_ETH_CHANNELS/2-1:0]();
 
-   asp_avst_if #(.DATA_WIDTH(JASON_IOPIPES_WIDTH)) udp_avst_from_pg1_to_pg2[JASON_NUM_IOPIPES-1:0]();
-   asp_avst_if #(.DATA_WIDTH(JASON_IOPIPES_WIDTH)) udp_avst_from_pg2_to_pg1[JASON_NUM_IOPIPES-1:0]();
+asp_avst_if_data #(.DATA_WIDTH(JASON_IOPIPES_WIDTH_DATA)) udp_avst_to_pg1_data[JASON_NUM_IOPIPES_DATA-1:0]();
+asp_avst_if_data #(.DATA_WIDTH(JASON_IOPIPES_WIDTH_DATA)) udp_avst_from_pg1_data[JASON_NUM_IOPIPES_DATA-1:0]();
 
-   asp_avst_if #(.DATA_WIDTH(JASON_IOPIPES_WIDTH)) udp_avst_from_pg3_to_pg4[JASON_NUM_IOPIPES-1:0]();
-   asp_avst_if #(.DATA_WIDTH(JASON_IOPIPES_WIDTH)) udp_avst_from_pg4_to_pg3[JASON_NUM_IOPIPES-1:0]();
+asp_avst_if_data #(.DATA_WIDTH(JASON_IOPIPES_WIDTH_DATA)) udp_avst_to_pg2_data[JASON_NUM_IOPIPES_DATA-1:0]();
+asp_avst_if_data #(.DATA_WIDTH(JASON_IOPIPES_WIDTH_DATA)) udp_avst_from_pg2_data[JASON_NUM_IOPIPES_DATA-1:0]();
 
+asp_avst_if_data #(.DATA_WIDTH(JASON_IOPIPES_WIDTH_DATA)) udp_avst_to_pg3_data[JASON_NUM_IOPIPES_DATA-1:0]();
+asp_avst_if_data #(.DATA_WIDTH(JASON_IOPIPES_WIDTH_DATA)) udp_avst_from_pg3_data[JASON_NUM_IOPIPES_DATA-1:0]();
+
+asp_avst_if_data #(.DATA_WIDTH(JASON_IOPIPES_WIDTH_DATA)) udp_avst_to_pg4_data[JASON_NUM_IOPIPES_DATA-1:0]();
+asp_avst_if_data #(.DATA_WIDTH(JASON_IOPIPES_WIDTH_DATA)) udp_avst_from_pg4_data[JASON_NUM_IOPIPES_DATA-1:0]();
+
+avst_data_router #(
+   .TDATA_WIDTH(JASON_IOPIPES_WIDTH_DATA),
+   .JASON_NUM_IOPIPES(JASON_NUM_IOPIPES_DATA),
+   .ROUTING_TABLE_PREFIX("/home/jcheung2/ofs_fourslot/2024.1/ofs-agx7-pcie-attach/ofs-common/src/common/noc/routing_tables/router_4x4")
+)
+jason_data_noc (
+
+   .clk_noc(uclk_div2),
+   .clk_usr(uclk_div2),
+   .rst_n(rst_n | rst_n_csr),
+
+   .udp_avst_to_pg1(udp_avst_to_pg1_data[0:0]), 
+   .udp_avst_from_pg1(udp_avst_from_pg1_data[0:0]),
+
+   .udp_avst_to_pg2(udp_avst_to_pg2_data[0:0]),
+   .udp_avst_from_pg2(udp_avst_from_pg2_data[0:0]),
+
+   .udp_avst_to_pg3(udp_avst_to_pg3_data[0:0]),
+   .udp_avst_from_pg3(udp_avst_from_pg3_data[0:0]),
+
+   .udp_avst_to_pg4(udp_avst_to_pg4_data[0:0]),
+   .udp_avst_from_pg4(udp_avst_from_pg4_data[0:0])
+);
+
+asp_avst_if_ctrl #(.DATA_WIDTH(JASON_IOPIPES_WIDTH_CTRL)) udp_avst_to_pg1_ctrl[JASON_NUM_IOPIPES_CTRL-1:0]();
+asp_avst_if_ctrl #(.DATA_WIDTH(JASON_IOPIPES_WIDTH_CTRL)) udp_avst_from_pg1_ctrl[JASON_NUM_IOPIPES_CTRL-1:0]();
+
+asp_avst_if_ctrl #(.DATA_WIDTH(JASON_IOPIPES_WIDTH_CTRL)) udp_avst_to_pg2_ctrl[JASON_NUM_IOPIPES_CTRL-1:0]();
+asp_avst_if_ctrl #(.DATA_WIDTH(JASON_IOPIPES_WIDTH_CTRL)) udp_avst_from_pg2_ctrl[JASON_NUM_IOPIPES_CTRL-1:0]();
+
+asp_avst_if_ctrl #(.DATA_WIDTH(JASON_IOPIPES_WIDTH_CTRL)) udp_avst_to_pg3_ctrl[JASON_NUM_IOPIPES_CTRL-1:0]();
+asp_avst_if_ctrl #(.DATA_WIDTH(JASON_IOPIPES_WIDTH_CTRL)) udp_avst_from_pg3_ctrl[JASON_NUM_IOPIPES_CTRL-1:0]();
+
+asp_avst_if_ctrl #(.DATA_WIDTH(JASON_IOPIPES_WIDTH_CTRL)) udp_avst_to_pg4_ctrl[JASON_NUM_IOPIPES_CTRL-1:0]();
+asp_avst_if_ctrl #(.DATA_WIDTH(JASON_IOPIPES_WIDTH_CTRL)) udp_avst_from_pg4_ctrl[JASON_NUM_IOPIPES_CTRL-1:0]();
+
+avst_ctrl_router #(
+   .TDATA_WIDTH(JASON_IOPIPES_WIDTH_CTRL),
+   .JASON_NUM_IOPIPES(JASON_NUM_IOPIPES_CTRL),
+   .ROUTING_TABLE_PREFIX("/home/jcheung2/ofs_fourslot/2024.1/ofs-agx7-pcie-attach/ofs-common/src/common/noc/routing_tables/router_4x4")
+)
+jason_control_noc (
+
+   .clk_noc(uclk_div2),
+   .clk_usr(uclk_div2),
+   .rst_n(rst_n | rst_n_csr),
+
+   .udp_avst_to_pg1(udp_avst_to_pg1_ctrl[0:0]), 
+   .udp_avst_from_pg1(udp_avst_from_pg1_ctrl[0:0]),
+
+   .udp_avst_to_pg2(udp_avst_to_pg2_ctrl[0:0]),
+   .udp_avst_from_pg2(udp_avst_from_pg2_ctrl[0:0]),
+
+   .udp_avst_to_pg3(udp_avst_to_pg3_ctrl[0:0]),
+   .udp_avst_from_pg3(udp_avst_from_pg3_ctrl[0:0]),
+
+   .udp_avst_to_pg4(udp_avst_to_pg4_ctrl[0:0]),
+   .udp_avst_from_pg4(udp_avst_from_pg4_ctrl[0:0])
+);
+// asp_avst_if #(.DATA_WIDTH(JASON_IOPIPES_WIDTH)) udp_avst_from_pg1_to_pg2[JASON_NUM_IOPIPES-1:0]();
+// asp_avst_if #(.DATA_WIDTH(JASON_IOPIPES_WIDTH)) udp_avst_from_pg2_to_pg1[JASON_NUM_IOPIPES-1:0]();
+
+// asp_avst_if #(.DATA_WIDTH(JASON_IOPIPES_WIDTH)) udp_avst_from_pg3_to_pg4[JASON_NUM_IOPIPES-1:0]();
+// asp_avst_if #(.DATA_WIDTH(JASON_IOPIPES_WIDTH)) udp_avst_from_pg4_to_pg3[JASON_NUM_IOPIPES-1:0]();
 
 generate if (PG_AFU_NUM_PORTS > 0) begin : pg_afu
 port_gasket #( 
    .PG_NUM_PORTS(PG_AFU_NUM_PORTS),              // Number of PCIe ports to PR region
    .PORT_PF_VF_INFO(PG_PF_VF_INFO),              // PCIe port data
    .NUM_MEM_CH(1),                 // Number of Memory Porst to PR region
-   .JASON_NUM_IOPIPES(JASON_NUM_IOPIPES),
-   .JASON_IOPIPES_WIDTH(JASON_IOPIPES_WIDTH),
+   .JASON_NUM_IOPIPES_DATA(JASON_NUM_IOPIPES_DATA),
+   .JASON_IOPIPES_WIDTH_DATA(JASON_IOPIPES_WIDTH_DATA),
+   .JASON_NUM_IOPIPES_CTRL(JASON_NUM_IOPIPES_CTRL),
+   .JASON_IOPIPES_WIDTH_CTRL(JASON_IOPIPES_WIDTH_CTRL),
    `ifdef INCLUDE_HSSI
    .JASON_MAX_NUM_ETH_CH(MAX_NUM_ETH_CHANNELS/2), // Number of HSSI channels
    `endif
@@ -747,6 +1169,10 @@ port_gasket #(
 	.uclk_div2,
    .port2_reset,
    .port2_freeze,
+   .port3_reset,
+   .port3_freeze,
+   .port4_reset,
+   .port4_freeze,
 
    .refclk             (SYS_REFCLK),            // 100 MHz refclk for user clk pll
    .clk,                                        // PCIe Clk
@@ -764,11 +1190,17 @@ port_gasket #(
    .flr_req            (afu_flr_req[1]),
 
 `ifdef INCLUDE_DDR4
-   .afu_mem_if         (ext_mem_if[3:3]),             // Memory interface
+   .afu_mem_if         (ext_mem_if[1:1]),             // Memory interface i-series
+   // .afu_mem_if         (ext_mem_if[3:3]),             // Memory interface
 `endif
 
-   .udp_avst_from_kernel (udp_avst_from_pg1_to_pg2),
-   .udp_avst_to_kernel   (udp_avst_from_pg2_to_pg1),
+   // .udp_avst_from_kernel (udp_avst_from_pg1_to_pg2),
+   // .udp_avst_to_kernel   (udp_avst_from_pg2_to_pg1),
+   .udp_avst_from_kernel_data (udp_avst_from_pg1_data),
+   .udp_avst_to_kernel_data   (udp_avst_to_pg1_data),
+
+   .udp_avst_from_kernel_ctrl (udp_avst_from_pg1_ctrl),
+   .udp_avst_to_kernel_ctrl   (udp_avst_to_pg1_ctrl),
 
    `ifdef INCLUDE_HSSI                           // Instantiates HE-HSSI in PR region                                                                             
       .hssi_ss_st_tx  (pg1_hssi_ss_st_tx ),           // HSSI Tx
@@ -835,12 +1267,14 @@ localparam pcie_ss_hdr_pkg::ReqHdr_pf_vf_info_t[PG_AFU_NUM_PORTS-1:0] PG_PF_VF_I
 
 // mem 0 and 1 is on the bottom
 generate if (PG_AFU_NUM_PORTS > 0) begin : pg_afu_2
-port_gasket_slv #( 
+port_gasket_2 #( 
    .PG_NUM_PORTS(PG_AFU_NUM_PORTS),              // Number of PCIe ports to PR region
    .PORT_PF_VF_INFO(PG_PF_VF_INFO_2),              // PCIe port data
    .NUM_MEM_CH(1),                 // Number of Memory Porst to PR region
-   .JASON_NUM_IOPIPES(JASON_NUM_IOPIPES),
-   .JASON_IOPIPES_WIDTH(JASON_IOPIPES_WIDTH),
+   .JASON_NUM_IOPIPES_DATA(JASON_NUM_IOPIPES_DATA),
+   .JASON_IOPIPES_WIDTH_DATA(JASON_IOPIPES_WIDTH_DATA),
+   .JASON_NUM_IOPIPES_CTRL(JASON_NUM_IOPIPES_CTRL),
+   .JASON_IOPIPES_WIDTH_CTRL(JASON_IOPIPES_WIDTH_CTRL),
    `ifdef INCLUDE_HSSI
    .JASON_MAX_NUM_ETH_CH(MAX_NUM_ETH_CHANNELS/2), // Number of HSSI channels
    `endif
@@ -851,8 +1285,8 @@ port_gasket_slv #(
 ) port_gasket_2 (
 	.uclk,
 	.uclk_div2,
-   .port2_reset,
-   .port2_freeze,
+   .port_reset(port2_reset),
+   .port_freeze(port2_freeze),
 	
    .refclk             (SYS_REFCLK),            // 100 MHz refclk for user clk pll
    .clk,                                        // PCIe Clk
@@ -871,12 +1305,18 @@ port_gasket_slv #(
    .flr_rsp            (afu_flr_rsp[2]),
 
 `ifdef INCLUDE_DDR4
-  .afu_mem_if         (ext_mem_if[2:2]),             // Memory interface
+  .afu_mem_if         (ext_mem_if[0:0]),             // Memory interface i-series
+//   .afu_mem_if         (ext_mem_if[2:2]),             // Memory interface
 `endif
 
-   .udp_avst_from_kernel(udp_avst_from_pg2_to_pg1),
-   .udp_avst_to_kernel  (udp_avst_from_pg1_to_pg2),
+   // .udp_avst_from_kernel(udp_avst_from_pg2_to_pg1),
+   // .udp_avst_to_kernel  (udp_avst_from_pg1_to_pg2),
 
+   .udp_avst_from_kernel_data(udp_avst_from_pg2_data),
+   .udp_avst_to_kernel_data  (udp_avst_to_pg2_data),
+
+   .udp_avst_from_kernel_ctrl(udp_avst_from_pg2_ctrl),
+   .udp_avst_to_kernel_ctrl  (udp_avst_to_pg2_ctrl),
 
 
   `ifdef INCLUDE_HSSI                           // Instantiates HE-HSSI in PR region   
@@ -944,12 +1384,14 @@ localparam pcie_ss_hdr_pkg::ReqHdr_pf_vf_info_t[PG_AFU_NUM_PORTS-1:0] PG_PF_VF_I
 
 // mem 0 and 1 is on the bottom
 generate if (PG_AFU_NUM_PORTS > 0) begin : pg_afu_3
-port_gasket_slv #( 
+port_gasket_3 #( 
    .PG_NUM_PORTS(PG_AFU_NUM_PORTS),              // Number of PCIe ports to PR region
    .PORT_PF_VF_INFO(PG_PF_VF_INFO_3),              // PCIe port data
    .NUM_MEM_CH(1),                 // Number of Memory Porst to PR region
-   .JASON_NUM_IOPIPES(JASON_NUM_IOPIPES),
-   .JASON_IOPIPES_WIDTH(JASON_IOPIPES_WIDTH),
+   .JASON_NUM_IOPIPES_DATA(JASON_NUM_IOPIPES_DATA),
+   .JASON_IOPIPES_WIDTH_DATA(JASON_IOPIPES_WIDTH_DATA),
+   .JASON_NUM_IOPIPES_CTRL(JASON_NUM_IOPIPES_CTRL),
+   .JASON_IOPIPES_WIDTH_CTRL(JASON_IOPIPES_WIDTH_CTRL),
    `ifdef INCLUDE_HSSI
    .JASON_MAX_NUM_ETH_CH(MAX_NUM_ETH_CHANNELS/2), // Number of HSSI channels
    `endif
@@ -960,8 +1402,8 @@ port_gasket_slv #(
 ) port_gasket_3 (
 	.uclk,
 	.uclk_div2,
-   .port2_reset,
-   .port2_freeze,
+   .port_reset(port3_reset),
+   .port_freeze(port3_freeze),
 	
    .refclk             (SYS_REFCLK),            // 100 MHz refclk for user clk pll
    .clk,                                        // PCIe Clk
@@ -980,11 +1422,18 @@ port_gasket_slv #(
    .flr_rsp            (afu_flr_rsp[3]),
 
 `ifdef INCLUDE_DDR4
-  .afu_mem_if         (ext_mem_if[1:1]),             // Memory interface
+  .afu_mem_if         (ext_mem_if[2:2]),             // Memory interface i-series
+//   .afu_mem_if         (ext_mem_if[1:1]),             // Memory interface
 `endif
 
-   .udp_avst_from_kernel(udp_avst_from_pg3_to_pg4),
-   .udp_avst_to_kernel  (udp_avst_from_pg4_to_pg3),
+   // .udp_avst_from_kernel(udp_avst_from_pg3_to_pg4),
+   // .udp_avst_to_kernel  (udp_avst_from_pg4_to_pg3),
+
+   .udp_avst_from_kernel_data(udp_avst_from_pg3_data),
+   .udp_avst_to_kernel_data  (udp_avst_to_pg3_data),
+
+   .udp_avst_from_kernel_ctrl(udp_avst_from_pg3_ctrl),
+   .udp_avst_to_kernel_ctrl  (udp_avst_to_pg3_ctrl),
 
 
 
@@ -1053,12 +1502,14 @@ localparam pcie_ss_hdr_pkg::ReqHdr_pf_vf_info_t[PG_AFU_NUM_PORTS-1:0] PG_PF_VF_I
 
 // mem 0 and 1 is on the bottom
 generate if (PG_AFU_NUM_PORTS > 0) begin : pg_afu_4
-port_gasket_slv #( 
+port_gasket_4 #( 
    .PG_NUM_PORTS(PG_AFU_NUM_PORTS),              // Number of PCIe ports to PR region
    .PORT_PF_VF_INFO(PG_PF_VF_INFO_4),              // PCIe port data
    .NUM_MEM_CH(1),                 // Number of Memory Porst to PR region
-   .JASON_NUM_IOPIPES(JASON_NUM_IOPIPES),
-   .JASON_IOPIPES_WIDTH(JASON_IOPIPES_WIDTH),
+   .JASON_NUM_IOPIPES_DATA(JASON_NUM_IOPIPES_DATA),
+   .JASON_IOPIPES_WIDTH_DATA(JASON_IOPIPES_WIDTH_DATA),
+   .JASON_NUM_IOPIPES_CTRL(JASON_NUM_IOPIPES_CTRL),
+   .JASON_IOPIPES_WIDTH_CTRL(JASON_IOPIPES_WIDTH_CTRL),
    `ifdef INCLUDE_HSSI
    .JASON_MAX_NUM_ETH_CH(MAX_NUM_ETH_CHANNELS/2), // Number of HSSI channels
    `endif
@@ -1069,8 +1520,8 @@ port_gasket_slv #(
 ) port_gasket_4 (
 	.uclk,
 	.uclk_div2,
-   .port2_reset,
-   .port2_freeze,
+   .port_reset(port4_reset),
+   .port_freeze(port4_freeze),
 	
    .refclk             (SYS_REFCLK),            // 100 MHz refclk for user clk pll
    .clk,                                        // PCIe Clk
@@ -1089,12 +1540,19 @@ port_gasket_slv #(
    .flr_rsp            (afu_flr_rsp[4]),
 
 `ifdef INCLUDE_DDR4
-  .afu_mem_if         (ext_mem_if[0:0]),             // Memory interface
+  .afu_mem_if         (ext_mem_if[3:3]),             // Memory interface i-series
+//   .afu_mem_if         (ext_mem_if[0:0]),             // Memory interface
 `endif
 
-   .udp_avst_from_kernel(udp_avst_from_pg4_to_pg3),
-   .udp_avst_to_kernel  (udp_avst_from_pg3_to_pg4),
 
+   // .udp_avst_from_kernel(udp_avst_from_pg4_to_pg3),
+   // .udp_avst_to_kernel  (udp_avst_from_pg3_to_pg4),
+
+   .udp_avst_from_kernel_data(udp_avst_from_pg4_data),
+   .udp_avst_to_kernel_data  (udp_avst_to_pg4_data),
+
+   .udp_avst_from_kernel_ctrl(udp_avst_from_pg4_ctrl),
+   .udp_avst_to_kernel_ctrl  (udp_avst_to_pg4_ctrl),
 
 
 //   `ifdef INCLUDE_HSSI                           // Instantiates HE-HSSI in PR region   
@@ -1306,7 +1764,7 @@ apf apf(
    .apf_pr_slv_rvalid     (apf_pgsk_slv_if.rvalid    ),
    .apf_pr_slv_rready     (apf_pgsk_slv_if.rready    ),
 
-   // additional apf port gasket interfaces 
+   ///////////////////////////additional port gasket interfaces///////////////////////////////
 
 	.apf_pr_2_slv_awaddr     (apf_pgsk_slv_if_2.awaddr    ),
    .apf_pr_2_slv_awprot     (apf_pgsk_slv_if_2.awprot    ),

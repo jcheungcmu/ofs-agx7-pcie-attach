@@ -13,3 +13,5 @@ set_global_assignment -name IP_FILE ../ip_lib/src/pd_qsys/fabric/ip/apf/apf_uart
 set_global_assignment -name IP_FILE ../ip_lib/src/pd_qsys/fabric/ip/apf/apf_pr_slv.ip
 set_global_assignment -name IP_FILE ../ip_lib/src/pd_qsys/fabric/ip/apf/apf_achk_slv.ip
 set_global_assignment -name IP_FILE ../ip_lib/src/pd_qsys/fabric/ip/apf/apf_pr_2_slv.ip
+set_global_assignment -name IP_FILE ../ip_lib/src/pd_qsys/fabric/ip/apf/apf_pr_3_slv.ip
+set_global_assignment -name IP_FILE ../ip_lib/src/pd_qsys/fabric/ip/apf/apf_pr_4_slv.ip

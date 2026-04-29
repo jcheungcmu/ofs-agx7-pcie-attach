@@ -143,3 +143,6 @@ set_global_assignment -name IP_FILE ../../../../src/pd_qsys/fabric/ip/apf/apf_bp
 set_global_assignment -name IP_FILE ../../../../src/pd_qsys/fabric/ip/apf/apf_clock_bridge.ip
 set_global_assignment -name IP_FILE ../../../../src/pd_qsys/fabric/ip/apf/apf_st2mm_slv.ip
 set_global_assignment -name QSYS_FILE ../../../../src/pd_qsys/fabric/apf.qsys
+set_global_assignment -name IP_FILE ../../../../src/pd_qsys/fabric/ip/apf/apf_pr_2_slv.ip
+set_global_assignment -name IP_FILE ../../../../src/pd_qsys/fabric/ip/apf/apf_pr_3_slv.ip
+set_global_assignment -name IP_FILE ../../../../src/pd_qsys/fabric/ip/apf/apf_pr_4_slv.ip

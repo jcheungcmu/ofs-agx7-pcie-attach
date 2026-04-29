@@ -29,14 +29,52 @@ if { [info exist env(OFS_BUILD_TAG_FLAT) ] } {
         #####################################################
         # Main PR Partition -- green_region
         #####################################################
+        # set_instance_assignment -name PARTITION green_region -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+        # set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+        # set_instance_assignment -name RESERVE_PLACE_REGION ON -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+        # set_instance_assignment -name PARTIAL_RECONFIGURATION_PARTITION ON -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+
+
+        # set_instance_assignment -name PLACE_REGION "X90 Y40 X385 Y265" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+        # set_instance_assignment -name ROUTE_REGION "X0 Y0 X385 Y329" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+
         set_instance_assignment -name PARTITION green_region -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
         set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
         set_instance_assignment -name RESERVE_PLACE_REGION ON -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
         set_instance_assignment -name PARTIAL_RECONFIGURATION_PARTITION ON -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
 
+        # set_instance_assignment -name PLACE_REGION "X90 Y40 X295 Y165; X276 Y140 X344 Y212" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+        # set_instance_assignment -name ROUTE_REGION "X0 Y0 X344 Y212" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+     
+        set_instance_assignment -name PLACE_REGION "X37 Y186 X198 Y313" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+        set_instance_assignment -name ROUTE_REGION "X37 Y186 X198 Y313" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
 
-        set_instance_assignment -name PLACE_REGION "X90 Y40 X385 Y265" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
-        set_instance_assignment -name ROUTE_REGION "X0 Y0 X385 Y329" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+        
+        set_instance_assignment -name PARTITION green_region_2 -to afu_top|pg_afu_2.port_gasket_2|pr_slot|afu_main -entity top
+        set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|pg_afu_2.port_gasket_2|pr_slot|afu_main
+        set_instance_assignment -name RESERVE_PLACE_REGION ON -to afu_top|pg_afu_2.port_gasket_2|pr_slot|afu_main
+        set_instance_assignment -name PARTIAL_RECONFIGURATION_PARTITION ON -to afu_top|pg_afu_2.port_gasket_2|pr_slot|afu_main -entity top
+
+        set_instance_assignment -name PLACE_REGION "X226 Y186 X386 Y313" -to afu_top|pg_afu_2.port_gasket_2|pr_slot|afu_main
+        set_instance_assignment -name ROUTE_REGION "X226 Y186 X386 Y313" -to afu_top|pg_afu_2.port_gasket_2|pr_slot|afu_main
+
+        set_instance_assignment -name PARTITION green_region_3 -to afu_top|pg_afu_3.port_gasket_3|pr_slot|afu_main -entity top
+        set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|pg_afu_3.port_gasket_3|pr_slot|afu_main
+        set_instance_assignment -name RESERVE_PLACE_REGION ON -to afu_top|pg_afu_3.port_gasket_3|pr_slot|afu_main
+        set_instance_assignment -name PARTIAL_RECONFIGURATION_PARTITION ON -to afu_top|pg_afu_3.port_gasket_3|pr_slot|afu_main -entity top
+
+        set_instance_assignment -name PLACE_REGION "X226 Y21 X386 Y146" -to afu_top|pg_afu_3.port_gasket_3|pr_slot|afu_main
+        set_instance_assignment -name ROUTE_REGION "X226 Y21 X386 Y146" -to afu_top|pg_afu_3.port_gasket_3|pr_slot|afu_main
+
+        set_instance_assignment -name PARTITION green_region_4 -to afu_top|pg_afu_4.port_gasket_4|pr_slot|afu_main -entity top
+        set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|pg_afu_4.port_gasket_4|pr_slot|afu_main
+        set_instance_assignment -name RESERVE_PLACE_REGION ON -to afu_top|pg_afu_4.port_gasket_4|pr_slot|afu_main
+        set_instance_assignment -name PARTIAL_RECONFIGURATION_PARTITION ON -to afu_top|pg_afu_4.port_gasket_4|pr_slot|afu_main -entity top
+
+        set_instance_assignment -name PLACE_REGION "X37 Y21 X198 Y146" -to afu_top|pg_afu_4.port_gasket_4|pr_slot|afu_main
+        set_instance_assignment -name ROUTE_REGION "X37 Y21 X198 Y146" -to afu_top|pg_afu_4.port_gasket_4|pr_slot|afu_main
+
+
     }
 
 }

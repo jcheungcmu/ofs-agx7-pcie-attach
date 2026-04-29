@@ -40,34 +40,52 @@ if { [info exist env(OFS_BUILD_TAG_FLAT) ] } {
         # set_instance_assignment -name PLACE_REGION "X90 Y40 X295 Y165; X276 Y140 X344 Y212" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
         # set_instance_assignment -name ROUTE_REGION "X0 Y0 X344 Y212" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
      
-        set_instance_assignment -name PLACE_REGION "X276 Y87 X295 Y139;X90 Y87 X275 Y165;X276 Y140 X343 Y211" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
-        set_instance_assignment -name ROUTE_REGION "X276 Y87 X295 Y139;X90 Y87 X275 Y165;X276 Y140 X343 Y211" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+        set_instance_assignment -name PLACE_REGION "X64 Y113 X180 Y198" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+        set_instance_assignment -name ROUTE_REGION "X64 Y113 X180 Y198" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+
         
         set_instance_assignment -name PARTITION green_region_2 -to afu_top|pg_afu_2.port_gasket_2|pr_slot|afu_main -entity top
         set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|pg_afu_2.port_gasket_2|pr_slot|afu_main
         set_instance_assignment -name RESERVE_PLACE_REGION ON -to afu_top|pg_afu_2.port_gasket_2|pr_slot|afu_main
         set_instance_assignment -name PARTIAL_RECONFIGURATION_PARTITION ON -to afu_top|pg_afu_2.port_gasket_2|pr_slot|afu_main -entity top
 
-        set_instance_assignment -name PLACE_REGION "X199 Y3 X295 Y84;X90 Y44 X198 Y84" -to afu_top|pg_afu_2.port_gasket_2|pr_slot|afu_main
-        set_instance_assignment -name ROUTE_REGION "X199 Y3 X295 Y84;X90 Y44 X198 Y84" -to afu_top|pg_afu_2.port_gasket_2|pr_slot|afu_main
+        set_instance_assignment -name PLACE_REGION "X215 Y113 X332 Y198" -to afu_top|pg_afu_2.port_gasket_2|pr_slot|afu_main
+        set_instance_assignment -name ROUTE_REGION "X215 Y113 X332 Y198" -to afu_top|pg_afu_2.port_gasket_2|pr_slot|afu_main
 
-        set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|tag_remap
-        set_instance_assignment -name PLACE_REGION "X0 Y0 X90 Y212" -to afu_top|tag_remap
+        set_instance_assignment -name PARTITION green_region_3 -to afu_top|pg_afu_3.port_gasket_3|pr_slot|afu_main -entity top
+        set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|pg_afu_3.port_gasket_3|pr_slot|afu_main
+        set_instance_assignment -name RESERVE_PLACE_REGION ON -to afu_top|pg_afu_3.port_gasket_3|pr_slot|afu_main
+        set_instance_assignment -name PARTIAL_RECONFIGURATION_PARTITION ON -to afu_top|pg_afu_3.port_gasket_3|pr_slot|afu_main -entity top
+
+        set_instance_assignment -name PLACE_REGION "X215 Y13 X332 Y99" -to afu_top|pg_afu_3.port_gasket_3|pr_slot|afu_main
+        set_instance_assignment -name ROUTE_REGION "X215 Y13 X332 Y99" -to afu_top|pg_afu_3.port_gasket_3|pr_slot|afu_main
+
+        set_instance_assignment -name PARTITION green_region_4 -to afu_top|pg_afu_4.port_gasket_4|pr_slot|afu_main -entity top
+        set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|pg_afu_4.port_gasket_4|pr_slot|afu_main
+        set_instance_assignment -name RESERVE_PLACE_REGION ON -to afu_top|pg_afu_4.port_gasket_4|pr_slot|afu_main
+        set_instance_assignment -name PARTIAL_RECONFIGURATION_PARTITION ON -to afu_top|pg_afu_4.port_gasket_4|pr_slot|afu_main -entity top
+
+        set_instance_assignment -name PLACE_REGION "X64 Y13 X180 Y99" -to afu_top|pg_afu_4.port_gasket_4|pr_slot|afu_main
+        set_instance_assignment -name ROUTE_REGION "X64 Y13 X180 Y99" -to afu_top|pg_afu_4.port_gasket_4|pr_slot|afu_main
+
+
+        # set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|tag_remap
+        # set_instance_assignment -name PLACE_REGION "X0 Y0 X90 Y212" -to afu_top|tag_remap
         
-        set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|pf_vf_mux_a
-        set_instance_assignment -name PLACE_REGION "X0 Y0 X90 Y212" -to afu_top|pf_vf_mux_a
+        # set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|pf_vf_mux_a
+        # set_instance_assignment -name PLACE_REGION "X0 Y0 X90 Y212" -to afu_top|pf_vf_mux_a
         
-        set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|pf_vf_mux_b
-        set_instance_assignment -name PLACE_REGION "X0 Y0 X90 Y212" -to afu_top|pf_vf_mux_b
+        # set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|pf_vf_mux_b
+        # set_instance_assignment -name PLACE_REGION "X0 Y0 X90 Y212" -to afu_top|pf_vf_mux_b
         
-        set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|mx2ho_tx_ab_mux
-        set_instance_assignment -name PLACE_REGION "X0 Y0 X90 Y212" -to afu_top|mx2ho_tx_ab_mux
+        # set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|mx2ho_tx_ab_mux
+        # set_instance_assignment -name PLACE_REGION "X0 Y0 X90 Y212" -to afu_top|mx2ho_tx_ab_mux
         
-        set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|afu_intf_inst
-        set_instance_assignment -name PLACE_REGION "X0 Y0 X90 Y212" -to afu_top|afu_intf_inst
+        # set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|afu_intf_inst
+        # set_instance_assignment -name PLACE_REGION "X0 Y0 X90 Y212" -to afu_top|afu_intf_inst
         
-        set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|fim_afu_instances|st2mm
-        set_instance_assignment -name PLACE_REGION "X0 Y0 X90 Y212" -to afu_top|fim_afu_instances|st2mm
+        # set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|fim_afu_instances|st2mm
+        # set_instance_assignment -name PLACE_REGION "X0 Y0 X90 Y212" -to afu_top|fim_afu_instances|st2mm
         
         set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to afu_top|fim_afu_instances|he_lb_top
         set_instance_assignment -name PLACE_REGION "X0 Y165 X275 Y212" -to afu_top|fim_afu_instances|he_lb_top

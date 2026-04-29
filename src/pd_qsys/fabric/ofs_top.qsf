@@ -19,12 +19,12 @@
 #
 # Quartus Prime
 # Version 23.4.0 Build 79 11/22/2023 Patches 0.02iofs,0.17 SC Pro Edition
-# Date created = 01:45:39  August 28, 2024
+# Date created = 14:00:38  August 12, 2025
 #
 # -------------------------------------------------------------------------- #
 set_global_assignment -name TOP_LEVEL_ENTITY ofs_top
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "23.4.0 SP0.02IOFS,0.17"
-set_global_assignment -name PROJECT_CREATION_TIME_DATE "01:45:39  AUGUST 28, 2024"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "14:00:38  AUGUST 12, 2025"
 set_global_assignment -name LAST_QUARTUS_VERSION "23.4.0 SP0.02iofs,0.17 Pro Edition"
 set_global_assignment -name FAMILY "Agilex 7"
 set_global_assignment -name DEVICE AGFB014R24A2E2V
@@ -37,6 +37,8 @@ set_global_assignment -name IP_FILE ip/apf/apf_uart_slv.ip
 set_global_assignment -name IP_FILE ip/apf/apf_pr_slv.ip
 set_global_assignment -name IP_FILE ip/apf/apf_achk_slv.ip
 set_global_assignment -name IP_FILE ip/apf/apf_pr_2_slv.ip
+set_global_assignment -name IP_FILE ip/apf/apf_pr_3_slv.ip
+set_global_assignment -name IP_FILE ip/apf/apf_pr_4_slv.ip
 set_global_assignment -name IP_FILE ip/apf/apf_bpf_mst.ip
 set_global_assignment -name IP_FILE ip/apf/apf_st2mm_mst.ip
 set_global_assignment -name IP_FILE ip/apf/apf_mctp_mst.ip
