@@ -1,0 +1,30 @@
+[ip]
+type = pcie
+
+[settings]
+output_name = pcie_ss
+# pcie_ss top_topology_hw.tcl parameter using the variables below
+# assuming x16 lane, following will map to  "Gen<pcie_gen> <pcie_instances>x<16/pcie_instances>"
+# i.e. for R-tile PCIe SS example "Gen5 2x8". For combinations supported.
+# Note: 
+# - "Gen5 2x8" is supported at the moment 
+# - "Gen5 1x16" is not supported in PCIe SS
+# - "Gen4 1x16" should work but not validated
+pcie_gen = 4
+pcie_instances = 1
+
+[pf0]
+bar0_address_width = 20
+
+[pf1]
+bar0_address_width = 20
+
+[pf2]
+bar0_address_width = 20
+
+[pf3]
+bar0_address_width = 20
+
+[pf4]
+bar0_address_width = 20
+

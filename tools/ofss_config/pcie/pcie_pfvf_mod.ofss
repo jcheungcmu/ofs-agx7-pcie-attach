@@ -13,3 +13,10 @@ bar0_address_width = 20
 [pf2]
 bar0_address_width = 20
 
+[pf3]
+bar0_address_width = 20
+
+[pf4]
+bar0_address_width = 20
+
+
